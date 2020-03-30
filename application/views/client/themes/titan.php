@@ -129,7 +129,7 @@
             </li>
           <?php if($this->user->loggedin) : ?>
             <li><a href="<?php echo site_url() ?>"><span class="glyphicon glyphicon-home notification-icon"></span></a></li>
-            <li class="user_bit"><img src="<?php echo base_url() ?><?php echo $this->settings->info->upload_path_relative ?>/<?php echo $this->user->info->avatar ?>" class="user_avatar"><a href="<?php echo site_url("profile/" . $this->user->info->username) ?>"><?php if($this->settings->info->user_display_type) : ?>
+            <li class="user_bit"><a href="<?php echo site_url("profile/" . $this->user->info->username) ?>"><img src="<?php echo base_url() ?><?php echo $this->settings->info->upload_path_relative ?>/<?php echo $this->user->info->avatar ?>" class="user_avatar"> &nbsp; <?php if($this->settings->info->user_display_type) : ?>
               <?php echo $this->user->info->first_name ?> <?php echo $this->user->info->last_name ?>
               <?php else : ?>
               <?php echo $this->user->info->username ?>
@@ -137,6 +137,7 @@
             <li><a href="#" data-target="#" onclick="load_notifications()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="noti-menu-drop"><span class="glyphicon glyphicon-bell notification-icon"></span><?php if($this->user->info->noti_count > 0) : ?><span class="badge notification-badge small-text"><?php echo $this->user->info->noti_count ?></span><?php endif; ?></a>
         
             <ul class="dropdown-menu" aria-labelledby="noti-menu-drop">
+            <div class="notify-arrow notify-arrow-blue"></div>
             <li>
             <div class="notification-box-title">
             <?php echo lang("ctn_412") ?> <?php if($this->user->info->noti_count > 0) : ?><span class="badge click" id="noti-click-unread" onclick="load_notifications_unread()"><?php echo $this->user->info->noti_count ?></span><?php endif; ?>
