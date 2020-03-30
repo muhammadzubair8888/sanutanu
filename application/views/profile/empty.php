@@ -19,6 +19,27 @@
 
  <div class="pull-right profile-friend-box">
   <?php if($this->user->loggedin ) : ?>
+  <?php
+    /************************ Message Button Start by Tanveer 29/03/2020 *************************/
+    ?>
+  <?php if($user->chat_option==0)
+  { ?>
+    <button type="button" class="btn btn-post btn-sm" id="start_chat_button" onClick="chat_with(<?php echo $user->ID; ?>);"><?php echo lang("ctn_12"); ?></button>
+    <?php
+  }
+  else
+  {
+    if($friend_flag)
+    {
+      ?>
+      <button type="button" class="btn btn-post btn-sm" id="start_chat_button" onClick="chat_with(<?php echo $user->ID; ?>);"><?php echo lang("ctn_12"); ?></button>
+      <?php
+    }
+  }
+  ?>
+  <?php
+  /************************ Message Button End by Tanveer 29/03/2020 *************************/
+  ?>
   <?php if($user->ID != $this->user->info->ID) : ?>
 <?php if($friend_flag) : ?>
 <button type="button" class="btn btn-success btn-sm" id="friend_button_<?php echo $user->ID ?>"><span class="glyphicon glyphicon-ok"></span> <?php echo lang("ctn_493") ?></button>

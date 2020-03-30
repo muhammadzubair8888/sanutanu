@@ -208,12 +208,51 @@ text-decoration: none;
 .notification-text-bit a:hover { color: #0B82F9 !important; }
 .user-icon { border-radius: 18px; width: 25px; height: 25px; }
 .user-icon-margin-right { margin-right: 20px; }
-.notification-box-title { border-bottom: 1px solid #EEE; font-size: 14px; margin-bottom: 10px; font-weight: 600; padding: 10px; }
+.notification-box-title { border-bottom: 1px solid #EEE; font-size: 14px; margin-bottom: 10px; font-weight: 600; padding: 10px; padding-top:5px; padding-bottom:5px; }
 .notification-box-title a { color: #000 !important; }
 .notification-box-footer { border-top: 1px solid #EEE; font-size: 14px; font-weight: 500; padding: 10px; text-align: center; color: #000 !important; }
 .notification-box-footer a { color: #2d89f0 !important; }
 .badge { background: #FC2232 !important; }
 #notifications-scroll { overflow: scroll; height: 150px; }
+#notifications-scroll p { padding-left:10px; width:268px !important; }
+.notify-arrow {
+
+    border-style: solid;
+
+    border-width: 0 9px 9px;
+
+    height: 0;
+
+    margin-top: 0;
+
+    opacity: 0;
+
+    position: absolute;
+
+    right: 7px;
+
+    top: -18px;
+
+    transition: all 0.25s ease 0s;
+
+    width: 0;
+
+    z-index: 10;
+
+    margin-top: 10px;
+
+    opacity: 1;
+
+}
+.notify-arrow-blue{
+
+    border-color: transparent transparent #FFF;
+
+    border-bottom-color: #FFF !important;
+
+    border-top-color: #FFF !important;
+
+}
 #timer-scroll { overflow: scroll; height: 150px; }
 .animation-fade { -webkit-transition: background 0.3s linear; -moz-transition: background 0.3s linear; -ms-transition: background 0.3s linear; -o-transition: background 0.3s linear; transition: background 0.3s linear; }
 .active-noti { border-right: 2px solid #F32838; }
