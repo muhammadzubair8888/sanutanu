@@ -215,6 +215,7 @@ text-decoration: none;
 .badge { background: #FC2232 !important; }
 #notifications-scroll { overflow: scroll; height: 150px; }
 #notifications-scroll p { padding-left:10px; width:268px !important; }
+#chat-scroll p { padding-left:10px; width:268px !important; }
 .notify-arrow {
 
     border-style: solid;

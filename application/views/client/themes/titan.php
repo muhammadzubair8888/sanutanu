@@ -156,6 +156,7 @@
             <li><a href="#" data-target="#" onclick="load_chats()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="email-menu-drop"><span class="glyphicon glyphicon-envelope notification-icon"></span><span class="badge notification-badge small-text" id="chat-noti"></span></a>
 
             <ul class="dropdown-menu" aria-labelledby="email-menu-drop">
+            <div class="notify-arrow notify-arrow-blue"></div>
             <li>
               <div class="notification-box-title">
                 <?php echo lang("ctn_489") ?> - <a href="<?php echo site_url("chat") ?>"><?php echo lang("ctn_482") ?></a>
