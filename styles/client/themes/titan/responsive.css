@@ -3,8 +3,13 @@
 @media (max-width: 400px) {
 	#responsive-menu-links { display: block; }
 	.dashboard-window { margin-bottom: 10px; }
+	#main-content { margin-top: 150px; }
 }
-
+@media (max-width: 991px) {
+	#main-content { margin-top: 150px !important; }
+	/*.sidebar { padding-top: 150px !important; }*/
+	.sidebar { display: none; }
+}
 @media (max-width: 767px) {
 	#timer-scroll { background: #FFF; }
 	#notifications-scroll { background: #FFF; }
@@ -13,4 +18,5 @@
 	.notification-box-title { background: #FFF; }
 	#responsive-menu-links { display: block; }
 	.dashboard-window { margin-bottom: 10px; }
+	#main-content { margin-top: 150px !important; }
 }

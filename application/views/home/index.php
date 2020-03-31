@@ -1,6 +1,6 @@
     <div class="row">
         <div class="col-md-2 sidebar-block" id="homepage-links">
-
+          
         <ul>
         <li <?php if($type == 0) : ?>class="active"<?php endif; ?>><a href="<?php echo site_url("home") ?>"><span class="glyphicon glyphicon-home" style="color: #a41be3"></span> <?php echo lang("ctn_481") ?></a></li>
         <li><a href="<?php echo site_url("profile/" . $this->user->info->username) ?>"><span class="glyphicon glyphicon-user sidebaricon" style="color: #a41be3"></span> <?php echo lang("ctn_200") ?></a></li>
@@ -51,6 +51,7 @@
         </ul>
         </div>
         <div class="col-md-6">
+ 
  <?php include(APPPATH . "views/feed/editor.php"); ?>
 
 <div id="home_posts">
@@ -62,7 +63,7 @@
 
         <div class="col-md-4" id="homepage-stuff">
         
-        <div class="page-block">
+        <!-- <div class="page-block">
           <div class="page-block-inner" style="background: url(<?php echo base_url() ?><?php echo $this->settings->info->upload_path_relative . "/" . $this->user->info->profile_header ?>) center center; background-size: cover;">
           <div class="page-block-avatar">
           <img src="<?php echo base_url() ?>/<?php echo $this->settings->info->upload_path_relative ?>/<?php echo $this->user->info->avatar ?>">
@@ -71,10 +72,10 @@
           <a href="<?php echo site_url("profile/" . $this->user->info->username) ?>"><?php echo $this->user->info->first_name ?> <?php echo $this->user->info->last_name ?></a>
           </div>
           </div>
-        </div>
+        </div> -->
 
         <?php if($this->settings->info->enable_google_ads_feed) : ?>
-          <div class="page-block half-separator">
+          <div class="page-block half-separator" style="margin-top:0px;">
             <div class="page-block-page clearfix">
             <?php include(APPPATH . "/views/home/google_ads.php"); ?>
           </div>
