@@ -25,6 +25,11 @@ class Home extends CI_Controller
 	{
 		$type = intval($type);
 		$hashtag = $this->common->nohtml($hashtag);
+		$this->template->loadExternal(
+			'
+			<script type="text/javascript" src="'
+			.base_url().'scripts/custom/profile.js" /></script>'
+		);
 		
 
 		$pages = $this->page_model->get_recent_pages();

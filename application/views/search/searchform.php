@@ -1,9 +1,10 @@
 <?php echo form_open(site_url(), array("class"=>"navbar-for")) ?>
 	<div class="search">
-	      <input type="text" class="searchTerm" placeholder="<?php echo lang("ctn_76") ?> ..." id="search-complete" >
-	      <button type="submit" class="searchButton">
+		<button disabled="true" type="button" class="searchButton">
 	        <i class="glyphicon glyphicon-search"></i>
 	     </button>
+	      <input type="text" class="searchTerm" placeholder="<?php echo lang("ctn_76") ?> ..." id="search-complete" >
+	      
    </div>
               <!-- <div class="has-search" style="padding-bottom: 5px; position: relative !important;">
                 <span class="glyphicon glyphicon-search form-control-feedback"></span>
@@ -19,11 +20,11 @@
 
 .searchTerm {
   width: 100%;
-  border: 3px solid #a41be3;
-  border-right: none;
+  border: 1px solid #CCC;
+  border-left: none;
   padding: 5px;
   height: 36px;
-  border-radius: 5px 0 0 5px;
+  border-radius: 0 14px 14px 0;
   outline: none;
   color: #9DBFAF;
 }
@@ -35,11 +36,12 @@
 .searchButton {
   width: 40px;
   height: 36px;
-  border: 1px solid #a41be3;
-  background: #a41be3;
+  border: 1px solid #CCC;
+  border-right: none;
+  background: #FFF;
   text-align: center;
-  color: #fff;
-  border-radius: 0 5px 5px 0;
+  color: #AAA;
+  border-radius: 14px 0 0 14px;
   cursor: pointer;
   font-size: 20px;
 }

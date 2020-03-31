@@ -89,7 +89,7 @@ body { font-family: "Open Sans"; background: #FDFDFD; color: #2d2d2d; }
 .doughnut-legend { list-style: none; }
 .doughnut-legend li { float: left; margin: 10px; }
 .home-label { border-bottom: 1px solid #f1f1f1; text-align: left; padding: 5px; color: #343a3d; margin: 0px; background: #f8f8f8; margin-bottom: 10px; border-radius: 4px; font-weight: 550; }
-.small-text { font-size: 12px !important; }
+.small-text { font-size: 12px !important; font-family: arial; }
 .user_level_display { font-size: 12px; padding-top: 0px;}
 .user_name_display { padding: 0px; margin: 0px; font-weight: 600; padding-bottom: 5px;}
 .user_avatar { display: inline-block; width: 25px; height: 25px; margin-left: 10px; border-radius: 13px;}
@@ -379,7 +379,7 @@ text-decoration: none;
 .feed-header-info p a {color: #a41be3;}
 .btn-create-albums{ background-color: #a41be3; color: #FFF; }
 #homepage-links ul li a { color: #a41be3; }
-.page-block-page .pull-left a { color: #a41be3; }
+.page-block-page .pull-left a { color: #000000; font-family: arial; font-weight: bold; }
 .profile-friend-area p a { color: #a41be3; }
 .feed-content-stats a span { color: #a41be3; }
 .mail-box-snippet button { background-color: #a41be3; color: #fff; }
@@ -399,7 +399,13 @@ ul.settings-sidebar li a { color: #a41be3; }
   padding-left: 0;
   padding-right: 0;
 }
-#homepage-links ul li a{ font-size: 18px; color: #333; font-weight: bold; }
+#homepage-links ul li a{ font-size: 18px; color: #333; font-weight: bold; position: relative; }
+.notification-badge2
+{
+  top: -6px !important;
+  left: 6px !important;
+  right: inherit !important;
+}
 #homepage-links .glyphicon
 {
   font-size: 18px;

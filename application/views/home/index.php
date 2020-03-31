@@ -6,7 +6,7 @@
         <li><a href="<?php echo site_url("profile/" . $this->user->info->username) ?>"><span class="glyphicon glyphicon-user sidebaricon" style="color: #a41be3"></span> <?php echo lang("ctn_200") ?></a></li>
         <li><a href="<?php echo site_url("chat") ?>"><span class="glyphicon glyphicon-envelope sidebaricon" style="color: #a41be3"></span> <?php echo lang("ctn_482") ?></a></li>
 
-        <li><a href="<?php echo site_url("home/notifications") ?>"><span class="glyphicon glyphicon-bell sidebaricon" style="color: #a41be3"></span><?php if($this->user->info->noti_count > 0) : ?><span class="badge notification-badge small-text"><?php echo $this->user->info->noti_count ?></span><?php endif; ?> <?php echo lang("ctn_412") ?></a></li>
+        <li><a href="<?php echo site_url("home/notifications") ?>"><span class="glyphicon glyphicon-bell sidebaricon" style="color: #a41be3"></span><?php if($this->user->info->noti_count > 0) : ?><span class="badge notification-badge notification-badge2 small-text"><?php echo $this->user->info->noti_count ?></span><?php endif; ?> <?php echo lang("ctn_412") ?></a></li>
 
         <?php if($this->settings->info->enable_blogs) : ?>
           <li><a href="<?php echo site_url("blog/your") ?>"><span class="glyphicon glyphicon-pencil sidebaricon" style="color: #a41be3"></span> <?php echo lang("ctn_780") ?></a></li>
@@ -94,12 +94,50 @@
          <?php foreach($users->result() as $r) : ?>
           <div class="page-block-page clearfix">
             <div class="pull-left" style="margin-right: 15px;">
-              <img src="<?php echo base_url() ?><?php echo $this->settings->info->upload_path_relative ?>/<?php echo $r->avatar ?>" width="40">
+              <a href="<?php echo site_url("profile/" . $r->username) ?>"><img src="<?php echo base_url() ?><?php echo $this->settings->info->upload_path_relative ?>/<?php echo $r->avatar ?>" width="40"></a>
             </div>
-            <div class="pull-left" style="padding-top: 8px;">
+            <div class="pull-left">
               <a href="<?php echo site_url("profile/" . $r->username) ?>"><?php echo $r->first_name ?> <?php echo $r->last_name ?></a>
-              
+              <p class="small-text faded-icon">@<?php echo $r->username ?></p>
             </div>
+
+            <?php
+              $CI =& get_instance();
+              // check user is friend
+              $friend_flag = 0;
+              $request_flag = 0;
+              $friend = $CI->user_model->get_user_friend($this->user->info->ID, $r->ID);
+              if($friend->num_rows() > 0) {
+                // Friends
+                $friend_flag = 1;
+              } else {
+                // Check for a request
+                $request = $CI->user_model->check_friend_request($this->user->info->ID, $r->ID);
+                if($request->num_rows() > 0) {
+                  // Request sent
+                  $request_flag = 1;
+                }
+              }
+            ?>
+            <div class="pull-right" style="padding-top: 5px;">
+              <?php if($this->user->loggedin){
+                ?>
+                <?php if($friend_flag) : ?>
+                <button type="button" class="btn btn-success btn-sm" id="friend_button_<?php echo $r->ID ?>"><span class="glyphicon glyphicon-ok"></span> <?php echo lang("ctn_493") ?></button>
+                <?php else : ?>
+                <?php if($request_flag) : ?>
+                <button type="button" class="btn btn-success btn-sm disabled" id="friend_button_<?php echo $r->ID ?>"><?php echo lang("ctn_601") ?></button>
+                <?php else : ?> 
+                  <?php if(!$r->allow_friends) : ?>
+                  <button type="button" class="btn btn-success btn-sm" onclick="add_friend(<?php echo $r->ID ?>)" id="friend_button_<?php echo $r->ID ?>"><?php echo lang("ctn_602") ?></button>
+                  <?php endif; ?>
+                <?php endif; ?>
+                <?php endif; ?>
+                <?php
+              } ?>
+
+            </div>
+
           </div>
          <?php endforeach; ?>
         </div>
