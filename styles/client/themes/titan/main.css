@@ -394,6 +394,11 @@ ul.settings-sidebar li a { color: #a41be3; }
 .panel-body .form-group a { color: #a41be3; }
 .paginate_button.active a {background-color: #a41be3;}
 /************* Left sidebar links work *************/
+#homepage-links
+{
+  padding-left: 0;
+  padding-right: 0;
+}
 #homepage-links ul li a{ font-size: 18px; color: #333; font-weight: bold; }
 #homepage-links .glyphicon
 {

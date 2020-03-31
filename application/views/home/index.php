@@ -5,6 +5,9 @@
         <li <?php if($type == 0) : ?>class="active"<?php endif; ?>><a href="<?php echo site_url("home") ?>"><span class="glyphicon glyphicon-home" style="color: #a41be3"></span> <?php echo lang("ctn_481") ?></a></li>
         <li><a href="<?php echo site_url("profile/" . $this->user->info->username) ?>"><span class="glyphicon glyphicon-user sidebaricon" style="color: #a41be3"></span> <?php echo lang("ctn_200") ?></a></li>
         <li><a href="<?php echo site_url("chat") ?>"><span class="glyphicon glyphicon-envelope sidebaricon" style="color: #a41be3"></span> <?php echo lang("ctn_482") ?></a></li>
+
+        <li><a href="<?php echo site_url("home/notifications") ?>"><span class="glyphicon glyphicon-bell sidebaricon" style="color: #a41be3"></span><?php if($this->user->info->noti_count > 0) : ?><span class="badge notification-badge small-text"><?php echo $this->user->info->noti_count ?></span><?php endif; ?> <?php echo lang("ctn_412") ?></a></li>
+
         <?php if($this->settings->info->enable_blogs) : ?>
           <li><a href="<?php echo site_url("blog/your") ?>"><span class="glyphicon glyphicon-pencil sidebaricon" style="color: #a41be3"></span> <?php echo lang("ctn_780") ?></a></li>
         <?php endif; ?>
