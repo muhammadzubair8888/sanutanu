@@ -24,7 +24,7 @@
   border-left: none;
   padding: 5px;
   height: 36px;
-  border-radius: 0 14px 14px 0;
+  border-radius: 0 5px 5px 0;
   outline: none;
   color: #9DBFAF;
 }
@@ -41,7 +41,7 @@
   background: #FFF;
   text-align: center;
   color: #AAA;
-  border-radius: 14px 0 0 14px;
+  border-radius: 5px 0 0 5px;
   cursor: pointer;
   font-size: 20px;
 }

@@ -120,40 +120,42 @@
               <div class="col-md-6" style="padding-top: 8px; height: 50px;">
                 <?php include(APPPATH . "views/search/searchform.php"); ?>
               </div>
-              <div class="col-md-4" style="padding-top: 10px; height: 50px;">
+              <div class="col-md-4" style="padding-top: 8px; height: 50px;">
                 <? //=$this->uri->segment(2);?>
-                <?php
-                if($this->uri->segment(1)=="profile")
-                {
-                  $username = $this->uri->segment(2);
-                  $CI =& get_instance();
-                  $CI->load->model('user_model');
-                  $result = $CI->user_model->get_user_by_username($username);
-                  if($result->num_rows()>0)
+                <div class="page-block half-separator" style="margin-top: 0; height: 36px; line-height: 36px; padding-left: 10px; border: 1px solid #CCC; background: #FFF; border-radius: 5px;">
+                  <?php
+                  if($this->uri->segment(1)=="profile")
                   {
-                    $user = $result->row_array();
-                    $user_name = $user['first_name'].' '.$user['last_name'];
+                    $username = $this->uri->segment(2);
+                    $CI =& get_instance();
+                    $CI->load->model('user_model');
+                    $result = $CI->user_model->get_user_by_username($username);
+                    if($result->num_rows()>0)
+                    {
+                      $user = $result->row_array();
+                      $user_name = $user['first_name'].' '.$user['last_name'];
+                    }
+                    else
+                    {
+                      $userid = $this->uri->segment(3);
+                      $result = $CI->user_model->get_user_by_id($userid);
+                      $user = $result->row_array();
+                      $user_name = $user['first_name'].' '.$user['last_name'];
+                      $username = $user['username'];
+                    }
+                    
+                    ?>
+                    <a class="header-home-button" href="<?php echo site_url().'/profile/'.$username ?>"><?php echo $user_name; ?></a>
+                    <?php
                   }
                   else
                   {
-                    $userid = $this->uri->segment(3);
-                    $result = $CI->user_model->get_user_by_id($userid);
-                    $user = $result->row_array();
-                    $user_name = $user['first_name'].' '.$user['last_name'];
-                    $username = $user['username'];
+                    ?>
+                    <a class="header-home-button" href="<?php echo site_url() ?>">Home</a>
+                    <?php
                   }
-                  
                   ?>
-                  <a class="header-home-button" href="<?php echo site_url().'/profile/'.$username ?>"><?php echo $user_name; ?></a>
-                  <?php
-                }
-                else
-                {
-                  ?>
-                  <a class="header-home-button" href="<?php echo site_url() ?>">Home</a>
-                  <?php
-                }
-                ?>
+                </div>
                 
               </div>
             </div>

@@ -123,13 +123,13 @@
               <?php if($this->user->loggedin){
                 ?>
                 <?php if($friend_flag) : ?>
-                <button type="button" class="btn btn-success btn-sm" id="friend_button_<?php echo $r->ID ?>"><span class="glyphicon glyphicon-ok"></span> <?php echo lang("ctn_493") ?></button>
+                <button type="button" class="btn btn-post btn-sm" style="border-radius: 40px;" id="friend_button_<?php echo $r->ID ?>"><span class="glyphicon glyphicon-ok"></span> <?php echo lang("ctn_493") ?></button>
                 <?php else : ?>
                 <?php if($request_flag) : ?>
-                <button type="button" class="btn btn-success btn-sm disabled" id="friend_button_<?php echo $r->ID ?>"><?php echo lang("ctn_601") ?></button>
+                <button type="button" class="btn btn-post btn-sm disabled" style="border-radius: 40px;" id="friend_button_<?php echo $r->ID ?>"><?php echo lang("ctn_601") ?></button>
                 <?php else : ?> 
                   <?php if(!$r->allow_friends) : ?>
-                  <button type="button" class="btn btn-success btn-sm" onclick="add_friend(<?php echo $r->ID ?>)" id="friend_button_<?php echo $r->ID ?>"><?php echo lang("ctn_602") ?></button>
+                  <button type="button" class="btn btn-post btn-sm" style="border-radius: 40px;" onclick="add_friend(<?php echo $r->ID ?>)" id="friend_button_<?php echo $r->ID ?>"><?php echo lang("ctn_602") ?></button>
                   <?php endif; ?>
                 <?php endif; ?>
                 <?php endif; ?>
