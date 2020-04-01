@@ -35,7 +35,7 @@ if(isset($r->p_username)) {
 <p><i><?php echo lang("ctn_826") ?></i></p>
 </div>
 <div class="feed-content-stats">
-<a href="#" onclick="get_post_likes(<?php echo $r->ID ?>)" class="feed-stat <?php if($r->likes <= 0) : ?>nodisplay<?php endif; ?>" id="likes-click-<?php echo $r->ID ?>"><span class="glyphicon glyphicon-thumbs-up"></span> <span id="feed-likes-<?php echo $r->ID ?>"> <?php echo $r->likes ?></span></a> <a href="javascript:void(0)" onclick="load_comments(<?php echo $r->ID ?>)" class="<?php if($r->comments <= 0) : ?>nodisplay<?php endif; ?>"><span class="glyphicon glyphicon-comment"></span> <span id="feed-comments-<?php echo $r->ID ?>"> <?php echo $r->comments ?></span></a>
+<a href="#" onclick="get_post_likes(<?php echo $r->ID ?>)" class="feed-stat <?php if($r->likes <= 0) : ?>nodisplay<?php endif; ?> likes-click-<?php echo $r->ID ?>" id="likes-click-<?php echo $r->ID ?>"><span class="glyphicon glyphicon-thumbs-up"></span> <span id="feed-likes-<?php echo $r->ID ?>" class="feed-likes-<?php echo $r->ID ?>"> <?php echo $r->likes ?></span></a> <a href="javascript:void(0)" onclick="load_comments(<?php echo $r->ID ?>)" class="<?php if($r->comments <= 0) : ?>nodisplay<?php endif; ?>"><span class="glyphicon glyphicon-comment"></span> <span class="feed-comments-<?php echo $r->ID ?>" id="feed-comments-<?php echo $r->ID ?>"> <?php echo $r->comments ?></span></a>
 </div>
 <div class="feed-footer">
 </div>

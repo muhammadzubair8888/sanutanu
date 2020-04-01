@@ -10,7 +10,7 @@ body { font-family: "Open Sans"; background: #FDFDFD; color: #2d2d2d; }
 .navbar-inverse { border: none; }
 .sub-header { padding-bottom: 10px; border-bottom: 1px solid #eee; }
 .navbar-fixed-top { border: 0; }
-#main-content { padding-right: 209px; padding: 15px; margin-top: 50px; background: #fafafa; border-right: 1px solid #d4dce2 !important; min-height: 568px; padding-bottom: 30px; padding-top: 0px; }
+#main-content { padding-right: 209px; padding: 15px; margin-top: 50px; background: #FFF; border-right: 1px solid #d4dce2 !important; min-height: 568px; padding-bottom: 30px; padding-top: 0px; }
 .col-md-offset-sidebar { padding-right:224px;  }
 
 #footer { border-top: 1px solid #d4dce2 !important; border-right: 1px solid #d4dce2; background: #FFF; padding: 6px; font-size: 11px; clear: both; z-index: 100; }

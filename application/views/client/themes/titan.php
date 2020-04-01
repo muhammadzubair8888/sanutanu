@@ -207,7 +207,7 @@
 
 
     </div>
-
+    <?php include(APPPATH . "views/modal/post_modal.php"); ?>
     <?php include(APPPATH . "views/client/chat.php"); ?>
 
     <!--<div id="footer" class="clearfix">-->

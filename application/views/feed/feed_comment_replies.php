@@ -1,5 +1,5 @@
 <div class="feed-comment-wrapper">
-<div id="feed-comments-spot-reply-<?php echo $comment->ID ?>">
+<div class="feed-comments-spot-reply-<?php echo $comment->ID ?>" id="feed-comments-spot-reply-<?php echo $comment->ID ?>">
 <?php include("feed_comment_replies_single.php"); ?>
 </div>
 <div class="feed-comment-m clearfix">
@@ -9,7 +9,7 @@
     </a>
   </div>
   <div class="feed-comment-m-part2">
-   <input type="text" class="form-control feed-comment-input-reply" placeholder="<?php echo lang("ctn_513") ?> ..." data-id="<?php echo $comment->ID ?>">
+   <input type="text" class="form-control feed-comment-input-reply feed-comment-input-reply<?php echo $comment->ID ?>" placeholder="<?php echo lang("ctn_513") ?> ..." data-id="<?php echo $comment->ID ?>">
   </div>
 </div>
 </div>

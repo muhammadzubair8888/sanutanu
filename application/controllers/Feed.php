@@ -603,6 +603,20 @@ class Feed extends CI_Controller
 			),1
 		);
 	}
+/************ Load Post in Popup ***************/
+	public function load_single_post_popup($postid) 
+	{
+		if(!$this->user->loggedin) $this->template->error(lang("error_1"));
+		$postid = intval($postid);
+		$posts = $this->feed_model->get_post($postid, $this->user->info->ID);
+
+		
+
+		$this->template->loadAjax("feed/feedpopup.php", array(
+			"posts" => $posts,
+			),1
+		);
+	}
 
 	public function load_hashtag_posts() 
 	{
@@ -1031,6 +1045,37 @@ class Feed extends CI_Controller
 		);
 	}
 
+	public function get_feed_comments_popup($id) 
+	{
+		if(!$this->user->loggedin) $this->template->errori(lang("error_1"));
+		$id = intval($id);
+		$post = $this->feed_model->get_post($id,$this->user->info->ID);
+		if($post->num_rows() == 0) {
+			$this->template->jsonError(lang("error_105"));
+		}
+		$post = $post->row();
+
+		$this->check_post_permission($post);
+
+		$page = 0;
+
+		$comments = $this->feed_model->get_feed_comments($id, $this->user->info->ID, $page);
+		$com = array();
+		foreach($comments->result() as $r) {
+			$com[] = $r;
+		}
+
+		$com = array_reverse($com);
+
+		$this->template->loadAjax("feed/feed_comments_popup.php", array(
+			"com" => $com,
+			"post" => $post,
+			"page" => $page,
+			"hide_prev" => 0
+			),1
+		);
+	}
+
 	public function get_previous_comments($id) 
 	{
 		if(!$this->user->loggedin) $this->template->error(lang("error_1"));
@@ -1293,6 +1338,40 @@ class Feed extends CI_Controller
 		$com = array_reverse($com);
 
 		$this->template->loadAjax("feed/feed_comment_replies.php", array(
+			"comment" => $comment,
+			"com" => $com
+			),1
+		);
+	}
+
+	public function get_feed_comments_replies_popup($id) 
+	{
+		if(!$this->user->loggedin) $this->template->error(lang("error_1"));
+		$id = intval($id);
+		$comment = $this->feed_model->get_comment($id);
+		if($comment->num_rows() == 0) {
+			$this->template->error(lang("error_108"));
+		}
+		$comment = $comment->row();
+
+		$post = $this->feed_model->get_post($comment->postid,$this->user->info->ID);
+		if($post->num_rows() == 0) {
+			$this->template->jsonError(lang("error_105"));
+		}
+		$post = $post->row();
+
+		$this->check_post_permission($post);
+
+		$replies = $this->feed_model->get_comment_replies($id, $this->user->info->ID, 0);
+
+		$com = array();
+		foreach($replies->result() as $r) {
+			$com[] = $r;
+		}
+
+		$com = array_reverse($com);
+
+		$this->template->loadAjax("feed/feed_comment_replies_popup.php", array(
 			"comment" => $comment,
 			"com" => $com
 			),1
