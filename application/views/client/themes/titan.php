@@ -80,6 +80,9 @@
         <link  href="<?php echo base_url() ?>scripts/libraries/viewer/viewer.css" rel="stylesheet">
       <script src="<?php echo base_url() ?>scripts/libraries/viewer/viewer.js"></script> <!-- Gallery viewer -->
 
+      <link rel="stylesheet"  href="<?php echo base_url() ?>styles/croppie.css" />
+      <script src="<?php echo base_url() ?>scripts/libraries/croppie.js"></script>
+
         
         <!-- CODE INCLUDES -->
         <?php echo $cssincludes ?> 
@@ -208,6 +211,7 @@
 
     </div>
     <?php include(APPPATH . "views/modal/post_modal.php"); ?>
+    <?php include(APPPATH . "views/modal/upload_profile_modal.php"); ?>
     <?php include(APPPATH . "views/client/chat.php"); ?>
 
     <!--<div id="footer" class="clearfix">-->

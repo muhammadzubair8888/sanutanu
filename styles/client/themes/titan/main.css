@@ -428,3 +428,5 @@ ul.settings-sidebar li a { color: #a41be3; }
   color: #000 !important;
   text-decoration: none !important;
 }
+
+.dropdown-menu.open { display: block !important; }

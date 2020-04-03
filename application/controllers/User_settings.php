@@ -774,6 +774,154 @@ class User_Settings extends CI_Controller
 		redirect(site_url("user_settings/social_networks"));
 	}
 
+	public function profile_pic_upload() 
+	{
+		$userid = $this->user->info->ID;
+		$uploadpath = $this->settings->info->upload_path;
+		$thumbnail = $this->input->post("capturedpic");
+		$fullpic = $this->input->post("fullpic");
+
+		$avatar = md5(date('Ymdhis')).'.jpg';
+		$newfile = $uploadpath.'/'.$avatar;
+		copy($thumbnail, $newfile);
+
+		$fullpicture = md5('n_'.date('Ymdhis')).'.jpg';
+		$newfile = $uploadpath.'/'.$fullpicture;
+		copy($fullpic, $newfile);
+
+
+		$this->user_model->update_user($this->user->info->ID, array(
+			"avatar" => $avatar
+			)
+		);
+
+		$this->load->model('image_model');
+		$this->load->model('feed_model');
+
+		// Check for default feed album
+		$album = $this->image_model->get_user_feed_album($this->user->info->ID);
+		if($album->num_rows() == 0) {
+			// Create
+			$albumid = $this->image_model->add_album(array(
+				"userid" => $this->user->info->ID,
+				"feed_album" => 1,
+				"name" => lang("ctn_646"),
+				"description" => lang("ctn_648"),
+				"timestamp" => time()
+				)
+			);
+		} else {
+			$album = $album->row();
+			$albumid = $album->ID;
+		}
+
+
+		$fileid = $this->feed_model->add_image(array(
+        	"file_name" => $fullpicture,
+        	"file_type" => 'Image',
+        	"extension" => 'jpg',
+        	"userid" => $this->user->info->ID,
+        	"timestamp" => time(),
+        	"albumid" => $albumid
+        	)
+        );
+        // Update album count
+        $this->image_model->increase_album_count($albumid);
+
+
+        $this->user_model->increase_posts($this->user->info->ID);
+		$postid = $this->feed_model->add_post(array(
+			"userid" => $this->user->info->ID,
+			"timestamp" => time(),
+			"imageid" => $fileid
+			)
+		);
+
+		$this->user_model->update_user($this->user->info->ID, array(
+			"profilepic_postid" => $postid
+			)
+		);
+
+
+
+
+
+
+		exit;
+	}
+
+
+	public function cover_pic_upload() 
+	{
+		$userid = $this->user->info->ID;
+		$uploadpath = $this->settings->info->upload_path;
+		$coverphoto = $this->input->post("coverphoto");
+
+		$fullpicture = md5('n_'.date('Ymdhis')).'.jpg';
+		$newfile = $uploadpath.'/'.$fullpicture;
+		copy($coverphoto, $newfile);
+
+
+		$this->user_model->update_user($this->user->info->ID, array(
+			"profile_header" => $fullpicture
+			)
+		);
+
+		$this->load->model('image_model');
+		$this->load->model('feed_model');
+
+		// Check for default feed album
+		$album = $this->image_model->get_user_feed_album($this->user->info->ID);
+		if($album->num_rows() == 0) {
+			// Create
+			$albumid = $this->image_model->add_album(array(
+				"userid" => $this->user->info->ID,
+				"feed_album" => 1,
+				"name" => lang("ctn_646"),
+				"description" => lang("ctn_648"),
+				"timestamp" => time()
+				)
+			);
+		} else {
+			$album = $album->row();
+			$albumid = $album->ID;
+		}
+
+
+		$fileid = $this->feed_model->add_image(array(
+        	"file_name" => $fullpicture,
+        	"file_type" => 'Image',
+        	"extension" => 'jpg',
+        	"userid" => $this->user->info->ID,
+        	"timestamp" => time(),
+        	"albumid" => $albumid
+        	)
+        );
+        // Update album count
+        $this->image_model->increase_album_count($albumid);
+
+
+        $this->user_model->increase_posts($this->user->info->ID);
+		$postid = $this->feed_model->add_post(array(
+			"userid" => $this->user->info->ID,
+			"timestamp" => time(),
+			"imageid" => $fileid
+			)
+		);
+
+		$this->user_model->update_user($this->user->info->ID, array(
+			"coverpic_postid" => $postid
+			)
+		);
+
+
+
+
+
+
+		exit;
+	}
+
 }
 
 ?>

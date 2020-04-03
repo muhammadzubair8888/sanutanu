@@ -29,17 +29,43 @@ function load_posts(userid)
  <div class="col-md-12">
 
 
- <div class="profile-header" id="profile_cover_image" style="background: url(<?php echo base_url() ?><?php echo $this->settings->info->upload_path_relative . "/" . $user->profile_header ?>) center center; background-size: cover;">
+ <div class="profile-header" id="profile_cover_image" style="background: url(<?php echo base_url() ?><?php echo $this->settings->info->upload_path_relative . "/" . $user->profile_header ?>) center center; background-size: cover; cursor: pointer;">
+  <a style="cursor: pointer;" style="display: block; width: 100%; height:100%;"><!-- <img src="<?php echo base_url() ?><?php echo $this->settings->info->upload_path_relative . "/" . $user->profile_header ?>" width="100%" height="100%" /> --></a>
  <div class="profile-header-avatar">
-	<img src="<?php echo base_url() ?>/<?php echo $this->settings->info->upload_path_relative ?>/<?php echo $user->avatar ?>">
+  <?php if($this->user->info->ID==$user->ID){
+    ?>
+    <a href="#mn1" class="dropdown-toggle" id="profilepicturemenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><img src="<?php echo base_url() ?>/<?php echo $this->settings->info->upload_path_relative ?>/<?php echo $user->avatar ?>"></a>
+    <?php
+  }else{
+    ?>
+    <img src="<?php echo base_url() ?>/<?php echo $this->settings->info->upload_path_relative ?>/<?php echo $user->avatar ?>">
+    <?php
+  } ?>
+	
  </div>
+  <ul class="dropdown-menu" id="mn1" role="menu" aria-labelledby="profilepicturemenu">
+    <li><a style="cursor: pointer;" onclick="post_modal(<?php echo $user->profilepic_postid; ?>);"><i class="glyphicon glyphicon-user"></i> &nbsp View Profile Picture</a></li>
+    <li><a style="cursor: pointer;" onclick="profilepicpopup_modal();"><i class="glyphicon glyphicon-picture"></i> &nbsp Upload Profile Picture</a></li>
+  </ul>
+  
+
+
  
  <div class="profile-header-name">
 <?php echo $user->first_name ?> <?php echo $user->last_name ?> <?php if($user->verified) : ?><img src="<?php echo base_url() ?>images/verified_badge.png" width="14" data-placement="top" data-toggle="tooltip" title="<?php echo lang("ctn_695") ?>"><?php endif; ?>
  </div>
- <div class="profile-cover-edit-button" hidden="true">
-   <button class="btn btn-post" style="border-radius: 20px;" onclick="save_image()">Edit</button>
+ <?php if($this->user->info->ID==$user->ID){
+    ?>
+ <div class="profile-cover-edit-button" style="position: absolute; top: 10px;" hidden="true">
+  <?php /* ?><button class="btn btn-post" style="border-radius: 20px;" onclick="save_image()">Edit</button><?php */ ?>
+   <button class="btn btn-default" style="border-radius: 5px;" onclick="change_cover();"><i class="glyphicon glyphicon-camera"></i> Edit Cover Photo</button>
+    <form method="post" enctype="multipart/form-data" style="display: none;">
+      <input type="file" name="coverupload" id="coverupload" accept="image/*">
+    </form>
  </div>
+ <?php
+  }
+ ?>
  <!-- <?php if($this->settings->info->avatar_upload) : ?>
         <input type="file" name="userfile_profile" id="chose_cover_image" onchange="preview_image()" style="display: none;" /> 
        <?php endif; ?> -->
@@ -50,6 +76,7 @@ function load_posts(userid)
   <li><a href="<?php echo site_url("profile/friends/" . $user->ID) ?>"><?php echo lang("ctn_493") ?></a></li>
   <li><a href="<?php echo site_url("profile/albums/" . $user->ID) ?>"><?php echo lang("ctn_483") ?></a></li>
  </ul>
+
 <!-- <div class="pull-right profile-friend-box">
   <button class="btn btn-success" onclick="save_image()">Save</button>
 </div> -->
