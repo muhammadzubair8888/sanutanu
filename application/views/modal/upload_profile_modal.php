@@ -225,12 +225,12 @@
         function readFile2(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
-            alert('ok');
+            //alert('ok');
             reader.onload = function (e) {
                 //alert('ok');
              var coverphoto = e.target.result
                 //console.log();
-                alert(coverphoto);
+                //alert(coverphoto);
 
                 $.ajax({
                     url: "<?php echo base_url('index.php/user_settings/cover_pic_upload'); ?>",
