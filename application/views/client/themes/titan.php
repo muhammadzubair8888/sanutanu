@@ -125,7 +125,7 @@
               </div>
               <div class="col-md-4" style="padding-top: 8px; height: 50px;">
                 <? //=$this->uri->segment(2);?>
-                <div class="page-block half-separator" style="margin-top: 0; height: 36px; line-height: 36px; padding-left: 10px; border: 1px solid #CCC; background: #FFF; border-radius: 5px;">
+                <!-- <div class="page-block half-separator" style="margin-top: 0; height: 36px; line-height: 36px; padding-left: 10px; border: 1px solid #CCC; background: #FFF; border-radius: 5px;">
                   <?php
                   if($this->uri->segment(1)=="profile")
                   {
@@ -157,12 +157,102 @@
                     <a class="header-home-button" href="<?php echo site_url() ?>">Home</a>
                     <?php
                   }
-                  ?>
+                  ?> -->
+
+
+                    <div id="navbar" class="navbar-collapse collapse" style="margin-top: 0; height: 36px; line-height: 36px; padding-left: 0px; background: #FFF; border-radius: 5px;">
+                      <ul class="nav navbar-nav navbar-left" style="text-align: center;">
+                        <li>
+                          <!-- <?php echo form_open(site_url(), array("class"=>"navbar-form")) ?>
+                          <div class="form-group">
+                            <input type="text" class="form-control" placeholder="<?php echo lang("ctn_76") ?> ..." id="search-complete" style="width:450px;">
+                          </div>
+                          <?php echo form_close() ?> -->
+                        </li>
+                      <?php if($this->user->loggedin) : ?>
+                        <!-- <li><a href="<?php echo site_url() ?>"><span class="glyphicon glyphicon-home notification-icon"></span></a></li> -->
+                        <li class="user_bit"><a href="<?php echo site_url("profile/" . $this->user->info->username) ?>"><img src="<?php echo base_url() ?><?php echo $this->settings->info->upload_path_relative ?>/<?php echo $this->user->info->avatar ?>" class="user_avatar"> &nbsp; <?php if($this->settings->info->user_display_type) : ?>
+                          <?php echo $this->user->info->first_name ?> <?php echo $this->user->info->last_name ?>
+                          <?php else : ?>
+                          <?php echo $this->user->info->username ?>
+                          <?php endif; ?></a></li>
+                        <li><a href="#" data-target="#" onclick="load_notifications()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="noti-menu-drop"><span class="glyphicon glyphicon-bell notification-icon"></span><?php if($this->user->info->noti_count > 0) : ?><span class="badge notification-badge small-text"><?php echo $this->user->info->noti_count ?></span><?php endif; ?></a>
+                    
+                        <ul class="dropdown-menu" aria-labelledby="noti-menu-drop">
+                        <div class="notify-arrow notify-arrow-blue"></div>
+                        <li>
+                        <div class="notification-box-title">
+                        <?php echo lang("ctn_412") ?> <?php if($this->user->info->noti_count > 0) : ?><span class="badge click" id="noti-click-unread" onclick="load_notifications_unread()"><?php echo $this->user->info->noti_count ?></span><?php endif; ?>
+                        </div>
+                        <div id="notifications-scroll">
+                          <div id="loading_spinner_notification">
+                            <span class="glyphicon glyphicon-refresh" id="ajspinner_notification"></span>
+                          </div>
+                        </div>
+                        <div class="notification-box-footer">
+                        <a href="<?php echo site_url("home/notifications") ?>"><?php echo lang("ctn_414") ?></a>
+                        </div>
+                      </li>
+                      </ul>
+                      </li>
+                        <li><a href="#" data-target="#" onclick="load_chats()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="email-menu-drop"><span class="glyphicon glyphicon-envelope notification-icon"></span><span class="badge notification-badge small-text" id="chat-noti"></span></a>
+
+                        <ul class="dropdown-menu" aria-labelledby="email-menu-drop">
+                        <div class="notify-arrow notify-arrow-blue"></div>
+                        <li>
+                          <div class="notification-box-title">
+                            <?php echo lang("ctn_489") ?> - <a href="<?php echo site_url("chat") ?>"><?php echo lang("ctn_482") ?></a>
+                            </div>
+                            <div id="chat-scroll">
+                              <div id="loading_spinner_email">
+                                <span class="glyphicon glyphicon-refresh" id="ajspinner_email"></span>
+                              </div>
+                            </div>
+                            <div class="notification-box-footer">
+                            <a href="#" id="chat-click-more" onclick="load_chat_page()"><?php echo lang("ctn_490") ?></a>
+                          </div>
+                        </li>
+                        </ul>
+
+                        </li>
+                        <!-- <li class="user_bit"><a href="javascript:void(0)" class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="glyphicon glyphicon-chevron-down notification-icon"></span></a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                          <li><a href="<?php echo site_url() ?>"><?php echo lang("ctn_2") ?></a></li>
+                          <li><a href="<?php echo site_url("profile/" . $this->user->info->username) ?>"><?php echo lang("ctn_491") ?></a></li>
+                          <li><a href="<?php echo site_url("pages/your") ?>"><?php echo lang("
+                          ctn_492"); ?><?php echo lang("ctn_492") ?></a></li>
+                          <li><a href="<?php echo site_url("profile/friends/" . $this->user->info->ID) ?>"><?php echo lang("ctn_493") ?></a></li>
+                          <li><a href="<?php echo site_url("user_settings") ?>"><?php echo lang("ctn_156") ?></a></li>
+                          <?php if($this->common->has_permissions(array("admin", "admin_members", "admin_payment", "admin_settings"), $this->user)) : ?>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="<?php echo site_url("admin") ?>"><?php echo lang("ctn_157") ?></a></li>
+                          <?php endif; ?>
+                        </ul></li> -->
+                        <li><a href="<?php echo site_url("login/logout/" . $this->security->get_csrf_hash()) ?>"><?php echo lang("ctn_149") ?></a></li>
+                      <?php else : ?>
+                      <li><a href="<?php echo site_url("login") ?>"><?php echo lang("ctn_150") ?></a></li>
+                        <li><a href="<?php echo site_url("register") ?>"><?php echo lang("ctn_151") ?></a></li>
+                      <?php endif; ?>
+                      </ul>
+                    </div>
+
+
+
+
+
                 </div>
                 
               </div>
             </div>
           </div>
+
+          <div class="col-md-2">
+            
+            
+
+          </div>
+
+
           
         </div>
         

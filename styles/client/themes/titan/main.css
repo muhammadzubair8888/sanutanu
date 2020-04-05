@@ -76,8 +76,9 @@ body { font-family: "Open Sans"; background: #FDFDFD; color: #2d2d2d; }
 .navbar-header2 { background: #0d1128 !important; border-radius: 0px !important; margin-bottom: 0px !important; z-index: 99;}
 .navbar-header2 a { color: #FFFFFF; }
 .navbar-header2 a:hover { color: #e1e1e1;}
-.navbar-nav li a { height: 52px; }
-.navbar-nav a { color: #FFF !important; }
+.navbar-nav li a { height: 34px; border-radius: 5px; border: 1px solid #CCC; margin-right: 8px; }
+.navbar-nav a { color: #333 !important; padding: 5px 5px !important; }
+.navbar-nav a:hover { color: #FFF !important; }
 .navbar-nav li:hover > a { background: #a41be3 !important;}
 .navbar-nav li:focus > a { background: #a41be3 !important;}
 .navbar-nav li:hover a #notifications-box a { background: #FFF !important;}
@@ -92,8 +93,8 @@ body { font-family: "Open Sans"; background: #FDFDFD; color: #2d2d2d; }
 .small-text { font-size: 12px !important; font-family: arial; }
 .user_level_display { font-size: 12px; padding-top: 0px;}
 .user_name_display { padding: 0px; margin: 0px; font-weight: 600; padding-bottom: 5px;}
-.user_avatar { display: inline-block; width: 25px; height: 25px; margin-left: 10px; border-radius: 13px;}
-.user_bit > a { padding: 15px !important; display: inline-block !important; color: #FFF !important;  }
+.user_avatar { display: inline-block; width: 25px; height: 25px; margin-left: 0px; border-radius: 13px;}
+.user_bit > a { padding: 5px !important; display: inline-block !important; color: #333 !important;  }
 .click { cursor: pointer; }
 .notification-badge { font-size: 9px !important; position: absolute; top: 6px; right: 2px;}
 

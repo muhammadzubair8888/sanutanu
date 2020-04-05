@@ -937,6 +937,51 @@ class Profile extends CI_Controller
 		redirect(site_url("profile/view_album/" . $image->albumid));
 	}
 
+	public function about($userid) 
+	{
+		if(!$this->user->loggedin) {
+			redirect(site_url("login"));
+		}
+		$this->template->loadExternal(
+			'
+			<script type="text/javascript" src="'
+			.base_url().'scripts/custom/profile.js" /></script>'
+		);
+		$userid = intval($userid);
+		$user = $this->user_model->get_user_by_id($userid);
+		if($user->num_rows() == 0) {
+			$this->template->error(lang("error_85"));
+		}
+		$user = $user->row();
+
+		// check user is friend
+		$flags = $this->check_friend($this->user->info->ID, $user->ID);
+
+		if($user->profile_view == 1 && $user->ID != $this->user->info->ID) {
+			// Only let's friends view profile.
+			if(!$flags['friend_flag']) {
+
+				$user->profile_header = "empty.png";
+				$user->avatar = "default.png";
+
+				$this->template->loadContent("profile/empty.php", array(
+					"user" => $user,
+					"friend_flag" => $flags['friend_flag'],
+					"request_flag" => $flags['request_flag'],
+					), 1
+				);
+			}
+		}
+
+
+		$this->template->loadContent("profile/about.php", array(
+			"user" => $user,
+			"friend_flag" => $flags['friend_flag'],
+			"request_flag" => $flags['request_flag'],
+			)
+		);
+	}
+
 	public function friends($userid) 
 	{
 		if(!$this->user->loggedin) {
