@@ -954,11 +954,13 @@ class Profile extends CI_Controller
 		}
 		$user = $user->row();
 
+		//echo 123;
+		//exit;
+
 		$userdata = $this->user_model->get_user_data($userid);
-		if($userdata->num_rows() == 0) {
-			$this->template->error(lang("error_85"));
-		}
-		$userdata = $userdata->row();
+		$userdata = $userdata->row_array();
+
+
 
 		// check user is friend
 		$flags = $this->check_friend($this->user->info->ID, $user->ID);

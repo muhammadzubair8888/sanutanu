@@ -90,7 +90,15 @@
         <h3>About</h3>
       </div>
       <div class="col-md-6">
+        <?php
+        if($user->ID == $this->user->info->ID)
+        {
+          ?>
         <button type="button" class="btn btn-post btn-sm pull-right" onclick="about_modal();">Edit</button>
+          <?php
+        }
+        ?>
+        
       </div>
     </div>
         
@@ -98,61 +106,61 @@
           <tr>
             <th style="width: 160px;">Work</th>
             <td>
-              <?php echo $userdata->work; ?>
+              <?php echo $userdata['work']; ?>
             </td>
           </tr>
           <tr>
             <th>College/University</th>
             <td>
-              <?php echo $userdata->college; ?>
+              <?php echo $userdata['college']; ?>
             </td>
           </tr>
           <tr>
             <th>High School</th>
             <td>
-              <?php echo $userdata->school; ?>
+              <?php echo $userdata['school']; ?>
             </td>
           </tr>
           <tr>
             <th>Address</th>
             <td>
-              <?php echo $userdata->address; ?>
+              <?php echo $userdata['address']; ?>
             </td>
           </tr>
           <tr>
             <th>Mobile</th>
             <td>
-              <?php echo $userdata->mobile; ?>
+              <?php echo $userdata['mobile']; ?>
             </td>
           </tr>
           <tr>
             <th>Website</th>
             <td>
-              <?php echo $userdata->website; ?>
+              <?php echo $userdata['website']; ?>
             </td>
           </tr>
           <tr>
             <th>Gender</th>
             <td>
-              <?php echo $userdata->gender; ?>
+              <?php echo $userdata['gender']; ?>
             </td>
           </tr>
           <tr>
             <th>Birthday</th>
             <td>
-              <?php echo $userdata->birthday; ?>
+              <?php if($userdata['birthday']!="") echo date('d M Y', strtotime($userdata['birthday'])); ?>
             </td>
           </tr>
           <tr>
             <th>Religion</th>
             <td>
-              <?php echo $userdata->religion; ?>
+              <?php echo $userdata['religion']; ?>
             </td>
           </tr>
           <tr>
             <th>Relationship</th>
             <td>
-              <?php echo $userdata->maritalstatus; ?>
+              <?php echo $userdata['maritalstatus']; ?>
             </td>
           </tr>
         </table>
