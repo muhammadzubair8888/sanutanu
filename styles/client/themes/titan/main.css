@@ -10,7 +10,7 @@ body { font-family: "Open Sans"; background: #FDFDFD; color: #2d2d2d; }
 .navbar-inverse { border: none; }
 .sub-header { padding-bottom: 10px; border-bottom: 1px solid #eee; }
 .navbar-fixed-top { border: 0; }
-#main-content { padding-right: 209px; padding: 15px; margin-top: 50px; background: #FFF; border-right: 1px solid #d4dce2 !important; min-height: 568px; padding-bottom: 30px; padding-top: 0px; }
+#main-content { padding-right: 209px; padding: 15px; margin-top: 52px; background: #FFF; border-right: 1px solid #d4dce2 !important; min-height: 568px; padding-bottom: 30px; padding-top: 0px; }
 .col-md-offset-sidebar { padding-right:224px;  }
 
 #footer { border-top: 1px solid #d4dce2 !important; border-right: 1px solid #d4dce2; background: #FFF; padding: 6px; font-size: 11px; clear: both; z-index: 100; }
@@ -76,9 +76,10 @@ body { font-family: "Open Sans"; background: #FDFDFD; color: #2d2d2d; }
 .navbar-header2 { background: #0d1128 !important; border-radius: 0px !important; margin-bottom: 0px !important; z-index: 99;}
 .navbar-header2 a { color: #FFFFFF; }
 .navbar-header2 a:hover { color: #e1e1e1;}
-.navbar-nav li a { height: 34px; border-radius: 5px; border: 1px solid #CCC; margin-right: 8px; }
+.navbar-nav li a { height: 34px;  }
+.toplinkbtn { border-radius: 5px; border: 1px solid #CCC; margin-right: 8px; }
+.toplinkbtn:hover { color: #FFF !important; }
 .navbar-nav a { color: #333 !important; padding: 5px 5px !important; }
-.navbar-nav a:hover { color: #FFF !important; }
 .navbar-nav li:hover > a { background: #a41be3 !important;}
 .navbar-nav li:focus > a { background: #a41be3 !important;}
 .navbar-nav li:hover a #notifications-box a { background: #FFF !important;}
@@ -262,7 +263,7 @@ text-decoration: none;
 #projects-scroll { overflow: scroll; height: 150px; }
 .project-box-footer { border-top: 1px solid #EEE; font-size: 14px; font-weight: 500; padding: 5px; text-align: center; color: #000 !important; height: 30px; }
 .project-box-footer a { color: #2d89f0 !important; padding: 0px !important; margin: 0px !important; }
-.projects-text-bit { float: left; width: 208px; vertical-align: top; padding: 0px;}
+.projects-text-bit { float: left; width: 208px; vertical-align: top; padding: 0px; line-height: 20px;}
 .projects-text-bit a { color: #2d89f0 !important; }
 .timer-notification {  }
 .timer-badge { font-size: 9px !important; position: absolute; top: 6px; right: 2px; background: #57bc1b !important;}

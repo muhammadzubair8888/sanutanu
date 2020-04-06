@@ -922,6 +922,125 @@ class User_Settings extends CI_Controller
 		exit;
 	}
 
+
+	function about_form()
+	{
+		$userid = $this->user->info->ID;
+		if($userid==0)
+		{
+			exit;
+		}
+		$row = $this->db->get_where('user_data',array('userid'=>$userid))->row_array();
+		?>
+		<form action="<?php echo site_url('user_settings/about_form_save'); ?>" method="post">
+			<table class="table table-striped table-bordered" align="center" style="width: 90%;">
+              <tr>
+                <th style="width: 160px;">Work</th>
+                <td>
+                	<input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
+                  <input type="text" class="form-control" name="work" id="work" value="<?php echo $row['work']; ?>" />
+                </td>
+              </tr>
+              <tr>
+                <th>College/University</th>
+                <td>
+                  <input type="text" class="form-control" name="college" id="college" value="<?php echo $row['college']; ?>" />
+                </td>
+              </tr>
+              <tr>
+                <th>High School</th>
+                <td>
+                  <input type="text" class="form-control" name="school" id="school" value="<?php echo $row['school']; ?>" />
+                </td>
+              </tr>
+              <tr>
+                <th>Address</th>
+                <td>
+                  <input type="text" class="form-control" name="address" id="address" value="<?php echo $row['address']; ?>" />
+                </td>
+              </tr>
+              <tr>
+                <th>Mobile</th>
+                <td>
+                  <input type="text" class="form-control" name="mobile" id="mobile" value="<?php echo $row['mobile']; ?>" />
+                </td>
+              </tr>
+              <tr>
+                <th>Website</th>
+                <td>
+                  <input type="text" class="form-control" name="website" id="website" value="<?php echo $row['website']; ?>" />
+                </td>
+              </tr>
+              <tr>
+                <th>Gender</th>
+                <td>
+                  <select class="form-control" name="gender" id="gender" style="max-width: 180px;">
+                      <option value="Male" <?php if($row['gender']=="Married")echo "selected"; ?> >Male</option>
+                      <option value="Female" <?php if($row['gender']=="Married")echo "selected"; ?> >Female</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <th>Birthday</th>
+                <td>
+                  <input type="date" class="form-control" name="birthday" id="birthday" value="<?php echo $row['birthday']; ?>" style="max-width: 180px;" />
+                </td>
+              </tr>
+              <tr>
+                <th>Religion</th>
+                <td>
+                  <input type="text" class="form-control" name="religion" id="religion" value="<?php echo $row['religion']; ?>" />
+                </td>
+              </tr>
+              <tr>
+                <th>Relationship</th>
+                <td>
+                  <select class="form-control" name="maritalstatus" id="maritalstatus" style="max-width: 180px;">
+                      <option value="Single" <?php if($row['maritalstatus']=="Single")echo "selected"; ?> >Single</option>
+                      <option value="Married" <?php if($row['maritalstatus']=="Married")echo "selected"; ?> >Married</option>
+                  </select>
+                </td>
+              </tr>
+            </table>  
+            <center><button type="submit" class="btn btn-sm btn-success">Save</button></center>
+        </form>
+		<?php
+		exit;
+	}
+
+	function about_form_save()
+	{
+		$userid = $this->user->info->ID;
+		if($userid>0)
+		{
+			$rows = $this->db->get_where('user_data',array('userid'=>$userid))->num_rows();
+
+			$data['userid'] = $userid;
+			$data['work'] = $this->input->post('work');
+			$data['college'] = $this->input->post('college');
+			$data['school'] = $this->input->post('school');
+			$data['address'] = $this->input->post('address');
+			$data['mobile'] = $this->input->post('mobile');
+			$data['website'] = $this->input->post('website');
+			$data['gender'] = $this->input->post('gender');
+			$data['birthday'] = $this->input->post('birthday');
+			$data['religion'] = $this->input->post('religion');
+			$data['maritalstatus'] = $this->input->post('maritalstatus');
+			if($rows>0)
+			{
+				$this->db->where('userid',$userid);
+				$this->db->update('user_data',$data);
+			}
+			else
+			{
+				$this->db->insert('user_data',$data);
+			}
+		}
+		
+		$this->load->library('user_agent');
+        return redirect($this->agent->referrer());
+	}
+
 }
 
 ?>

@@ -101,6 +101,9 @@
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
+
+        <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.6/bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.6/bootstrap-editable/js/bootstrap-editable.min.js"></script>
         
 
     </head>
@@ -160,8 +163,8 @@
                   ?> -->
 
 
-                    <div id="navbar" class="navbar-collapse collapse" style="margin-top: 0; height: 36px; line-height: 36px; padding-left: 0px; background: #FFF; border-radius: 5px;">
-                      <ul class="nav navbar-nav navbar-left" style="text-align: center;">
+                    <div id="navbar" class="navbar-collapse collapse" style="margin-top: 0; height: 36px; line-height: 36px; padding-left: 0px; background: #FFF; border-radius: 5px; padding-right: 30px;">
+                      <ul class="nav navbar-nav navbar-right" style="text-align: center;">
                         <li>
                           <!-- <?php echo form_open(site_url(), array("class"=>"navbar-form")) ?>
                           <div class="form-group">
@@ -171,12 +174,12 @@
                         </li>
                       <?php if($this->user->loggedin) : ?>
                         <!-- <li><a href="<?php echo site_url() ?>"><span class="glyphicon glyphicon-home notification-icon"></span></a></li> -->
-                        <li class="user_bit"><a href="<?php echo site_url("profile/" . $this->user->info->username) ?>"><img src="<?php echo base_url() ?><?php echo $this->settings->info->upload_path_relative ?>/<?php echo $this->user->info->avatar ?>" class="user_avatar"> &nbsp; <?php if($this->settings->info->user_display_type) : ?>
+                        <li class="user_bit"><a class="toplinkbtn" href="<?php echo site_url("profile/" . $this->user->info->username) ?>"><img src="<?php echo base_url() ?><?php echo $this->settings->info->upload_path_relative ?>/<?php echo $this->user->info->avatar ?>" class="user_avatar"> &nbsp; <?php if($this->settings->info->user_display_type) : ?>
                           <?php echo $this->user->info->first_name ?> <?php echo $this->user->info->last_name ?>
                           <?php else : ?>
                           <?php echo $this->user->info->username ?>
                           <?php endif; ?></a></li>
-                        <li><a href="#" data-target="#" onclick="load_notifications()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="noti-menu-drop"><span class="glyphicon glyphicon-bell notification-icon"></span><?php if($this->user->info->noti_count > 0) : ?><span class="badge notification-badge small-text"><?php echo $this->user->info->noti_count ?></span><?php endif; ?></a>
+                        <li><a href="#" class="toplinkbtn" data-target="#" onclick="load_notifications()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="noti-menu-drop"><span class="glyphicon glyphicon-bell notification-icon"></span><?php if($this->user->info->noti_count > 0) : ?><span class="badge notification-badge small-text"><?php echo $this->user->info->noti_count ?></span><?php endif; ?></a>
                     
                         <ul class="dropdown-menu" aria-labelledby="noti-menu-drop">
                         <div class="notify-arrow notify-arrow-blue"></div>
@@ -195,7 +198,7 @@
                       </li>
                       </ul>
                       </li>
-                        <li><a href="#" data-target="#" onclick="load_chats()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="email-menu-drop"><span class="glyphicon glyphicon-envelope notification-icon"></span><span class="badge notification-badge small-text" id="chat-noti"></span></a>
+                        <li><a href="#" class="toplinkbtn" data-target="#" onclick="load_chats()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="email-menu-drop"><span class="glyphicon glyphicon-envelope notification-icon"></span><span class="badge notification-badge small-text" id="chat-noti"></span></a>
 
                         <ul class="dropdown-menu" aria-labelledby="email-menu-drop">
                         <div class="notify-arrow notify-arrow-blue"></div>
@@ -228,10 +231,10 @@
                             <li><a href="<?php echo site_url("admin") ?>"><?php echo lang("ctn_157") ?></a></li>
                           <?php endif; ?>
                         </ul></li> -->
-                        <li><a href="<?php echo site_url("login/logout/" . $this->security->get_csrf_hash()) ?>"><?php echo lang("ctn_149") ?></a></li>
+                        <li><a class="toplinkbtn" href="<?php echo site_url("login/logout/" . $this->security->get_csrf_hash()) ?>"><?php echo lang("ctn_149") ?></a></li>
                       <?php else : ?>
-                      <li><a href="<?php echo site_url("login") ?>"><?php echo lang("ctn_150") ?></a></li>
-                        <li><a href="<?php echo site_url("register") ?>"><?php echo lang("ctn_151") ?></a></li>
+                      <li><a class="toplinkbtn" href="<?php echo site_url("login") ?>"><?php echo lang("ctn_150") ?></a></li>
+                        <li><a class="toplinkbtn" href="<?php echo site_url("register") ?>"><?php echo lang("ctn_151") ?></a></li>
                       <?php endif; ?>
                       </ul>
                     </div>
@@ -301,6 +304,7 @@
 
     </div>
     <?php include(APPPATH . "views/modal/post_modal.php"); ?>
+    <?php include(APPPATH . "views/modal/about_modal.php"); ?>
     <?php include(APPPATH . "views/modal/upload_profile_modal.php"); ?>
     <?php include(APPPATH . "views/client/chat.php"); ?>
 

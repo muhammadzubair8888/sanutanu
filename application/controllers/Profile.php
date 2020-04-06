@@ -954,6 +954,12 @@ class Profile extends CI_Controller
 		}
 		$user = $user->row();
 
+		$userdata = $this->user_model->get_user_data($userid);
+		if($userdata->num_rows() == 0) {
+			$this->template->error(lang("error_85"));
+		}
+		$userdata = $userdata->row();
+
 		// check user is friend
 		$flags = $this->check_friend($this->user->info->ID, $user->ID);
 
@@ -976,6 +982,7 @@ class Profile extends CI_Controller
 
 		$this->template->loadContent("profile/about.php", array(
 			"user" => $user,
+			"userdata" => $userdata,
 			"friend_flag" => $flags['friend_flag'],
 			"request_flag" => $flags['request_flag'],
 			)

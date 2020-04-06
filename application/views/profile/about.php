@@ -73,19 +73,90 @@
 
 
 <div class="row">
-  <div class="col-md-5">
+  <!-- <div class="col-md-5">
     <h3>About</h3>
     <div class="list-group">
-      <a href="#" class="list-group-item active">Overview</a>
-      <a href="#" class="list-group-item">Work and Education</a>
-      <a href="#" class="list-group-item">Places You've Lived</a>
-      <a href="#" class="list-group-item">Contact and Basic Info</a>
-      <a href="#" class="list-group-item">Family and Relationships</a>
-      <a href="#" class="list-group-item">Details About You</a>
-      <a href="#" class="list-group-item">Life Events</a>
+      <ul class="nav nav-pills nav-stacked">
+        <li class="active"><a href="#overview" data-toggle="tab">Overview</a></li>
+        <li><a href="#workeducation" data-toggle="tab">Work and Education</a></li>
+        <li><a href="#livingplaces" data-toggle="tab">Places You've Lived</a></li>
+        <li><a href="#contactsinfo" data-toggle="tab">Contact and Basic Info</a></li>
+      </ul>
     </div>
+  </div> -->
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-6">
+        <h3>About</h3>
+      </div>
+      <div class="col-md-6">
+        <button type="button" class="btn btn-post btn-sm pull-right" onclick="about_modal();">Edit</button>
+      </div>
+    </div>
+        
+        <table class="table table-striped table-bordered">
+          <tr>
+            <th style="width: 160px;">Work</th>
+            <td>
+              <?php echo $userdata->work; ?>
+            </td>
+          </tr>
+          <tr>
+            <th>College/University</th>
+            <td>
+              <?php echo $userdata->college; ?>
+            </td>
+          </tr>
+          <tr>
+            <th>High School</th>
+            <td>
+              <?php echo $userdata->school; ?>
+            </td>
+          </tr>
+          <tr>
+            <th>Address</th>
+            <td>
+              <?php echo $userdata->address; ?>
+            </td>
+          </tr>
+          <tr>
+            <th>Mobile</th>
+            <td>
+              <?php echo $userdata->mobile; ?>
+            </td>
+          </tr>
+          <tr>
+            <th>Website</th>
+            <td>
+              <?php echo $userdata->website; ?>
+            </td>
+          </tr>
+          <tr>
+            <th>Gender</th>
+            <td>
+              <?php echo $userdata->gender; ?>
+            </td>
+          </tr>
+          <tr>
+            <th>Birthday</th>
+            <td>
+              <?php echo $userdata->birthday; ?>
+            </td>
+          </tr>
+          <tr>
+            <th>Religion</th>
+            <td>
+              <?php echo $userdata->religion; ?>
+            </td>
+          </tr>
+          <tr>
+            <th>Relationship</th>
+            <td>
+              <?php echo $userdata->maritalstatus; ?>
+            </td>
+          </tr>
+        </table>
   </div>
-  <div class="col-md-7"></div>
 </div>
 
 
