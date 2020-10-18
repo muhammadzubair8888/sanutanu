@@ -53,6 +53,45 @@ class Home extends CI_Controller
 		);
 	}
 
+
+	public function stories($type = 0, $hashtag = "")
+	{
+		$type = intval($type);
+		$hashtag = $this->common->nohtml($hashtag);
+		$this->template->loadExternal(
+			'
+			<script type="text/javascript" src="'
+			.base_url().'scripts/custom/profile.js" /></script>'
+		);
+		
+
+		$pages = $this->page_model->get_recent_pages();
+		$hashtags = $this->feed_model->get_trending_hashtags(10);
+		$users = $this->user_model->get_newest_users($this->user->info->ID);
+
+		$postid = intval($this->input->get("postid"));
+		$commentid = intval($this->input->get("commentid"));
+		$replyid = intval($this->input->get("replyid"));
+
+		$userswithstories = $this->feed_model->get_users_have_stories();
+		//print_r($userswithstories->result());
+		//exit;
+		$this->template->loadContent("home/stories.php", array(
+			"pages" => $pages,
+			"users" => $users,
+			"hashtags" => $hashtags,
+			"type" => $type,
+			"hashtag" => $hashtag,
+			"postid" => $postid,
+			"commentid" => $commentid,
+			"replyid" => $replyid,
+			"userswithstories" => $userswithstories
+			)
+		);
+	}
+
+
+
 	public function get_user_friends() 
 	{
 		$query2 = $this->common->nohtml($this->input->get("term"));
@@ -117,6 +156,7 @@ class Home extends CI_Controller
 		} else {
 			$lang = $_COOKIE["language"];
 		}
+		
 		$this->template->loadContent("home/change_language.php", array(
 			"languages" => $languages,
 			"user_lang" => $lang
@@ -174,7 +214,7 @@ class Home extends CI_Controller
 					$s = new STDClass;
 					$s->label = $r->first_name ." " . $r->last_name;
 					$s->type = "user";
-					$s->value = $r->username;
+					$s->value = $r->first_name ." " . $r->last_name;
 					$s->avatar = base_url() . $this->settings->info->upload_path_relative . "/" . $r->avatar;
 					$s->url = site_url("profile/" . $r->username);
 					$array[] = $s;

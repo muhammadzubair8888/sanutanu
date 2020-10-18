@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 // $config['base_url'] = 'http://sanutanu.com';
-$config['base_url'] = 'http://localhost/sanutanu';
+$config['base_url'] = 'http://localhost/sanutanu/';
 /*
 |--------------------------------------------------------------------------
 | Index File
@@ -112,7 +112,14 @@ $config['available_languages'] = array(
 		"datatable_lang" => "",
 		"fullcalendar_lang" => "",
 		"datetimepicker" => ""
-	)
+	)/*,
+	"french" => array(
+		"display_name" => "French",
+		"rtl_support" => 0,
+		"datatable_lang" => "",
+		"fullcalendar_lang" => "",
+		"datetimepicker" => ""
+	)*/
 );
 
 /*
@@ -197,7 +204,7 @@ $config['composer_autoload'] = 'vendor/autoload.php';
 | DO NOT CHANGE THIS UNLESS YOU FULLY UNDERSTAND THE REPERCUSSIONS!!
 |
 */
-$config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-';
+$config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-';//a-z 0-9~%.:_\- - \'-\' "-"   
 
 /*
 |--------------------------------------------------------------------------
@@ -477,12 +484,12 @@ $config['global_xss_filtering'] = FALSE;
 | 'csrf_regenerate' = Regenerate token on every submission
 | 'csrf_exclude_uris' = Array of URIs which ignore CSRF checks
 */
-$config['csrf_protection'] = TRUE;
+$config['csrf_protection'] = FALSE;
 $config['csrf_token_name'] = 'csrf_test_name';
 $config['csrf_cookie_name'] = 'csrf_cookie_name';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = FALSE;
-$config['csrf_exclude_uris'] = array('invoice/view', 'ipn/process2', 'funds', 'ipn/stripe/[0-9]+','ipn/checkout2/[0-9]+'); 
+$config['csrf_exclude_uris'] = array('invoice/view', 'ipn/process2', 'funds', 'ipn/stripe/[0-9]+','ipn/checkout2/[0-9]+','chat/publish'); 
 
 /*
 |--------------------------------------------------------------------------

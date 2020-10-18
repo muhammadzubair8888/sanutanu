@@ -98,11 +98,16 @@
           <?php
         }
         ?>
-        
       </div>
     </div>
         
         <table class="table table-striped table-bordered">
+          <tr>
+            <th>About Me</th>
+            <td>
+              <?php echo $user->aboutme; ?>
+            </td>
+          </tr>
           <tr>
             <th style="width: 160px;">Work</th>
             <td>
@@ -125,6 +130,24 @@
             <th>Address</th>
             <td>
               <?php echo $userdata['address']; ?>
+            </td>
+          </tr>
+          <tr>
+            <th>City</th>
+            <td>
+              <?php echo $user->city; ?>
+            </td>
+          </tr>
+          <tr>
+            <th>State</th>
+            <td>
+              <?php echo $user->state; ?>
+            </td>
+          </tr>
+          <tr>
+            <th>Country</th>
+            <td>
+              <?php echo $user->country; ?>
             </td>
           </tr>
           <tr>
@@ -173,8 +196,7 @@
  </div>
  </div>
  <script type="text/javascript">
-$(document).ready(function() {
-
+/*$(document).ready(function() {
    var st = $('#search_type').val();
     var table = $('#friends-table').DataTable({
         "dom" : "<'row'<'col-sm-12'tr>>" +
@@ -195,7 +217,7 @@ $(document).ready(function() {
         { "orderable" : false }
     ],
         "ajax": {
-            url : "<?php echo site_url("profile/friends_page/" . $user->ID) ?>",
+            url : "<?php //echo site_url("profile/friends_page/" . $user->ID) ?>",
             type : 'GET',
             data : function ( d ) {
                 d.search_type = $('#search_type').val();
@@ -234,5 +256,10 @@ function set_search_icon(icon, options)
           $('#' + options[i]).fadeOut(10);
         }
       }
-    }
+    }*/
+</script>
+<script type="text/javascript">
+  $(function(){        
+    $(".geocomplete").geocomplete();                           
+   });
 </script>

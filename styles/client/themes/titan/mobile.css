@@ -1,0 +1,479 @@
+#responsive-menu-links { display: none; }
+
+@media (max-width: 400px) {
+	#responsive-menu-links { display: block; }
+	.dashboard-window { margin-bottom:10px; }
+	#main-content { margin-top: 100px !important; }
+}
+@media (max-width: 991px) {
+	#main-content { margin-top: 100px !important; }
+	/*.sidebar { padding-top: 150px !important; }*/
+	.sidebar{
+		display: inline-block;
+	}
+}
+@media (max-width: 768px) {
+	#timer-scroll { background: #FFF; }
+	#notifications-scroll { background: #FFF; }
+	#projects-scroll { background: #FFF; }
+	#chat-scroll { background: #FFF; }
+	.notification-box-title { background: #FFF; }
+	#responsive-menu-links { display: block; }
+	.dashboard-window { margin-bottom: 10px; }
+	#main-content { margin-top: 100px !important; }
+}
+@media (max-width: 1024px){
+	
+	.mainbar{
+        width: 100vw;  
+	 }
+	.rightbar{
+		display: none;
+	 }
+	.col-md-2{
+		width: 16.66666667vw;
+		float: left;
+		font-size: 2vw !important;
+	 }
+	.col-md-6 {
+       width: 50vw;
+       float: left;
+       font-size: 2vw !important;
+     }
+     .col-md-4 {
+       width: 33.33333333%;
+       float: left;
+       font-size: 2vw !important;
+     }
+    #navbar{
+       display: block !important;
+       font-size: 2vw !important;
+       border-radius: 0px !important;
+     }
+    .navbar-brand{
+       font-size: 2vw !important;
+     }
+    .navbar-for{
+    	font-size: 2vw !important;
+     }
+    .sidebar-block{
+    	font-size: 2vw !important;
+     }
+    #homepage-links{
+    	font-size: 2vw !important;
+     }
+    #homepage-stuff{
+    	font-size: 2vw !important;
+     }
+    .sidebar-block{
+    	font-size: 2vw !important;
+     }
+    .sidebar-block ul{
+    	font-size: 2vw !important;
+     }
+    .sidebar-block  ul li a{
+    	font-size: 2vw !important;
+     }
+    .sidebar-block p{
+    	font-size: 2vw !important;
+     }
+    .page-block{
+    	font-size: 2vw !important;
+     }
+    .page-block-title{
+    	font-size: 2vw !important;
+     }
+    .page-block-page{
+    	font-size: 2vw !important;
+     }
+    .pull-left{
+    	font-size: 2vw !important;
+    	margin-right: 1vw !important;
+     }
+    .pull-left p{
+    	font-size: 1vw !important;
+     }
+    .pull-left a{
+    	font-size: 1vw !important;	
+     }
+    .pull-left a img{
+    	font-size: 1vw !important;
+    	width: 5vw !important;
+     }
+    .pull-left img{
+    	font-size: 1vw !important;
+    	width: 5vw !important;
+     }
+    .pull-right{
+    	font-size: 2vw !important;
+     }
+    .pull-right button{
+    	font-size: 1vw !important;
+     }
+    .feed-footer{
+    	font-size:2vw !important;
+     }
+    .feed-header-user{
+    	font-size:2vw !important;
+     }
+    .feed-header-user img{
+    	font-size:2vw !important;
+    	width: 5vw !important;
+    	height: 5vw !important;
+     }
+    .feed-header-info{
+    	font-size:2vw !important;
+     }
+    .feed-header-info a{
+    	font-size:2vw !important;
+     }
+    .feed-timestamp{
+    	font-size:2vw !important;
+     }
+    .feed-header-dropdown{
+    	font-size: 2vw !important;
+     }
+    .dropdown a{
+       font-style:1vw !important;
+     }
+    .dropdown a{
+    	font-style:2vw !important;
+     }
+    .btn-group{
+       font-style:2vw !important;
+     }
+    .btn-group a{
+    	font-style:2vw !important;
+     }
+    .btn-group ul li a{
+        font-style:2vw !important;
+     }
+    .feed-content{
+        font-style:2vw !important;
+     }
+    .feed-content a{
+    	font-style:2vw !important;
+     }
+    .feed-content-stats{
+    	font-style:2vw !important;
+     }
+     .feed-content-stats a{
+    	font-style:2vw !important;
+     }
+    .feed-footer{
+    	font-size: 2vw !important;
+     }
+    .feed-footer a{
+    	font-size:2vw !important;
+     }
+    .feed-footer ul li{
+    	font-size:2vw !important;
+     }
+    #like-button-267{
+        font-size:2vw !important;
+     }
+    #dislike-button-267{
+       font-size:2vw !important;
+     }
+    .editor-button{
+       font-size:2vw !important;
+     }
+    .editor-button {
+       font-size:2vw !important;
+     }
+    .editor-button  ul li a{
+     	font-size: 2vw !important;
+     }
+    .user_bi a img{
+        font-size: 1vw !important;   
+     }
+    .topbar-right a{
+     	font-size: 1vw !important;
+     }
+    .toplinkbtn img{
+     	font-size: 1vw !important;
+     	width: 2vw !important;
+     	height: 2vw !important;
+     }
+    .toplinkbtn{
+     	font-size: 1vw !important;
+     }
+    #noti-menu-drop{
+     	font-size: 1vw !important;
+     }
+
+    .topbar-right{
+     	font-size: 1vw !important;
+     }
+    .searchButton{
+     	font-size: 2vw !important;
+     }
+    .search{
+     	font-size: 2vw !important;
+     }
+    .nav ul li a{
+     	font-size: 2vw !important;
+     }
+    .editor-user-icon img{
+     	width: 5vw !important;
+     	height: 5vw !important;
+       }
+    .editor-header{
+     	font-size: 2vw !important;
+     }
+    .user-icon-big {
+       width: 4vw !important;
+       height: 4vw !important;
+      }
+    .editor-textarea {
+      	font-size: 2vw !important;
+      }
+    .editor-textarea-part {
+        width: calc(100% - 0px) !important;
+        float: left !important;
+      }
+    .btn-post{
+      	
+      	font-size: 2vw !important;
+      }
+    .dropdown-menu{
+      	font-size: 2vw !important;
+      	width: 10vw !important;
+      }
+    .notify-arrow{
+      	font-size: 2vw !important;
+      }
+    .notification-box-title{
+      	font-size: 1vw !important;
+      	
+      }
+    .notifications-scroll{
+      	font-size: 2vw !important;
+      }
+    .notification-box-bit {
+      	font-size: 2vw !important;
+      }
+     .notification-icon-bit {
+       margin-right: 0px !important ;
+       width: 23px !important; 
+      }
+     .notification-box-bit {
+        padding: 0px !important;   	
+      }
+    .projects-text-bit{
+      		font-size: 2vw !important;
+      }
+    .projects-text-bit a{
+      		font-size: 2vw !important;
+      }
+    .projects-text-bit p{
+      		font-size: 2vw !important;
+      }
+    .notification-box-footer{
+      	font-size:2vw !important;
+      }
+    .notification-box-footer a{
+      	font-size: 2vw !important;
+      }
+    .notification-icon{
+      	font-size: 2vw !important;
+      }
+    .badge{
+      	font-size: 2vw !important;
+      }
+    .notification-box-title{
+      	font-size: 2vw !important;
+      	width: 30vw !important;
+      }
+    .notification-box-title a{
+     	font-size: 2vw !important;
+      }
+    #chat-scroll{
+      	font-size: 2vw !important;
+      	width: 60vw !important;
+      }
+    #loading_spinner_email{
+      	font-size: 2vw !important;
+      }
+    .glyphicon {
+     	font-size: 2vw !important;
+      }
+    .notification-box-footer{
+      	font-size: 2vw !important;
+      }
+    .notification-box-footer a{
+      	font-size: 2vw !important;
+      }
+    .notification-badge {
+      	font-size: 2vw !important;
+      }
+    .fa-w-16{
+      	font-size: 2vw !important;
+      }
+    .online-dot-user{
+       font-size: 2vw !important;
+       bottom: 9px !important;
+      }
+    .online-dot-user a{
+      	font-size: 2vw !important;
+      }
+      .online-dot-user a img{
+      	font-size: 2vw !important;
+      	width: 2vw !important;
+      	height: 2vw !important;
+      }
+     .user-box-avatar img {
+       width: 4vw !important;
+       height: 4vw !important;
+      }
+      .notification-icon-bit {
+        margin-right: 9px !important;
+       }
+    .projects-text-bit{
+      font-size: 1vw !important;
+      }
+    .projects-text-bit a{
+      font-size: 2vw !important;
+      }
+    .notification-datestamp{
+      font-size: 2vw !important;
+      }
+    .offline-dot-user{
+       font-size: 2vw !important;
+       bottom: 9px !important;
+      }
+    .offline-dot-user a{
+       font-size: 2vw !important;
+      } 
+    .offline-dot-user a img{
+       font-size: 2vw !important;
+       width: 2vw !important;
+       height:2vw !important;
+      } 
+    .dropdown-menu{
+      	font-size: 2vw !important;
+      }
+    .dropdown-menu li{
+      	font-size: 2vw !important;
+      }
+    .dropdown-menu li a{
+      	font-size: 2vw !important;
+      }
+    .dropdown{
+        font-size: 2vw !important;
+      }
+    .faded-icon{
+        font-size: 2vw !important;
+      }
+    .editor-feedcol{
+      	font-size: 2vw !important;
+      	padding: 0px !important;
+      }
+    table{
+      	font-size: 2vw !important;
+      }
+    .editor-feedrow{
+      	font-size: 2vw !important;
+      }
+    svg-inline--fa.fa-w-16 {
+        bottom: 0px !important;
+        right: 0px !important;
+      }
+    table{
+      	font-size: 2vw !important;
+      }
+    tbody{
+      	font-size: 2vw !important;
+      }
+    tr td{
+         font-size: 2vw !important;
+      }
+    tr td{
+         font-size: 2vw !important;
+      }
+    td{
+          font-size: 2vw !important;
+          padding-right: 0px !important;
+      }
+    td img{
+      	font-size: 2vw !important;
+      	width: 5vw !important;
+      	height: 5vw !important;
+      }
+    .dropdown{
+      	font-size: 2vw !important;
+      }
+    .dropdown-toggle{
+      	font-size: 2vw !important;
+      }
+    .fa-w-20{
+      	font-size: 2vw !important;
+      }
+    .caret{
+      	font-size: 2vw !important;
+      }
+    .dropdown-menu{
+      	font-size: 2vw !important;
+      }
+    .dropdown-header{
+      	font-size: 2vw !important;
+      }
+    .active{
+      	font-size: 2vw !important;
+      }
+       .active a{
+       	font-size: 2vw !important;	
+      }
+    .btn-sm {
+        padding: 3px 3px;
+        line-height: 1.5; 
+     }
+    .postboxbutton {
+        width: 18px !important;
+       }
+       .navbar-nav a {
+       padding-top:2vw !important;
+       padding-right:1vw !important;
+       padding-bottom:3vw !important;
+       padding-left: 1vw !important;
+     }
+     #noti-menu-drop{ 
+     width: 4.8vw !important;      
+     }
+     #email-menu-drop{
+     	width: 4.8vw !important;
+     }
+    .navbar-nav {
+       margin: 1vw -0vw !important;
+      }
+      .searchform{
+      	margin-left: 4vw !important;
+      	margin-right: -2vw !important;
+      }
+ }
+#responsive-menu-links {
+	   display: none;
+    }
+.editor-button{
+	padding: 0px !important;
+}
+@media (max-width: 414px){
+
+}
+@media (max-width: 770px){
+	
+      .navbar-nav>li {
+     float: left;
+     }
+     .navbar-nav>li{
+     	float: left;
+     }
+     .navbar-nav>li {
+       float: left;
+     }
+}
+
+*{
+	padding: 0px;
+	margin: 0px;
+}

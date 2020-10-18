@@ -38,10 +38,10 @@ class Funds extends CI_Controller
 			$stripe = null;
 		}
 
-		$this->template->loadContent("funds/index.php", array(
-			"stripe" => $stripe
-			)
-		);
+		// $this->template->loadContent("funds/index.php", array(
+		// 	"stripe" => $stripe
+		// 	)
+		// );
 	}
 
 	public function spend() 

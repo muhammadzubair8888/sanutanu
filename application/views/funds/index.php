@@ -1,7 +1,7 @@
 <div class="white-area-content">
 
 <div class="db-header clearfix">
-    <div class="page-header-title"> <span class="glyphicon glyphicon-piggy-bank"></span> <?php echo lang("ctn_250") ?></div>
+    <div class="page-header-title"> <span class="fa fa-money-bill"></span> <?php echo lang("ctn_250") ?></div>
     <div class="db-header-extra"> <a href="<?php echo site_url("funds/payment_log") ?>" class="btn btn-post btn-sm"><?php echo lang("ctn_388") ?></a> <a href="funds/spend" class="btn btn-success btn-sm"><?php echo lang("ctn_731") ?></a>
 </div>
 </div>
@@ -17,7 +17,7 @@
 
 <hr>
 
-<p class="align-center"><img src="<?php echo base_url() ?>/images/paypal.png"></p>
+<!-- <p class="align-center"><img src="<?php echo base_url() ?>/images/paypal.png"></p> -->
 		<center>
 		<form method="post" action="https://www.paypal.com/cgi-bin/webscr" accept-charset="UTF-8" class="form-inline">
 				<input type="hidden" name="charset" value="utf-8" />

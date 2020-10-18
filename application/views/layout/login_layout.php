@@ -22,7 +22,8 @@
         <script src="<?php echo base_url();?>bootstrap/js/bootstrap.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 
-
+        <link rel="stylesheet" href="<?php echo base_url();?>sweatalert/sweetalert.css">
+                <script src="<?php echo base_url();?>sweatalert/sweetalert.js"></script>
         <!-- Favicon: http://realfavicongenerator.net -->
         <link rel="apple-touch-icon" sizes="76x76" href="<?php echo base_url() ?>images/favicon/apple-touch-icon.png">
         <link rel="icon" type="image/png" href="<?php echo base_url() ?>images/favicon/favicon-32x32.png" sizes="32x32">
@@ -38,7 +39,18 @@
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
-        
+        <?php $themecolor = $this->settings->info->color; ?>
+        <style type="text/css">
+
+             /*settings*/
+   ul.settings-sidebar li a { color: <?php echo $themecolor; ?> !important;}
+.panel-body .form-group a { color: <?php echo $themecolor; ?> !important;}
+/*login button*/
+      .btn.btn-primary { background: <?php echo $themecolor; ?> !important;}
+    .btn-flat-login { background:<?php echo $themecolor; ?> !important; }
+    .btn-post {background-color: <?php echo $themecolor; ?> !important;}
+  
+        </style>
 
         <script type="text/javascript">
             $(document).ready(function() {

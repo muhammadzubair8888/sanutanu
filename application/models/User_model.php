@@ -14,6 +14,26 @@ class User_Model extends CI_Model
 		return $this->db->where("ID", $userid)->get("users");
 	}
 
+
+	public function get_user_plans($userid)
+	{
+		return $this->db->where('users_id',$userid)->join('ads_plans', 'buy_ads_plan.ads_plans_id= ads_plans.id','left')->get('buy_ads_plan');
+	}
+
+
+	public function get_user_plans_no_remaining($userid)
+	{
+		return $this->db->where('users_id',$userid)->where('remaining_adds >',0)->join('ads_plans', 'buy_ads_plan.ads_plans_id= ads_plans.id','left')->get('buy_ads_plan');
+	}
+
+	public function mutual_frields($userid)
+	{
+		$userid = addslashes($userid);
+		$ID = $this->user->info->ID;
+		$qry = "SELECT * FROM `user_friends` WHERE friendid in( SELECT friendid from `user_friends` WHERE userid = '$ID' ) and userid = '$userid'";
+		return $this->db->query($qry)->num_rows();
+	}
+
 	public function get_user_by_username($username) 
 	{
 		return $this->db->where("username", $username)->get("users");
@@ -91,7 +111,7 @@ class User_Model extends CI_Model
 			)
 		);
 
-		return $this->db->select("users.username, users.email, users.first_name, 
+		return $this->db->select("users.username,users.points, users.email, users.first_name, 
 			users.last_name, users.ID, users.joined, users.oauth_provider,
 			users.user_role, users.online_timestamp, users.avatar,
 			user_roles.name as user_role_name")
@@ -343,7 +363,8 @@ class User_Model extends CI_Model
     		->set($field, $field . '-' . $amount, FALSE)->update("users");
     }
 
-	public function update_user($userid, $data) {
+	public function update_user($userid, $data)
+	{
 		$this->db->where("ID", $userid)->update("users", $data);
 	}
 
@@ -536,7 +557,7 @@ class User_Model extends CI_Model
 		$this->db->insert("user_data", $data);
 	}
 
-	public function update_user_data($id, $data) 
+	public function update_user_data($id,$data) 
 	{
 		$this->db->where("ID", $id)->update("user_data", $data);
 	}
@@ -584,6 +605,17 @@ class User_Model extends CI_Model
 			->join("users", "users.ID = user_friends.friendid")
 			->order_by("users.online_timestamp", "DESC")
 			->limit($limit)
+			->get("user_friends");
+	}
+
+	public function get_user_friends_all($userid) 
+	{
+		return $this->db
+			->select("users.username, users.first_name, users.last_name,
+				users.avatar, users.online_timestamp, users.ID as friendid")
+			->where("user_friends.userid", $userid)
+			->join("users", "users.ID = user_friends.friendid")
+			->order_by("users.online_timestamp", "DESC")
 			->get("user_friends");
 	}
 

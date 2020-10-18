@@ -3,7 +3,7 @@
 class Register_Model extends CI_Model 
 {
 
-	public function registerUser($username, $email, $first_name, $last_name, $password,
+	public function register_api($username, $email, $first_name, $last_name, $password,
 	$access_level=1
 	) {
 		$this->db->insert("users", 
@@ -40,7 +40,8 @@ class Register_Model extends CI_Model
 
 	public function check_username_is_free($username) 
 	{
-		$s=$this->db->where("username", $username)->get("users");
+		$s =$this->db->where("username", $username)->get("users");
+		//return $s;
 		if($s->num_rows() > 0) {
 			return false;
 		} else {

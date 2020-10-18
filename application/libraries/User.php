@@ -29,7 +29,7 @@ class User
 
  		$select = "users.`ID`, users.`username`, users.`email`, 
 				users.first_name, 
-				users.last_name, users.`online_timestamp`, users.avatar,
+				users.last_name,users.gender, users.`online_timestamp`, users.avatar,
 				users.email_notification, users.aboutme, users.points,
 				users.premium_time, users.active, users.activate_code,
 				users.profile_comments, users.address_1, users.address_2,
@@ -41,6 +41,9 @@ class User
 				users.oauth_provider,
 				users.relationship_status, users.relationship_userid,
 				users.verified,
+				users.profilepic_postid,
+				users.coverpic_postid,
+				users.allow_newsletter,
 				users.user_role, user_roles.name as ur_name,
 				user_roles.admin, user_roles.admin_settings, 
 				user_roles.admin_members, user_roles.admin_payment,

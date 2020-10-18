@@ -7,7 +7,7 @@
 				<button type="button" class="close" data-dismiss="modal">×</button>
 				<!-- <h4 class="modal-title">Enquire Now</h4> -->
 			</div>
-			<div class="modal-body" id="sanutanu_post_popup">
+			<div class="modal-body" id="sanutanu_post_popup" style="padding: 0;">
 				<div class="row">
 					<div class="col-md-8"></div>
 					<div class="col-md-4"></div>
@@ -22,12 +22,11 @@
 <style type="text/css">
 	
 #postpopup .modal-dialog {
-    width: 70%;
-    max-height: 100%;
-    padding: 0px ;
+    width: 88%;
+    padding: 0px;
     position: relative;
 }
-#postpopup .modal-dialog:before {
+/*#postpopup .modal-dialog:before {
     content: '';
     height: 0px;
     width: 0px;
@@ -38,14 +37,14 @@
     top: 1px;
     left: -14px;
     z-index: 99;
-}
+}*/
 
-.custom-modal-header {
+#postpopup .custom-modal-header {
     text-align: center;
-    color: #a41be3;
+    color: #000;
     text-transform: uppercase;
     letter-spacing: 2px;
-    border-top: 4px solid;
+    border-top: 0px solid;
 }
 
 #postpopup .modal-dialog .close {
@@ -65,7 +64,7 @@
 }
 
 .custom-modal-body {
-	height: 700px;
+	/*height: 700px;*/
 }
 
 #postpopup .modal-dialog:after {
@@ -91,8 +90,20 @@
     vertical-align: middle;
 }
 #postpopup .feed-comments-spot {
-	max-height: 190px;
+	max-height: 100%;
 	overflow-y: auto;
+}
+.feed-comment-area-popup { overflow-y: auto; }
+.fit-image{
+/*width: auto;*/
+/*object-fit: cover;*/
+/*height: auto;*/ /* only if you want fixed height */
+}
+.feed-content-popup
+{
+    display: table-cell;
+    vertical-align: middle;
+    background: #000;
 }
 </style>
 <script type="text/javascript">
@@ -109,9 +120,66 @@
 		      /*$('#home_posts').jscroll({
 		        nextSelector : '.load_next'
 		      });*/
+              $('#postpopup').modal('show');
+              //fit_modal_body($("#postpopup"));
+              setTimeout(function(){ fit_modal_body($("#postpopup")); }, 200);
 		     
 		    }
 		  })
-		$('#postpopup').modal('show');
+		
 	}
+</script>
+<script type="text/javascript">
+    var fit_modal_body;
+
+    fit_modal_body = function(modal) {
+        //alert('ok');
+        var ht = $(window).height();
+      var body, bodypaddings, header, headerheight, height, modalheight, popupimg;
+      header = $(".modal-header", modal);
+      body = $("#sanutanu_post_popup", modal);
+      popupimg = $(".fit-image", modal);
+      modalheight = parseInt(modal.css("height"));
+      headerheight = parseInt(header.css("height")) + parseInt(header.css("padding-top")) + parseInt(header.css("padding-bottom"));
+      bodypaddings = parseInt(body.css("padding-top")) + parseInt(body.css("padding-bottom"));
+      height = ht-80;//modalheight - headerheight - bodypaddings - 5;
+      //alert(ht);
+      iw = popupimg.width();
+      ih = popupimg.height();
+      
+     // alert( iw + " x " + ih );
+      if( Number(iw) > Number(ih) )
+      {
+        //popupimg.css("height", "auto");
+        popupimg.css("width", "100%");
+        //alert(1);
+      }
+      else
+      {
+        popupimg.css("height", "" + height + "px");
+        //alert(2);
+        //popupimg.css("width", "auto");
+      }
+
+      var mw = $('.feed-content-wraper').width();////////
+
+      var fh1 = $('#postpopup .feed-header').height();
+      var fh2 = $('#postpopup .feed-content-right').height();
+      var fh3 = $('#postpopup .feed-content-stats').height();
+      var fh4 = $('#postpopup .feed-footer').height();
+      var fhf = $('.feed-content-popup').height() - fh1 - fh2 - fh3 - fh4;
+     // alert(fhf);
+
+      body.css("max-height", "" + height + "px");
+      //$('#postpopup .feed-comment-area').css("height", height + "px");
+      $('#postpopup .feed-comment-area').css("max-height", fhf + "px");
+      $('.feed-content-popup').css("height", "" + height + "px");
+      $('.feed-content-popup').css("width", "" + mw + "px");
+      return body.css("height", "" + height + "px");
+
+    };
+
+    $(window).resize(function() {
+      return fit_modal_body($("#postpopup"));
+    });
 </script>

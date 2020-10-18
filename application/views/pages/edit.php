@@ -71,7 +71,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group hide">
                     <label for="inputEmail3" class="col-sm-2 control-label"><?php echo lang("ctn_541") ?></label>
                     <div class="col-sm-10">
                     <img src="<?php echo base_url() ?>/<?php echo $this->settings->info->upload_path_relative ?>/<?php echo $page->profile_avatar ?>" />
@@ -80,7 +80,7 @@
                     
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group hide">
                     <label for="inputEmail3" class="col-sm-2 control-label"><?php echo lang("ctn_542") ?></label>
                     <div class="col-sm-10">
                     <img src="<?php echo base_url() ?>/<?php echo $this->settings->info->upload_path_relative ?>/<?php echo $page->profile_header ?>" width="100%" />
@@ -91,7 +91,7 @@
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label"><?php echo lang("ctn_497") ?></label>
                     <div class="col-sm-10">
-                        <input type="text" name="location" class="form-control map_name" value="<?php echo $page->location ?>">
+                        <input type="text" name="location" class="form-control autocomplete" value="<?php echo $page->location ?>" data-uri="locations" dada-template="city">
                     </div>
                 </div>
                 <div class="form-group">

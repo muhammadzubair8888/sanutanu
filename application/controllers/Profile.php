@@ -70,13 +70,6 @@ class Profile extends CI_Controller
 			$user_data = $user_data->row();
 		}
 
-		if($this->user->loggedin) {
-			// check user is friend
-			$flags = $this->check_friend($this->user->info->ID, $user->ID);
-		} else {
-			$flags = array("friend_flag" => false, "request_flag" => false);
-		}
-
 		// If user is not logged in and friend only profile, no dice.
 		if($user->profile_view == 1 && !$this->user->loggedin) {
 			$user->profile_header = "empty.png";
@@ -93,18 +86,18 @@ class Profile extends CI_Controller
 		if($this->user->loggedin) {
 			if($user->profile_view == 1 && $user->ID != $this->user->info->ID) {
 				// Only let's friends view profile.
-				if(!$flags['friend_flag']) {
+				// if(!$flags['friend_flag']) {
 
-					$user->profile_header = "empty.png";
-					$user->avatar = "default.png";
+				// 	$user->profile_header = "empty.png";
+				// 	$user->avatar = "default.png";
 
-					$this->template->loadContent("profile/empty.php", array(
-						"user" => $user,
-						"friend_flag" => $flags['friend_flag'],
-						"request_flag" => $flags['request_flag'],
-						), 1
-					);
-				}
+				// 	$this->template->loadContent("profile/empty.php", array(
+				// 		"user" => $user,
+				// 		"friend_flag" => $flags['friend_flag'],
+				// 		"request_flag" => $flags['request_flag'],
+				// 		), 1
+				// 	);
+				// }
 			}
 		}
 
@@ -127,8 +120,6 @@ class Profile extends CI_Controller
 			"role" => $rolename,
 			"fields" => $fields,
 			"user_data" => $user_data,
-			"friend_flag" => $flags['friend_flag'],
-			"request_flag" => $flags['request_flag'],
 			"friends" => $friends,
 			"albums" => $albums,
 			"post_count" => 0,
@@ -813,6 +804,7 @@ class Profile extends CI_Controller
 		$name = $this->common->nohtml($this->input->post("name"));
 		$description = $this->common->nohtml($this->input->post("description"));
 		$albumid = intval($this->input->post("albumid"));
+		$privacy = intval($this->input->post('privacy'));
 
 		// Check for valid album
 		$album = $this->image_model->get_user_album($albumid);
@@ -838,7 +830,8 @@ class Profile extends CI_Controller
             	"file_url" => $image_url,
             	"albumid" => $album->ID,
             	"name" => $name,
-            	"description" => $description
+            	"description" => $description,
+            	"privacy" => $privacy
             	)
             );
 
@@ -875,7 +868,8 @@ class Profile extends CI_Controller
             	"albumid" => $album->ID,
             	"name" => $name,
             	"description" => $description,
-            	"file_url" => ""
+            	"file_url" => "",
+            	"privacy" => $privacy
             	)
             );
 		} else {
@@ -883,6 +877,7 @@ class Profile extends CI_Controller
 				"name" => $name,
             	"description" => $description,
             	"albumid" => $album->ID,
+            	"privacy" => $privacy
 				)
 			);
 		}

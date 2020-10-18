@@ -13,7 +13,7 @@
 <?php if($this->settings->info->user_display_type) : ?>
 <?php echo $r->first_name ?> <?php echo $r->last_name ?>
 <?php else : ?>
-<?php echo $r->username ?>
+<?php echo $r->first_name.' '.$r->last_name; ?>
 <?php endif; ?>
 <p class="friends-bar-last-online"><?php echo $this->common->get_time_string_simple($this->common->convert_simple_time($r->online_timestamp)) ?></p>
 </div>

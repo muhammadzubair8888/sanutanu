@@ -131,16 +131,19 @@ $lang['success_115'] = "The invite was deleted!";
 //v1.4
 $lang['success_116'] = "The social media account was deauthoized and will no longer be able to login using it.";
 $lang['success_117'] = "Please enter OTP from your SMS message";
-$lang['success_118'] = "";
-$lang['success_119'] = "";
-$lang['success_120'] = "";
-$lang['success_121'] = "";
-$lang['success_122'] = "";
-$lang['success_123'] = "";
-$lang['success_124'] = "";
+$lang['success_118'] = "You have successfully sent a but report to administrator.";
+$lang['success_119'] = "Privacy Policy was updated successfully.";
+$lang['success_120'] = "Advert Plan Successfully added";
+$lang['success_121'] = "Advert Plan Successfully Deleted";
+$lang['success_122'] = "The Religion category was added!";
+$lang['success_123'] = "The Community category was added!";
+$lang['success_124'] = " Step 1 Completed Now Fill Step 2 and Go Next";
 $lang['success_125'] = "";
 $lang['success_126'] = "";
 $lang['success_127'] = "";
-$lang['success_128'] = "";
+$lang['success_128'] = "The Group category was deleted!";
+$lang['success_129'] = "The Group category was added!";
+$lang['success_130'] = "The Religion was deleted!";
+$lang['success_131'] = "The Community was deleted!";
 
 ?>

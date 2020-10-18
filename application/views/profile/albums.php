@@ -58,9 +58,35 @@
  </div>
  </div>
 
-<div class="white-area-content separator">
+<div class="white-area-conten separator">
 
-<div class="db-header clearfix">
+
+
+
+
+<ul id="albums">
+<?php
+$CI =& get_instance();
+$CI->load->model('image_model');
+  $albums = $CI->image_model->get_user_albums_all($user->ID);
+  foreach($albums->result() as $r) {
+    $r2 = $this->db->limit(1)->where('albumid',$r->ID)->get('user_images')->row();
+    if(isset($r2->file_name)) {
+      $image = '<img src="'. base_url() . $this->settings->info->upload_path_relative . '/' . $r2->file_name .'" width="50">';
+    } else {
+      $image = '<img src="'. base_url() . $this->settings->info->upload_path_relative . '/default_album.png" width="50">';
+    }
+    echo '<li><a href="'.site_url("profile/view_album/" . $r->ID).'">'.$image.''.$image.''.$image.''.$image.''.$image.''.$image.'</a><a href="'.site_url("profile/view_album/" . $r->ID).'" style="height: inherit;"><h5>'.$r->name.'</h5></a></li>';
+  }
+?>
+</ul>
+
+
+
+
+
+
+<!-- <div class="db-header clearfix">
     <div class="page-header-title"> <span class="glyphicon glyphicon-user"></span> <?php echo $user->first_name ?>'s <?php echo lang("ctn_483") ?></div>
     <div class="db-header-extra form-inline"> 
 
@@ -76,7 +102,7 @@
           <li><a href="#" onclick="change_search(1)"><span class="glyphicon glyphicon-ok nodisplay" id="search-exact"></span> <?php echo lang("ctn_338") ?></a></li>
           <li><a href="#" onclick="change_search(2)"><span class="glyphicon glyphicon-ok nodisplay" id="name-exact"></span> <?php echo lang("ctn_81") ?></a></li>
         </ul>
-      </div><!-- /btn-group -->
+      </div><! -- /btn-group - ->
 </div>
 </div>
 
@@ -89,6 +115,14 @@
 
 
 <div class="table-responsive">
+
+
+
+
+
+
+
+
 <table id="album-table" class="table table-striped table-hover table-bordered">
 <thead>
 <tr class="table-header"><td><?php echo lang("ctn_556") ?></td><td><?php echo lang("ctn_81") ?></td><td><?php echo lang("ctn_557") ?></td><td><?php echo lang("ctn_558") ?></td><td><?php echo lang("ctn_52") ?></td></tr>
@@ -140,9 +174,9 @@
      
     </div>
   </div>
-</div>
+</div> -->
  <script type="text/javascript">
-$(document).ready(function() {
+/*$(document).ready(function() {
 
    var st = $('#search_type').val();
     var table = $('#album-table').DataTable({
@@ -177,8 +211,8 @@ $(document).ready(function() {
     table.search(this.value).draw();
 });
 
-} );
-function change_search(search) 
+} );*/
+/*function change_search(search) 
     {
       var options = [
       "search-like", 
@@ -199,5 +233,5 @@ function set_search_icon(icon, options)
           $('#' + options[i]).fadeOut(10);
         }
       }
-    }
+    }*/
 </script>

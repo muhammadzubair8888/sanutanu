@@ -1,13 +1,23 @@
 <script src="<?php echo base_url() ?>scripts/custom/get_usernames.js"></script>
 <div class="row">
         <div class="col-md-12">
-        	<div class="white-area-content">
+            
+            <div class="mx1 mb2 h6 sm-h4 flex justify-center filter-buttons-group filter-buttons x-btn-group topbuttons" data-filter-group="type">
+                <a href="<?php echo site_url('pages/joined'); ?>" class="btn btn-post btn-tab"><?php echo lang('ctn_982'); ?></a>
+                <a href="<?php echo site_url('pages/your'); ?>" class="btn btn-post btn-tab"><?php echo lang('ctn_577'); ?></a>
+                <?php if( (isset($member) && $member != null && $member->roleid == 1) || ($this->common->has_permissions(array("admin", "page_admin", "page_creator"), $this->user)) ) : ?>
+                <a href="<?php echo site_url("pages/add") ?>" class="btn btn-post btn-tab btn-active"><?php echo lang("ctn_531") ?></a>
+                <?php endif; ?>
+            </div>
+
+
+        	<!-- <div class="white-area-content"> -->
         		
-        		<div class="db-header clearfix">
-				    <div class="page-header-title"> <span class="glyphicon glyphicon-file"></span> <?php echo lang("ctn_531") ?></div>
-				    <div class="db-header-extra"> <a href="<?php echo site_url("pages/add") ?>" class="btn btn-post btn-sm"><?php echo lang("ctn_531") ?></a>
-				</div>
-				</div>
+        		<!-- <div class="db-header clearfix">
+                                    <div class="page-header-title"> <span class="glyphicon glyphicon-file"></span> <?php echo lang("ctn_531") ?></div>
+                                    <div class="db-header-extra"> <a href="<?php echo site_url("pages/add") ?>" class="btn btn-post btn-sm"><?php echo lang("ctn_531") ?></a>
+                                </div>
+                                </div> -->
 
                 <?php echo form_open_multipart(site_url("pages/add_pro"), array("class" => "form-horizontal")) ?>
                 <div class="panel panel-default">
@@ -140,7 +150,7 @@
                 <?php echo form_close() ?>
 
 
-        	</div>
+        	<!-- </div> -->
         </div>
     </div>
 

@@ -12,7 +12,7 @@ if($r->post_as == "page") {
 	if(!empty($r->page_slug)) {
 		$slug = $r->page_slug;
 	} else {
-		$slug = $r->pageid;
+		$slug = $r->groupid;
 	}
 	$url = site_url("pages/view/" . $slug);
 } else {

@@ -1,6 +1,7 @@
 <?php $script = ""; ?>
 <?php foreach($chats->result() as $r) : ?>
 	<?php
+	//print_r($r);
 		if(!empty($r->lc_title)) {
 			$r->title = $r->lc_title;
 		}
@@ -25,9 +26,12 @@
 		$window_id = "active_chat_window_" .$r->ID;
 		$script .= '$("#'.$window_id.'").scrollTop($("#'.$window_id.'")[0].scrollHeight);';
 
+		$chatuserid = @$this->db->get_where('live_chat_users', array('chatid'=>$r->ID, 'userid !='=>$this->user->info->ID))->row()->userid;
+		$chatusername = @$this->db->get_where('users', array('ID'=>$chatuserid) )->row()->username;
+
 	?>
 <div class="active_chat_bubble active_chat_window" id="active_chat_bubble_<?php echo $r->ID ?>">
-<div class="chat-top-bar"><a style="text-decoration: none;color:#FFF;" href="<?php echo site_url("profile/" . $this->user->info->username) ?>" class="chat_title"><?php echo $r->title ?></a><div class="pull-right"> <span class="glyphicon glyphicon-minus click chat-icon" onclick="close_active_chat_window(<?php echo $r->ID ?>)"></span> <span class="glyphicon glyphicon-remove click chat-icon" onclick="hide_chat_window(<?php echo $r->ID ?>)"></span></div></div>
+<div class="chat-top-bar"><a style="text-decoration: none;color:#FFF;" href="<?php echo site_url("profile/" . $chatusername ) ?>" class="chat_title"><?php echo $r->title ?></a><div class="pull-right"> <span class="fa fa-video click chat-icon" onclick="start_video_call_window(<?php echo $chatuserid; ?>,<?php echo $r->ID; ?>)"></span> <span class="fa fa-phone-alt click chat-icon" onclick="start_audio_call_window(<?php echo $chatuserid; ?>,<?php echo $r->ID; ?>)"></span> <span class="glyphicon glyphicon-minus click chat-icon" onclick="close_active_chat_window(<?php echo $r->ID ?>)"></span> <span class="glyphicon glyphicon-remove click chat-icon" onclick="hide_chat_window(<?php echo $r->ID ?>)"></span> </div></div>
 <div class="chat-chat-body" id="active_chat_window_<?php echo $r->ID ?>">
 	<?php foreach($msgs as $msg) : ?>
 		<div class="media chat-messages-block">

@@ -209,7 +209,8 @@ $lang['error_191'] = "The max amount of images that can be uploaded at one time 
 $lang['error_192'] = "You must add a password before you can deauthorize your social media account!";
 $lang['error_193'] = "You did not enter a valid email or mobile number!";
 $lang['error_194'] = "You did not enter a valid OTP";
-$lang['error_195'] = "";
+$lang['error_195'] = "Religion cannot be empty!";
+
 $lang['error_196'] = "";
 $lang['error_197'] = "";
 $lang['error_198'] = "";

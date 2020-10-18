@@ -13,10 +13,21 @@
                     <?php if($this->user->info->admin || $this->user->info->admin_settings) : ?>
                       <li class="<?php if(isset($activeLink['admin']['settings'])) echo "active" ?>"><a href="<?php echo site_url("admin/settings") ?>"><?php echo lang("ctn_158") ?></a></li>
                       <li class="<?php if(isset($activeLink['admin']['social_settings'])) echo "active" ?>"><a href="<?php echo site_url("admin/social_settings") ?>"> <?php echo lang("ctn_159") ?></a></li>
-                      <li class="<?php if(isset($activeLink['admin']['ad_settings'])) echo "active" ?>"><a href="<?php echo site_url("admin/ad_settings") ?>"> <?php echo lang("ctn_671") ?></a></li>
+                      <li class="<?php if(isset($activeLink['admin']['ad_settings'])) echo "active" ?>">
+                        <a href="<?php echo site_url("admin/ad_settings") ?>"> <?php echo lang("ctn_671") ?></a>
+                      </li>
                       <li class="<?php if(isset($activeLink['admin']['rotation_ads'])) echo "active" ?>"><a href="<?php echo site_url("admin/rotation_ads") ?>"> <?php echo lang("ctn_706") ?></a></li>
-                      <li class="<?php if(isset($activeLink['admin']['promoted_posts'])) echo "active" ?>"><a href="<?php echo site_url("admin/promoted_posts") ?>"> <?php echo lang("ctn_705") ?></a></li>
+                      <li class="<?php if(isset($activeLink['admin']['plan_ads'])) echo "active" ?>"><a href="<?php echo site_url("admin/plan_ads") ?>"> <?php echo lang("ctn_996") ?></a></li>
+                      <li class="<?php if(isset($activeLink['admin']['promoted_posts'])) echo "active" ?>">
+                        <a href="<?php echo site_url("admin/promoted_posts") ?>"> 
+                          <?php echo lang("ctn_705") ?>
+                          <?php if ($this->admin_model->getpromotedpoststatusrows() > 0)  { ?>                        
+                            <span class="badge"><?php echo $this->admin_model->getpromotedpoststatusrows(); ?></span>
+                          <?php  } ?>
+                        </a>
+                      </li>
                       <li class="<?php if(isset($activeLink['admin']['verified_requests'])) echo "active" ?>"><a href="<?php echo site_url("admin/verified_requests") ?>"> <?php echo lang("ctn_694") ?></a></li>
+                      <li class="<?php if(isset($activeLink['admin']['group_categories'])) echo "active" ?>"><a href="<?php echo site_url("admin/group_categories") ?>"> <?php echo lang("ctn_1029") ?></a></li>
                       <li class="<?php if(isset($activeLink['admin']['page_categories'])) echo "active" ?>"><a href="<?php echo site_url("admin/page_categories") ?>"> <?php echo lang("ctn_529") ?></a></li>
                       <li class="<?php if(isset($activeLink['admin']['blogs'])) echo "active" ?>"><a href="<?php echo site_url("admin/blogs") ?>"> <?php echo lang("ctn_792") ?></a></li>
                       <li class="<?php if(isset($activeLink['admin']['blog_posts'])) echo "active" ?>"><a href="<?php echo site_url("admin/blog_posts") ?>"> <?php echo lang("ctn_793") ?></a></li>
@@ -27,13 +38,24 @@
                     <li class="<?php if(isset($activeLink['admin']['invites'])) echo "active" ?>"><a href="<?php echo site_url("admin/invites") ?>"> Invites</a></li>
                     <li class="<?php if(isset($activeLink['admin']['custom_fields'])) echo "active" ?>"><a href="<?php echo site_url("admin/custom_fields") ?>"> <?php echo lang("ctn_346") ?></a></li>
                     <li class="<?php if(isset($activeLink['admin']['reports'])) echo "active" ?>"><a href="<?php echo site_url("admin/reports") ?>"> <?php echo lang("ctn_530") ?></a></li>
+                    <li class="<?php if(isset($activeLink['admin']['report_abuse_posts'])) echo "active" ?>"><a href="<?php echo site_url("admin/report_abuse_posts") ?>"> <?php echo lang("ctn_959") ?></a></li>
+                    <li class="<?php if(isset($activeLink['admin']['report_abuse_reasons'])) echo "active" ?>"><a href="<?php echo site_url("admin/report_abuse_reasons") ?>"> <?php echo lang("ctn_960") ?></a></li>
+
+                    <li class="<?php if(isset($activeLink['admin']['bugs_report'])) echo "active" ?>"><a href="<?php echo site_url("admin/bugs_report") ?>"> <?php echo lang("ctn_974") ?></a></li>
+
                     <?php endif; ?>
+                     <!-- contact us -->
+                    <?php if($this->user->info->admin || $this->user->info->admin_members) : ?>
+                   <li class="<?php if(isset($activeLink['admin']['contact_us_info'])) echo "active" ?>"><a href="<?php echo site_url("admin/contact_us_info") ?>"> <?php echo lang("ctn_1035") ?></a></li> <!-- contact us -->
+                       <?php endif; ?>
                     <?php if($this->user->info->admin) : ?>
                     <li class="<?php if(isset($activeLink['admin']['user_roles'])) echo "active" ?>"><a href="<?php echo site_url("admin/user_roles") ?>"> <?php echo lang("ctn_316") ?></a></li>
                     <?php endif; ?>
                     <?php if($this->user->info->admin || $this->user->info->admin_members) : ?>
                     <li class="<?php if(isset($activeLink['admin']['user_groups'])) echo "active" ?>"><a href="<?php echo site_url("admin/user_groups") ?>"> <?php echo lang("ctn_161") ?></a></li>
                     <li class="<?php if(isset($activeLink['admin']['ipblock'])) echo "active" ?>"><a href="<?php echo site_url("admin/ipblock") ?>"> <?php echo lang("ctn_162") ?></a></li>
+
+                    <li class="<?php if(isset($activeLink['admin']['privacy'])) echo "active" ?>"><a href="<?php echo site_url("admin/privacy") ?>"> <?php echo lang("ctn_981") ?></a></li>
                     <?php endif; ?>
                     <?php if($this->user->info->admin) : ?>
                       <li class="<?php if(isset($activeLink['admin']['email_templates'])) echo "active" ?>"><a href="<?php echo site_url("admin/email_templates") ?>"> <?php echo lang("ctn_163") ?></a></li>
@@ -43,7 +65,14 @@
                     <?php endif; ?>
                     <?php if($this->user->info->admin || $this->user->info->admin_payment) : ?>
                       <li class="<?php if(isset($activeLink['admin']['payment_settings'])) echo "active" ?>"><a href="<?php echo site_url("admin/payment_settings") ?>"> <?php echo lang("ctn_246") ?></a></li>
+                     
                       <li class="<?php if(isset($activeLink['admin']['payment_logs'])) echo "active" ?>"><a href="<?php echo site_url("admin/payment_logs") ?>"> <?php echo lang("ctn_288") ?></a></li>
+                          <?php endif; ?>
+                       <?php if($this->user->info->admin || $this->user->info->admin_payment) : ?>
+                      <li class="<?php if(isset($activeLink['admin']['payment_logs'])) echo "active" ?>"><a href="<?php echo site_url("admin/religions") ?>"> <?php echo lang("ctn_1041") ?></a></li>
+                          <?php endif; ?>
+                      <?php if($this->user->info->admin || $this->user->info->admin_payment) : ?>
+                      <li class="<?php if(isset($activeLink['admin']['payment_logs'])) echo "active" ?>"><a href="<?php echo site_url("admin/communities") ?>"> <?php echo lang("ctn_1042") ?></a></li>
                     <?php endif; ?>
                   </ul>
                 </div>
@@ -52,6 +81,7 @@
             <li class="<?php if(isset($activeLink['home']['general'])) echo "active" ?>"><a href="<?php echo site_url() ?>"><span class="glyphicon glyphicon-home sidebar-icon sidebar-icon-blue"></span> <?php echo lang("ctn_154") ?> <span class="sr-only">(current)</span></a></li>
             <li class="<?php if(isset($activeLink['members']['general'])) echo "active" ?>"><a href="<?php echo site_url("members") ?>"><span class="glyphicon glyphicon-user sidebar-icon sidebar-icon-green"></span> <?php echo lang("ctn_155") ?></a></li>
             <li class="<?php if(isset($activeLink['settings']['general'])) echo "active" ?>"><a href="<?php echo site_url("user_settings") ?>"><span class="glyphicon glyphicon-cog sidebar-icon sidebar-icon-pink"></span> <?php echo lang("ctn_156") ?></a></li>
-            
+
+
       
           </ul>

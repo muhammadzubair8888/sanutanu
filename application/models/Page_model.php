@@ -65,6 +65,11 @@ class Page_Model extends CI_Model
 		return $this->db->where("ID", $id)->get("page_users");
 	}
 
+	public function get_rotaion_adverts($id)
+	{
+		return $this->db->where("userid", $id)->get("rotation_ads");
+	}
+
 	public function update_page($id, $data) 
 	{
 		$this->db->where("ID", $id)->update("pages", $data);
@@ -101,6 +106,34 @@ class Page_Model extends CI_Model
 
 		return $datatable->get("page_users");
 
+	}
+
+	public function get_user_pages_simple($userid) 
+	{
+		$this->db->where("page_users.userid", $userid);
+		$this->db->where("page_users.roleid", 1);
+		$this->db->select("pages.name, pages.pageviews, pages.likes, pages.ID,
+			pages.slug, pages.timestamp, pages.members, pages.profile_avatar, 
+			page_categories.name as category_name,
+			page_users.roleid");
+		$this->db->join("pages", "pages.ID = page_users.pageid");
+		$this->db->join("page_categories", "page_categories.ID = pages.categoryid");
+		$this->db->group_by("pages.ID");
+		return $this->db->get("page_users");
+	}
+
+	public function get_user_pages_joined($userid) 
+	{
+		$this->db->where("page_users.userid", $userid);
+		$this->db->where("page_users.roleid", 0);
+		$this->db->select("pages.name, pages.pageviews, pages.likes, pages.ID,
+			pages.slug, pages.timestamp, pages.members, pages.profile_avatar, 
+			page_categories.name as category_name,
+			page_users.roleid");
+		$this->db->join("pages", "pages.ID = page_users.pageid");
+		$this->db->join("page_categories", "page_categories.ID = pages.categoryid");
+		$this->db->group_by("pages.ID");
+		return $this->db->get("page_users");
 	}
 
 	public function get_total_members($pageid) 

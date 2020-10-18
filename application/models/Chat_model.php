@@ -44,6 +44,13 @@ class chat_Model extends CI_Model
 			->get("live_chat_users");
 	}
 
+	public function get_other_chat_user($chatid, $userid) 
+	{
+		return $this->db->where("userid !=", $userid)
+			->where("chatid", $chatid)
+			->get("live_chat_users");
+	}
+
 	public function get_chat_user_id($id) 
 	{
 		return $this->db->where("ID", $id)->get("live_chat_users");

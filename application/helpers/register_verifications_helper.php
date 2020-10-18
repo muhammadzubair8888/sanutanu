@@ -29,5 +29,14 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 	    }   
 	}
 
+	if ( ! function_exists('upload_path'))
+	{
+	    function upload_path(){
+	        $ci=& get_instance();
+	        $imgpath = base_url() ."/". $ci->settings->info->upload_path_relative ."/";
+	        return $imgpath;
+	    }
+	}
+
 
 ?>

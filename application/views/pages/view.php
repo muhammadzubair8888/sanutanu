@@ -31,16 +31,40 @@ function load_posts(pageid)
 
  <div class="profile-header" style="background: url(<?php echo base_url() ?><?php echo $this->settings->info->upload_path_relative . "/" . $page->profile_header ?>) center center; background-size: cover;">
  <div class="profile-header-avatar">
-	<img src="<?php echo base_url() ?>/<?php echo $this->settings->info->upload_path_relative ?>/<?php echo $page->profile_avatar ?>">
+  <?php if( (isset($member) && $member != null && $member->roleid == 1) || ($this->common->has_permissions(array("admin", "page_admin"), $this->user)) ) : ?> 
+	<a href="#mn1" class="dropdown-toggle" id="profilepicturemenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><img src="<?php echo base_url() ?>/<?php echo $this->settings->info->upload_path_relative ?>/<?php echo $page->profile_avatar ?>" style="width: 100%; height: 100%;"></a>
+  <?php else: ?>
+    <img src="<?php echo base_url() ?>/<?php echo $this->settings->info->upload_path_relative ?>/<?php echo $page->profile_avatar ?>" style="width: 100%; height: 100%;">
+  <?php endif; ?>
  </div>
+ <ul class="dropdown-menu" id="mn1" role="menu" aria-labelledby="profilepicturemenu">
+    <li><a style="cursor: pointer;" onclick="post_modal(<?php echo $page->profilepic_postid; ?>);"><i class="glyphicon glyphicon-user"></i> &nbsp View Profile Picture</a></li>
+    <li><a style="cursor: pointer;" onclick="profilepicpopup_modal();"><i class="glyphicon glyphicon-picture"></i> &nbsp Upload Profile Picture</a></li>
+  </ul>
+
+
+  <?php if( (isset($member) && $member != null && $member->roleid == 1) || ($this->common->has_permissions(array("admin", "page_admin"), $this->user)) ) : ?> 
+
+  <div class="profile-cover-edit-button" style="position: absolute; top: 10px; left: 10px;" >
+  <?php /* ?><button class="btn btn-post" style="border-radius: 20px;" onclick="save_image()">Edit</button><?php */ ?>
+   <button class="btn btn-default" style="border-radius: 5px;" onclick="change_cover();"><i class="glyphicon glyphicon-camera"></i> Edit Cover Photo</button>
+    <form method="post" enctype="multipart/form-data" style="display: none;">
+      <input type="file" name="coverupload" id="coverupload" accept="image/*">
+    </form>
+ </div>
+ <?php endif; ?>
+
  <div class="profile-header-options">
   <?php if( (isset($member) && $member != null && $member->roleid == 1) || ($this->common->has_permissions(array("admin", "page_admin"), $this->user)) ) : ?> 
-<a href="<?php echo site_url("pages/edit_page/" . $page->ID) ?>" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-cog"></span></a> <a href="<?php echo site_url("pages/delete_page/" . $page->ID . "/" . $this->security->get_csrf_hash()) ?>" onclick="return confirm('<?php echo lang("ctn_551") ?>')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span></a>
+
+<a href="<?php echo site_url("pages/edit_page/" . $page->ID) ?>" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-cog"></span></a> 
+<a href="<?php echo site_url("pages/delete_page/" . $page->ID . "/" . $this->security->get_csrf_hash()) ?>" onclick="return confirm('<?php echo lang("ctn_551") ?>')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span></a>
 <?php endif; ?>
  </div>
  <div class="profile-header-name">
 <?php echo $page->name ?>
  </div>
+
  </div>
  <div class="profile-header-bar clearfix">
  <ul>
@@ -101,7 +125,7 @@ function load_posts(pageid)
 
  	</div>
 
-  <?php if($this->settings->info->enable_google_ads_pages) : ?>
+        <?php if($this->settings->info->enable_google_ads_pages) : ?>
           <div class="page-block half-separator">
             <div class="page-block-page clearfix">
             <?php include(APPPATH . "/views/home/google_ads.php"); ?>
@@ -110,7 +134,7 @@ function load_posts(pageid)
         <?php endif; ?>
 
         <?php if($this->settings->info->enable_rotation_ads_pages) : ?>
-            <?php include(APPPATH . "/views/home/rotation_ads.php"); ?>
+            <?php include(APPPATH . "/views/pages/rotation_ads.php"); ?>
         <?php endif; ?>
 
 

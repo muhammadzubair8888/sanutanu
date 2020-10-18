@@ -1,3 +1,6 @@
+<!-- References: https://github.com/fancyapps/fancyBox -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
 <div class="row">
  <div class="col-md-12">
 
@@ -13,6 +16,7 @@
  <div class="profile-header-bar clearfix">
  <ul>
  	<li><a href="<?php echo site_url("profile/" . $user->username) ?>"><?php echo lang("ctn_200") ?></a></li>
+  <li><a href="<?php echo site_url("profile/about/" . $user->ID) ?>"><?php echo lang("ctn_205") ?></a></li>
  	<li><a href="<?php echo site_url("profile/friends/" . $user->ID) ?>"><?php echo lang("ctn_493") ?></a></li>
  	<li class="active"><a href="<?php echo site_url("profile/albums/" . $user->ID) ?>"><?php echo lang("ctn_483") ?></a></li>
  </ul>
@@ -70,32 +74,40 @@
 </div>
 </div>
 
-<p><?php echo $album->description ?></p>
+<!-- <p><?php echo $album->description ?></p>
 
-<hr>
+<hr> -->
 
 <?php if($images->num_rows() == 0) : ?>
 <p><?php echo lang("ctn_583") ?> <a href="javascript:void(0)" data-toggle="modal" data-target="#addModal"><?php echo lang("ctn_584") ?></a> <?php echo lang("ctn_585") ?></p>
 <?php else : ?>
   <div>
-  <ul class="album-images">
+  <!-- <ul class="album-images"> -->
 <?php foreach($images->result() as $r) : ?>
-<li class="album-image">
+  <?php $privacy = $this->image_model->image_privacy($r->ID); ?>
+<?php if(($privacy==1) || ($privacy==2 && $this->user_model->get_user_friend($this->user->info->ID, $album->userid)->num_rows()>0) || ($this->user->info->ID == $album->userid) ): ?>
+<div class='thumbnail col-sm-4 col-xs-6 col-md-3 col-lg-3'>
 <?php if(isset($r->file_name)) : ?>
-    <img src="<?php echo base_url() ?><?php echo $this->settings->info->upload_path_relative ?>/<?php echo $r->file_name ?>" width="140" alt="<?php echo $r->name . "<br>" . $r->description ?>">
+    <a class="fancybox" rel="ligthbox" href="<?php echo base_url() ?><?php echo $this->settings->info->upload_path_relative ?>/<?php echo $r->file_name ?>">
+      <img src="<?php echo base_url() ?><?php echo $this->settings->info->upload_path_relative ?>/<?php echo $r->file_name ?>" width="200" style="width: 100%; height: 200px; object-fit: cover;" alt="<?php echo $r->name . "<br>" . $r->description ?>">
+    </a>
   <?php else : ?>
-    <img src="<?php echo base_url() ?><?php echo $this->settings->info->upload_path_relative ?>/default_album.png" width="140" alt="<?php echo $r->name . "<br>" . $r->description ?>">
+    <a class="thumbnail fancybox" rel="ligthbox" href="<?php echo base_url() ?><?php echo $this->settings->info->upload_path_relative ?>/default_album.png">
+      <img src="<?php echo base_url() ?><?php echo $this->settings->info->upload_path_relative ?>/default_album.png" width="200" style="width: 100%; height: 200px; object-fit: cover;" alt="<?php echo $r->name . "<br>" . $r->description ?>">
+    </a>
   <?php endif; ?>
   <p><?php echo $r->name ?></p>
   <?php if( ($this->user->loggedin && $album->userid == $this->user->info->ID) || $this->common->has_permissions(array("admin","admin_members"), $this->user)) : ?>
-  <div class="album-image-options">
+  <div class="album-image-options" style="text-align: center;">
     <a href="javascript:void(0)" onclick="edit_image(<?php echo $r->ID ?>)" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-cog"></span></a> <a href="<?php echo site_url("profile/delete_image/" . $r->ID . "/" . $this->security->get_csrf_hash()) ?>" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span></a>
   </div>
 <?php endif; ?>
-</li>
-<?php endforeach; ?>
-</ul>
 </div>
+<?php endif; ?>
+<?php endforeach; ?>
+<!-- </ul> -->
+</div>
+<div class="clearfix"></div>
 <?php endif; ?>
 
 <div class="align-center">
@@ -250,4 +262,14 @@ function add_photo()
 	            +'</div>';
 	$('#multi').append(html);
 }
+</script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    //FANCYBOX
+    //https://github.com/fancyapps/fancyBox
+    $(".fancybox").fancybox({
+        openEffect: "none",
+        closeEffect: "none"
+    });
+});
 </script>

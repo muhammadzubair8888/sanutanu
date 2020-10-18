@@ -157,15 +157,15 @@ class Login extends CI_Controller
     		$this->template->error(lang("error_29"));
     	}
 
-    // 	if($this->settings->info->activate_account) 
-    // 	{
-    // 		if(!$r->active) {
-    // 			$this->template->error(lang("error_72") . "<a href='".
-    // 				site_url("register/send_activation_code/" . $r->ID . "/" .
-    // 				 urlencode($r->email)).
-    // 				"'>".lang("error_73") ."</a> " . lang("error_74"));
-    // 		}
-    // 	}
+    	if($this->settings->info->activate_account) 
+    	{
+    		if(!$r->active) {
+    			$this->template->error(lang("error_72") . "<a href='".
+    				site_url("register/send_activation_code/" . $r->ID . "/" .
+    				 urlencode($r->email)).
+    				"'>".lang("error_73") ."</a> " . lang("error_74"));
+    		}
+    	}
 
     	if($this->settings->info->secure_login) {
 			// Generate a token
@@ -206,10 +206,25 @@ class Login extends CI_Controller
 		setcookie($config . "un", $email, time()+$ttl, "/");
 		setcookie($config . "tkn", $token, time()+$ttl, "/");
 
+
+
+		
+
 		if(!empty($redirect)) {
 			redirect(site_url(urldecode($redirect)));
 		} else {
-			redirect(base_url());
+			if($r->redirect==1)
+			{
+				$this->user_model->update_user($r->ID, array(
+					"redirect" => 0 
+					)
+				);
+				redirect(site_url('user_settings'));
+			}
+			else
+			{
+				redirect(base_url());
+			}
 		}
 	}
 
@@ -654,6 +669,7 @@ class Login extends CI_Controller
 		delete_cookie($config. "oauthsecret");
 		$this->session->sess_destroy();
 		redirect(base_url());
+		
 	}
 
 	public function resetpw($token,$userid) 

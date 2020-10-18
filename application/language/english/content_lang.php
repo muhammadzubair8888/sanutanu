@@ -685,7 +685,7 @@ $lang['ctn_642'] = "Group Chat!";
 $lang['ctn_643'] = "Chat with";
 $lang['ctn_644'] = "has lef";
 $lang['ctn_645'] = "has joined the chat.";
-$lang['ctn_646'] = "Feed Album";
+$lang['ctn_646'] = "Uploads";
 $lang['ctn_647'] = "Images posted on the page's feed.";
 $lang['ctn_648'] = "Images you posted on your feed.";
 $lang['ctn_649'] = "has tagged you in a post!";
@@ -889,4 +889,127 @@ $lang['ctn_838'] = "If your account is linked to a social media network, they wi
 $lang['ctn_839'] = "DeAuth";
 $lang['ctn_840'] = "";
 
+$lang['ctn_946'] = "Profile Pictures";
+$lang['ctn_948'] = "Profile Pictures";
+
+$lang['ctn_949'] = "Cover Photos";
+$lang['ctn_950'] = "Cover Photos";
+
+$lang['ctn_951'] = "Gender";
+$lang['ctn_952'] = "Male";
+$lang['ctn_953'] = "Female";
+
+$lang['ctn_954'] = "Birthday";
+$lang['ctn_955'] = "Signup for Newsletter";
+
+$lang['ctn_956'] = "Story Time";
+$lang['ctn_957'] = "Set story time that how many seconds you want to show story and move to next story.";
+
+$lang['ctn_958'] = "Report Abuse";
+$lang['ctn_959'] = "Report Abuse Posts";
+$lang['ctn_960'] = "Report Abuse Reasons";
+$lang['ctn_961'] = "Sr.";
+$lang['ctn_962'] = "Reasons";
+$lang['ctn_963'] = "Add";
+$lang['ctn_964'] = "Edit";
+$lang['ctn_965'] = "Share";
+$lang['ctn_966'] = "Delete";
+$lang['ctn_967'] = "Save";
+$lang['ctn_968'] = "Post ID";
+
+$lang['ctn_969'] = "Report Bug";
+$lang['ctn_970'] = "Title";
+$lang['ctn_971'] = "Description";
+$lang['ctn_972'] = "Operating System";
+$lang['ctn_973'] = "Screenshort";
+$lang['ctn_974'] = "Bugs Report";
+
+$lang['ctn_975'] = "Privacy";
+$lang['ctn_976'] = "Public";
+$lang['ctn_977'] = "Friends";
+$lang['ctn_978'] = "Only Me";
+
+$lang['ctn_979'] = 'I have accept the <a href="'.site_url('privacy').'" target="_blank">privacy policy</a>.';
+$lang['ctn_980'] = 'You did not accept the privacy policy.';
+$lang['ctn_981'] = 'Privacy Policy';
+
+$lang['ctn_982'] = 'Joined Pages';
+
+$lang['ctn_983'] = 'Color Scheme';
+
+
+
+$lang['ctn_984'] ='Add Image';
+$lang['ctn_985'] ='Add URL';
+$lang['ctn_986'] ='Add Duration';
+$lang['ctn_987'] ='Select Country';
+$lang['ctn_988'] ='Select State';
+$lang['ctn_989'] ='Select City';
+$lang['ctn_990'] ='One Weak';
+$lang['ctn_991'] ='Two Weak';
+$lang['ctn_992'] ='Three Weak';
+$lang['ctn_993'] ='Four Weak';
+$lang['ctn_994'] ='State';
+$lang['ctn_995'] ='Select Page';
+
+
+
+$lang['ctn_996'] ='Ads Plan';
+$lang['ctn_997'] ='No Of Ads';
+$lang['ctn_998'] ='Plan Description';
+$lang['ctn_999'] ='Optional';
+$lang['ctn_1000'] ='Ads Page';
+$lang['ctn_1001'] ='Advert Date';
+$lang['ctn_1002'] ='View Advert';
+$lang['ctn_1003'] ='View Statistics';
+
+$lang['ctn_1004'] ='All Adverts';
+$lang['ctn_1005'] ='See All Your Adverts , Statistics and No Of Clicks';
+$lang['ctn_1006'] ='Improve Your Buisness Click and Post Your Add on Homepage';
+$lang['ctn_1007'] ='Edit Plan';
+$lang['ctn_1008'] ='Selected Country';
+$lang['ctn_1009'] ='Selected State';
+$lang['ctn_1010'] ='Selected State';
+$lang['ctn_1011'] ='Change';
+$lang['ctn_1012'] ='Buy Ads Subscription';
+$lang['ctn_1013'] ='Remaining Ads';
+
+$lang['ctn_1014'] ='Post Ads';
+$lang['ctn_1015'] ='Buying Date';
+$lang['ctn_1016'] ='Buy Plan for Random City , State or Country ';
+$lang['ctn_1017'] ='Buy Plan for  Specific   City ,  State or Country ';
+
+
+
+$lang['ctn_1018'] ='Random';
+$lang['ctn_1019'] ='Specific';
+$lang['ctn_1020'] ='Buy Credits';
+$lang['ctn_1021'] = "Groups";
+$lang['ctn_1022'] = "Description";
+$lang['ctn_1023'] = "Discussion";
+$lang['ctn_1024'] = "Join Group";
+$lang['ctn_1025'] = "Invite";
+$lang['ctn_1026'] = "Promoted Posts Prices";
+$lang['ctn_1027'] = "Promote Duration";
+$lang['ctn_1028'] = "Contact Us";
+$lang['ctn_1029'] = "Group Categories";
+$lang['ctn_1030'] = "Create New Group";
+$lang['ctn_1031'] = "Name your group";
+$lang['ctn_1032'] = "Group Description";
+$lang['ctn_1033'] = "Select Group Category";
+$lang['ctn_1034'] = "title";
+$lang['ctn_1035'] = " Contact Us Report";
+$lang['ctn_1036'] = " Invited You To Join the Group ";
+$lang['ctn_1037'] = "Invite Members";
+$lang['ctn_1038'] = "Group Rule Added Successfully";
+$lang['ctn_1039'] = "Find Partner";
+$lang['ctn_1040'] = "Marrige Profiles";
+$lang['ctn_1041'] = "Religions";
+$lang['ctn_1042'] = "Communities";
+$lang['ctn_1043'] = "Name";
+$lang['ctn_1044'] = "ID";
+$lang['ctn_1045'] = "Add New Religion";
+$lang['ctn_1046'] = "Add Religion";
+$lang['ctn_1047'] = "";
 ?>
+

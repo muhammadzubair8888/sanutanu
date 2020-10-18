@@ -9,9 +9,18 @@
 	  <textarea name="content" class="edit-textarea edit-editor-textarea" id="editor-textarea" placeholder="<?php echo lang("ctn_495") ?>"><?php echo $post->content ?></textarea>
 	</div>
 	 </div>
-	 <div class="editor-footer">
-		<button type="button" class="editor-button" value="" id="edit-image"><span class="glyphicon glyphicon-picture"></span></button> <button type="button" class="editor-button" title="<?php echo lang("ctn_496") ?>" id="edit-video"><span class="glyphicon glyphicon-facetime-video"></span></button> <button type="button" class="editor-button" id="edit-location" title="<?php echo lang("ctn_497") ?>"><span class="glyphicon glyphicon-map-marker"></span></button> <button type="button" class="editor-button" id="edit-users" title="<?php echo lang("ctn_132") ?>"><span class="glyphicon glyphicon-user"></span></button> <button type="button" class="editor-button" id="edit-poll" title="<?php echo lang("ctn_711") ?>"><span class="glyphicon glyphicon-stats"></span></button> <button class="editor-button dropdown-toggle" type="button" data-toggle="dropdown" title="<?php echo lang("ctn_498") ?>"><span class="glyphicon glyphicon-heart"></span></button> <?php if(isset($post->pageid) && $post->pageid > 0) : ?><button class="editor-button" type="button"><input type="checkbox" name="members_only" value="1" <?php if($post->member_only) : ?> checked <?php endif; ?>> <?php echo lang("ctn_824") ?></button><?php endif; ?>
-  <ul class="dropdown-menu">
+	 <div class="editor-footer" style="background: #FFF;">
+		<button type="button" class="editor-button mytooltip postboxbutton" value="" id="edit-image" title="<?php echo lang("ctn_499") ?>"><span class="glyphicon glyphicon-picture"></span></button> 
+    <button type="button" class="editor-button mytooltip postboxbutton" title="<?php echo lang("ctn_496") ?>" id="edit-video"><span class="glyphicon glyphicon-facetime-video"></span></button> 
+    <button type="button" class="editor-button mytooltip postboxbutton" id="edit-location" title="<?php echo lang("ctn_497") ?>"><span class="glyphicon glyphicon-map-marker"></span></button> 
+    <button type="button" class="editor-button mytooltip postboxbutton" id="edit-users" title="<?php echo lang("ctn_132") ?>"><span class="glyphicon glyphicon-user"></span></button> 
+    <button type="button" class="editor-button mytooltip postboxbutton" id="edit-poll" title="<?php echo lang("ctn_711") ?>"><span class="glyphicon glyphicon-stats"></span></button> 
+    <button class="editor-button dropdown-toggle mytooltip postboxbutton" type="button" data-toggle="dropdown" title="<?php echo lang("ctn_498") ?>"><span class="fa fa-grin"></span></button>
+     <?php if(isset($post->pageid) && $post->pageid > 0) : ?>
+      <button class="editor-button mytooltip postboxbutton" type="button"><input type="checkbox" name="members_only" value="1" <?php if($post->member_only) : ?> checked <?php endif; ?>> <?php echo lang("ctn_824") ?></button>
+    <?php endif; ?>
+
+  <ul class="dropdown-menu emojismenu" style="height: 330px; overflow-y: auto;">
     <li>
       <?php $smiles = $this->common->get_smiles(); ?>
       <?php foreach($smiles as $k=>$v) : ?>
@@ -19,7 +28,33 @@
       <?php endforeach; ?>
     </li>
   </ul>
+
+  <div class="dropdown" style="z-index: 99; width: 100px !important; display: inline-block; padding: 5px; padding-bottom: 0;">
+    <input type="hidden" name="postfor" id="postforedit" value="<?php echo $post->postfor ?>">
+    <?php if($post->postfor==1): ?>
+    <a class="btn btn-xs btn-post dropdown-toggle btnpostfor editpostfor" data-toggle="dropdown" style="font-weight: bold;"><i class="fa fa-globe-asia" style="font-size: 15px;"></i> &nbsp; Public <span class="caret"></span></a>
+    <?php elseif($post->postfor==2): ?>
+      <a class="btn btn-xs btn-post dropdown-toggle btnpostfor editpostfor" data-toggle="dropdown" style="font-weight: bold;"><i class="fa fa-user-friends" style="font-size: 15px;"></i> &nbsp; Friends <span class="caret"></span></a>
+    <?php else: ?>
+      <a class="btn btn-xs btn-post dropdown-toggle btnpostfor editpostfor" data-toggle="dropdown" style="font-weight: bold;"><i class="fa fa-lock" style="font-size: 15px;"></i> &nbsp; Only Me <span class="caret"></span></a>
+    <?php endif; ?>
+    
+    <ul class="dropdown-menu">
+      <li class="dropdown-header">Who should see this?</li>
+      <li data-editvalue="1" data-text="" class="active">
+        <a style="cursor: pointer;" onclick="setPostForEdit(1,this);"><i class="fa fa-globe-asia" style="font-size: 15px;"></i> &nbsp; Public</a>
+      </li>
+      <li data-editvalue="2">
+        <a style="cursor: pointer;" onclick="setPostForEdit(2,this);"><i class="fa fa-user-friends" style="font-size: 15px;"></i> &nbsp; Friends</a>
+      </li>
+      <li data-editvalue="3">
+        <a style="cursor: pointer;" onclick="setPostForEdit(3,this);"><i class="fa fa-lock" style="font-size: 15px;"></i> &nbsp; Only Me</a>
+      </li>
+    </ul>
+  </div>
+
 	</div>
+
 	<div id="edit-location-area" class="nodisplay">
 	 <div class="form-group">
 	 <label for="p-in" class="col-md-1 control-label"><span class="glyphicon glyphicon-map-marker"></span></label>
@@ -28,6 +63,7 @@
         </div>
 	 </div>
 	 </div>
+
 	 <div id="edit-image-area" class="nodisplay">
 		<?php if(isset($post->imageid)) : ?>
 		<?php if(!empty($post->image_file_name)) : ?>
@@ -49,6 +85,7 @@
 	            </div>
 	    </div>
     </div>
+
     <div id="edit-video-area" class="nodisplay">
     <?php if(isset($post->videoid)) : ?>
 	<?php if(!empty($post->video_file_name)) : ?>
@@ -79,6 +116,7 @@
             </div>
     </div>
     </div>
+
     <div id="edit-users-area" class="nodisplay">
     <div class="form-group">
 	    <label for="p-in" class="col-md-4 label-heading"><?php echo lang("ctn_504") ?></label>
@@ -91,6 +129,7 @@
 	    </div>
     </div>
     </div>
+
     <div id="edit-poll-area" class="nodisplay">
 	    <div class="form-group">
 		    <label for="p-in" class="col-md-4 label-heading"><?php echo lang("ctn_712") ?></label>
@@ -124,7 +163,9 @@
             <input type="button" class="btn btn-post btn-xs" value="<?php echo lang("ctn_717") ?>" id="add_answer_edit">
             <input type="hidden" name="poll_answers" value="<?php echo $poll_answers_count ?>" id="poll_answers_edit">
     </div>
+
 </div>
+
 <div class="modal-footer">
 <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo lang("ctn_60") ?></button>
 <input type="submit" class="btn btn-post" value="<?php echo lang("ctn_494") ?>">
@@ -149,4 +190,19 @@
       $('#answer-area-edit').append(html);
     });
   });
+</script>
+<script type="text/javascript">
+  function h(e) {
+  $(e).css({'height':'65px','overflow-y':'hidden'}).height(e.scrollHeight-30);
+}
+$('textarea').each(function () {
+  h(this);
+}).on('input', function () {
+  h(this);
+});
+
+$(function () {
+  $('.mytooltip').tooltip();
+})
+
 </script>

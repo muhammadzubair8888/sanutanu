@@ -11,6 +11,7 @@ class Feed extends CI_Controller
 		$this->load->model("image_model");
 		$this->load->model("page_model");
 		$this->load->model("home_model");
+		$this->load->model("group_model");
 
 
 		$this->template->set_layout("client/themes/titan.php");
@@ -21,8 +22,10 @@ class Feed extends CI_Controller
 		
 	}
 
+
 	public function add_post() 
 	{
+
 		if(!$this->user->loggedin) $this->template->error(lang("error_1"));
 		$content = $this->common->nohtml($this->input->post("content"));
 		$image_url = $this->common->nohtml($this->input->post("image_url"));
@@ -30,6 +33,33 @@ class Feed extends CI_Controller
 
 		$targetid = intval($this->input->post("targetid"));
 		$target_type = $this->common->nohtml($this->input->post("target_type"));
+		$groupid = intval($this->input->post("groupid"));
+		$postfor = intval($this->input->post("postfor"));
+		$checkfeed = intval($this->input->post('checkfeed'));
+
+		$storyfor = intval($this->input->post('storyfor'));
+		$checkstory = intval($this->input->post('checkstory'));
+
+		$extpostlink  = $this->input->post('ext-post-link');
+		$extpostimage = $this->input->post('ext-post-image');
+		$extposttitle = $this->input->post('ext-post-title');
+		$extpostdesc  = $this->input->post('ext-post-desc');
+
+		if($checkfeed==1 && $checkstory==0)
+		{
+			$posttype = 'feed';
+			$privacy = $postfor;
+		}
+		else if($checkfeed==0 && $checkstory==1)
+		{
+			$posttype = 'story';
+			$privacy = 2;
+		}
+		else
+		{
+			$posttype = 'all';
+			$privacy = $postfor;
+		}
 
 		$with_users = ($this->input->post("with_users"));
 		$post_as = $this->common->nohtml($this->input->post("post_as"));
@@ -47,6 +77,8 @@ class Feed extends CI_Controller
 		$poll_type = intval($this->input->post("poll_type"));
 
 
+
+//exit;
 		$users = array();
 		$user_flag = 0;
 		if(is_array($with_users)) {
@@ -99,7 +131,28 @@ class Feed extends CI_Controller
 					$album = $album->row();
 					$albumid = $album->ID;
 				}
-			} else {
+			} 
+			else if($groupid>0)
+			
+			{
+				$album = $this->image_model->get_group_feed_album($groupid);
+				if($album->num_rows() == 0) {
+					// Create
+					$albumid = $this->image_model->add_album(array(
+						"groupid" => $groupid,
+						"feed_album" => 1,
+						"name" => lang("ctn_646"),
+						"description" => lang("ctn_647"),
+						"timestamp" => time()
+						)
+					);
+				} else {
+					$album = $album->row();
+					$albumid = $album->ID;
+				}
+			}
+			 else
+			{
 				// Check for default feed album
 				$album = $this->image_model->get_user_feed_album($this->user->info->ID);
 				if($album->num_rows() == 0) {
@@ -109,7 +162,8 @@ class Feed extends CI_Controller
 						"feed_album" => 1,
 						"name" => lang("ctn_646"),
 						"description" => lang("ctn_648"),
-						"timestamp" => time()
+						"timestamp" => time(),
+						"groupid" => $groupid
 						)
 					);
 				} else {
@@ -122,7 +176,9 @@ class Feed extends CI_Controller
             	"file_url" => $image_url,
             	"userid" => $this->user->info->ID,
             	"timestamp" => time(),
-            	"albumid" => $albumid
+            	"albumid" => $albumid,
+            	"privacy" => $privacy,
+            	"groupid" => $groupid
             	)
             );
             // Update album count
@@ -175,6 +231,23 @@ class Feed extends CI_Controller
 					$album = $album->row();
 					$albumid = $album->ID;
 				}
+			} else if($groupid > 0) {
+				// Check for default feed album
+				$album = $this->image_model->get_group_feed_album($groupid);
+				if($album->num_rows() == 0) {
+					// Create
+					$albumid = $this->image_model->add_album(array(
+						"groupid" => $groupid,
+						"feed_album" => 1,
+						"name" => lang("ctn_646"),
+						"description" => lang("ctn_647"),
+						"timestamp" => time()
+						)
+					);
+				} else {
+					$album = $album->row();
+					$albumid = $album->ID;
+				}
 			} else {
 				// Check for default feed album
 				$album = $this->image_model->get_user_feed_album($this->user->info->ID);
@@ -185,7 +258,8 @@ class Feed extends CI_Controller
 						"feed_album" => 1,
 						"name" => lang("ctn_646"),
 						"description" => lang("ctn_648"),
-						"timestamp" => time()
+						"timestamp" => time(),
+						"groupid" => $groupid
 						)
 					);
 				} else {
@@ -202,7 +276,9 @@ class Feed extends CI_Controller
             	"file_size" => $data['file_size'],
             	"userid" => $this->user->info->ID,
             	"timestamp" => time(),
-            	"albumid" => $albumid
+            	"albumid" => $albumid,
+            	"privacy" => $privacy,
+            	"groupid" => $groupid
             	)
             );
             // Update album count
@@ -308,6 +384,11 @@ class Feed extends CI_Controller
 			}
 		}
 
+		if($extpostlink!="")
+		{
+			$site_flag = 1;
+		}
+
 		// Set default postAs to user if empty
 		if(empty($post_as)) {
 			$post_as = "user";
@@ -341,7 +422,11 @@ class Feed extends CI_Controller
 				"user_flag" => $user_flag,
 				"profile_userid" => $this->user->info->ID,
 				"site_flag" => $site_flag,
-				"member_only" => $members_only
+				"member_only" => $members_only,
+				"postfor" => $postfor,
+				"posttype" => $posttype,
+				"storyfor" => $storyfor,
+				"groupid" => $groupid
 				)
 			);
 			$this->user_model->increase_posts($this->user->info->ID);
@@ -398,7 +483,11 @@ class Feed extends CI_Controller
 				"hide_profile" => 1, // stops it showing up in feed and profile page,
 				"post_as" => $post_as,
 				"site_flag" => $site_flag,
-				"member_only" => $members_only
+				"member_only" => $members_only,
+				"postfor" => $postfor,
+				"posttype" => $posttype,
+				"storyfor" => $storyfor,
+				"groupid" => $groupid
 				)
 			);
 		} else {
@@ -412,7 +501,11 @@ class Feed extends CI_Controller
 				"location" => $location,
 				"user_flag" => $user_flag,
 				"site_flag" => $site_flag,
-				"member_only" => $members_only
+				"member_only" => $members_only,
+				"postfor" => $postfor,
+				"posttype" => $posttype,
+				"storyfor" => $storyfor,
+				"groupid" => $groupid
 				)
 			);
 		}
@@ -423,7 +516,19 @@ class Feed extends CI_Controller
 			)
 		);
 
-		foreach($sites as $site) 
+		if($extpostlink!="")
+		{
+			$this->feed_model->add_feed_site(array(
+				"url" => $extpostlink,
+				"title" => $extposttitle,
+				"description" => $extpostdesc,
+				"image" => $extpostimage,
+				"postid" => $postid
+				)
+			);
+		}
+
+		/*foreach($sites as $site) 
 		{
 			$this->feed_model->add_feed_site(array(
 				"url" => $site['url'],
@@ -433,7 +538,7 @@ class Feed extends CI_Controller
 				"postid" => $postid
 				)
 			);
-		}
+		}*/
 
 		foreach($tagged_users as $user) {
 			// Notification
@@ -538,8 +643,8 @@ class Feed extends CI_Controller
 			}
 		}
 
-		//$this->session->set_flashdata("globalmsg", "Post posted!");
-		//redirect(site_url());
+		$this->session->set_flashdata("globalmsg", "Post posted!");
+		// redirect(site_url());
 
 		echo json_encode(array(
 			"success" => 1
@@ -547,7 +652,6 @@ class Feed extends CI_Controller
 		);
 		exit();
 	}
-
 	public function load_home_posts() 
 	{
 		if(!$this->user->loggedin) $this->template->error(lang("error_1"));
@@ -566,6 +670,45 @@ class Feed extends CI_Controller
 			"posts" => $posts,
 			"promoted_posts" => $promoted_posts,
 			"a_url" => $url
+			),1
+		);
+	}
+		public function load_group_posts($groupid) 
+	{
+		if(!$this->settings->info->public_pages) {
+			if(!$this->user->loggedin) $this->template->errori(lang("error_1"));
+		}
+		$groupid = intval($groupid);
+		$page = intval($this->input->get("page"));
+
+
+		$group = $this->group_model->get_user_group($groupid);
+		if($group->num_rows() == 0) {
+			$this->template->errori(lang("error_94"));
+		}
+		$group = $group->row();
+     
+		if($this->user->loggedin) {
+			$userid = $this->user->info->ID;
+		} else {
+			$userid = 0;
+		}
+		$posts = $this->feed_model->get_group_posts($groupid, $userid, $page);
+		$page = $page + 10;
+		$url = site_url("feed/load_group_posts/" . $groupid . "?page=" . $page);
+
+		// Get group member
+		$member = $this->group_model->get_group_user($groupid, $userid);
+		if($member->num_rows() == 0) {
+			$member = null;
+		} else {
+			$member = $member->row();
+		}
+
+		$this->template->loadAjax("feed/feed.php", array(
+			"posts" => $posts,
+			"a_url" => $url,
+			"member" => $member
 			),1
 		);
 	}
@@ -603,6 +746,21 @@ class Feed extends CI_Controller
 			),1
 		);
 	}
+
+	public function load_single_story($postid) 
+	{
+		if(!$this->user->loggedin) $this->template->error(lang("error_1"));
+		$postid = intval($postid);
+		$posts = $this->feed_model->get_post($postid, $this->user->info->ID);
+
+		
+
+		$this->template->loadAjax("feed/storyfeed.php", array(
+			"posts" => $posts,
+			),1
+		);
+	}
+
 /************ Load Post in Popup ***************/
 	public function load_single_post_popup($postid) 
 	{
@@ -1558,6 +1716,9 @@ class Feed extends CI_Controller
 		$question = $this->common->nohtml($this->input->post("poll_question"));
 		$poll_type = intval($this->input->post("poll_type"));
 
+		$postfor = intval($this->input->post("postfor"));
+		$privacy = $postfor;
+
 
 		$c = $this->common->get_user_tag_usernames($content);
 		$content = $c['content'];
@@ -1582,7 +1743,8 @@ class Feed extends CI_Controller
 			 $fileid = $this->feed_model->add_image(array(
             	"file_url" => $image_url,
             	"userid" => $this->user->info->ID,
-            	"timestamp" => time()
+            	"timestamp" => time(),
+            	"privacy" => $privacy
             	)
             );
 
@@ -1616,7 +1778,8 @@ class Feed extends CI_Controller
             	"extension" => $data['file_ext'],
             	"file_size" => $data['file_size'],
             	"userid" => $this->user->info->ID,
-            	"timestamp" => time()
+            	"timestamp" => time(),
+            	"privacy" => $privacy
             	)
             );
 		}
@@ -1680,7 +1843,8 @@ class Feed extends CI_Controller
 			"imageid" => $fileid,
 			"videoid" => $videoid,
 			"user_flag" => $user_flag,
-			"member_only" => $members_only
+			"member_only" => $members_only,
+			"postfor" => $postfor
 			)
 		);
 
@@ -1966,6 +2130,50 @@ class Feed extends CI_Controller
 		exit();
 	}
 
+
+	public function report_abuse_post($hash) 
+	{
+		//$hash = $this->input->post('csrf_test_name');
+		if(!$this->user->loggedin) $this->template->error(lang("error_1"));
+		if($hash != $this->security->get_csrf_hash()) {
+			$this->template->jsonError(lang("error_6"));
+		}
+		$postid = intval($this->input->post('id'));
+		$report_abuse_reason = $this->common->nohtml( $this->input->post('report_abuse_reason') );
+		$this->feed_model->report_abuse_post($postid, $report_abuse_reason);
+
+		echo json_encode(array(
+			"success" => 1
+			)
+		);
+		exit();
+	}
+
+	public function change_privacy($hash) 
+	{
+		//$hash = $this->input->post('csrf_test_name');
+		if(!$this->user->loggedin) $this->template->error(lang("error_1"));
+		if($hash != $this->security->get_csrf_hash()) {
+			$this->template->jsonError(lang("error_6"));
+		}
+		$postid = intval($this->input->post('id'));
+		$privacy = intval($this->input->post('privacy'));
+		$this->db->where('ID',$postid)->update('feed_item', array( 'postfor' => $privacy ));
+		$imageid = $this->db->get_where('feed_item', array('ID'=>$postid))->row()->imageid;
+		if($imageid>0)
+		{
+			$this->db->where('ID',$imageid)->update('user_images', array( 'privacy' => $privacy ));
+		}
+		//$report_abuse_reason = $this->common->nohtml( $this->input->post('report_abuse_reason') );
+		//$this->feed_model->report_abuse_post($postid, $report_abuse_reason);
+
+		echo json_encode(array(
+			"success" => 1
+			)
+		);
+		exit();
+	}
+
 	public function save_post($id, $hash) 
 	{
 		if(!$this->user->loggedin) $this->template->error(lang("error_1"));
@@ -2005,7 +2213,7 @@ class Feed extends CI_Controller
 		exit();
 	}
 
-	public function share_post($id, $hash) 
+	public function share_post($id, $postfor, $hash) 
 	{
 		if(!$this->user->loggedin) $this->template->error(lang("error_1"));
 		if($hash != $this->security->get_csrf_hash()) {
@@ -2028,7 +2236,8 @@ class Feed extends CI_Controller
 		$postid = $this->feed_model->add_post(array(
 			"userid" => $this->user->info->ID,
 			"timestamp" => time(),
-			"share_postid" => $post->ID
+			"share_postid" => $post->ID,
+			"postfor" => $postfor
 			)
 		);
 
@@ -2196,6 +2405,59 @@ class Feed extends CI_Controller
 			)
 		);
 	}
+
+
+	public function boast_post($id)
+	{
+		if(!$this->user->loggedin) $this->template->error(lang("error_1"));
+		$id = intval($id);
+		$post = $this->feed_model->get_post($id,$this->user->info->ID);
+		if($post->num_rows() == 0) {
+			$this->template->jsonError(lang("error_105"));
+		}
+		$post = $post->row();
+
+		if($post->pageid > 0 && $post->post_as == "page") {
+			// Anyone who is admin of page can modify the post
+			$member = $this->page_model->get_page_user($post->pageid, $this->user->info->ID);
+			if($member->num_rows() == 0) {
+				if(!$this->common->has_permissions(array("admin", "post_admin"), $this->user)) {
+					$this->template->errori(lang("error_109"));
+				}
+			} else {
+				$member = $member->row();
+				if($member->roleid != 1) {
+					if(!$this->common->has_permissions(array("admin", "post_admin"), $this->user)) {
+						$this->template->errori(lang("error_109"));
+					}
+				}
+			}
+
+		} else {
+			if($post->userid != $this->user->info->ID) {
+				if(!$this->common->has_permissions(array("admin", "post_admin"), $this->user)) {
+					$this->template->errori(lang("error_109"));
+				}
+			}
+		}
+
+		// Check post isn't already being promoted
+		$promotedpost = $this->home_model->get_promoted_post_by_postid($id);
+		if($promotedpost->num_rows() > 0) {
+			$promotedpost = $promotedpost->row();
+			// Status = 1 means inactive (ran out of pageviews so can be readded!)
+			if($promotedpost->status == 0 || $promotedpost->status == 2) {
+				$this->template->errori(lang("error_159"));
+			}
+		}
+
+		$this->template->loadAjax("feed/boast_post.php", array(
+			"post" => $post
+			)
+		);
+	}
+
+
 
 	public function promote_post_pro($id) 
 	{
@@ -2377,6 +2639,72 @@ class Feed extends CI_Controller
 			)
 		);
 		exit();
+	}
+
+	public function extracturl()
+	{
+		$link = $this->input->post('link');
+		$main_url = $link[0];
+		$site = $this->common->get_url_details($main_url);
+	   //print_r($title);
+	   ?>
+	   
+		   <div class="link-post-data" style="text-decoration: none; margin: 0 -10px; overflow: hidden;" >
+		   	<?php
+		   	if(!empty($site['title']))
+			   {
+			   	   if($this->feed_model->isRtl($site['title']))
+				   {
+				   	$dir = 'rtl';
+				   }
+				   else
+				   {
+				   	$dir = 'ltr';
+				   }
+				   ?>
+				   	<div class="link-post-title" dir="<?php echo $dir; ?>" >
+				   		<!-- <div style="text-align: left; font-size: 12px; font-weight: normal; font-family: arial; text-transform: uppercase;"><?php //echo $url['host']; ?></div> -->
+				   	<a style="position: absolute;top: 0px; right: 5px; color: #FFF; font-weight: bold; cursor: pointer; text-shadow: 0px 0px 2px #000;" onclick="$('.link-post-data').remove();">x</a>
+					<?php echo $site['title']; ?>
+				   	<input type="hidden" name="ext-post-title" value="<?php echo $site['title']; ?>" />
+				   	</div>
+			   	 <?php
+			   }
+			   if(!empty($site['description']))
+			   {
+			   	if($this->feed_model->isRtl($site['description']))
+				   {
+				   	$dir = 'rtl';
+				   }
+				   else
+				   {
+				   	$dir = 'ltr';
+				   }
+			   ?>
+			       <div class="link-post-desc" dir="<?php echo $dir; ?>" style="">
+			       		<input type="hidden" name="ext-post-desc" value="<?php echo $site['description']; ?>" />
+			       		<?php echo $site['description']; ?>
+			       	</div>
+			    <?php
+				}
+		   	?>
+			   <input type="hidden" name="ext-post-link" id="ext-post-link" value="<?php echo $site['url']; ?>" />
+			   <?php
+			      if(!empty($site['image'])) {
+			      	?>
+			      	 <div class="link-post-image" style="position: relative;">
+			      	 	<input type="hidden" name="ext-post-image" value="<?php echo $site['image']; ?>" />
+			      	 	<!-- <a style="position: absolute;top: 0px; right: 5px; color: #FFF; font-weight: bold; cursor: pointer; text-shadow: 0px 0px 2px #000;" onclick="$('.link-post-image').remove();">x</a> -->
+			      	 	<img  style="max-height:100%; max-width:100%;" src="<?php echo $site['image']; ?>" />
+				     </div>
+			         <?php
+			   }
+
+			    ?>
+		   </div>
+		   <?php
+
+		exit;
 	}
 
 }

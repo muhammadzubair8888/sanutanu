@@ -38,7 +38,7 @@ function load_posts(userid)
     <?php
   }else{
     ?>
-    <img src="<?php echo base_url() ?>/<?php echo $this->settings->info->upload_path_relative ?>/<?php echo $user->avatar ?>">
+    <a href="#mn1" class="dropdown-toggle" id="profilepicturemenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><img src="<?php echo base_url() ?>/<?php echo $this->settings->info->upload_path_relative ?>/<?php echo $user->avatar ?>"></a>
     <?php
   } ?>
 	
@@ -105,17 +105,9 @@ function load_posts(userid)
   <?php
   /************************ Message Button End by Tanveer 29/03/2020 *************************/
   ?>
-<?php if($friend_flag) : ?>
-<button type="button" class="btn btn-success btn-sm" id="friend_button_<?php echo $user->ID ?>"><span class="glyphicon glyphicon-ok"></span> <?php echo lang("ctn_493") ?></button>
-<?php else : ?>
-<?php if($request_flag) : ?>
-<button type="button" class="btn btn-success btn-sm disabled" id="friend_button_<?php echo $user->ID ?>"><?php echo lang("ctn_601") ?></button>
-<?php else : ?> 
   <?php if(!$user->allow_friends) : ?>
   <button type="button" class="btn btn-success btn-sm" onclick="add_friend(<?php echo $user->ID ?>)" id="friend_button_<?php echo $user->ID ?>"><?php echo lang("ctn_602") ?></button>
   <?php endif; ?>
-<?php endif; ?>
-<?php endif; ?>
 <?php endif; ?>
 <?php endif; ?>
 <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#reportModal" title="<?php echo lang("ctn_578") ?>"><span class="glyphicon glyphicon-flag"></span></button>
@@ -156,9 +148,19 @@ function load_posts(userid)
  	<span class="glyphicon glyphicon-globe"></span> <?php echo lang("ctn_603") ?>
  	</div>
  	<div class="page-block-intro">
- 	<?php echo $user->aboutme ?>
+    <?php
+              $udata = $this->db->get_where('user_data',array('userid'=>$user->ID))->row_array();
+              ?>
+              <!-- <h5 style="text-align:center;"><strong id="user-name">Arun Kumar Perumal</strong></h5>
+              <p style="text-align:center;font-size: smaller;" id="user-frid">FBT000000213 </p>
+              <p style="text-align:center;font-size: smaller;overflow-wrap: break-word;" id="user-email">arunkumarperumal8791@gmail.com </p> -->
+              <p style="text-align:center;font-size: smaller;"><strong><?php echo $udata['work'] ?></strong></p>
+              <p style="text-align:center;font-size: smaller;"><strong>Lives in <?php echo $user->city.', '.$user->country; ?></strong><span class="tags" id="user-status"></span></p>
+              <p style="text-align:center;font-size: smaller;"><strong>Address: </strong><span class="tags" id="user-status"><?php echo $user->address_1; ?></span></p>
+              <p style="text-align:center;font-size: smaller;"><strong>Joined on <?php echo date('M Y',$user->joined); ?></strong><span class="tags" id="user-status"></span></p>
+ 	<?php //echo $user->aboutme ?>
  	</div>
-  <hr>
+  <!-- <hr>
 
   <?php if(isset($user->location_live) && !empty($user->location_live)) : ?>
     <div class="page-block-tidbit">
@@ -227,20 +229,28 @@ function load_posts(userid)
 </div>
 <?php endif; ?>
 
-</div>
+</div> -->
 
  	</div>
 
-  <?php if($this->settings->info->enable_google_ads_pages) : ?>
-          <div class="page-block half-separator">
-            <div class="page-block-page clearfix">
-            <?php include(APPPATH . "/views/home/google_ads.php"); ?>
-          </div>
-          </div>
-        <?php endif; ?>
+        <?php 
+       // if($this->settings->info->enable_google_ads_pages) : 
+          ?>
+
+        <!--   <div class="page-block half-separator">
+            <div class="page-block-page clearfix"> -->
+            <?php 
+            // include(APPPATH . "/views/home/google_ads.php"); 
+            ?>
+      <!--     </div>
+          </div> -->
+
+        <?php
+         // endif; 
+         ?>
 
         <?php if($this->settings->info->enable_rotation_ads_pages) : ?>
-            <?php include(APPPATH . "/views/home/rotation_ads.php"); ?>
+            <?php include(APPPATH . "/views/profile/rotation_ads.php"); ?>
         <?php endif; ?>
 
 

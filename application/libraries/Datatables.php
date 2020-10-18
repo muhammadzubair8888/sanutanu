@@ -127,7 +127,7 @@ class Datatables {
 		if($this->search_flag) {
 			// A search was performed, so we need to recalculate total rows.
 			$this->CI->db->from($table_name);
-			$this->total_rows = $this->CI->db->count_all_results();
+			$this->total_rows = $this->CI->db->num_rows();
 		}
 		$s=  $this->CI->db->limit($this->length, $this->start)
 			->get($table_name);

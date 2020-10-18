@@ -157,6 +157,7 @@ class IPN extends CI_Controller
 		}
 
 		// Create a charge: this will charge the user's card
+
 		try {
 		  $charge = \Stripe\Charge::create(array(
 		    "amount" => $amount, // Amount in cents
@@ -164,6 +165,9 @@ class IPN extends CI_Controller
 		    "source" => $token,
 		    "description" => $name
 		    ));
+
+
+		  print_r($charge);exit;
 		  $this->ipn_model->log_ipn("[STRIPE] Payment made successfully: $name.");
 		} catch(\Stripe\Error\Card $e) {
 		  // The card has been declined

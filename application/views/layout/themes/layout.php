@@ -18,7 +18,8 @@
         <link href="<?php echo base_url();?>styles/elements.css" rel="stylesheet" type="text/css">
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,500,550,600,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
-
+        <link rel="stylesheet" href="<?php echo base_url();?>sweatalert/sweetalert.css">
+        <script src="<?php echo base_url();?>sweatalert/sweetalert.js"></script>
         <!-- SCRIPTS -->
         <script type="text/javascript">
         var global_base_url = "<?php echo site_url('/') ?>";
@@ -56,6 +57,7 @@
 
         <!-- Favicon: http://realfavicongenerator.net -->
         <link rel="apple-touch-icon" sizes="76x76" href="<?php echo base_url() ?>images/favicon/apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="<?php echo base_url() ?>assets/css/display.css">
         <link rel="icon" type="image/png" href="<?php echo base_url() ?>images/favicon/favicon-32x32.png" sizes="32x32">
         <link rel="icon" type="image/png" href="<?php echo base_url() ?>images/favicon/favicon-16x16.png" sizes="16x16">
         <link rel="manifest" href="<?php echo base_url() ?>images/favicon/manifest.json">
@@ -73,7 +75,7 @@
     </head>
     <body>
 
-    <nav class="navbar navbar-inverse navbar-header2">
+    <nav class="navbar navbar-inverse navbar-header2 test">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -151,7 +153,7 @@
 
     </div>
     <div id="footer" class="clearfix">
-      <span class="pull-left"><?php echo lang("ctn_170") ?> <a href="https://itstechworld.com/" rel="nofollow"> ITS Tech World </a> <?php echo $this->settings->info->site_name ?> V<?php echo $this->settings->version ?></span> <span class="pull-right"><a href="<?php echo site_url("home/change_language") ?>"><?php echo lang("ctn_171") ?></a></span>
+      <span class="pull-left"><?php echo lang("ctn_170") ?> <a href="https://hybreathe.com/" rel="nofollow"> HYBREATHE </a> <?php echo $this->settings->info->site_name ?> V<?php echo $this->settings->version ?></span> <span class="pull-right"><a href="<?php echo site_url("home/change_language") ?>"><?php echo lang("ctn_171") ?></a></span>
     </div>
 
     <!-- SCRIPTS -->
