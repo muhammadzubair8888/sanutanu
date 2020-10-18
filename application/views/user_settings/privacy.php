@@ -81,6 +81,56 @@
 	      </select>
 	    </div>
 	</div>
+	<div class="form-group">
+	    <label for="inputEmail3" class="col-sm-4 control-label"><?php echo lang("ctn_1060") ?></label>
+	    <div class="col-sm-8">
+	      <select name="friends_show" class="form-control">
+	      	<option value="0"><?php echo lang("ctn_632") ?></option>
+	      	<option value="1" <?php if($this->user->info->firends_show) echo "selected" ?>><?php echo lang("ctn_633") ?></option>
+	      		<option value="2" <?php if($this->user->info->firends_show) echo "selected" ?>><?php echo lang("ctn_1063") ?></option>
+	      </select>
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label for="inputEmail3" class="col-sm-4 control-label"><?php echo lang("ctn_1062") ?></label>
+	    <div class="col-sm-8">
+	      <select name="uploads_show" class="form-control">
+	      	<option value="0"><?php echo lang("ctn_632") ?></option>
+	      	<option value="1" <?php if($this->user->info->uploads_show == 1) echo "selected" ?>><?php echo lang("ctn_633") ?></option>
+	      	<option value="2" <?php if($this->user->info->uploads_show == 2) echo "selected" ?>><?php echo lang("ctn_1063") ?></option>
+	      </select>
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label for="inputEmail3" class="col-sm-4 control-label"><?php echo lang("ctn_1066") ?></label>
+	    <div class="col-sm-8">
+	      <select name="covers_show" class="form-control">
+	      	<option value="0"><?php echo lang("ctn_632") ?></option>
+	      	<option value="1" <?php if($this->user->info->covers_show == 1) echo "selected" ?>><?php echo lang("ctn_633") ?></option>
+	      	<option value="2" <?php if($this->user->info->covers_show == 2) echo "selected" ?>><?php echo lang("ctn_1063") ?></option>
+	      </select>
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label for="inputEmail3" class="col-sm-4 control-label"><?php echo lang("ctn_1065") ?></label>
+	    <div class="col-sm-8">
+	      <select name="profiles_show" class="form-control">
+	      	<option value="0"><?php echo lang("ctn_632") ?></option>
+	      	<option value="1" <?php if($this->user->info->profiles_show == 1) echo "selected" ?>><?php echo lang("ctn_633") ?></option>
+	      	<option value="2" <?php if($this->user->info->profiles_show == 2) echo "selected" ?>><?php echo lang("ctn_1063") ?></option>
+	      </select>
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label for="inputEmail3" class="col-sm-4 control-label"><?php echo lang("ctn_1064") ?></label>
+	    <div class="col-sm-8">
+	      <select name="intro_show" class="form-control">
+	      	<option value="0"><?php echo lang("ctn_632") ?></option>
+	      	<option value="1" <?php if($this->user->info->intro_show == 1) echo "selected" ?>><?php echo lang("ctn_633") ?></option>
+	      	<option value="2" <?php if($this->user->info->intro_show == 2) echo "selected" ?>><?php echo lang("ctn_1063") ?></option>
+	      </select>
+	    </div>
+	</div>
 	<input type="submit" name="s" value="<?php echo lang("ctn_236") ?>" class="btn btn-post form-control" />
 <?php echo form_close() ?>
 

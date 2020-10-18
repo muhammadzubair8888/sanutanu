@@ -47,19 +47,68 @@ class Blog extends CI_Controller
 		}
 
 		$blog = $this->blog_model->get_user_blog($this->user->info->ID);
+		// print_r($blog->row());
 		if($blog->num_rows() == 0) {
+			$countries = $this->blog_model->countries_get();
+
 			$this->template->loadContent("blog/create.php", array(
-				
-				), 1
+				'countries' => $countries
+				)
 			);
 		}
+		$block = true;
 		$blog = $blog->row();
+		// echo  $blog->blog_status ;
+		if($blog != ''):
+		if($blog->blog_status == 0 && $blog->blog_approved == 1 ):
+			$block = true;
+		elseif($blog->blog_status == 1):
+			$check = $this->date_diff1(1,$blog->timestamp);
 
+			if($check == 14):
+			$block = true;
+		else:
+			$block = false;
+			endif;
+		elseif($blog->blog_status == 2):
+			$check = $this->date_diff1(2,$blog->timestamp);
+			// echo $check;
+			if($check == 3):
+			$block = true;
+		else:
+			$block = false;
+			endif;
+		elseif($blog->blog_status == 3):
+		 $check = $this->date_diff1(2,$blog->timestamp);
+			if($check == 6):
+			$block = true;
+		else:
+			$block = false;
+		endif;
+	else:
+		$block = false;
+	endif;
+endif;
+		
 		$this->template->loadContent("blog/your.php", array(
-			"blog" => $blog
-			
+			"blog" => $blog,
+			"block" => $block
 			)
 		);
+	}
+
+ function date_diff1($type,$timestamp)
+	{
+		$date = new DateTime();
+		$date->setTimestamp($timestamp);
+		 $last = new DateTime( $date->format('Y-m-d H:i:s') );
+         $now = new DateTime( date( 'Y-m-d h:i:s', time() )) ;
+         $interval = $last->diff($now);
+         if($type == 1):
+          return (int)$interval->format('%D');
+      elseif($type == 2 || $type == 3 ):
+      	return (int)$interval->format('%M');
+      endif;
 	}
 
 	public function your_page() 
@@ -149,7 +198,9 @@ class Blog extends CI_Controller
 		$description = $this->common->nohtml($this->input->post("description"));
 
 		$private = intval($this->input->post("private"));
-
+		$country = $this->common->nohtml($this->input->post("country"));
+// print_r($country);
+// exit;
 		if(empty($title)) {
 			$this->template->error(lang("error_172"));
 		}
@@ -164,7 +215,8 @@ class Blog extends CI_Controller
 			"description" => $description,
 			"userid" => $this->user->info->ID,
 			"private" => $private,
-			"timestamp" => time()
+			"timestamp" => time(),
+			'target_country' => $country
 			)
 		);
 
@@ -187,9 +239,10 @@ class Blog extends CI_Controller
 		if($blog->userid != $this->user->info->ID) {
 			$this->template->error(lang("error_179"));
 		}
-
+		$countries = $this->blog_model->countries_get();
 		$this->template->loadContent("blog/edit_blog.php", array(
-			"blog" => $blog
+			"blog" => $blog,
+			"countries" => $countries
 			)
 		);
 	}
@@ -212,6 +265,7 @@ class Blog extends CI_Controller
 
 		$title = $this->common->nohtml($this->input->post("title"));
 		$description = $this->common->nohtml($this->input->post("description"));
+		$country = $this->common->nohtml($this->input->post("country"));
 
 		$private = intval($this->input->post("private"));
 
@@ -224,7 +278,8 @@ class Blog extends CI_Controller
 			"title" => $title,
 			"description" => $description,
 			"private" => $private,
-			"timestamp" => time()
+			"timestamp" => time(),
+			"target_country" => $country
 			)
 		);
 
@@ -617,6 +672,17 @@ class Blog extends CI_Controller
 			"author" => $author
 			)
 		);
+	}
+
+	public function report_post()
+	{
+		$id = $this->common->nohtml($this->input->post('id'));
+		$this->blog_model->reported_post($id,array(
+			'repoted'=>1,
+		)
+
+	);
+		echo 'done';
 	}
 
 	public function view_blog($id, $page=0) 

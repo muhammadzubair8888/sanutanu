@@ -47,7 +47,7 @@
 					    </div>
 					    <div class="col-md topper d-flex align-items-center justify-content-end">
 					    	<p class="mb-0 d-block">
-					    		<a href="<?php echo base_url('index.php/home');?>" class="btn py-2 px-3 btn-primary">
+					    		<a href="<?php echo base_url('home');?>" class="btn py-2 px-3 btn-primary">
 					    			<span>Login</span>
 					    		</a>
 					    	</p>

@@ -71,7 +71,7 @@ class Chat extends CI_Controller
 			$this->template->errori(lang("error_85"));
 		}
 		$user = $user->row();
-		$title = "Chat with " . $user->username;
+		$title = $user->first_name." ".$user->last_name;
 		$this->template->loadAjax("chat/empty_chat.php", array(
 			"title" => $title,
 			"userid" => $user->ID
@@ -126,9 +126,10 @@ class Chat extends CI_Controller
 			$member->title = $chat->title;
 		}
 		
-
+		$chatwith = $this->chat_model->get_other_chat_user($chatid, $this->user->info->ID)->row()->userid;
 		// Good
 		$data= array(
+			"userid" => $chatwith,
 			"chatid" => $chatid,
 			"title" => $member->title,
 		);
@@ -499,8 +500,8 @@ class Chat extends CI_Controller
 			}
 
 			
-			$title = lang("ctn_643") . " <strong>" . $user->username . "</strong>";
-			$title2= lang("ctn_643") . " <strong>" . $this->user->info->username . "</strong>";
+			$title = " <strong>" . $user->first_name." ".$user->last_name . "</strong>";
+			$title2= " <strong>" . $this->user->info->first_name." ".$this->user->info->last_name . "</strong>";
 			
 
 
@@ -960,7 +961,7 @@ class Chat extends CI_Controller
 		if(!empty($chat->title)) {
 			$title = $chat->title;
 		} else {
-			$title = lang("ctn_643") . " <strong>" . $this->user->info->username . "</strong>";
+			$title = " <strong>" . $this->user->info->first_name." ".$this->user->info->last_name . "</strong>";
 		}
 
 		// Add all users
@@ -1077,8 +1078,8 @@ class Chat extends CI_Controller
 
 		if(empty($title)) {
 			$chat_title = "";
-			$title = lang("ctn_643") . " <strong>" . $user->username . "</strong>";
-			$title2= lang("ctn_643") . " <strong>" . $this->user->info->username . "</strong>";
+			$title = " <strong>" . $user->first_name." ".$user->last_name . "</strong>";
+			$title2= " <strong>" . $this->user->info->first_name." ".$this->user->info->last_name . "</strong>";
 		} else {
 			$title2 = $title;
 			$chat_title = $title;
@@ -1258,6 +1259,48 @@ class Chat extends CI_Controller
 		);
 	}
 
+	
+	function call($type="video",$to=0, $ring=0)
+	{
+		$page_data = array();
+		$page_data['type'] = $type;
+		$page_data['to'] = $to;
+		$page_data['ring'] = $ring;
+		$this->load->view("chat/call.php", $page_data);
+	}
+
+	function stream($channel="default")
+	{
+		$page_data = array();
+		$page_data['channel'] = $channel;
+		$this->load->view("chat/streamtest.php", $page_data);
+	}
+
+	function streamview($channel="default")
+	{
+		$page_data = array();
+		$page_data['channel'] = $channel;
+		$this->load->view("chat/streamview.php", $page_data);
+	}
+
+	public function chatuser($userid)
+	{
+		$user = $this->user_model->get_user_by_id($userid)->row();
+		?>
+		<div>
+			<div class="pull-left" style="margin-right: 15px;">
+              <img src="<?php echo base_url() ?><?php echo $this->settings->info->upload_path_relative ?>/<?php echo $user->avatar ?>" width="40">
+            </div>
+            <div class="pull-left" style="text-align: left; font-weight: bold;">
+              <a href="<?php echo site_url("profile/" . $user->username) ?>"><?php echo $user->first_name ?> <?php echo $user->last_name ?></a>
+              <p class="small-text faded-icon">@<?php echo $user->username ?></p>
+            </div>
+            <div class="clearfix"></div>
+		</div>
+		<?php
+		exit;
+	}
+	
 }
 
 ?>

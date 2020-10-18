@@ -23,7 +23,7 @@ if(isset($r->p_username)) {
 }
 ?>
 <div class="row">
-<div class="col-md-8">
+<div class="col-md-8 feed-content-wraper" style="padding-right: 0;">
 	
 
 
@@ -31,7 +31,7 @@ if(isset($r->p_username)) {
 
 
 
-<div class="feed-content">
+<div class="feed-content feed-content-popup" style="padding: 0px;">
 <!-- <?php echo nl2br($r->content) ?> -->
 <?php if($r->site_flag) : ?>
 	<?php $sites = $this->feed_model->get_feed_urls($r->ID); ?>
@@ -152,7 +152,7 @@ foreach($answers->result() as $a) {
   		$url = site_url("profile/view_album/" . $r->albumid);
   	}
   	?>
-			<p class="small-text"><i><?php echo lang("ctn_523") ?>: <a href="<?php echo $url ?>"><?php echo $r->album_name ?></a></i></p>
+			<!-- <p class="small-text"><i><?php echo lang("ctn_523") ?>: <a href="<?php echo $url ?>"><?php echo $r->album_name ?></a></i></p> -->
 		<?php endif; ?>
 	</div>
 <?php elseif($r->template == "event") : ?>
@@ -173,9 +173,9 @@ foreach($answers->result() as $a) {
 <?php else : ?>
 	<?php if(isset($r->imageid)) : ?>
 		<?php if(!empty($r->image_file_name)) : ?>
-		<p><img src="<?php echo base_url() ?><?php echo $this->settings->info->upload_path_relative ?>/<?php echo $r->image_file_name ?>" width="100%"></p>
+		<img class="img-responsive fit-image center-block" src="<?php echo base_url() ?><?php echo $this->settings->info->upload_path_relative ?>/<?php echo $r->image_file_name ?>" />
 		<?php else : ?>
-		<p><img src="<?php echo $r->image_file_url ?>" width="100%"></p>
+		<img class="img-responsive fit-image center-block" src="<?php echo $r->image_file_url ?>" />
 		<?php endif; ?>
 		<?php if(isset($r->albumid)) : ?>
 			<?php if($r->pageid > 0) {
@@ -184,7 +184,7 @@ foreach($answers->result() as $a) {
   		$url = site_url("profile/view_album/" . $r->albumid);
   	}
   	?>
-			<p class="small-text"><i><?php echo lang("ctn_523") ?>: <a href="<?php echo $url ?>"><?php echo $r->album_name ?></a></i></p>
+			<!-- <p class="small-text"><i><?php echo lang("ctn_523") ?>: <a href="<?php echo $url ?>"><?php echo $r->album_name ?></a></i></p> -->
 		<?php endif; ?>
 	<?php endif; ?>
 
@@ -214,9 +214,9 @@ foreach($answers->result() as $a) {
 
 
 </div>
-<div class="col-md-4">
+<div class="col-md-4" style="padding-left: 0;">
 
-<div class="feed-wrapper" id="feed-post-<?php echo $r->ID ?>">
+<div class="feed-wrapper" id="feed-post-<?php echo $r->ID ?>" style="margin: 0;">
 <div class="feed-header clearfix">
 <div class="feed-header-user">
 <img src="<?php echo base_url() ?>/<?php echo $this->settings->info->upload_path_relative ?>/<?php echo $r->avatar ?>" class="user-icon-big">
@@ -225,7 +225,7 @@ foreach($answers->result() as $a) {
 <div class="feed-header-info">
 <?php if(isset($r->p_username)) : ?> 
 <?php // Posting to someone's profile ?>
-<p><a href="<?php echo site_url("profile/" . $r->p_username) ?>"><?php echo $r->p_first_name ?> <?php echo $r->p_last_name ?></a> <?php if($r->p_verified) : ?><img src="<?php echo base_url() ?>images/verified_badge.png" class="verified-badge" width="14" data-placement="top" data-toggle="tooltip" title="<?php echo lang("ctn_720") ?>"><?php endif; ?> <span class="glyphicon glyphicon-circle-arrow-right"></span> <a href="<?php echo site_url("profile/" . $r->username) ?>"><?php echo $r->first_name ?> <?php echo $r->last_name ?></a> <?php if($r->verified) : ?><img src="<?php echo base_url() ?>images/verified_badge.png" width="14" data-placement="top" data-toggle="tooltip" class="verified-badge" title="<?php echo lang("ctn_720") ?>"><?php endif; ?></p>
+<p><a href="<?php echo site_url("profile/" . $r->p_username) ?>"><?php echo $r->p_first_name ?> <?php echo $r->p_last_name ?></a> <?php if($r->p_verified) : ?><img src="<?php echo base_url() ?>images/verified_badge.png" class="verified-badge" width="14" data-placement="top" data-toggle="tooltip" title="<?php echo lang("ctn_720") ?>"><?php endif; ?><span class="glyphicon glyphicon-circle-arrow-right"></span> <a href="<?php echo site_url("profile/" . $r->username) ?>"><?php echo $r->first_name ?> <?php echo $r->last_name ?></a> <?php if($r->verified) : ?><img src="<?php echo base_url() ?>images/verified_badge.png" width="14" data-placement="top" data-toggle="tooltip" class="verified-badge" title="<?php echo lang("ctn_720") ?>"><?php endif; ?></p>
 
 <p class="feed-timestamp"><?php echo $this->common->get_time_string_simple($this->common->convert_simple_time($r->timestamp)) ?> <?php if($r->location) : ?>- <?php echo lang("ctn_516") ?> <a href="https://www.google.com/maps/place/<?php echo urlencode($r->location) ?>"><span class="glyphicon glyphicon-map-marker"></span> <?php echo $r->location ?></a><?php endif; ?> 
 
@@ -257,8 +257,16 @@ foreach($answers->result() as $a) {
 			<?php endif; ?>
 		    </p>
 	<?php else : ?>
-		<?php // Normal post ?>
-		<p><a href="<?php echo $url ?>"><?php echo $r->first_name ?> <?php echo $r->last_name ?></a> <?php if($r->verified) : ?><img src="<?php echo base_url() ?>images/verified_badge.png" class="verified-badge" width="14" data-placement="top" data-toggle="tooltip" title="<?php echo lang("ctn_720") ?>"><?php endif; ?>
+		<?php // group post ?>
+		<!-- <p><a href="<?php echo $url ?>"><?php echo $r->first_name ?> <?php echo $r->last_name ?></a> <?php if($r->verified) : ?><img src="<?php echo base_url() ?>images/verified_badge.png" class="verified-badge" width="14" data-placement="top" data-toggle="tooltip" title="<?php echo lang("ctn_720") ?>"><?php endif; ?> -->
+       <a href="<?php echo $url ?>"><?php echo $r->first_name ?> <?php echo $r->last_name ?></a> <?php if($r->groupid>0)
+		{ 
+			echo '<span class="glyphicon glyphicon-circle-arrow-right"></span> <a href="'.site_url('groups/view/'.$r->groupid).'" >'.$this->group_model->get_user_group($r->groupid)->row()->name.'</a>'; 
+        } ?> <?php if($r->verified) : ?><img src="<?php echo base_url() ?>images/verified_badge.png" class="verified-badge" width="14" data-placement="top" data-toggle="tooltip" title="<?php echo lang("ctn_720") ?>"><?php endif; ?>
+
+
+
+
 			<?php if($r->share_postid > 0) : ?>
 				<?php echo lang("ctn_791") ?>
 			<?php endif; ?>
@@ -278,17 +286,20 @@ foreach($answers->result() as $a) {
 </div>
 <!-- Close Header -->
 
-<div class="feed-header-dropdown">
+<div class="feed-header-dropdown" style="right: 50px; top: 25px;">
 	<?php if(isset($r->promoted_id)) : ?>
 		<span class="post-promoted"><span class="glyphicon glyphicon-bullhorn"></span> <?php echo lang("ctn_721") ?></span>
 	<?php endif; ?>
 	<?php if($this->user->loggedin) : ?>
 <div class="btn-group">
-    <span class="glyphicon glyphicon-chevron-down faded-icon dropdown-toggle click" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></span>
+	<a class="faded-icon dropdown-toggle click" style="background: none !important;box-shadow: none !important;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		<span class="glyphicon glyphicon-option-horizontal" style="font-size: 18px;" ></span>
+	</a>
+    
   <ul class="dropdown-menu">
   	<li><a href="javascript:void(0)" onclick="save_post(<?php echo $r->ID ?>)" id="save_post_<?php echo $r->ID ?>"><?php if(!isset($r->savepostid)) : ?><?php echo lang("ctn_518") ?></a><?php else : ?><?php echo lang("ctn_519") ?><?php endif; ?></li>
   	<li><a href="javascript:void(0)" onclick="subscribe_post(<?php echo $r->ID ?>)" id="subscribe_post_<?php echo $r->ID ?>"><?php if(!isset($r->subid)) : ?><?php echo lang("ctn_520") ?></a><?php else : ?><?php echo lang("ctn_521") ?></a><?php endif; ?></li>
-  	<li><a href="javascript:void(0)" onclick="share_post(<?php echo $r->ID ?>)" id="share_post_<?php echo $r->ID ?>"><?php echo lang("ctn_765") ?></a></li>
+  	<!-- <li><a href="javascript:void(0)" onclick="share_post(<?php //echo $r->ID ?>)" id="share_post_<?php //echo $r->ID ?>"><?php //echo lang("ctn_765") ?></a></li> -->
   	<?php if($r->userid == $this->user->info->ID || ($r->pageid > 0 && $r->post_as == "page" && isset($r->roleid) && $r->roleid == 1) || $this->common->has_permissions(array("admin", "post_admin"), $this->user)) : ?>
     <li><a href="javascript:void(0)" onclick="delete_post(<?php echo $r->ID ?>)"><?php echo lang("ctn_522") ?></a></li>
     <li><a href="javascript:void(0);" onclick="edit_post(<?php echo $r->ID ?>)"><?php echo lang("ctn_55") ?></a></li>
@@ -296,6 +307,10 @@ foreach($answers->result() as $a) {
     <li><a href="javascript:void(0);" onclick="promote_post(<?php echo $r->ID ?>)"><?php echo lang("ctn_722") ?></a></li>
     <?php endif; ?>
     <?php endif; ?>
+
+    <?php if($r->userid != $this->user->info->ID): ?>
+    	<li><a href="javascript:void(0);" onclick="report_abuse_modal(<?php echo $r->ID ?>)"><?php echo lang("ctn_958") ?></a></li>
+	<?php endif; ?>
 
   </ul>
 </div>
@@ -305,8 +320,10 @@ foreach($answers->result() as $a) {
 </div>
 
 
-<div class="feed-content">
-<?php echo nl2br($r->content) ?>
+<div class="feed-content feed-content-right">
+<?php if($r->content!=""): ?>
+<div class="feed-content-text"><?php echo nl2br($r->content) ?></div>
+<?php endif; ?>
 <?php if($r->site_flag) : ?>
 	<?php $sites = $this->feed_model->get_feed_urls($r->ID); ?>
 	<?php foreach($sites->result() as $site) : ?>
@@ -463,7 +480,7 @@ foreach($answers->result() as $a) {
   		$url = site_url("profile/view_album/" . $r->albumid);
   	}
   	?>
-			<p class="small-text"><i><?php echo lang("ctn_523") ?>: <a href="<?php echo $url ?>"><?php echo $r->album_name ?></a></i></p>
+			<!-- <p class="small-text"><i><?php echo lang("ctn_523") ?>: <a href="<?php echo $url ?>"><?php echo $r->album_name ?></a></i></p> -->
 		<?php endif; ?>
 	<?php endif; ?>
 
@@ -489,12 +506,33 @@ foreach($answers->result() as $a) {
 
 
 <div class="feed-content-stats">
-<a href="#" onclick="get_post_likes(<?php echo $r->ID ?>)" class="feed-stat <?php if($r->likes <= 0) : ?>nodisplay<?php endif; ?> likes-click-<?php echo $r->ID ?>" id="likes-click-<?php echo $r->ID ?>"><span class="glyphicon glyphicon-thumbs-up"></span> <span id="feed-likes-<?php echo $r->ID ?>" class="feed-likes-<?php echo $r->ID ?>"> <?php echo $r->likes ?></span></a> <?php if($this->settings->info->enable_dislikes) : ?><a href="#" onclick="get_post_likes(<?php echo $r->ID ?>)" class="feed-stat <?php if($r->dislikes <= 0) : ?>nodisplay<?php endif; ?> dislikes-click-<?php echo $r->ID ?>" id="dislikes-click-<?php echo $r->ID ?>"><span class="glyphicon glyphicon-thumbs-down"></span> <span id="feed-dislikes-<?php echo $r->ID ?>" class="feed-dislikes-<?php echo $r->ID ?>"> <?php echo $r->dislikes ?></span></a><?php endif; ?> <a href="javascript:void(0)" onclick="javascript:$('.comment-input-<?php echo $r->ID ?>').focus();" class="<?php if($r->comments <= 0) : ?>nodisplay<?php endif; ?>"><span class="glyphicon glyphicon-comment"></span> <span class="feed-comments-<?php echo $r->ID ?>" id="feed-comments-<?php echo $r->ID ?>"> <?php echo $r->comments ?></span></a>
+<a href="#" onclick="get_post_likes(<?php echo $r->ID ?>)" class="feed-stat <?php if($r->likes <= 0) : ?>nodisplay<?php endif; ?> likes-click-<?php echo $r->ID ?>" id="likes-click-<?php echo $r->ID ?>"><span class="fa fa-thumbs-up"></span> <span id="feed-likes-<?php echo $r->ID ?>" class="feed-likes-<?php echo $r->ID ?>"> <?php echo $r->likes ?></span></a> 
+<?php if($this->settings->info->enable_dislikes) : ?>
+	<a href="#" onclick="get_post_likes(<?php echo $r->ID ?>)" class="feed-stat <?php if($r->dislikes <= 0) : ?>nodisplay<?php endif; ?> dislikes-click-<?php echo $r->ID ?>" id="dislikes-click-<?php echo $r->ID ?>"><span class="fa fa-thumbs-down"></span> <span id="feed-dislikes-<?php echo $r->ID ?>" class="feed-dislikes-<?php echo $r->ID ?>"> <?php echo $r->dislikes ?></span></a>
+<?php endif; ?> 
+<a href="javascript:void(0)" onclick="load_comments(<?php echo $r->ID ?>)" class="feed-stat <?php if($r->comments <= 0) : ?>nodisplay<?php endif; ?>"><span class="fa fa-comment-alt"></span> <span class="feed-comments-<?php echo $r->ID ?>" id="feed-comments-<?php echo $r->ID ?>"> <?php echo $r->comments ?></span></a>
 </div>
 <div class="feed-footer">
-<button type="button" id="like-button-<?php echo $r->ID ?>" class="like-button-<?php echo $r->ID ?> editor-button faded-icon <?php if(isset($r->likeid) && $r->like_type == 0) : ?>active-like<?php endif; ?>" onclick="like_feed_post(<?php echo $r->ID ?>,0)"><span class="glyphicon glyphicon-thumbs-up"></span> <span id="like-button-like-<?php echo $r->ID ?>" class="like-button-like-<?php echo $r->ID ?>"><?php echo lang("ctn_337") ?></span></button> <?php if($this->settings->info->enable_dislikes) : ?><button type="button" id="dislike-button-<?php echo $r->ID ?>" class="dislike-button-<?php echo $r->ID ?> editor-button faded-icon <?php if(isset($r->likeid) && $r->like_type == 1) : ?>active-like<?php endif; ?>" onclick="like_feed_post(<?php echo $r->ID ?>,1)"><span class="glyphicon glyphicon-thumbs-down"></span> <span id="dislike-button-like-<?php echo $r->ID ?>" class="dislike-button-like-<?php echo $r->ID ?>">Dislike</span></button><?php endif; ?> <button type="button" class="editor-button faded-icon" onclick="javascript:$('.comment-input-<?php echo $r->ID ?>').focus();"><span class="glyphicon glyphicon-comment"></span> <?php echo lang("ctn_524") ?></button>
+<a id="like-button-<?php echo $r->ID ?>" class="like-button-<?php echo $r->ID ?> editor-button faded-icon <?php if(isset($r->likeid) && $r->like_type == 0) : ?>active-like<?php endif; ?>" onclick="like_feed_post(<?php echo $r->ID ?>,0)"><nobr><span class="far fa-thumbs-up"></span> <span id="like-button-like-<?php echo $r->ID ?>" class="like-button-like-<?php echo $r->ID ?>" ><?php echo lang("ctn_337") ?></span></nobr></a> 
+<?php if($this->settings->info->enable_dislikes) : ?>
+	<a id="dislike-button-<?php echo $r->ID ?>" class="dislike-button-<?php echo $r->ID ?> editor-button faded-icon <?php if(isset($r->likeid) && $r->like_type == 1) : ?>active-like<?php endif; ?>" onclick="like_feed_post(<?php echo $r->ID ?>,1)"><nobr><span class="far fa-thumbs-down"></span> <span id="dislike-button-like-<?php echo $r->ID ?>" class="dislike-button-like-<?php echo $r->ID ?>">Dislike</span></nobr><span></a>
+<?php endif; ?> 
+<a class="editor-button faded-icon" onclick="javascript:$('.comment-input-<?php echo $r->ID ?>').focus();"><nobr><span class="far fa-comment-alt"></span> <?php echo lang("ctn_524") ?></nobr></a>
+<a class="editor-button faded-icon dropdown-toggle" data-toggle="dropdown"><nobr><span class="fa fa-share"></span> <?php echo lang("ctn_965") ?></nobr></a>
+<ul class="dropdown-menu" style="right:0; left: auto;">
+  <li class="dropdown-header">Who should see this?</li>
+  <li data-editvalue="1">
+    <a style="cursor: pointer;" onclick="share_post(<?php echo $r->ID ?>, 1);"><i class="fa fa-globe-asia" style="font-size: 15px;"></i> &nbsp; Public</a>
+  </li>
+  <li data-editvalue="2">
+    <a style="cursor: pointer;" onclick="share_post(<?php echo $r->ID ?>, 2);"><i class="fa fa-user-friends" style="font-size: 15px;"></i> &nbsp; Friends</a>
+  </li>
+  <li data-editvalue="3">
+    <a style="cursor: pointer;" onclick="share_post(<?php echo $r->ID ?>, 3);"><i class="fa fa-lock" style="font-size: 15px;"></i> &nbsp; Only Me</a>
+  </li>
+</ul>
 </div>
-<div class="feed-comment-area feed-comment-<?php echo $r->ID ?>" id="feed-comment-<?php echo $r->ID ?>">
+<div class="feed-comment-area feed-comment-area-popup custom-scrollbar-css feed-comment-<?php echo $r->ID ?>" id="feed-comment-<?php echo $r->ID ?>">
 
 </div>
 </div>
@@ -512,3 +550,6 @@ foreach($answers->result() as $a) {
 			});
 </script>
 <?php endif; ?>
+<style type="text/css">
+	.modal-backdrop.in { opacity: .8 !important; }
+</style>

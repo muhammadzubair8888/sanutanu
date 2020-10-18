@@ -119,6 +119,16 @@
         <span class="help-block"><?php echo lang("ctn_401") ?></span>
     </div>
 </div>
+
+<div class="form-group">
+    <label for="story_time" class="col-sm-2 control-label"><?php echo lang("ctn_956") ?></label>
+    <div class="col-sm-10">
+        <input type="number" class="form-control" id="story_time" name="story_time" placeholder="" value="<?php echo $this->settings->info->story_time ?>" ><br />
+        <span class="help-block"><?php echo lang("ctn_957") ?></span>
+    </div>
+</div>
+
+
 <div class="form-group">
     <label for="dpname-in" class="col-sm-2 control-label"><?php echo lang("ctn_344") ?></label>
     <div class="col-sm-10">
@@ -252,8 +262,21 @@
     </div>
 </div>
 
+<!-- change color scheme -->
+
+
+<div class="form-group">
+<label for="color" class="col-sm-2 control-label"><?php echo lang("ctn_983") ?></label>
+<div class="col-sm-2">
+<input type="color" class="form-control" id="color" name="color"  value="<?php echo $this->settings->info->color; ?>" >
+</div>
+</div> <!-- form group -->
+
+
+
 <input type="submit" class="btn btn-post form-control" value="<?php echo lang("ctn_13") ?>" />
 <?php echo form_close() ?>
 </div>
 </div>
 </div>
+

@@ -1,13 +1,92 @@
 <script src="<?php echo base_url() ?>scripts/custom/get_usernames.js"></script>
 <div class="row">
-        <div class="col-md-12">
-        	<div class="white-area-content">
-        		
-        		<div class="db-header clearfix">
-				    <div class="page-header-title"> <span class="glyphicon glyphicon-file"></span> <?php echo lang("ctn_531") ?></div>
-				    <div class="db-header-extra"> <a href="<?php echo site_url("pages/add") ?>" class="btn btn-post btn-sm"><?php echo lang("ctn_531") ?></a>
-				</div>
-				</div>
+     <!-- <h3 style="font-weight: bold;">Create a Page</h3>
+     <p>Connect your business, yourself or your cause to the worldwide community of people on Facebook. To get started, choose a Page category.</p>
+
+     <div style="margin-top: 50px;" class="row">
+         <div class="col-md-6">
+             <div class="box1" style="background-color: #e9ebee; border-radius: 10px;">
+                <div style="text-align: center; padding: 28px;">
+                    <img src="https://www.facebook.com/images/pages/create/biz_illustration.png">
+                    <h3>Business or Brand</h3>
+                    <p>Showcase your products and services, spotlight your brand and reach more customers on <b>Sanutanu</b></p>
+                    <button id="buisness" style="margin-top: 30px;" class="btn btn-primary">Get Started</button>
+                </div>
+             </div>
+             <div class="box2" style="background-color: #e9ebee; border-radius: 10px; display: none;">
+                <div style="padding: 28px;">
+                    <h3 style="font-weight: bold;">Business or Brand</h3>
+                    <p>Connect with customers, grow your audience and showcase your products with a free business Page.</p>
+                    <div class="form-group">
+                        <label>Page Name</label>
+                        <input type="text" name="name" class="form-control">
+                    </div>
+                    <?php if(!$this->settings->info->page_slugs) : ?>
+                    <div class="form-group">
+                        <label><?php echo lang("ctn_535") ?></label>
+                        <input type="text" name="slug" class="form-control" id="slug-check">
+                        <div id="slug-msg"></div>
+                    </div>
+                    <?php endif; ?>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select name="categoryid" class="form-control">
+                            <?php foreach($categories->result() as $r) : ?>
+                                <option value="<?php echo $r->ID ?>"><?php echo $r->name ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <button style="margin-top: 10px;" class="btn btn-sm btn-primary">Continue</button>
+                </div>
+             </div>
+         </div>
+         <div class="col-md-6">
+             <div class="box3" style="background-color: #e9ebee; border-radius: 10px;">
+                <div style="text-align: center; padding: 28px;">
+                    <img src="https://www.facebook.com/images/pages/create/community_illustration.png">
+                    <h3>Community or Public Figure</h3>
+                    <p>Connect and share with people in your community, organization, team, group or club.</p>
+                    <button id="public" style="margin-top: 30px;" class="btn btn-sm btn-primary">Get Started</button>
+                </div>
+             </div>
+             <div class="box4" style="background-color: #e9ebee; border-radius: 10px; display: none;">
+                <div style="padding: 28px;">
+                    <h3 style="font-weight: bold;">Community or Public Figure</h3>
+                    <p>Connect and share with people in your community, organization, team, group or club.</p>
+                    <div class="form-group">
+                        <label>Page Name</label>
+                        <input type="text" name="name" class="form-control">
+                    </div>
+                    <?php if(!$this->settings->info->page_slugs) : ?>
+                    <div class="form-group">
+                        <label><?php echo lang("ctn_535") ?></label>
+                        <input type="text" name="slug" class="form-control" id="slug-check">
+                        <div id="slug-msg"></div>
+                    </div>
+                    <?php endif; ?>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select name="categoryid" class="form-control">
+                            <?php foreach($categories->result() as $r) : ?>
+                                <option value="<?php echo $r->ID ?>"><?php echo $r->name ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <button style="margin-top: 10px;" class="btn btn-sm btn-primary">Continue</button>
+                </div>
+             </div>
+         </div>
+     </div> -->
+     <div class="col-md-12">
+            
+            <div class="mx1 mb2 h6 sm-h4 flex justify-center filter-buttons-group filter-buttons x-btn-group topbuttons" data-filter-group="type">
+                <a href="<?php echo site_url('pages/joined'); ?>" class="btn btn-post btn-tab"><?php echo lang('ctn_982'); ?></a>
+                <a href="<?php echo site_url('pages/your'); ?>" class="btn btn-post btn-tab"><?php echo lang('ctn_577'); ?></a>
+                <?php if( (isset($member) && $member != null && $member->roleid == 1) || ($this->common->has_permissions(array("admin", "page_admin", "page_creator"), $this->user)) ) : ?>
+                <a href="<?php echo site_url("pages/add") ?>" class="btn btn-post btn-tab btn-active"><?php echo lang("ctn_531") ?></a>
+                <?php endif; ?>
+            </div>
+
 
                 <?php echo form_open_multipart(site_url("pages/add_pro"), array("class" => "form-horizontal")) ?>
                 <div class="panel panel-default">
@@ -56,20 +135,20 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-group">
+               <!--  <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label"><?php echo lang("ctn_829") ?></label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" name="pay_to_join" value="0">
                         <span class="help-block"><?php echo lang("ctn_830") ?></span>
                     </div>
-                </div>
-                <div class="form-group">
+                </div> -->
+               <!--  <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label"><?php echo lang("ctn_831") ?></label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" name="pay_to_user" id="username-search" value="">
                         <span class="help-block"><?php echo lang("ctn_832") ?></span>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label"><?php echo lang("ctn_541") ?></label>
@@ -140,11 +219,21 @@
                 <?php echo form_close() ?>
 
 
-        	</div>
         </div>
-    </div>
+</div>
 
     <script type="text/javascript">
+
+        // $(document).ready(function() { 
+        //     $("#buisness").click(function() { 
+        //         $('.box1').fadeOut(); 
+        //         $('.box2').fadeIn(); 
+        //     });
+        //     $("#public").click(function() { 
+        //         $('.box3').fadeOut(); 
+        //         $('.box4').fadeIn(); 
+        //     }); 
+        // });
         $(document).ready(function() {
             $('#slug-check').on("change", function() {
                 var slug = $('#slug-check').val();
@@ -170,4 +259,4 @@
                 })
             });
         });
-    </script>
+    </script> 

@@ -11,13 +11,13 @@ class Login_Model extends CI_Model
 
 	public function getUserByEmail($email) 
 	{
-		return $this->db->select("ID,email,password,token,active,online_timestamp")
+		return $this->db->select("ID,email,password,token,active,online_timestamp,redirect")
 		->where("email", $email)->get("users");
 	}
 
 	public function getUserByUsername($username) 
 	{
-		return $this->db->select("ID,email,password,token,active,online_timestamp")
+		return $this->db->select("ID,email,password,token,active,online_timestamp,redirect")
 		->where("username", $username)->get("users");
 	}
 

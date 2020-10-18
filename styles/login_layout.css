@@ -28,7 +28,7 @@ body { font-size: 13px; font-family: "Open Sans"; background: url(../images/bg_1
 .login-form h2 { margin-top: 0px; }
 .login-welcome { font-size: 34px; color: #FFF; text-align: center; padding: 20px; margin-top: 20px;}
 .login-form-intro { font-size: 14px; text-align: center; color: #7c7c7c; }
-.login-form-area { width: 100%; margin-top: 30px; margin-bottom: 30px;}
+.login-form-area { width: 100%;} /* margin-top: 30px; margin-bottom: 30px; */
 .btn-flat-login { background: #b445e8; color: #FFF; }
 .btn-flat-login:hover { background: #a41be3; color: #FFF; }
 .login-icon-color { color: #a0a0a0; }

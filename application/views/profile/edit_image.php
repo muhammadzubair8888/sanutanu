@@ -27,6 +27,16 @@
                     </div>
             </div>
             <div class="form-group">
+                    <label for="p-in" class="col-md-4 label-heading"><?php echo lang("ctn_975") ?></label>
+                    <div class="col-md-8">
+                        <select name="privacy" class="form-control">
+                            <option value="1" <?php if($image->privacy == '1') echo "selected" ?> ><?php echo lang("ctn_976") ?></option>
+                            <option value="2" <?php if($image->privacy == '2') echo "selected" ?> ><?php echo lang("ctn_977") ?></option>
+                            <option value="3" <?php if($image->privacy == '3') echo "selected" ?> ><?php echo lang("ctn_978") ?></option>
+                        </select>
+                    </div>
+            </div>
+            <div class="form-group">
                     <label for="p-in" class="col-md-4 label-heading"><?php echo lang("ctn_499") ?></label>
                     <div class="col-md-8">
                         <?php if(!empty($image->file_name )) : ?>
@@ -35,12 +45,12 @@
                         <input type="file" class="form-control" name="image_file">
                     </div>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                     <label for="p-in" class="col-md-4 label-heading"><?php echo lang("ctn_500") ?></label>
                     <div class="col-md-8">
                         <input type="text" class="form-control" name="image_url" placeholder="http://www ..." value="<?php echo $image->file_url ?>">
                     </div>
-            </div>
+            </div> -->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo lang("ctn_60") ?></button>

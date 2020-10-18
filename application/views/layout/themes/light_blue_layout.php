@@ -19,7 +19,8 @@
         <link href="<?php echo base_url();?>styles/elements.css" rel="stylesheet" type="text/css">
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,500,550,600,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
-
+        <link rel="stylesheet" href="<?php echo base_url();?>sweatalert/sweetalert.css">
+                <script src="<?php echo base_url();?>sweatalert/sweetalert.js"></script>
         <!-- SCRIPTS -->
         <script type="text/javascript">
         var global_base_url = "<?php echo site_url('/') ?>";
@@ -88,7 +89,7 @@
             <span class="icon-bar"></span>
           </button>
           <?php if($this->settings->info->logo_option) : ?>
-          <a class="navbar-brand-two" href="<?php echo site_url() ?>" title="<?php echo $this->settings->info->site_name ?>"><img src="<?php echo base_url() ?><?php echo $this->settings->info->upload_path_relative ?>/<?php echo $this->settings->info->site_logo ?>" width="123" height="32"></a>
+          <a class="navbar-brand-two" href="<?php echo site_url() ?>" title="<?php echo $this->settings->info->site_name ?>"><img style="width: 100%;height: 100%;" src="<?php echo base_url() ?><?php echo $this->settings->info->upload_path_relative ?>/<?php echo $this->settings->info->site_logo ?>"></a>
         <?php else : ?>
           <a class="navbar-brand" href="<?php echo site_url() ?>" title="<?php echo $this->settings->info->site_name ?>"><?php echo $this->settings->info->site_name ?></a>
         <?php endif; ?>
@@ -156,7 +157,7 @@
 
     </div>
     <div id="footer" class="clearfix">
-      <span class="pull-left"><?php echo lang("ctn_170") ?> <a href="https://itstechworld.com/"> ITS Tech World </a> <?php echo $this->settings->info->site_name ?> V<?php echo $this->settings->version ?></span> <span class="pull-right"><a href="<?php echo site_url("home/change_language") ?>"><?php echo lang("ctn_171") ?></a></span>
+      <span class="pull-left"><?php echo lang("ctn_170") ?> <a href="https://hybreathe.com/"> HYBREATHE </a> <?php echo $this->settings->info->site_name ?> V<?php echo $this->settings->version ?></span> <span class="pull-right"><a href="<?php echo site_url("home/change_language") ?>"><?php echo lang("ctn_171") ?></a></span>
     </div>
 
     <!-- SCRIPTS -->

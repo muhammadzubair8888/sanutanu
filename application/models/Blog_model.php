@@ -23,6 +23,16 @@ class Blog_Model extends CI_Model
 		$this->db->where("ID", $id)->update("user_blogs", $data);
 	}
 
+	public function countries_get()
+	{
+		return $this->db->get('countries')->result();
+	}
+
+	public function reported_post($id, $data)
+	{
+		$this->db->where("ID", $id)->update("user_blog_posts", $data);
+	}
+
 	public function get_blog($id) 
 	{
 		return $this->db->where("ID", $id)->get("user_blogs");
@@ -78,6 +88,9 @@ class Blog_Model extends CI_Model
 	public function get_new_public_posts($page) 
 	{
 		return $this->db->where("user_blog_posts.status", 1)->where("user_blogs.private", 0)
+			
+			->where('user_blogs.target_country',$this->user->info->country)
+			->or_where('user_blogs.target_country','0')
 			->select("user_blog_posts.ID, user_blog_posts.title, user_blog_posts.body,
 				user_blog_posts.status, user_blog_posts.last_updated, user_blog_posts.image,
 				user_blogs.ID as blogid, user_blogs.userid,

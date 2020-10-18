@@ -36,6 +36,17 @@
                         </select>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label"><?php echo lang("ctn_1080") ?></label>
+                    <div class="col-sm-10">
+                        <select name="country" class="form-control">
+                          <option value="0"><?php echo lang("ctn_539") ?></option>
+                          <?php foreach($countries as $c): ?>
+                          <option value="<?php echo $c->name ?>"><?php echo $c->name ?></option>
+                      <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
 
                 <input type="submit" class="btn btn-post form-control" value="<?php echo lang("ctn_785") ?>">
 

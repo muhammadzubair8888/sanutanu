@@ -21,6 +21,11 @@ class Home extends CI_Controller
 		//$this->template->set_layout("layout/themes/titan_layout.php");
 	}
 
+	/* function test()
+	{
+		$this->common->send_email('Test mail smtp HTML','<html><head><title>Test Mail</title></head><body><b>Test mail smtp</b></body></html>','mr.tanveer007@gmail.com');
+	} */
+
 	public function index($type = 0, $hashtag = "")
 	{
 		$type = intval($type);
@@ -52,6 +57,45 @@ class Home extends CI_Controller
 			)
 		);
 	}
+
+
+	public function stories($type = 0, $hashtag = "")
+	{
+		$type = intval($type);
+		$hashtag = $this->common->nohtml($hashtag);
+		$this->template->loadExternal(
+			'
+			<script type="text/javascript" src="'
+			.base_url().'scripts/custom/profile.js" /></script>'
+		);
+		
+
+		$pages = $this->page_model->get_recent_pages();
+		$hashtags = $this->feed_model->get_trending_hashtags(10);
+		$users = $this->user_model->get_newest_users($this->user->info->ID);
+
+		$postid = intval($this->input->get("postid"));
+		$commentid = intval($this->input->get("commentid"));
+		$replyid = intval($this->input->get("replyid"));
+
+		$userswithstories = $this->feed_model->get_users_have_stories();
+		//print_r($userswithstories->result());
+		//exit;
+		$this->template->loadContent("home/stories.php", array(
+			"pages" => $pages,
+			"users" => $users,
+			"hashtags" => $hashtags,
+			"type" => $type,
+			"hashtag" => $hashtag,
+			"postid" => $postid,
+			"commentid" => $commentid,
+			"replyid" => $replyid,
+			"userswithstories" => $userswithstories
+			)
+		);
+	}
+
+
 
 	public function get_user_friends() 
 	{
@@ -94,6 +138,27 @@ class Home extends CI_Controller
 		exit();
 	}
 
+	public function get_city_id()
+	{
+		
+		$id = $this->input->get('id');
+		$citys = $this->home_model->get_city_id($id);
+		foreach($citys as $c)
+		{
+			echo "<option value=' $c->id '>$c->name</option>";
+		}
+	}
+
+	public function get_rates()
+	{
+		$city_id = $this->input->get('c_id');
+		$country_id = $this->input->get('count');
+		$data[] = $this->home_model->get_rate_country($country_id);
+		$data[] = $this->home_model->get_papulation_city($city_id);
+		echo json_encode($data);
+
+	}
+
 	private function get_fresh_results($stats) 
 	{
 		$data = new STDclass;
@@ -117,6 +182,7 @@ class Home extends CI_Controller
 		} else {
 			$lang = $_COOKIE["language"];
 		}
+		
 		$this->template->loadContent("home/change_language.php", array(
 			"languages" => $languages,
 			"user_lang" => $lang
@@ -174,7 +240,7 @@ class Home extends CI_Controller
 					$s = new STDClass;
 					$s->label = $r->first_name ." " . $r->last_name;
 					$s->type = "user";
-					$s->value = $r->username;
+					$s->value = $r->first_name ." " . $r->last_name;
 					$s->avatar = base_url() . $this->settings->info->upload_path_relative . "/" . $r->avatar;
 					$s->url = site_url("profile/" . $r->username);
 					$array[] = $s;

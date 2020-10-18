@@ -38,7 +38,7 @@ function load_posts(userid)
     <?php
   }else{
     ?>
-    <img src="<?php echo base_url() ?>/<?php echo $this->settings->info->upload_path_relative ?>/<?php echo $user->avatar ?>">
+    <a href="#mn1" class="dropdown-toggle" id="profilepicturemenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><img src="<?php echo base_url() ?>/<?php echo $this->settings->info->upload_path_relative ?>/<?php echo $user->avatar ?>"></a>
     <?php
   } ?>
 	
@@ -105,27 +105,19 @@ function load_posts(userid)
   <?php
   /************************ Message Button End by Tanveer 29/03/2020 *************************/
   ?>
-<?php if($friend_flag) : ?>
-<button type="button" class="btn btn-success btn-sm" id="friend_button_<?php echo $user->ID ?>"><span class="glyphicon glyphicon-ok"></span> <?php echo lang("ctn_493") ?></button>
-<?php else : ?>
-<?php if($request_flag) : ?>
-<button type="button" class="btn btn-success btn-sm disabled" id="friend_button_<?php echo $user->ID ?>"><?php echo lang("ctn_601") ?></button>
-<?php else : ?> 
   <?php if(!$user->allow_friends) : ?>
   <button type="button" class="btn btn-success btn-sm" onclick="add_friend(<?php echo $user->ID ?>)" id="friend_button_<?php echo $user->ID ?>"><?php echo lang("ctn_602") ?></button>
   <?php endif; ?>
-<?php endif; ?>
-<?php endif; ?>
 <?php endif; ?>
 <?php endif; ?>
 <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#reportModal" title="<?php echo lang("ctn_578") ?>"><span class="glyphicon glyphicon-flag"></span></button>
  </div>
  </div>
 
- <div class="row separator">
+ <div class="row half-separator">
  <div class="col-md-4">
 
-  <div class="page-block">
+<!--   <div class="page-block">
     <div class="align-center">
       <div class="project-info project-block align-center">
       <p class="project-info-bit profile-big-text"><?php echo number_format($user->profile_views) ?></p>
@@ -148,17 +140,60 @@ function load_posts(userid)
       <p class="project-info-title"><?php echo lang("ctn_606") ?></p>
       </div>
     </div>
-  </div>
-
- 	<div class="page-block half-separator">
+  </div> -->
+<div style="border-radius: 3px; border: 1px solid #DDD;" class="page-block">
  	
- 	<div class="page-block-title">
- 	<span class="glyphicon glyphicon-globe"></span> <?php echo lang("ctn_603") ?>
- 	</div>
+ 	
+ 	
+<?php 
+        $int_show = true;
+          
+    if($user->intro_show == 2):
+      if($user->ID == $this->user->info->ID):
+              $int_show = true;
+            else:
+              $int_show = false;
+          endif;
+          
+        elseif($user->intro_show == 1):
+          foreach($friends->result() as $f):
+              if($f->userid == $this->user->info->ID):
+                $int_show = true;
+                break;
+              else:
+                $int_show = false;
+              endif;
+
+            endforeach;
+            if($user->ID == $this->user->info->ID):
+              $int_show = true;
+            endif;
+          else:
+            $int_show = true;
+          endif;
+
+
+          if($int_show):
+         ?>
+
+         <div class="page-block-title">
+  <span style="color: #337ab7;" class="glyphicon glyphicon-globe"></span> <?php echo lang("ctn_1047") ?>
+  </div>
  	<div class="page-block-intro">
- 	<?php echo $user->aboutme ?>
+    <?php
+              $udata = $this->db->get_where('user_data',array('userid'=>$user->ID))->row_array();
+              ?>
+              <!-- <h5 style="text-align:center;"><strong id="user-name">Arun Kumar Perumal</strong></h5>
+              <p style="text-align:center;font-size: smaller;" id="user-frid">FBT000000213 </p>
+              <p style="text-align:center;font-size: smaller;overflow-wrap: break-word;" id="user-email">arunkumarperumal8791@gmail.com </p> -->
+              <p style="text-align:center;font-size: smaller;"><strong><?php echo $udata['work'] ?></strong></p>
+              <p style="text-align:center;font-size: smaller;"><strong>Lives in <?php echo $user->city.', '.$user->country; ?></strong><span class="tags" id="user-status"></span></p>
+              <p style="text-align:center;font-size: smaller;"><strong>Address: </strong><span class="tags" id="user-status"><?php echo $user->address_1; ?></span></p>
+              <p style="text-align:center;font-size: smaller;"><strong>Joined on <?php echo date('M Y',$user->joined); ?></strong><span class="tags" id="user-status"></span></p>
+ 	<?php //echo $user->aboutme ?>
  	</div>
-  <hr>
+ <?php endif; ?>
+  <!-- <hr>
 
   <?php if(isset($user->location_live) && !empty($user->location_live)) : ?>
     <div class="page-block-tidbit">
@@ -227,44 +262,182 @@ function load_posts(userid)
 </div>
 <?php endif; ?>
 
-</div>
+</div> -->
 
  	</div>
 
-  <?php if($this->settings->info->enable_google_ads_pages) : ?>
-          <div class="page-block half-separator">
-            <div class="page-block-page clearfix">
-            <?php include(APPPATH . "/views/home/google_ads.php"); ?>
-          </div>
-          </div>
-        <?php endif; ?>
+        <?php 
+       // if($this->settings->info->enable_google_ads_pages) : 
+          ?>
+
+        <!--   <div class="page-block half-separator">
+            <div class="page-block-page clearfix"> -->
+            <?php 
+            // include(APPPATH . "/views/home/google_ads.php"); 
+            ?>
+      <!--     </div>
+          </div> -->
+
+        <?php
+         // endif; 
+         ?>
 
         <?php if($this->settings->info->enable_rotation_ads_pages) : ?>
-            <?php include(APPPATH . "/views/home/rotation_ads.php"); ?>
+            <?php include(APPPATH . "/views/profile/rotation_ads.php"); ?>
         <?php endif; ?>
+        <?php if($m_friends): ?>
+              <div style="border-radius: 3px; border: 1px solid #DDD;" class="page-block half-separator">
+                <div class="page-block-title">
+                  <span style="color: #337ab7;" class="glyphicon glyphicon-user"></span> <a href="<?php echo site_url("profile/friends/" . $user->ID) ?>"><?php echo lang("ctn_1061") ?></a>
+                </div>
+                <div class="page-block-tidbit" style="padding: 5px;">
+                <?php foreach($m_friends->result() as $r) : ?>
+                  <a href="<?php echo site_url("profile/" . $r->username) ?>">
+                  <div  style=" border: 1px solid #DDD;padding: 5px;margin: 3px;height: 130px;" class="profile-friend-area onhoverchangewhitecolor">
+                    <p><img style="height:100%;width:100%;" src="<?php echo base_url() ?><?php echo $this->settings->info->upload_path_relative ?>/<?php echo $r->avatar ?>"></p>
+                    <p><?php echo $r->first_name ?> <?php echo $r->last_name ?></p>
+                  </div>
+                  </a>
+                <?php endforeach; ?>
+                </div>
+
+            </div>
+          <?php endif; ?>
+
+        <!-- firends show for ristricted -->
+        <?php 
+        $allow_show = true;
+          
+    if($user->firends_show == 2):
+      if($user->ID == $this->user->info->ID):
+              $allow_show = true;
+            else:
+              $allow_show = false;
+          endif;
+          
+        elseif($user->firends_show == 1):
+          foreach($friends->result() as $f):
+              if($f->userid == $this->user->info->ID):
+                $allow_show = true;
+                break;
+              else:
+                $allow_show = false;
+              endif;
+
+            endforeach;
+            if($user->ID == $this->user->info->ID):
+              $allow_show = true;
+            endif;
+          else:
+            $allow_show = true;
+          endif;
 
 
-    <div class="page-block half-separator">
+          if($allow_show):
+         ?>
+    <div style="border-radius: 3px; border: 1px solid #DDD;" class="page-block half-separator">
         <div class="page-block-title">
-          <span class="glyphicon glyphicon-user"></span> <a href="<?php echo site_url("profile/friends/" . $user->ID) ?>"><?php echo lang("ctn_493") ?></a>
+          <span style="color: #337ab7;" class="glyphicon glyphicon-user"></span> <a href="<?php echo site_url("profile/friends/" . $user->ID) ?>"><?php echo lang("ctn_493") ?></a>
         </div>
-        <div class="page-block-tidbit">
+        <div class="page-block-tidbit" style="padding: 5px;">
         <?php foreach($friends->result() as $r) : ?>
-          <div class="profile-friend-area">
-          <p><img src="<?php echo base_url() ?><?php echo $this->settings->info->upload_path_relative ?>/<?php echo $r->avatar ?>" width="40"></p>
-          <p><a href="<?php echo site_url("profile/" . $r->username) ?>"><?php echo $r->first_name ?> <?php echo $r->last_name ?></a></p>
+          <a href="<?php echo site_url("profile/" . $r->username) ?>">
+          <div  style=" border: 1px solid #DDD;padding: 5px;margin: 3px;height: 130px;" class="profile-friend-area onhoverchangewhitecolor">
+            <p><img style="height:100%;width:100%;" src="<?php echo base_url() ?><?php echo $this->settings->info->upload_path_relative ?>/<?php echo $r->avatar ?>"></p>
+            <p><?php echo $r->first_name ?> <?php echo $r->last_name ?></p>
           </div>
+          </a>
         <?php endforeach; ?>
         </div>
 
     </div>
+<?php endif; ?>
 
-    <div class="page-block half-separator">
-        <div class="page-block-title">
-          <span class="glyphicon glyphicon-picture"></span> <a href="<?php echo site_url("profile/albums/" . $user->ID) ?>"><?php echo lang("ctn_483") ?></a>
+    <div style="border-radius: 3px; border: 1px solid #DDD;" class="page-block half-separator">
+        <div  class="page-block-title">
+          <span style="color: #337ab7;" class="glyphicon glyphicon-picture"></span> <a href="<?php echo site_url("profile/albums/" . $user->ID) ?>"><?php echo lang("ctn_483") ?></a>
         </div>
         <div class="page-block-tidbit">
           <?php foreach($albums->result() as $r) : ?>
+          <?php if($r->name == 'Uploads'):
+
+               if($user->uploads_show == 2):
+      if($user->ID == $this->user->info->ID):
+              $album = true;
+            else:
+              $album = false;
+          endif;
+          
+        elseif($user->uploads_show == 1):
+          foreach($friends->result() as $f):
+              if($f->userid == $this->user->info->ID):
+                $album = true;
+                break;
+              else:
+                $album = false;
+              endif;
+
+            endforeach;
+            if($user->ID == $this->user->info->ID):
+              $album = true;
+            endif;
+          else:
+            $album = true;
+          endif;
+
+                elseif($r->name == 'Profile Pictures'):
+                  if($user->profiles_show == 2):
+      if($user->ID == $this->user->info->ID):
+              $album = true;
+            else:
+              $album = false;
+          endif;
+          
+        elseif($user->profiles_show == 1):
+          foreach($friends->result() as $f):
+              if($f->userid == $this->user->info->ID):
+                $album = true;
+                break;
+              else:
+                $album = false;
+              endif;
+
+            endforeach;
+            if($user->ID == $this->user->info->ID):
+              $album = true;
+            endif;
+          else:
+            $album = true;
+          endif;
+                else:
+                      if($user->covers_show == 2):
+      if($user->ID == $this->user->info->ID):
+              $album = true;
+            else:
+              $album = false;
+          endif;
+          
+        elseif($user->covers_show == 1):
+          foreach($friends->result() as $f):
+              if($f->userid == $this->user->info->ID):
+                $album = true;
+                break;
+              else:
+                $album = false;
+              endif;
+
+            endforeach;
+            if($user->ID == $this->user->info->ID):
+              $album = true;
+            endif;
+          else:
+            $album = true;
+          endif;
+        endif;
+            ?>
+
+
+      <?php if($album): ?>
             <div class="profile-album-area">
             <?php if(isset($r->file_name)) : ?>
               <a href="<?php echo site_url("profile/view_album/" . $r->ID) ?>"><img src="<?php echo base_url() ?><?php echo $this->settings->info->upload_path_relative ?>/<?php echo $r->file_name ?>"></a>
@@ -273,6 +446,7 @@ function load_posts(userid)
             <?php endif; ?>
             <p><a href="<?php echo site_url("profile/view_album/" . $r->ID) ?>"><?php echo $r->name ?></a></p>
             </div>
+          <?php endif; ?>
           <?php endforeach; ?>
         </div>
 

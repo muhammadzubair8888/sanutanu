@@ -29,7 +29,23 @@ class Login extends CI_Controller
 		if ($this->user->loggedin) {
 			redirect(base_url());
 		}
-		$this->template->loadContent("login/index.php", array());
+		$this->load->helper("captcha");
+		$rand = rand(4000,100000);
+		$vals = array(
+		    'word' => $rand,
+		    'img_path' => './images/captcha/',
+    		'img_url' => base_url() . 'images/captcha/',
+		    'img_width' => 150,
+		    'img_height' => 30,
+		    'expiration' => 7200
+		    );
+		$cap = create_captcha($vals);
+		$fields = $this->user_model->get_custom_fields(array("register"=>1));
+		$this->template->loadContent("login/index.php", array(
+			"cap" => $cap,
+		    "fields" => $fields,
+		    )
+		);
 	}
 
 	public function ajax_check_login() 
@@ -106,6 +122,17 @@ class Login extends CI_Controller
 		exit();
 	}
 
+	public function get_city_id()
+	{
+		
+		$id = $this->input->get('id');
+		$citys = $this->home_model->get_city_id($id);
+		foreach($citys as $c)
+		{
+			echo "<option value=' $c->name '>$c->name</option>";
+		}
+	}
+
 	public function pro($redirect="") 
 	{	
 		$this->template->set_error_view("error/login_error.php");
@@ -157,15 +184,15 @@ class Login extends CI_Controller
     		$this->template->error(lang("error_29"));
     	}
 
-    // 	if($this->settings->info->activate_account) 
-    // 	{
-    // 		if(!$r->active) {
-    // 			$this->template->error(lang("error_72") . "<a href='".
-    // 				site_url("register/send_activation_code/" . $r->ID . "/" .
-    // 				 urlencode($r->email)).
-    // 				"'>".lang("error_73") ."</a> " . lang("error_74"));
-    // 		}
-    // 	}
+    	if($this->settings->info->activate_account) 
+    	{
+    		if(!$r->active) {
+    			$this->template->error(lang("error_72") . "<a href='".
+    				site_url("register/send_activation_code/" . $r->ID . "/" .
+    				 urlencode($r->email)).
+    				"'>".lang("error_73") ."</a> " . lang("error_74"));
+    		}
+    	}
 
     	if($this->settings->info->secure_login) {
 			// Generate a token
@@ -206,10 +233,25 @@ class Login extends CI_Controller
 		setcookie($config . "un", $email, time()+$ttl, "/");
 		setcookie($config . "tkn", $token, time()+$ttl, "/");
 
+
+
+		
+
 		if(!empty($redirect)) {
 			redirect(site_url(urldecode($redirect)));
 		} else {
-			redirect(base_url());
+			if($r->redirect==1)
+			{
+				$this->user_model->update_user($r->ID, array(
+					"redirect" => 0 
+					)
+				);
+				redirect(site_url('user_settings'));
+			}
+			else
+			{
+				redirect(base_url());
+			}
 		}
 	}
 
@@ -654,6 +696,7 @@ class Login extends CI_Controller
 		delete_cookie($config. "oauthsecret");
 		$this->session->sess_destroy();
 		redirect(base_url());
+		
 	}
 
 	public function resetpw($token,$userid) 

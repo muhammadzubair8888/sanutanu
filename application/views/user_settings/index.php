@@ -211,6 +211,18 @@
 	      <input type="checkbox" name="profile_comments" value="1" <?php if($this->user->info->profile_comments) echo "checked" ?>>
 	    </div>
 	</div>
+	<div class="form-group">
+	    <label for="inputEmail3" class="col-sm-2 control-label"><?php echo lang("ctn_1066") ?></label>
+	    <div class="col-sm-10">
+	      <input type="checkbox" name="mute_rigns" value="1" <?php if($this->user->info->rings) echo "checked" ?>>
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label for="inputEmail3" class="col-sm-2 control-label"><?php echo lang("ctn_1067") ?></label>
+	    <div class="col-sm-10">
+	      <input type="checkbox" name="online_status" value="1" <?php if($this->user->info->online_status) echo "checked" ?>>
+	    </div>
+	</div>
 	 <input type="submit" name="s" value="<?php echo lang("ctn_236") ?>" class="btn btn-post form-control" />
 <?php echo form_close() ?>
 </div>

@@ -48,6 +48,17 @@ class Pages extends CI_Controller
 		);
 	}
 
+	public function joined() 
+	{
+		if(!$this->user->loggedin) {
+			redirect(site_url("login"));
+		}
+		$this->template->loadContent("pages/joined.php", array(
+			
+			)
+		);
+	}
+
 	public function all() 
 	{
 		if(!$this->user->loggedin) {
@@ -225,9 +236,6 @@ class Pages extends CI_Controller
 			       "encrypt_name" => TRUE,
 			       "remove_spaces" => TRUE,
 			       "allowed_types" => "gif|png|jpg|jpeg",
-			       "max_size" => $this->settings->info->file_size,
-			       "max_width" => $this->settings->info->avatar_width,
-			       "max_height" => $this->settings->info->avatar_height
 			    ));
 
 			    if (!$this->upload->do_upload("userfile")) {
@@ -486,8 +494,9 @@ class Pages extends CI_Controller
 
 		$this->load->library("upload");
 
-
-		if ($_FILES['userfile']['size'] > 0) {
+//echo $this->settings->info->avatar_height;
+//exit;
+		if ($_FILES['userfile']['size'] > 0 && 0 > 1) {
 				$this->upload->initialize(array( 
 			       "upload_path" => $this->settings->info->upload_path,
 			       "overwrite" => FALSE,
@@ -496,8 +505,8 @@ class Pages extends CI_Controller
 			       "remove_spaces" => TRUE,
 			       "allowed_types" => "gif|png|jpg|jpeg",
 			       "max_size" => $this->settings->info->file_size,
-			       "max_width" => $this->settings->info->avatar_width,
-			       "max_height" => $this->settings->info->avatar_height
+			       //"max_width" => $this->settings->info->avatar_width,
+			       //"max_height" => $this->settings->info->avatar_height
 			    ));
 
 			    if (!$this->upload->do_upload("userfile")) {
@@ -512,7 +521,7 @@ class Pages extends CI_Controller
 				$profile_avatar= $page->profile_avatar;
 			}
 
-			if ($_FILES['userfile_profile']['size'] > 0) {
+			if ($_FILES['userfile_profile']['size'] > 0 && 0 > 1) {
 				$this->upload->initialize(array( 
 			       "upload_path" => $this->settings->info->upload_path,
 			       "overwrite" => FALSE,
@@ -540,8 +549,8 @@ class Pages extends CI_Controller
 			"slug" => $slug,
 			"type" => $type,
 			"categoryid" => $categoryid,
-			"profile_header" => $profile_header,
-			"profile_avatar" => $profile_avatar,
+			//"profile_header" => $profile_header,
+			//"profile_avatar" => $profile_avatar,
 			"description" => $description,
 			"posting_status" => $posting_status,
 			"location" => $location,
@@ -1235,7 +1244,7 @@ class Pages extends CI_Controller
 		redirect(site_url("pages/members/" . $page->ID));
 	}
 
-	public function join_page($id, $hash) 
+	public function join_page($id, $hash, $ajax = 0) 
 	{
 		if(!$this->user->loggedin) {
 			redirect(site_url("login"));
@@ -1327,9 +1336,19 @@ class Pages extends CI_Controller
 		);
 
 		$this->update_user_pages($id, $this->user->info->ID, true);
-
-		$this->session->set_flashdata("globalmsg", lang("success_65"));
-		redirect(site_url("pages/view/" . $id));
+		if($ajax==0)
+		{
+			$this->session->set_flashdata("globalmsg", lang("success_65"));
+			redirect(site_url("pages/view/" . $id));
+		}
+		else
+		{
+			echo json_encode(array(
+				"success" => 1
+				)
+			);
+			exit();
+		}
 	}
 
 	public function remove_member($id, $hash) 
@@ -1384,7 +1403,7 @@ class Pages extends CI_Controller
 		redirect(site_url("pages/members/" . $page->ID));
 	}
 
-	public function leave_page($id, $hash) 
+	public function leave_page($id, $hash, $ajax = 0) 
 	{
 		if(!$this->user->loggedin) {
 			redirect(site_url("login"));
@@ -1413,9 +1432,20 @@ class Pages extends CI_Controller
 
 		$this->update_user_pages($page->ID, $this->user->info->ID, false);
 		
-
-		$this->session->set_flashdata("globalmsg", lang("success_67"));
-		redirect(site_url("pages/view/" . $id));
+		if($ajax==0)
+		{
+			$this->session->set_flashdata("globalmsg", lang("success_67"));
+			redirect(site_url("pages/view/" . $id));
+		}
+		else
+		{
+			echo json_encode(array(
+				"success" => 1
+				)
+			);
+			exit();
+		}
+		
 	}
 
 	public function albums($id) 
@@ -2839,6 +2869,200 @@ class Pages extends CI_Controller
 
 		$this->session->set_flashdata("globalmsg", lang("success_79"));
 		redirect(site_url("pages/view/" . $slug));
+	}
+
+
+	function loadpicturesforprofile($pageid="-1")
+	{
+		$userid = $this->user->info->ID;
+		$pics = $this->db->order_by("ID", "desc")->group_by('file_name')->get_where('user_images',array('userid'=>$userid,'pageid'=>$pageid))->result_array();
+		foreach ($pics as $pic) {
+		    ?>
+		<div class="col-lg-3 col-sm-4 col-xs-6" style="height: 100px;  overflow: hidden; margin-bottom: 6px;"><img class="thumbnail img-responsive profilethumbnail" onclick="set_imageid(<?php echo $pic['ID']; ?>);" src="<?php echo base_url() ?>/<?php echo $this->settings->info->upload_path_relative ?>/<?php echo $pic['file_name']; ?>" style="width: 100%; height: 100px; object-fit: cover; cursor: pointer;" ></div>
+		    <?php
+		}
+	}
+
+	public function profile_pic_upload($pageid=0) 
+	{
+		$userid = $this->user->info->ID;
+		$uploadpath = $this->settings->info->upload_path;
+		$thumbnail = $this->input->post("capturedpic");
+		$fullpic = $this->input->post("fullpic");
+		$profile_imageid = $this->input->post("profile_imageid");
+
+		$avatar = md5(date('Ymdhis')).'.jpg';
+		$newfile = $uploadpath.'/'.$avatar;
+		copy($thumbnail, $newfile);
+
+		if($profile_imageid=="")
+		{
+			$fullpicture = md5('n_'.date('Ymdhis')).'.jpg';
+			$newfile = $uploadpath.'/'.$fullpicture;
+			copy($fullpic, $newfile);
+		}
+		else
+		{
+			$row_img = $this->db->get_where('user_images',array('ID'=>$profile_imageid))->row_array();
+			$fullpicture = $row_img['file_name'];
+		}
+
+		$this->page_model->update_page($pageid, array(
+			"profile_avatar" => $avatar
+			)
+		);
+
+		$this->load->model('image_model');
+		$this->load->model('feed_model');
+
+		// Check for default feed album
+		$album = $this->image_model->get_page_profile_album($pageid);
+		if($album->num_rows() == 0) {
+			// Create
+			$albumid = $this->image_model->add_album(array(
+				"pageid" => $pageid,
+				"feed_album" => 2,
+				"name" => lang("ctn_946"),
+				"description" => lang("ctn_948"),
+				"timestamp" => time()
+				)
+			);
+		} else {
+			$album = $album->row();
+			$albumid = $album->ID;
+		}
+
+
+		$fileid = $this->feed_model->add_image(array(
+        	"file_name" => $fullpicture,
+        	"file_type" => 'Image',
+        	"extension" => 'jpg',
+        	"userid" => $this->user->info->ID,
+        	"pageid" => $pageid,
+        	"timestamp" => time(),
+        	"albumid" => $albumid
+        	)
+        );
+
+        // Update album count
+        $this->image_model->increase_album_count($albumid);
+
+        //$this->user_model->increase_posts($this->user->info->ID);
+		$postid = $this->feed_model->add_post(array(
+			"userid" => $this->user->info->ID,
+			"pageid" => $pageid,
+			"post_as" => "page",
+			"hide_profile" => 1,
+			"posttype" => "feed",
+			"postfor" => 2,
+			"timestamp" => time(),
+			"imageid" => $fileid
+			)
+		);
+
+		$this->page_model->update_page($this->user->info->ID, array(
+			"profilepic_postid" => $postid
+			)
+		);
+
+
+
+
+
+
+		exit;
+	}
+
+
+	public function cover_pic_upload($pageid=0) 
+	{
+		$userid = $this->user->info->ID;
+		$uploadpath = $this->settings->info->upload_path;
+		$coverphoto = $this->input->post("coverphoto");
+
+		$fullpicture = md5('n_'.date('Ymdhis')).'.jpg';
+		$newfile = $uploadpath.'/'.$fullpicture;
+		copy($coverphoto, $newfile);
+
+
+		$this->page_model->update_page($pageid, array(
+			"profile_header" => $fullpicture
+			)
+		);
+
+		$this->load->model('image_model');
+		$this->load->model('feed_model');
+
+		// Check for default feed album
+		$album = $this->image_model->get_page_cover_album($pageid);
+		if($album->num_rows() == 0) {
+			// Create
+			$albumid = $this->image_model->add_album(array(
+				"pageid" => $pageid,
+				"feed_album" => 3,
+				"name" => lang("ctn_949"),
+				"description" => lang("ctn_950"),
+				"timestamp" => time()
+				)
+			);
+		} else {
+			$album = $album->row();
+			$albumid = $album->ID;
+		}
+
+
+		$fileid = $this->feed_model->add_image(array(
+        	"file_name" => $fullpicture,
+        	"file_type" => 'Image',
+        	"extension" => 'jpg',
+        	"userid" => $this->user->info->ID,
+        	"pageid" => $pageid,
+        	"timestamp" => time(),
+        	"albumid" => $albumid
+        	)
+        );
+        // Update album count
+        $this->image_model->increase_album_count($albumid);
+
+
+        $this->user_model->increase_posts($this->user->info->ID);
+		$postid = $this->feed_model->add_post(array(
+			"userid" => $this->user->info->ID,
+			"pageid" => $pageid,
+			"post_as" => "page",
+			"hide_profile" => 1,
+			"posttype" => "feed",
+			"postfor" => 2,
+			"timestamp" => time(),
+			"imageid" => $fileid
+			)
+		);
+
+		$this->page_model->update_page($pageid, array(
+			"coverpic_postid" => $postid
+			)
+		);
+
+
+
+
+
+
+		exit;
+	}
+
+	public function settings($id)
+	{
+		$this->load->model('Page_model');
+		$page = $this->Page_model->get_page_by_slug($id);
+		// print_r();
+		$page = $page->result();
+		// exit;
+		$this->template->loadContent("pages/page_settings.php", array(
+			"page" => $page,
+			"slug" => $page[0]->slug,
+			)
+		);
 	}
 
 }

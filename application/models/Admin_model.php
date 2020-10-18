@@ -2,7 +2,6 @@
 
 class Admin_Model extends CI_Model 
 {
-
 	public function updateSettings($data) 
 	{
 		$this->db->where("ID", 1)->update("site_settings", $data);
@@ -17,6 +16,19 @@ class Admin_Model extends CI_Model
 			)
 		);
 	}
+   public function get_contact_us_report($datatable) 
+	{
+		$datatable->db_order('contact_us.title');
+		$this->db
+			->select("contact_us.*, users.username, users.first_name, users.last_name, users.avatar, users.online_timestamp")
+			->join("users", "users.ID = contact_us.userid");
+		$qry = $datatable->get("contact_us");
+		return $qry;
+	}
+	public function get_contact_us() 
+	{
+		return $this->db->from("contact_us")->count_all_results();
+	}
 
 	public function get_ip_blocks() 
 	{
@@ -26,6 +38,11 @@ class Admin_Model extends CI_Model
 	public function get_ip_block($id) 
 	{
 		return $this->db->where("ID", $id)->get("ip_block");
+	}
+
+	public function get_rotation_addby_id($id)
+	{
+		return $this->db->where("ID", $id)->get("rotation_ads");
 	}
 
 	public function delete_ipblock($id) {
@@ -79,6 +96,16 @@ class Admin_Model extends CI_Model
 	public function update_group($id, $data) 
 	{
 		$this->db->where("ID", $id)->update("user_groups", $data);
+	}
+
+	public function update_papulation($id,$data)
+	{
+		$this->db->where("id", $id)->update("countries", $data);
+	}
+
+	public function update_city_papulation($id,$data)
+	{
+		$this->db->where("id", $id)->update("cities", $data);
 	}
 
 	public function get_users_from_groups($id, $page) 
@@ -330,15 +357,33 @@ class Admin_Model extends CI_Model
 		$this->db->insert("page_categories", $data);
 	}
 
+	public function add_group_category($data) 
+	{
+		$this->db->insert("group_categories", $data);
+	}
+
 	public function get_page_category($id) 
 	{
 		return $this->db->where("ID", $id)->get("page_categories");
 	}
 
+	public function get_group_category($id) 
+	{
+		return $this->db->where("ID", $id)->get("group_categories");
+	}
+
+	
+
 	public function delete_page_category($id) 
 	{
 		$this->db->where("ID", $id)->delete("page_categories");
 	}
+
+	public function delete_group_category($id) 
+	{
+		$this->db->where("id", $id)->delete("group_categories");
+	}
+	
 
 	public function update_page_category($id, $data) 
 	{
@@ -362,9 +407,26 @@ class Admin_Model extends CI_Model
 		return $datatable->get("page_categories");
 	}
 
+	public function get_group_categories($datatable) 
+	{
+		$datatable->db_order();
+
+		$datatable->db_search(array(
+			"group_categories.name",
+			),
+			true // Cache query
+		);
+		return $datatable->get("group_categories");
+	}
+
 	public function delete_report($id) 
 	{
 		$this->db->where("ID", $id)->delete("reports");
+	}
+
+	public function delete_report_abuse($id) 
+	{
+		$this->db->where("ID", $id)->delete("report_abuse_posts");
 	}
 
 	public function get_total_reports() 
@@ -404,14 +466,81 @@ class Admin_Model extends CI_Model
 		return $datatable->get("reports");
 	}
 
+	public function get_report_abuse_posts($datatable) 
+	{
+		$datatable->db_order();
+
+		$datatable->db_search(array(
+			"report_abuse_posts.reason",
+			"users.username",
+			"report_abuse_posts.postid"
+			),
+			true // Cache query
+		);
+		$this->db
+			->select("report_abuse_posts.ID,report_abuse_posts.postid, report_abuse_posts.reason, report_abuse_posts.timestamp, report_abuse_posts.fromid, users.username, users.first_name, users.last_name, users.avatar, users.online_timestamp")
+			->join("users", "users.ID = report_abuse_posts.fromid");
+		return $datatable->get("report_abuse_posts");
+	}
+
+	public function get_bug_report($datatable) 
+	{
+		$datatable->db_order();
+
+		/*$datatable->db_search(array(
+			"bug_report.subject",
+			"users.username",
+			"bug_report.description",
+			"bug_report.os"
+			),
+			true // Cache query
+		);*/
+		$this->db
+			->select("bug_report.*, users.username, users.first_name, users.last_name, users.avatar, users.online_timestamp")
+			->join("users", "users.ID = bug_report.fromid");
+		$qry = $datatable->get("bug_report");
+		
+		return $qry;
+	}
+
+	public function get_total_bug_reports() 
+	{
+		return $this->db->from("bug_report")->count_all_results();
+	}
+
 	public function add_rotation_ad($data) 
 	{
 		$this->db->insert("rotation_ads", $data);
 	}
 
+	public function add_rotation_plan($data) 
+	{
+		$this->db->insert("ads_plans", $data);
+	}	
+
 	public function get_rotation_ad($id) 
 	{
 		return $this->db->where("ID", $id)->get("rotation_ads");
+	}
+
+	public function get_ads_plan($id) 
+	{
+		return $this->db->where("id", $id)->get("ads_plans");
+	}
+
+	public function get_buy_adds_plan($id) 
+	{
+		$userid = $this->user->info->ID;
+		$this->db->where("users_id", $userid);
+		$this->db->where("ads_plans_id", $id);
+		return $this->db->get("buy_ads_plan");
+	}	
+
+	public function get_buyplanfor_check_plan($id) 
+	{
+		$userid = $this->user->info->ID;
+		$sql = "SELECT * FROM buy_ads_plan WHERE users_id = $userid AND ads_plans_id = $id AND remaining_adds > 0";
+		return  $this->db->query($sql);
 	}
 
 	public function update_rotation_ad($id, $data) 
@@ -419,16 +548,52 @@ class Admin_Model extends CI_Model
 		$this->db->where("ID", $id)->update("rotation_ads", $data);
 	}
 
+
+	public function update_rotation_plan($id , $data)
+	{
+		$this->db->where("id", $id)->update("ads_plans", $data);
+	}
+
 	public function delete_rotation_ad($id) 
 	{
 		$this->db->where("ID", $id)->delete("rotation_ads");
+	}
+
+	public function delete_ads_plan($id)
+	{
+		$this->db->where("ID", $id)->delete("ads_plans");
 	}
 
 	public function get_total_rotation_ads() 
 	{
 		return $this->db->from("rotation_ads")->count_all_results();
 	}
+	public function get_total_religion_ads() 
+	{
+		return $this->db->from("religions")->count_all_results();
+	}
+	 public function get_total_community_ads() 
+	 {
+	 	return $this->db->from("community")->count_all_results();
+	}
+	public function get_total_ads_plans() 
+	{
+		return $this->db->from("ads_plans")->count_all_results();
+	}
+	public function get_adds_plans($datatable)
+	{
+		$datatable->db_order();
 
+		$datatable->db_search(array(
+			"ads_plans.plan_name",
+			"ads_plans.status",
+			),
+			true 
+		);
+
+		$this->db->select("*");
+		return $datatable->get("ads_plans");
+	}	
 	public function get_rotation_ads($datatable) 
 	{
 		$datatable->db_order();
@@ -436,6 +601,8 @@ class Admin_Model extends CI_Model
 		$datatable->db_search(array(
 			"rotation_ads.name",
 			"rotation_ads.status",
+			"rotation_ads.link",
+			"rotation_ads.image",
 			),
 			true // Cache query
 		);
@@ -443,13 +610,32 @@ class Admin_Model extends CI_Model
 		$this->db->select("users.username, users.ID as userid,
 			users.online_timestamp, users.first_name, users.last_name,
 			users.avatar,
-			rotation_ads.name, rotation_ads.timestamp, rotation_ads.pageviews,
-			rotation_ads.status, rotation_ads.cost, rotation_ads.ID")
+			rotation_ads.name, rotation_ads.timestamp, rotation_ads.page,rotation_ads.add_duration,rotation_ads.city_id,rotation_ads.state_id,rotation_ads.country_id, rotation_ads.pageviews,
+			rotation_ads.status, rotation_ads.link, rotation_ads.image, rotation_ads.cost, rotation_ads.ID")
 			->join("users", "users.ID = rotation_ads.userid", "left outer");
 		
 		return $datatable->get("rotation_ads");
 	}
+	public function get_religions_ads($datatable) 
+	{
+		$datatable->db_order();
+        $datatable->db_search(array(
+			"religions.name"
+			),
+			true // Cache query
+		);
+            $this->db->select("religions.name, religions.ID")
+			->join("users", "users.ID = religions.ID", "left outer");
+		    return $datatable->get("religions");
+	}
+	
+	public function get_community() 
+	{
+       return  $this->db->select("religions.name as religionname, religions.ID as religion_id ,
+         	community.name as comunityname , community.ID , community.religion_id")
+			->join("religions", "religions.ID = community.religion_id", "left outer")->get("community");
 
+	}
 	public function get_total_promoted_posts() 
 	{
 		return $this->db->from("promoted_posts")->count_all_results();
@@ -579,6 +765,15 @@ class Admin_Model extends CI_Model
 	{
 		$this->db->insert("invites", $data);
 	}
+	public function add_religion($data) 
+	{
+		$this->db->insert("religions", $data);
+	}
+	public function add_communities($data) 
+	{
+		$this->db->insert("community", $data);
+	}
+
 
 	public function get_total_invites() 
 	{
@@ -607,15 +802,48 @@ class Admin_Model extends CI_Model
 	{
 		return $this->db->where("ID", $id)->get("invites");
 	}
+	public function get_religion($ID) 
+	{
+		return $this->db->where("ID", $ID)->get("religions");
+	}
+	public function get_communities($id) 
+	{
+		return $this->db->where("ID", $id)->get("community");
+	}
+
+
 
 	public function delete_invite($id) 
 	{
 		$this->db->where("ID", $id)->delete("invites");
 	}
-
+    public function delete_religion($id) 
+	{
+		$this->db->where("ID", $ID)->delete("religions");
+	}
+	public function delete_communites($id) 
+	{
+		$this->db->where("ID", $id)->delete("community");
+	}
 	public function update_invite($id, $data) 
 	{
 		$this->db->where("ID", $id)->update("invites", $data);
+	}
+	public function update_religion($id, $data) 
+	{
+		$this->db->where("ID", $id)->update("religions", $data);
+	}
+
+    public function update_communities($id, $data) 
+	{
+		$this->db->where("ID", $id)->update("community", $data);
+	}
+
+
+
+	public function getpromotedpoststatusrows()
+	{
+		return $this->db->from("promoted_posts")->where("status", 0)->count_all_results();
 	}
 }
 

@@ -7,7 +7,7 @@ class Image_Model extends CI_Model
 	{
 		return $this->db->where("user_albums.userid", $userid)
 			->select("user_images.file_name, user_images.ID as imageid,
-				user_albums.ID, user_albums.name, user_albums.description")
+				user_albums.ID, user_albums.name, user_albums.description, user_albums.privacy,user_albums.userid")
 			->join("user_images", "user_images.albumid = user_albums.ID", "left outer")
 			->group_by("user_albums.ID")
 			->limit(4)
@@ -24,7 +24,11 @@ class Image_Model extends CI_Model
             ->limit(4)
             ->get("user_albums");
     }
-
+    public function get_group_feed_album($groupid) 
+    {
+        return $this->db->where("groupid", $groupid)->where('feed_album',1)->get("user_albums");
+    }
+   
 	public function get_user_feed_album($userid) 
 	{
 		return $this->db
@@ -33,6 +37,36 @@ class Image_Model extends CI_Model
 			->select("user_albums.ID, user_albums.name, user_albums.description")
 			->get("user_albums");
 	}
+    
+     public function get_group_albums_sample($groupid) 
+    {
+        return $this->db->where("user_albums.groupid", $groupid)
+            ->select("user_images.file_name, user_images.ID as imageid, user_images.name,
+                user_albums.ID, user_albums.name, user_albums.description")
+            ->join("user_images", "user_images.albumid = user_albums.ID", "left outer")
+            ->group_by("user_albums.ID")
+            ->limit(4)
+            ->get("user_albums");
+    }
+
+
+    public function get_user_profile_album($userid) 
+    {
+        return $this->db
+            ->where("user_albums.userid", $userid)
+            ->where("feed_album", 2)
+            ->select("user_albums.ID, user_albums.name, user_albums.description")
+            ->get("user_albums");
+    }
+
+    public function get_user_cover_album($userid) 
+    {
+        return $this->db
+            ->where("user_albums.userid", $userid)
+            ->where("feed_album", 3)
+            ->select("user_albums.ID, user_albums.name, user_albums.description")
+            ->get("user_albums");
+    }
 
 	public function add_album($data) 
 	{
@@ -110,7 +144,11 @@ class Image_Model extends CI_Model
     	return $this->db->where("albumid", $id)
     		->limit(50, $page)->get("user_images");
     }
-
+    public function get_total_group_albums($groupid) 
+    {
+        return $this->db->where("groupid", $groupid)
+            ->from("user_albums")->count_all_results();
+    }
     public function get_total_album_images($id) 
     {
     	return $this->db->where("albumid", $id)
@@ -129,10 +167,15 @@ class Image_Model extends CI_Model
             ->select("user_images.ID, user_images.name, user_images.description,
                 user_images.userid, user_images.file_name, user_images.file_type,
                 user_images.extension, user_images.file_size, user_images.timestamp,
-                user_images.file_url, user_images.albumid,
+                user_images.file_url, user_images.albumid,user_images.privacy,
                 user_albums.pageid")
             ->join("user_albums", "user_albums.ID = user_images.albumid")
             ->get("user_images");
+    }
+
+    public function image_privacy($imageid)
+    {
+        return $this->db->where("ID", $imageid)->get("user_images")->row()->privacy;
     }
 
     public function delete_image($id) 
@@ -147,7 +190,17 @@ class Image_Model extends CI_Model
 
     public function get_page_feed_album($pageid) 
     {
-        return $this->db->where("pageid", $pageid)->get("user_albums");
+        return $this->db->where("pageid", $pageid)->where('feed_album',1)->get("user_albums");
+    }
+
+    public function get_page_profile_album($pageid) 
+    {
+        return $this->db->where("pageid", $pageid)->where('feed_album',2)->get("user_albums");
+    }
+
+    public function get_page_cover_album($pageid) 
+    {
+        return $this->db->where("pageid", $pageid)->where('feed_album',3)->get("user_albums");
     }
 
     public function get_total_page_albums($pageid) 
@@ -183,6 +236,43 @@ class Image_Model extends CI_Model
     public function get_total_user_images($userid) 
     {
         return $this->db->where("userid", $userid)->from("user_images")->count_all_results();
+    }
+
+    public function get_group_cover_album($pageid) 
+    {
+        return $this->db->where("groupid", $pageid)->where('feed_album',3)->get("user_albums");
+    }
+    // public function add_album($data) 
+    // {
+    //     $this->db->insert("user_albums", $data);
+    //     return $this->db->insert_ID();
+    // }
+     public function get_group_album_images($id, $group) 
+    {
+        return $this->db->where("albumid", $id)
+            ->limit(50, $group)->get("user_images");
+    }
+    public function get_group_albums_all($id) 
+    {
+        return $this->db->where("groupid", $id)->get("user_albums");
+    }
+     public function get_group_albums($gorupid, $datatable) 
+    {
+        $datatable->db_order();
+
+        $datatable->db_search(array(
+            "user_albums.name"
+            ),
+            true // Cache query
+        );
+        $this->db
+            ->where("user_albums.groupid", $groupid)
+            ->select("user_images.file_name, user_images.ID as imageid,
+                user_albums.ID, user_albums.name, user_albums.description,
+                 user_albums.images, user_albums.timestamp")
+            ->join("user_images", "user_images.albumid = user_albums.ID", "left outer")
+            ->group_by("user_albums.ID");
+        return $datatable->get("user_albums");
     }
 
 }

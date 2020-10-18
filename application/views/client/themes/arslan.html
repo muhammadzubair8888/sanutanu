@@ -1,0 +1,2835 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>SANUTANU</title>         
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Bootstrap -->
+        <link href="http://sanutanu.com/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link href="http://sanutanu.com/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
+
+        <link href="http://sanutanu.com/scripts/libraries/mention/jquery.mentions.css" rel="stylesheet" type="text/css">
+        
+
+         <!-- Styles -->
+        <link href="http://sanutanu.com/styles/client/themes/titan/main.css" rel="stylesheet" type="text/css">
+        <link href="http://sanutanu.com/styles/client/themes/titan/responsive.css" rel="stylesheet" type="text/css">
+      <link rel="stylesheet" href="http://sanutanu.com/sweatalert/sweetalert.css">
+                <script src="http://sanutanu.com/sweatalert/sweetalert.js"></script>
+        
+        <link href="http://sanutanu.com/styles/client/responsive.css" rel="stylesheet" type="text/css">
+        
+        <link href="http://sanutanu.com/styles/client/elements.css" rel="stylesheet" type="text/css">
+        <link href='//fonts.googleapis.com/css?family=Open+Sans:400,500,550,600,700' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+
+        <link href="http://sanutanu.com/styles/chat.css" rel="stylesheet" type="text/css">
+
+        <!-- SCRIPTS -->
+        <script type="text/javascript">
+        var global_base_url = "http://sanutanu.com/";
+        var global_hash = "da8c9e7b95a9b14bc86954f3f7b3700f";
+        </script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+        <script src="http://sanutanu.com/scripts/libraries/jquery.form.min.js"></script> <!-- processing forms ajax -->
+
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.12/datatables.min.css"/>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.12/datatables.min.js"></script> <!-- datatables -->
+
+        <script src="http://sanutanu.com/scripts/libraries/mention/jquery.mentions.js"></script> <!-- @mentions and #hastags -->
+        <script src="http://sanutanu.com/scripts/libraries/jquery.jscroll.js"></script> <!-- infinite scroll -->
+
+        <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script> <!-- text editor -->
+
+        <script src="//twemoji.maxcdn.com/2/twemoji.min.js?2.3.0"></script> <!-- for emoji -->
+
+        
+                 <link href="http://sanutanu.com/scripts/libraries/select2.min.css" rel="stylesheet" type="text/css">
+ <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyBipO3Bxb7dzzAJb5WwaXJ5CuRh4EU1i8k&libraries=places"></script>
+        <script src="http://sanutanu.com/scripts/libraries/jquery.geocomplete.min.js"></script>
+        <script src="http://sanutanu.com/scripts/libraries/select2.full.min.js"></script>
+
+                  <script src="http://sanutanu.com/scripts/custom/chat.js" type="text/javascript"></script>
+          <script type="text/javascript">
+          time_to_update = 5000;
+          </script>
+        
+        <link  href="http://sanutanu.com/scripts/libraries/viewer/viewer.css" rel="stylesheet">
+      <script src="http://sanutanu.com/scripts/libraries/viewer/viewer.js"></script> <!-- Gallery viewer -->
+
+      <link rel="stylesheet"  href="http://sanutanu.com/styles/croppie.css" />
+      <script src="http://sanutanu.com/scripts/libraries/croppie.js"></script>
+
+        
+        <!-- CODE INCLUDES -->
+        
+			<script type="text/javascript" src="http://sanutanu.com/scripts/custom/profile.js" /></script> 
+
+        <!-- Favicon: http://realfavicongenerator.net -->
+        <link rel="apple-touch-icon" sizes="76x76" href="http://sanutanu.com/images/favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" href="http://sanutanu.com/images/favicon/favicon-32x32.png" sizes="32x32">
+        <link rel="icon" type="image/png" href="http://sanutanu.com/images/favicon/favicon-16x16.png" sizes="16x16">
+        <link rel="manifest" href="http://sanutanu.com/images/favicon/manifest.json">
+        <link rel="mask-icon" href="http://sanutanu.com/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="theme-color" content="#ffffff">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.1.45/css/materialdesignicons.css" rel="stylesheet"/>
+
+        <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.6/bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.6/bootstrap-editable/js/bootstrap-editable.min.js"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="http://sanutanu.com/scripts/libraries/msdropdown/dd.css" />
+    <script src="http://sanutanu.com/scripts/libraries/msdropdown/jquery.dd.min.js"></script>
+
+    
+    <!-- <link rel="stylesheet" href="https://twitter.github.io/typeahead.js/css/examples.css" />  -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
+     <script src="https://twitter.github.io/typeahead.js/js/handlebars.js"></script>
+     <script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
+<style type="text/css">
+  .navbar-brand{ color: #1ca1fa !important; }
+  #homepage-links ul li.active a{ color: #1ca1fa !important; }
+  .sidebaricon{ color: #1ca1fa !important; }
+  .postboxbutton{ color: #1ca1fa !important; }
+  .feed-header-info p a{ color: #1ca1fa !important; }
+  .active-like{ color: #1ca1fa !important; }
+  .feed-content-stats a span{ color: #1ca1fa !important; }
+  .btn-post { background-color: #1ca1fa !important; }
+  .active_chat_window .chat-top-bar {
+    background:  #1ca1fa !important;}
+    .chat-user-title a {color:#1ca1fa !important;}
+    .profile-header-bar .active a { color:#1ca1fa !important;}
+   }
+.profile-header-bar ul li a {color:#1ca1fa !important;}
+.profile-friend-area p a {color: #1ca1fa !important;}
+.chat-user-title { color: #1ca1fa !important;}
+.paginate_button.active a {
+    background-color: #1ca1fa !important;}
+    .profile-header-bar ul li a {
+    color: #1ca1fa !important;}
+
+    /*admin side*/
+    .inner-sidebar-links .active a {
+    background: #1ca1fa !important;}
+    .breadcrumb li a {
+    color: #1ca1fa !important;}
+    .btn-post {
+    background-color: #1ca1fa !important;}
+   /*settings*/
+   ul.settings-sidebar li a {
+    color: #1ca1fa !important;
+
+}
+.panel-body .form-group a {
+    color: #1ca1fa !important;
+}
+/*login button*/
+.btn.btn-primary {
+    background: #1ca1fa !important;}
+    .btn-flat-login {
+    background:#1ca1fa !important; }
+    .btn-post {
+    background-color: #1ca1fa !important;
+    
+}
+.tt-suggestion:hover, .tt-suggestion:hover .smtext { background-color: #1ca1fa !important; }
+.tt-suggestion.tt-cursor, .tt-suggestion.tt-cursor .smtext { background-color: #1ca1fa !important; }
+#aboutpopup .modal-dialog:after{ border-right-color: #1ca1fa !important; }
+#aboutpopup .modal-dialog:before{ border-left-color: #1ca1fa !important; }
+.custom-modal-header{color:#1ca1fa !important;}
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus
+{
+  background:#1ca1fa !important;
+  border-color:#1ca1fa !important;
+}
+.searchTerm:focus{
+  color: #1ca1fa !important;
+}
+</style>
+    </head>
+    <body>
+
+
+    <nav class="navbar navbar-fixed-top" style="background: #FFF; z-index: 3;">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="row">
+              <div class="col-md-2" style=" height: 50px; padding: 0;">
+                              <a class="navbar-brand" href="http://sanutanu.com" title="SANUTANU">SANUTANU</a>
+                        <div class="clearfix"></div>
+              </div>
+              <div class="col-md-6" style="padding-top: 8px; height: 50px;">
+                <form action="http://sanutanu.com/search/index" class="navbar-for searchform" method="get" accept-charset="utf-8">
+	<div class="search">
+	      <input type="text" name="q" class="searchTerm autocomplete" placeholder="Search ..." data-uri="search_suggession" data-template="search" value="" autocomplete="off" >
+        <button disabled="true" type="button" class="searchButton">
+          <i class="glyphicon glyphicon-search"></i>
+       </button>
+   </div>
+              <!-- <div class="has-search" style="padding-bottom: 5px; position: relative !important;">
+                <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                <input type="text" class="form-control" placeholder="Search ..." id="search-complete" style="width:100% !important;">
+              </div> -->
+              </form><style type="text/css">
+.search {
+  width: 100%;
+  position: relative;
+  display: flex;
+}
+
+.searchTerm {
+  width: 100%;
+  border: 1px solid #CCC;
+  /*border-right: none;*/
+  padding: 5px;
+  height: 36px;
+   border-radius: 3px 0 0 3px; 
+  outline: none;
+  color: #9DBFAF;
+}
+
+
+
+.searchButton {
+  width: 40px;
+  height: 36px;
+  border: 1px solid #CCC;
+  border-left: none;
+  background: #FFF;
+  text-align: center;
+  color: #AAA;
+  border-radius: 0 3px 3px 0;
+  cursor: pointer;
+  font-size: 20px;
+}
+</style>              </div>
+              <div class="col-md-4" style="padding-top: 8px; height: 50px;">
+                                <!-- <div class="page-block half-separator" style="margin-top: 0; height: 36px; line-height: 36px; padding-left: 10px; border: 1px solid #CCC; background: #FFF; border-radius: 5px;">
+                   -->
+
+
+                    <div id="navbar" class="navbar-collapse collapse" style="margin-top: 0; height: 38px; line-height: 38px; padding-left: 0px; background: #FFF; border-radius: 4px; padding-right: 0px; border: 1px solid rgba(0,0,0,0.1);">
+                      <ul class="nav navbar-nav navbar-right" style="text-align: center; margin-right: 0; ">
+                        <!-- <li> -->
+                          <!--  -->
+                        <!-- </li> -->
+                                              <!-- <li><a href=""><span class="glyphicon glyphicon-home notification-icon"></span></a></li> -->
+                        <li class="user_bi" style="padding-right: 0px; text-align: left; flex: auto;"><a class="toplinkbtn" href="http://sanutanu.com/profile/admin" style="width: 100%;"><img src="http://sanutanu.com/uploads/d2e66dff2f8c198718c6699ece9ee20e.jpg" class="user_avatar"> &nbsp;                           SanuTanu                          </a></li>
+
+                        <li class="topbar-right" style="padding-right: 0px; text-align: left; flex: auto;"><a class="toplinkbtn" href="http://sanutanu.com/home" style="width: 100%;"> Home </a></li>
+
+                        <li class="topbar-right" style=" flex: auto;"><a href="#" class="toplinkbtn" data-target="#" onclick="load_notifications()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="noti-menu-drop" style="width: 34px; background: #FFF !important;"><span class="fa fa-bell notification-icon"></span><span class="badge notification-badge small-text">2</span></a>
+                    
+                        <ul class="dropdown-menu" aria-labelledby="noti-menu-drop">
+                        <div class="notify-arrow notify-arrow-blue"></div>
+                        <li>
+                        <div class="notification-box-title">
+                        Notifications <span class="badge click" id="noti-click-unread" onclick="load_notifications_unread()">2</span>                        </div>
+                        <div id="notifications-scroll">
+                          <div id="loading_spinner_notification">
+                            <span class="glyphicon glyphicon-refresh" id="ajspinner_notification"></span>
+                          </div>
+                        </div>
+                        <div class="notification-box-footer">
+                        <a href="http://sanutanu.com/home/notifications">Read More</a>
+                        </div>
+                      </li>
+                      </ul>
+                      </li>
+                        <li class="topbar-right" style=" flex: auto;"><a href="#" class="toplinkbtn" data-target="#" onclick="load_chats()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="email-menu-drop" style="width: 34px; background: #FFF !important; border-radius: 5px;"><span class="fa fa-comment-dots notification-icon"></span><span class="badge notification-badge small-text" id="chat-noti"></span></a>
+
+                        <ul class="dropdown-menu" aria-labelledby="email-menu-drop">
+                        <div class="notify-arrow notify-arrow-blue"></div>
+                        <li>
+                          <div class="notification-box-title">
+                            Chat Messages - <a href="http://sanutanu.com/chat">Inbox</a>
+                            </div>
+                            <div id="chat-scroll">
+                              <div id="loading_spinner_email">
+                                <span class="glyphicon glyphicon-refresh" id="ajspinner_email"></span>
+                              </div>
+                            </div>
+                            <div class="notification-box-footer">
+                            <a href="#" id="chat-click-more" onclick="load_chat_page()">Load More</a>
+                          </div>
+                        </li>
+                        </ul>
+
+                        </li>
+                        <!-- <li class="user_bit"><a href="javascript:void(0)" class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="glyphicon glyphicon-chevron-down notification-icon"></span></a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                          <li><a href="http://sanutanu.com">Home</a></li>
+                          <li><a href="http://sanutanu.com/profile/admin">My Profile</a></li>
+                          <li><a href="http://sanutanu.com/pages/your">My Pages</a></li>
+                          <li><a href="http://sanutanu.com/profile/friends/1">Friends</a></li>
+                          <li><a href="http://sanutanu.com/user_settings">Settings</a></li>
+                          
+                                                      <li role="separator" class="divider"></li>
+                            <li><a href="http://sanutanu.com/admin">Admin Panel</a></li>
+                                                  </ul></li> -->
+                        <!-- <li style="display: inline-block; float: inherit;"><a class="toplinkbtn" href="http://sanutanu.com/login/logout/da8c9e7b95a9b14bc86954f3f7b3700f" title="Logout" style="padding-top: 6px !important;">Logout</a></li> -->
+                                            </ul>
+                    </div>
+
+
+
+
+
+                </div>
+                
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-2">
+            
+            
+
+          </div>
+
+
+          
+        </div>
+        
+      </div>
+    </nav>
+
+
+
+
+    <div id="main-content">
+    
+        <div id="responsive-menu-links">
+          <select name='link' OnChange="window.location.href=$(this).val();" class="form-control">
+          <option value='http://sanutanu.com/home'>Newsfeed</option>
+          <option value='http://sanutanu.com/profile/admin'>Profile</option>
+          <option value='http://sanutanu.com/chat'>Inbox</option>
+          <option value='http://sanutanu.com/user_settings'>Settings</option>
+          <option value='http://sanutanu.com/profile/albums/1'>Albums</option>
+          <option value='http://sanutanu.com/pages/your'>Pages</option>
+          <option value='http://sanutanu.com/home/index/2'>Saved Posts</option>
+          	          <option value='http://sanutanu.com/admin'>Admin</option>
+	      	      	          <option value='http://sanutanu.com/home/index/4'>All Posts</option>
+	      	      	          <option value='http://sanutanu.com/pages/all'>All Pages</option>
+	            </select>
+  </div>                 <div class="container">
+
+          <div class="row">
+          <!-- <div class="col-md-12 col-md-offset-sidebar"> -->
+            <div class="col-md-10">
+
+                      
+     
+
+            <div class="row">
+        <div class="col-md-2 sidebar-block custom-scrollbar-css" id="homepage-links">
+          
+        <ul>
+        <li class="active"><a href="http://sanutanu.com/home"><span class="fa fa-house-user sidebaricon"></span> Newsfeed</a></li>
+        <li><a href="http://sanutanu.com/profile/admin"><span class="fa fa-user-tie sidebaricon"></span> Profile</a></li>
+        <li><a href="http://sanutanu.com/chat"><span class="far fa-envelope sidebaricon"></span> Inbox</a></li>
+
+        <li><a href="http://sanutanu.com/home/notifications"><span class="far fa-bell sidebaricon"></span><span class="badge notification-badge notification-badge2 small-text">2</span> Notifications</a></li>
+
+                  <li><a href="http://sanutanu.com/blog/your"><span class="fa fa-blog sidebaricon"></span> Your Blog</a></li>
+                <li><a href="http://sanutanu.com/user_settings"><span class="fa fa-user-cog sidebaricon"></span> Settings</a></li>
+
+                <li><a href="http://sanutanu.com/login/logout/da8c9e7b95a9b14bc86954f3f7b3700f"><span class="fa fa-sign-out-alt sidebaricon"></span> Logout</a></li>
+                </ul>
+
+        <p class="sidebar-title">Content</p>
+        <ul>
+        <li><a href="http://sanutanu.com/profile/albums/1"><span class="fa fa-images sidebaricon"></span> Albums</a></li>
+        <li><a href="http://sanutanu.com/pages/your"><span class="fa fa-copy sidebaricon"></span> Pages</a></li>
+        <li><a href="http://sanutanu.com/groups/index"><span class="fa fa-users sidebaricon"></span>Groups</a></li>
+   
+                  <li><a href="http://sanutanu.com/blog/new_posts"><span class="fa fa-blog sidebaricon"></span> Blogs</a></li>
+                <li ><a href="http://sanutanu.com/home/index/2"><span class="far fa-list-alt sidebaricon" style="color: #a41be3"></span> Saved Posts</a></li>
+                <li><a href="http://sanutanu.com/funds"><span class="fa fa-money-bill sidebaricon"></span> Funds</a></li>
+                </ul>
+                  <p class="sidebar-title">Admin</p>
+          <ul>
+                        <li><a href="http://sanutanu.com/admin"><span class="fa fa-tools sidebaricon"></span> Admin Panel</a></li>
+                          <li ><a href="http://sanutanu.com/home/index/4"><span class="far fa-list-alt sidebaricon" style="color: #a41be3"></span> All Posts</a></li>
+                          <li><a href="http://sanutanu.com/pages/all"><span class="fa fa-list-alt sidebaricon"></span> All Pages</a></li>
+                        </ul>
+      
+        <hr>
+
+        <p class="sidebar-title">
+        Trending</p>
+        <ul>
+                  </ul>
+        </div>
+        <div class="col-md-6">
+ 
+ 
+	<form action="http://sanutanu.com/feed/add_post" id="social-form" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+            <input type="hidden" name="csrf_test_name" value="da8c9e7b95a9b14bc86954f3f7b3700f" />
+  <input type="hidden" name="targetid" value="">
+  <input type="hidden" name="target_type" value="">
+<div class="editor-wrapper" onclick="checkeditor();">
+  <div class="editor-header" style="">Create Post</div>
+<div class="editor-content">
+<div class="clearfix editor-textarea-wrapper">
+<div class="editor-user-icon"><img src="http://sanutanu.com//uploads/d2e66dff2f8c198718c6699ece9ee20e.jpg" class="user-icon-big" id="editor-poster-icon">
+</div>
+
+<div class="editor-textarea-part"><textarea onclick="highlightPostBox();" onkeyup="extracturl(this.value);" name="content" class="editor-textarea" id="editor-textarea" placeholder="What's on your mind?"></textarea>
+  </div>
+</div>
+<div class="editor-post-container"></div>
+<div id="userTagBox" class="collapse">
+  <div class="input-group tagbox">
+      <span class="input-group-addon">With</span>
+      <select class="js-example-basic-multiple form-control" style="width: 100%;" name="with_users[]" id="with_users" multiple="multiple"></select>
+  </div>
+</div>
+  
+</div>
+<div class="editor-footer" style="background: #FFF;">
+  <div class="dropdown">
+    <button type="button" id="image-button" class="editor-button  mytooltip postboxbutton" title="Upload Image" data-toggle="modal" data-target="#imageModal"><span class="glyphicon glyphicon-picture"></span></button> 
+    <button type="button" id="video-button" class="editor-button mytooltip postboxbutton" title="Video" data-toggle="modal" data-target="#videoModal"><span class="glyphicon glyphicon-facetime-video"></span></button> 
+    <button type="button" id="map-button" class="editor-button mytooltip postboxbutton" title="Location" data-toggle="modal" data-target="#locationModal"><span class="glyphicon glyphicon-map-marker"></span></button> 
+    <button type="button" id="user-button" class="editor-button mytooltip postboxbutton" title="User" data-toggle="collapse" data-target="#userTagBox"><span class="glyphicon glyphicon-user"></span></button> 
+    <button type="button" id="poll-button" class="editor-button mytooltip postboxbutton" title="Create Poll" data-toggle="modal" data-target="#pollModal"><span class="glyphicon glyphicon-stats"></span></button>
+
+    <button class="editor-button dropdown-toggle mytooltip postboxbutton" type="button" data-placement="top" data-toggle="dropdown" title="Icon"><!-- <span class="glyphicon glyphicon-heart"></span> --><span class="fa fa-grin"></span></button> 
+
+
+        <ul class="dropdown-menu emojismenu custom-scrollbar-css" style="height: 330px; overflow-y: auto;">
+        <li>
+                                <button type="button" class="nobutton" onclick="add_smile('&#128512;')">&#128512;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128513;')">&#128513;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128514;')">&#128514;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128515;')">&#128515;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128516;')">&#128516;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128517;')">&#128517;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128518;')">&#128518;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128519;')">&#128519;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128520;')">&#128520;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128521;')">&#128521;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128522;')">&#128522;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128523;')">&#128523;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128524;')">&#128524;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128525;')">&#128525;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128526;')">&#128526;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128527;')">&#128527;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128528;')">&#128528;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128529;')">&#128529;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128530;')">&#128530;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128531;')">&#128531;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128532;')">&#128532;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128533;')">&#128533;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128534;')">&#128534;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128535;')">&#128535;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128536;')">&#128536;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128537;')">&#128537;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128538;')">&#128538;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128539;')">&#128539;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128540;')">&#128540;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128541;')">&#128541;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128542;')">&#128542;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128543;')">&#128543;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128544;')">&#128544;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128545;')">&#128545;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128546;')">&#128546;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128547;')">&#128547;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128548;')">&#128548;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128549;')">&#128549;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128550;')">&#128550;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128551;')">&#128551;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128552;')">&#128552;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128553;')">&#128553;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128554;')">&#128554;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128555;')">&#128555;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128556;')">&#128556;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128557;')">&#128557;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128558;')">&#128558;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128559;')">&#128559;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128560;')">&#128560;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128561;')">&#128561;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128562;')">&#128562;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128563;')">&#128563;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128564;')">&#128564;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128565;')">&#128565;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128566;')">&#128566;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128567;')">&#128567;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128568;')">&#128568;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128569;')">&#128569;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128570;')">&#128570;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128571;')">&#128571;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128572;')">&#128572;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128573;')">&#128573;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128574;')">&#128574;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128575;')">&#128575;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128576;')">&#128576;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128577;')">&#128577;</button>
+                      <button type="button" class="nobutton" onclick="add_smile('&#128578;')">&#128578;</button>
+                  </li>
+      </ul>
+   </div>
+  
+
+  
+
+  <div class="row postbtnrow" style="background: #f5f6f7; margin: -10px; margin-top: 0px; padding-top: 10px; border-top: 1px solid #dddfe2; border-radius: 0 0 4px 4px; display: none;">
+    <div class="col-md-12">
+      <table style="width:100%;" border="0">
+        <tr>
+          <td class="editor-feedrow" width="50%">
+            
+            
+            <table style="width:100%;" border="0">
+
+
+              <tr>
+                <td class="editor-feedcol" style="padding: 5px 5px;text-align: center;" onclick="checkuncheck(0);">
+                  <table align="center">
+                    <tr>
+                      <td style="padding-right: 5px;font-size: 22px; text-align: center;color: #a41be3;">
+                        <i class="newsfeed-unchecked far fa-circle" style="display: none;"></i>
+                        <i class="newsfeed-checked fa fa-check-circle"></i>
+                        <input type="hidden" name="checkfeed" id="checkfeed" value="1" />
+                      </td>
+                      <td style="padding: 5px;">
+                        <img src="https://icons-for-free.com/iconfiles/png/512/morning+news+newspaper+icon-1320136429130706490.png" style="width:40px; height:40px; border-radius: 50%; border:1px solid #CCC;" />
+                      </td>
+                      <td>News Feed</td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+
+
+              <tr>
+                <td style="text-align: center; padding: 5px;">
+                  <div class="dropdown" style="z-index: 99; width: 100px !important; display: inline-block; padding: 5px; padding-bottom: 0;">
+                                        <input type="hidden" name="postfor" id="postfor" value="1">
+                    <a class="btn btn-xs btn-post dropdown-toggle btnpostfor" data-toggle="dropdown" style="font-weight: bold;"><i class="fa fa-globe-asia" style="font-size: 15px;"></i> &nbsp; Public <span class="caret"></span></a>
+                    
+                    <ul class="dropdown-menu">
+                      <li class="dropdown-header">Who should see this?</li>
+                      <li data-value="1" data-text="" class="active">
+                        <a style="cursor: pointer;" onclick="setPostFor(1,this);"><i class="fa fa-globe-asia" style="font-size: 15px;"></i> &nbsp; Public</a>
+                      </li>
+                      <li data-value="2">
+                        <a style="cursor: pointer;" onclick="setPostFor(2,this);"><i class="fa fa-user-friends" style="font-size: 15px;"></i> &nbsp; Friends</a>
+                      </li>
+                      <li data-value="3">
+                        <a style="cursor: pointer;" onclick="setPostFor(3,this);"><i class="fa fa-lock" style="font-size: 15px;"></i> &nbsp; Only Me</a>
+                      </li>
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+            </table>
+
+
+          </td>
+
+
+
+
+          <td class="editor-feedrow" width="50%">
+            
+
+
+            <table style="width:100%;" border="0">
+
+
+              <tr>
+                <td class="editor-feedcol storycheck" style="padding: 5px 5px;text-align: center;" onclick="checkuncheck(1);">
+                  <table align="center">
+                    <tr>
+                      <td style="padding-right: 5px;font-size: 22px; text-align: center;color: #a41be3;">
+                        <i class="storyfeed-unchecked far fa-circle" style=""></i>
+                        <i class="storyfeed-checked fa fa-check-circle" style="display: none;"></i>
+                        <input type="hidden" name="checkstory" id="checkstory" value="0" />
+                      </td>
+                      <td style="padding: 5px;">
+                        <div style="position: relative; width: 40px; height: 40px; border-radius: 50%; margin: auto;">
+                          <img src="http://sanutanu.com//uploads/d2e66dff2f8c198718c6699ece9ee20e.jpg" style="width:40px; height:40px; border-radius: 50%; border:1px solid #666;" />
+                          <i class="fa fa-plus-circle" style="position: absolute;bottom: -3px; right: -3px; background: #FFF;border-radius: 50%; font-size: 18px; border: 1px solid #FFF;"></i>
+                        </div>
+                      </td>
+                      <td>Your Story</td>
+                    </tr>
+                  </table>
+                  
+                  
+                </td>
+              </tr>
+
+
+              <tr>
+                <td style="text-align: center; padding: 5px;">
+                  <div class="dropdown" style="z-index: 99; width: 100px !important; display: inline-block; padding: 5px; padding-bottom: 0;">
+                    <input type="hidden" name="storyfor" id="storyfor" value="2">
+                    <a class="btn btn-xs btn-post dropdown-toggle btnstoryfor" data-toggle="dropdown" style="font-weight: bold;"><i class="fa fa-user-friends" style="font-size: 15px;"></i> &nbsp; Friends <span class="caret"></span></a>
+                    
+                    <ul class="dropdown-menu">
+                      <li class="dropdown-header">Who should see this?</li>
+                      <!-- <li data-storyvalue="1" data-text="" class="active">
+                        <a style="cursor: pointer;" onclick="setStoryFor(1,this);"><i class="fa fa-globe-asia" style="font-size: 15px;"></i> &nbsp; Public</a>
+                      </li> -->
+                      <li data-storyvalue="2" class="active">
+                        <a style="cursor: pointer;" onclick="setStoryFor(2,this);"><i class="fa fa-user-friends" style="font-size: 15px;"></i> &nbsp; Friends</a>
+                      </li>
+                      <!-- <li data-storyvalue="3">
+                        <a style="cursor: pointer;" onclick="setStoryFor(3,this);"><i class="fa fa-lock" style="font-size: 15px;"></i> &nbsp; Only Me</a>
+                      </li> -->
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+            </table>
+
+
+
+
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3" style="padding:5px;"><input type="submit" class="btn btn-post btn-sm" style="width: 100%;font-weight: bold;" value="Post"></td>
+        </tr>
+      </table>
+
+    </div>
+  </div>
+
+
+  
+
+
+</div>
+
+<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-user"></span> Add an Image</h4>
+      </div>
+      <div class="modal-body ui-front form-horizontal">
+          <div class="form-group">
+                    <label for="p-in" class="col-md-4 label-heading">Upload Image</label>
+                    <div class="col-md-8">
+                        <input type="file" class="form-control" name="image_file" id="image_file">
+                    </div>
+            </div>
+            <div class="form-group">
+                    <label for="p-in" class="col-md-4 label-heading">or From URL</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="image_url" id="image_url" placeholder="http://www ...">
+                    </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <input type="button" class="btn btn-post" value="Select" data-dismiss="modal">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-user"></span> Add a Video</h4>
+      </div>
+      <div class="modal-body ui-front form-horizontal">
+          <div class="form-group">
+                    <label for="p-in" class="col-md-4 label-heading">Upload Video</label>
+                    <div class="col-md-8">
+                        <input type="file" class="form-control" name="video_file" id="video_file">
+                    </div>
+            </div>
+            <div class="form-group">
+                    <label for="p-in" class="col-md-4 label-heading">or YouTube URL</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="youtube_url" id="video_url" placeholder="http://www ...">
+                    </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <input type="button" class="btn btn-post" data-dismiss="modal" value="Select">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="locationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-user"></span> Get Location</h4>
+      </div>
+      <div class="modal-body ui-front form-horizontal">
+          <div class="form-group">
+                    <label for="p-in" class="col-md-4 label-heading">Location</label>
+                    <div class="col-md-8">
+                      <input type="text" name="location" id="map_name" class="form-control map_name">
+                    </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <input type="button" class="btn btn-post" data-dismiss="modal" value="Select">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-user"></span> Select Friends</h4>
+      </div>
+      <div class="modal-body ui-front form-horizontal">
+          <div class="form-group">
+                    <label for="p-in" class="col-md-4 label-heading">Select User</label>
+                    <div class="col-md-8">
+                        <select class="js-example-basic-multiple" style="width: 100%;" name="with_users[]" id="with_users" multiple="multiple">
+                        
+                        </select>
+                    </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <input type="button" class="btn btn-post" value="Select" data-dismiss="modal">
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="modal fade" id="pollModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-stats"></span> Create Poll</h4>
+      </div>
+      <div class="modal-body ui-front form-horizontal">
+          <div class="form-group">
+                    <label for="p-in" class="col-md-4 label-heading">Poll Question</label>
+                    <div class="col-md-8">
+                        <input type="text" name="poll_question" class="form-control" id="poll_question">
+                    </div>
+            </div>
+            <div class="form-group">
+                    <label for="p-in" class="col-md-4 label-heading">Type</label>
+                    <div class="col-md-8">
+                        <select name="poll_type" class="form-control">
+                          <option value="0">Single Answer</option>
+                          <option value="1">Multiple Answer</option>
+                        </select>
+                    </div>
+            </div>
+            <div class="form-group">
+                    <label for="p-in" class="col-md-4 label-heading">Answers</label>
+                    <div class="col-md-8" id="answer-area">
+                        <div class="form-group">
+                                <div class="col-md-12">
+                                    <input type="text" name="poll_answer_1" class="form-control" placeholder="Answer #1 ...">
+                                </div>
+                        </div>
+                        <div class="form-group">
+                                <div class="col-md-12">
+                                    <input type="text" name="poll_answer_2" class="form-control" placeholder="Answer #2 ...">
+                                </div>
+                        </div>
+                        <div class="form-group">
+                                <div class="col-md-12">
+                                    <input type="text" name="poll_answer_3" class="form-control" placeholder="Answer #3 ...">
+                                </div>
+                        </div>
+                        <div class="form-group">
+                                <div class="col-md-12">
+                                    <input type="text" name="poll_answer_4" class="form-control" placeholder="Answer #4 ...">
+                                </div>
+                        </div>
+                        <div class="form-group">
+                                <div class="col-md-12">
+                                    <input type="text" name="poll_answer_5" class="form-control" placeholder="Answer #5 ...">
+                                </div>
+                        </div>
+                    </div>
+            </div>
+            <input type="button" class="btn btn-post btn-xs" value="Add Another Answer" id="add_answer">
+            <input type="hidden" name="poll_answers" value="5" id="poll_answers">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <input type="button" class="btn btn-post" value="Create Poll" data-dismiss="modal">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+
+    $('#poll_question').change(function() {
+      var q = $(this).val();
+      if(q) {
+        $('#poll-button').addClass("highlight-button");
+      } else {
+        $('#poll-button').removeClass("highlight-button");
+      }
+    });
+
+    $('#with_users').change(function() {
+      var q = $(this).val();
+      if(q) {
+        $('#user-button').addClass("highlight-button");
+      } else {
+        $('#user-button').removeClass("highlight-button");
+      }
+    });
+
+     $('#map_name').change(function() {
+      var q = $(this).val();
+      if(q) {
+        $('#map-button').addClass("highlight-button");
+      } else {
+        $('#map-button').removeClass("highlight-button");
+      }
+    });
+
+     $('#video_file').change(function() {
+      var q = $(this).val();
+      if(q) {
+        $('#video-button').addClass("highlight-button");
+      } else if(!$('#video_url').val()) {
+        $('#video-button').removeClass("highlight-button");
+      }
+    });
+
+     $('#video_url').change(function() {
+      var q = $(this).val();
+      if(q) {
+        $('#video-button').addClass("highlight-button");
+      } else if(!$('#video_file').val()) {
+        $('#video-button').removeClass("highlight-button");
+      }
+    });
+
+     $('#image_file').change(function() {
+      var q = $(this).val();
+      if(q) {
+        $('#image-button').addClass("highlight-button");
+      } else if(!$('#image_url').val()) {
+        $('#image-button').removeClass("highlight-button");
+      }
+    });
+
+     $('#image_url').change(function() {
+      var q = $(this).val();
+      if(q) {
+        $('#image-button').addClass("highlight-button");
+      } else if(!$('#image_file').val()) {
+        $('#image-button').removeClass("highlight-button");
+      }
+    });
+    $('#add_answer').click(function() {
+      var answers = $('#poll_answers').val();
+      answers++;
+      $('#poll_answers').val(answers);
+
+      var html = '<div class="form-group">'+
+                    '<div class="col-md-12">'+
+                    '<input type="text" name="poll_answer_'+answers+'" class="form-control" placeholder="Answer #'+answers+' ...">'+
+                    '</div>'+
+                    '</div>';
+      $('#answer-area').append(html);
+    });
+  });
+</script>
+
+</form></div>
+
+<div class="modal fade" id="likeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-user"></span> Post Likes</h4>
+      </div>
+      <div class="modal-body ui-front" id="post-likes">
+          
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="editPostModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" id="editPost">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-user"></span> Edit Post</h4>
+      </div>
+      <div class="modal-body ui-front form-horizontal" id="editPost">
+          
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="promotePostModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" id="promotePost">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-user"></span> </h4>
+      </div>
+      <div class="modal-body ui-front form-horizontal" id="promotePost">
+          
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function h(e) {
+  $(e).css({'height':'65px','overflow-y':'hidden'}).height(e.scrollHeight-30);
+}
+$('textarea').each(function () {
+  h(this);
+}).on('input', function () {
+  h(this);
+});
+
+$(function () {
+  $('.mytooltip').tooltip();
+})
+
+</script>
+<style type="text/css">
+.editor-textarea-part {
+  cursor: text;
+}
+.editor-textarea-part textarea {
+  border: 0;
+  margin: 0rem 0 0.5rem 0;
+  outline: 0;
+  padding: 1.5rem 0 0 1.25rem;
+  resize: none;
+  min-height: 50px !important;
+}
+.editor-feedrow:hover
+{
+  background: #ebedf0;
+}
+.editor-feedcol
+{
+  cursor: pointer;
+  font-weight: bold;
+}
+.link-post-data
+{
+  border: 1px solid #CCC;
+  position: relative;
+}
+.link-post-title
+{
+  background: #f2f2f2;
+  padding: 5px 15px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #000;
+  position: relative;
+  
+}
+.link-post-desc
+{
+  text-overflow: ellipsis; 
+  overflow: hidden; 
+  white-space: nowrap; 
+  overflow: hidden; 
+  width: 100%; 
+  padding: 5px 15px;
+  background: #f2f2f2;
+  border-bottom: 1px solid #CCC;
+  padding-top: 0;
+}
+</style>
+<script type="text/javascript">
+  $(document).ready(function(){
+  $(document).on('click','textarea', function(e) {
+      e.stopPropagation();
+  });
+  $(document).on('click','#status-overlay', function (e) {
+      $("#status-overlay").hide();
+      $('.postbtnrow').hide();
+      $(".editor-wrapper").css('z-index','1');
+      $(".editor-wrapper").css('position', '');
+  });
+});
+function highlightPostBox()
+{
+  $("#status-overlay").show();//editPost
+  $('.postbtnrow').fadeIn();
+  $(".editor-wrapper").css('z-index','9999999');
+  $(".editor-wrapper").css('position', 'relative');
+  if (typeof collapse == 'function'){
+    $('#userTagBox').collapse("hide");
+  }
+  
+}
+function setPostFor(v,a)
+{
+  $('[data-value=1]').removeClass('active');
+  $('[data-value=2]').removeClass('active');
+  $('[data-value=3]').removeClass('active');
+  $('[data-value='+ v +']').addClass('active');
+  $("#postfor").val(v);
+  $('.btnpostfor').html($(a).html()+' <span class="caret"></span>');
+}
+function setStoryFor(v,a)
+{
+  $('[data-storyvalue=1]').removeClass('active');
+  $('[data-storyvalue=2]').removeClass('active');
+  $('[data-storyvalue=3]').removeClass('active');
+  $('[data-storyvalue='+ v +']').addClass('active');
+  $("#storyfor").val(v);
+  $('.btnstoryfor').html($(a).html()+' <span class="caret"></span>');
+}
+function setPostForEdit(v,a)
+{
+  $('[data-editvalue=1]').removeClass('active');
+  $('[data-editvalue=2]').removeClass('active');
+  $('[data-editvalue=3]').removeClass('active');
+  $('[data-editvalue='+ v +']').addClass('active');
+  $("#postforedit").val(v);
+  $('.btnpostfor.editpostfor').html($(a).html()+' <span class="caret"></span>');
+}
+function checkuncheck(v)
+{
+  if(v==0)
+  {
+    var f = $('#checkfeed').val(); 
+    if(f==1)
+    {
+      $('#checkfeed').val(0);
+      $('.newsfeed-unchecked').show();
+      $('.newsfeed-checked').hide();
+    }
+    else
+    {
+      $('#checkfeed').val(1);
+      $('.newsfeed-checked').show();
+      $('.newsfeed-unchecked').hide();
+    }
+  }
+  else if(v==1)
+  {
+    var f = $('#checkstory').val(); 
+    if(f==1)
+    {
+      $('#checkstory').val(0);
+      $('.storyfeed-unchecked').show();
+      $('.storyfeed-checked').hide();
+    }
+    else
+    {
+      $('#checkstory').val(1);
+      $('.storyfeed-checked').show();
+      $('.storyfeed-unchecked').hide();
+    }
+  }
+}
+function checkeditor()
+{
+  if(!$('.postbtnrow').is(':visible'))
+  {
+    $('textarea').click();
+  }
+}
+function extracturl(text)
+{
+  var regex = /https?:\/\/[\-A-Za-z0-9+&@#\/%?=~_|$!:,.;]*/g;
+  link = text.match(regex);
+  var extlink = "";
+  if($('#ext-post-link').length)
+  {
+    extlink = $('#ext-post-link').val();
+  }
+  
+  //alert(extlink);
+  if(link!=null && extlink=="")
+  {
+      //alert(extlink);
+      $('.editor-post-container').html('Loading...');
+      //$('.editor-post-container').hide();
+       $.ajax({
+            type:'post',
+            url:'http://sanutanu.com//feed/extracturl',
+            data:{
+              link:link,
+              'csrf_test_name':'da8c9e7b95a9b14bc86954f3f7b3700f'
+            },
+         cache: false,
+         success:function(response) {
+            //$('#loading').text('');
+            //$('.container').show();
+            $('.editor-post-container').html(response);
+          }
+        });
+   }
+}
+</script>
+ 
+
+<div id="home_posts">
+
+</div>
+
+
+  </div>
+
+        <div class="col-md-4 homepage-stuff" id="homepage-stuff">
+        
+        <!-- <div class="page-block">
+          <div class="page-block-inner" style="background: url(http://sanutanu.com/uploads/ab3e13efdeab547813a840d59c3fd1d0.jpg) center center; background-size: cover;">
+          <div class="page-block-avatar">
+          <img src="http://sanutanu.com//uploads/d2e66dff2f8c198718c6699ece9ee20e.jpg">
+          </div> 
+          <div class="page-block-info">
+          <a href="http://sanutanu.com/profile/admin">SanuTanu </a>
+          </div>
+          </div>
+        </div> -->
+
+        
+                          
+        <div id="hidewhenaddshow" class="page-block half-separator">
+         <div class="page-block-title">Newest Users</div>
+                   <div class="page-block-page clearfix">
+            <div class="pull-left" style="margin-right: 15px;">
+              <a href="http://sanutanu.com/profile/developer"><img src="http://sanutanu.com/uploads/default.png" width="40"></a>
+            </div>
+            <div class="pull-left">
+              <a href="http://sanutanu.com/profile/developer">dev olper</a>
+              <p class="small-text faded-icon">@developer</p>
+            </div>
+
+                        <div class="pull-right" style="padding-top: 5px;">
+                                               
+                                    <button type="button" class="btn btn-post btn-sm" style="border-radius: 40px;" onclick="add_friend(19)" id="friend_button_19">Add Friend</button>
+                                                                  
+            </div>
+
+          </div>
+                   <div class="page-block-page clearfix">
+            <div class="pull-left" style="margin-right: 15px;">
+              <a href="http://sanutanu.com/profile/kiran"><img src="http://sanutanu.com/uploads/default.png" width="40"></a>
+            </div>
+            <div class="pull-left">
+              <a href="http://sanutanu.com/profile/kiran">ki Ran</a>
+              <p class="small-text faded-icon">@kiran</p>
+            </div>
+
+                        <div class="pull-right" style="padding-top: 5px;">
+                                               
+                                    <button type="button" class="btn btn-post btn-sm" style="border-radius: 40px;" onclick="add_friend(18)" id="friend_button_18">Add Friend</button>
+                                                                  
+            </div>
+
+          </div>
+                   <div class="page-block-page clearfix">
+            <div class="pull-left" style="margin-right: 15px;">
+              <a href="http://sanutanu.com/profile/jams"><img src="http://sanutanu.com/uploads/default.png" width="40"></a>
+            </div>
+            <div class="pull-left">
+              <a href="http://sanutanu.com/profile/jams">James Mates</a>
+              <p class="small-text faded-icon">@jams</p>
+            </div>
+
+                        <div class="pull-right" style="padding-top: 5px;">
+                                               
+                                    <button type="button" class="btn btn-post btn-sm" style="border-radius: 40px;" onclick="add_friend(17)" id="friend_button_17">Add Friend</button>
+                                                                  
+            </div>
+
+          </div>
+                   <div class="page-block-page clearfix">
+            <div class="pull-left" style="margin-right: 15px;">
+              <a href="http://sanutanu.com/profile/alex"><img src="http://sanutanu.com/uploads/default.png" width="40"></a>
+            </div>
+            <div class="pull-left">
+              <a href="http://sanutanu.com/profile/alex">Alex Doe</a>
+              <p class="small-text faded-icon">@alex</p>
+            </div>
+
+                        <div class="pull-right" style="padding-top: 5px;">
+                                                              <button type="button" class="btn btn-post btn-sm disabled" style="border-radius: 40px;" id="friend_button_16">Request Sent</button>
+                                                
+            </div>
+
+          </div>
+                   <div class="page-block-page clearfix">
+            <div class="pull-left" style="margin-right: 15px;">
+              <a href="http://sanutanu.com/profile/john"><img src="http://sanutanu.com/uploads/default.png" width="40"></a>
+            </div>
+            <div class="pull-left">
+              <a href="http://sanutanu.com/profile/john">John Doe</a>
+              <p class="small-text faded-icon">@john</p>
+            </div>
+
+                        <div class="pull-right" style="padding-top: 5px;">
+                                               
+                                    <button type="button" class="btn btn-post btn-sm" style="border-radius: 40px;" onclick="add_friend(15)" id="friend_button_15">Add Friend</button>
+                                                                  
+            </div>
+
+          </div>
+                 </div>
+
+
+        <div class="page-block half-separator">
+         <div class="page-block-title">Newest Pages</div>
+                            	<div class="page-block-page clearfix">
+         		<div class="pull-left" style="margin-right: 5px;">
+         			<img src="http://sanutanu.com/uploads/404bb0546b480f931414e95a956a39b6.jpg" width="40">
+         		</div>
+         		<div class="pull-left">
+         			<a href="http://sanutanu.com/pages/view/salman-khan">Salman Khan</a>
+         			<p class="small-text faded-icon">0 Members</p>
+         		</div>
+         	</div>
+                            	<div class="page-block-page clearfix">
+         		<div class="pull-left" style="margin-right: 5px;">
+         			<img src="http://sanutanu.com/uploads/5d53810fd601c3b0a1eeed3c4e6f4aef.jpg" width="40">
+         		</div>
+         		<div class="pull-left">
+         			<a href="http://sanutanu.com/pages/view/shahrukh-khan">Shahrukh Khan</a>
+         			<p class="small-text faded-icon">2 Members</p>
+         		</div>
+         	</div>
+                            	<div class="page-block-page clearfix">
+         		<div class="pull-left" style="margin-right: 5px;">
+         			<img src="http://sanutanu.com/uploads/4e20c99533401cad28333a81b7e648a0.jpg" width="40">
+         		</div>
+         		<div class="pull-left">
+         			<a href="http://sanutanu.com/pages/view/sun-shine">Sun Shine</a>
+         			<p class="small-text faded-icon">2 Members</p>
+         		</div>
+         	</div>
+                            	<div class="page-block-page clearfix">
+         		<div class="pull-left" style="margin-right: 5px;">
+         			<img src="http://sanutanu.com/uploads/c67c60d4fba03b24ebf35aa69f2cc7e2.jpg" width="40">
+         		</div>
+         		<div class="pull-left">
+         			<a href="http://sanutanu.com/pages/view/test-page">Test Page</a>
+         			<p class="small-text faded-icon">2 Members</p>
+         		</div>
+         	</div>
+                            	<div class="page-block-page clearfix">
+         		<div class="pull-left" style="margin-right: 5px;">
+         			<img src="http://sanutanu.com/uploads/1b1799b14d2c4ac2fa470abac8c11f99.jpg" width="40">
+         		</div>
+         		<div class="pull-left">
+         			<a href="http://sanutanu.com/pages/view/alpha-traders">Alpha Traders</a>
+         			<p class="small-text faded-icon">1 Members</p>
+         		</div>
+         	</div>
+                 </div>
+
+        </div>
+      </div>
+
+<script type="text/javascript">
+var global_page = 0;
+var hide_prev = 0;
+
+
+
+$(document).ready(function() {
+  load_posts();
+
+});
+
+function load_posts_wrapper() 
+{
+  load_posts();
+}
+
+function load_posts() 
+{
+  $.ajax({
+    url: global_base_url + 'feed/load_home_posts',
+    type: 'GET',
+    data: {
+    },
+    success: function(msg) {
+      $('#home_posts').html(msg);
+      $('#home_posts').jscroll({
+        nextSelector : '.load_next'
+      });
+     
+    }
+  })
+}
+</script>
+      </div>
+            <div class="col-md-2">
+            <div class="sidebar">
+                <div class="friends-padding-content">
+<p class="friends-title">Recent Friends</p>
+</div>
+
+<div class="friends-bar-box clearfix clickable" onclick="chat_with(6)">
+<div class="friends-bar-user">
+<div class="user-box-avatar">
+                <div class="offline-dot-user" data-toggle="tooltip" data-placement="bottom" title="Offline"></div>
+                <a href="http://sanutanu.com/profile/ahsinjavaid890"><img src="http://sanutanu.com/uploads/e50629a469ea524281d842bf853ec4a3.jpg" title="ahsinjavaid890" data-toggle="tooltip" data-placement="right" /></a>
+                </div></div>
+<div class="friends-bar-user-info">
+Ahsin Javaid<p class="friends-bar-last-online">5 Days ago</p>
+</div>
+</div>
+<div class="friends-bar-box clearfix clickable" onclick="chat_with(13)">
+<div class="friends-bar-user">
+<div class="user-box-avatar">
+                <div class="offline-dot-user" data-toggle="tooltip" data-placement="bottom" title="Offline"></div>
+                <a href="http://sanutanu.com/profile/tanveer"><img src="http://sanutanu.com/uploads/bffba492e42b0d64b7a44ba84fab37b7.jpg" title="tanveer" data-toggle="tooltip" data-placement="right" /></a>
+                </div></div>
+<div class="friends-bar-user-info">
+Tanveer Mehar<p class="friends-bar-last-online">06/07/2020</p>
+</div>
+</div>
+<div class="friends-bar-box clearfix clickable" onclick="chat_with(12)">
+<div class="friends-bar-user">
+<div class="user-box-avatar">
+                <div class="offline-dot-user" data-toggle="tooltip" data-placement="bottom" title="Offline"></div>
+                <a href="http://sanutanu.com/profile/bilal"><img src="http://sanutanu.com/uploads/8a128fc5cf2fa74798e4886609459e5a.jpg" title="bilal" data-toggle="tooltip" data-placement="right" /></a>
+                </div></div>
+<div class="friends-bar-user-info">
+Muhammad Bilal<p class="friends-bar-last-online">04/07/2020</p>
+</div>
+</div>
+    </div>
+      </div>
+        <!-- </div> -->
+  </div>
+
+
+    </div>
+    <div id="postpopup" class="modal fade in" role="dialog">
+	<div class="modal-dialog">
+		
+		<!-- Modal content-->
+		<div class="modal-content row">
+			<div class="custom-modal-header">
+				<button type="button" class="close" data-dismiss="modal">×</button>
+				<!-- <h4 class="modal-title">Enquire Now</h4> -->
+			</div>
+			<div class="modal-body" id="sanutanu_post_popup" style="padding: 0;">
+				<div class="row">
+					<div class="col-md-8"></div>
+					<div class="col-md-4"></div>
+				</div>
+			</div>
+			
+		</div>
+		
+	</div>
+</div>
+
+<style type="text/css">
+	
+#postpopup .modal-dialog {
+    width: 88%;
+    padding: 0px;
+    position: relative;
+}
+/*#postpopup .modal-dialog:before {
+    content: '';
+    height: 0px;
+    width: 0px;
+    border-left: 50px solid #a41be3;
+    border-right: 50px solid transparent;
+    border-bottom: 50px solid transparent;
+    position: absolute;
+    top: 1px;
+    left: -14px;
+    z-index: 99;
+}*/
+
+#postpopup .custom-modal-header {
+    text-align: center;
+    color: #000;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-top: 0px solid;
+}
+
+#postpopup .modal-dialog .close {
+    z-index: 99999999;
+    color: white;
+    text-shadow: 0px 0px 0px;
+    font-weight: normal;
+    top: 4px;
+    right: 6px;
+    position: absolute;
+    opacity: 1;
+}
+
+.custom-modal-header .modal-title {
+    /* font-weight: bold; */
+    font-size: 18px;
+}
+
+.custom-modal-body {
+	/*height: 700px;*/
+}
+
+#postpopup .modal-dialog:after {
+    content: '';
+    height: 0px;
+    width: 0px;
+    /* border-right: 50px solid rgba(255, 0, 0, 0.98); */
+    border-right: 50px solid #a41be3;
+    border-bottom: 50px solid transparent;
+    position: absolute;
+    top: 1px;
+    right: -14px;
+    z-index: 999999;
+}
+
+#postpopup .form-group {
+    margin-bottom: 15px !important;
+}
+
+#postpopup .form-inline .form-control {
+    display: inline-block;
+    width: 100%;
+    vertical-align: middle;
+}
+#postpopup .feed-comments-spot {
+	max-height: 100%;
+	overflow-y: auto;
+}
+.feed-comment-area-popup { overflow-y: auto; }
+.fit-image{
+/*width: auto;*/
+/*object-fit: cover;*/
+/*height: auto;*/ /* only if you want fixed height */
+}
+.feed-content-popup
+{
+    display: table-cell;
+    vertical-align: middle;
+    background: #000;
+}
+</style>
+<script type="text/javascript">
+	function post_modal(id)
+	{
+		$.ajax({
+		    url: global_base_url + 'feed/load_single_post_popup/'+id,
+		    type: 'GET',
+		    data: {
+		    },
+		    success: function(msg) {
+		      $('#sanutanu_post_popup').html(msg);
+		      load_comments_popup(id);
+		      /*$('#home_posts').jscroll({
+		        nextSelector : '.load_next'
+		      });*/
+              $('#postpopup').modal('show');
+              //fit_modal_body($("#postpopup"));
+              setTimeout(function(){ fit_modal_body($("#postpopup")); }, 200);
+		     
+		    }
+		  })
+		
+	}
+</script>
+<script type="text/javascript">
+    var fit_modal_body;
+
+    fit_modal_body = function(modal) {
+        //alert('ok');
+        var ht = $(window).height();
+      var body, bodypaddings, header, headerheight, height, modalheight, popupimg;
+      header = $(".modal-header", modal);
+      body = $("#sanutanu_post_popup", modal);
+      popupimg = $(".fit-image", modal);
+      modalheight = parseInt(modal.css("height"));
+      headerheight = parseInt(header.css("height")) + parseInt(header.css("padding-top")) + parseInt(header.css("padding-bottom"));
+      bodypaddings = parseInt(body.css("padding-top")) + parseInt(body.css("padding-bottom"));
+      height = ht-80;//modalheight - headerheight - bodypaddings - 5;
+      //alert(ht);
+      iw = popupimg.width();
+      ih = popupimg.height();
+      
+     // alert( iw + " x " + ih );
+      if( Number(iw) > Number(ih) )
+      {
+        //popupimg.css("height", "auto");
+        popupimg.css("width", "100%");
+        //alert(1);
+      }
+      else
+      {
+        popupimg.css("height", "" + height + "px");
+        //alert(2);
+        //popupimg.css("width", "auto");
+      }
+
+      var mw = $('.feed-content-wraper').width();////////
+
+      var fh1 = $('#postpopup .feed-header').height();
+      var fh2 = $('#postpopup .feed-content-right').height();
+      var fh3 = $('#postpopup .feed-content-stats').height();
+      var fh4 = $('#postpopup .feed-footer').height();
+      var fhf = $('.feed-content-popup').height() - fh1 - fh2 - fh3 - fh4;
+     // alert(fhf);
+
+      body.css("max-height", "" + height + "px");
+      //$('#postpopup .feed-comment-area').css("height", height + "px");
+      $('#postpopup .feed-comment-area').css("max-height", fhf + "px");
+      $('.feed-content-popup').css("height", "" + height + "px");
+      $('.feed-content-popup').css("width", "" + mw + "px");
+      return body.css("height", "" + height + "px");
+
+    };
+
+    $(window).resize(function() {
+      return fit_modal_body($("#postpopup"));
+    });
+</script>    <div id="aboutpopup" class="modal fade in" role="dialog">
+	<div class="modal-dialog">
+		
+		<!-- Modal content-->
+		<div class="modal-content row">
+			<div class="custom-modal-header">
+				<button type="button" class="close" data-dismiss="modal">×</button>
+				<!-- <h4 class="modal-title">Enquire Now</h4> -->
+			</div>
+			<div class="modal-body" id="sanutanu_about_popup">
+				<div class="row">
+					<div class="col-md-12 sanutanu_about_form" >
+                                     
+                    </div>
+				</div>
+			</div>
+			
+		</div>
+		
+	</div>
+</div>
+
+<style type="text/css">
+	
+#aboutpopup .modal-dialog {
+    width: 70%;
+    max-height: 100%;
+    padding: 0px ;
+    position: relative;
+}
+#aboutpopup .modal-dialog:before {
+    content: '';
+    height: 0px;
+    width: 0px;
+    border-left: 50px solid #a41be3;
+    border-right: 50px solid transparent;
+    border-bottom: 50px solid transparent;
+    position: absolute;
+    top: 1px;
+    left: -14px;
+    z-index: 99;
+}
+
+.custom-modal-header {
+    text-align: center;
+    color: #a41be3;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-top: 4px solid;
+}
+
+#aboutpopup .modal-dialog .close {
+    z-index: 99999999;
+    color: white;
+    text-shadow: 0px 0px 0px;
+    font-weight: normal;
+    top: 4px;
+    right: 6px;
+    position: absolute;
+    opacity: 1;
+}
+
+.custom-modal-header .modal-title {
+    /* font-weight: bold; */
+    font-size: 18px;
+}
+
+.custom-modal-body {
+	height: 700px;
+}
+
+#aboutpopup .modal-dialog:after {
+    content: '';
+    height: 0px;
+    width: 0px;
+    /* border-right: 50px solid rgba(255, 0, 0, 0.98); */
+    border-right: 50px solid #a41be3;
+    border-bottom: 50px solid transparent;
+    position: absolute;
+    top: 1px;
+    right: -14px;
+    z-index: 999999;
+}
+
+#aboutpopup .form-group {
+    margin-bottom: 15px !important;
+}
+
+#aboutpopup .form-inline .form-control {
+    display: inline-block;
+    width: 100%;
+    vertical-align: middle;
+}
+#aboutpopup .feed-comments-spot {
+	max-height: 190px;
+	overflow-y: auto;
+}
+</style>
+
+<script type="text/javascript">
+    function initahead() {
+        $('.typeahead').typeahead(null,{
+              name: 'autocomplete',
+              display: 'search_title',
+              //input: this,
+
+              source: function (query, result, cba) {
+                //var element = $(this.$el[0].parentElement.parentElement).children("input").first();
+                //console.log();
+                //var uri = $(':focus').attr('data-url');
+                    var uri = 'http://sanutanu.com/' + $(':focus').attr('data-url');
+                    $.ajax({
+                        url: uri,
+                        data: {'query': query,'csrf_test_name':'da8c9e7b95a9b14bc86954f3f7b3700f'},
+                        dataType: "json",
+                        type: "POST",
+                        success: function (data) {
+                            cba(data);
+                        }
+                    });
+                },
+                limit:10,
+                templates: {
+                    suggestion: function(item){
+                        var t = $(':focus').attr('data-template');
+                        if(t=='places')
+                        {
+                            return `<div class="row" style="margin: 0;">
+                                      <div class="col-md-12" style="padding:3px; font-weight: bold;">`+item.search_title+`</div>
+                                    </div>`;
+                        }
+                        else if(t=='cities')
+                        {
+                            return `<div class="row" style="margin: 0;">
+                                      <div class="col-md-12" style="padding:3px; font-weight: bold;">`+item.city+`, `+item.state+`, `+item.country+`</div>
+                                    </div>`;
+                        }
+                        else if(t=='states')
+                        {
+                            return `<div class="row" style="margin: 0;">
+                                      <div class="col-md-12" style="padding:3px; font-weight: bold;">`+item.state+`, `+item.country+`</div>
+                                    </div>`;
+                        }
+                        else if(t=='countries')
+                        {
+                            return `<div class="row" style="margin: 0;">
+                                      <div class="col-md-12" style="padding:3px; font-weight: bold;">`+item.country+`</div>
+                                    </div>`;
+                        }
+                        else if(t=='user')
+                        {
+                            return `<div class="row" style="margin: 0;">
+                                      <div class="col-md-12" style="padding:3px; font-weight: bold;">`+item.city+`, `+item.state+`, `+item.country+`</div>
+                                    </div>`;
+                        }
+                        else
+                        {
+                            return `<div class="row" style="margin: 0;">
+                                      <div class="col-md-12" style="padding:3px; font-weight: bold;">`+item.search_title+`</div>
+                                    </div>`;
+                        }
+                        
+                        //Handlebars.compile(htm);
+                    } 
+                  }
+        });
+    };
+</script>
+
+<script type="text/javascript">
+	function about_modal()
+	{
+		$.ajax({
+		    url: global_base_url + 'user_settings/about_form/',
+		    type: 'GET',
+		    data: {
+		    },
+		    success: function(msg) {
+		      $('.sanutanu_about_form').html(msg);
+              initahead();
+		      //load_comments_popup(id);
+		      /*$('#home_posts').jscroll({
+		        nextSelector : '.load_next'
+		      });*/
+		     
+		    }
+		  })
+		$('#aboutpopup').modal('show');
+	}
+</script>
+
+
+
+<style>
+.autocomp
+{
+    padding-top:0px; 
+    padding-bottom:0px; 
+    border:none !important; 
+    padding-right:0px; 
+    background:none; 
+    padding-left:5px; 
+    min-width:80px;
+}
+
+.ui-autocomplete-highlight {
+    font-weight: bold;
+}
+
+.ui-state-active a,
+.ui-state-active a:link,
+.ui-state-active a:visited {
+    color: #5b518b !important; /* any color you like */
+    background:#900 !important;
+    border-radius: 0;
+}
+
+.ui-widget-content .ui-state-active {
+    color: #5b518b !important; /* any color you like */
+    background:#900 !important;
+    border-radius: 0;
+}
+
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus
+{
+    
+    color:#FFF !important;
+    border-radius: 0;
+}
+.ui-autocomplete {
+  z-index: 215000000 !important;
+  border-radius: 0;
+  padding: 0;
+}
+</style>    <div id="callpopup" class="modal fade in" role="dialog">
+	<div class="modal-dialog">
+		
+		<!-- Modal content-->
+		<div class="modal-content row">
+			<div class="custom-modal-header hide">
+				<!-- <button type="button" class="close" data-dismiss="modal">×</button> -->
+				<!-- <h4 class="modal-title">New Call from </h4> -->
+			</div>
+			<div class="modal-body" id="sanutanu_about_popup">
+                <div style="display: flex;">
+                    <div class="chatcallinfo"></div>
+                    <div style="padding-left: 10px; font-weight: bold;">Request for <span class="chatcalltype">Video</span> call.</div>
+                </div> 
+                <hr>
+				<div class="row">
+    				<div class="col-md-12 sanutanu_about_form" style="text-align: center;" >
+                        <a class="btn btn-success" onclick="callresponse(1);">Accept</a>
+                        <a class="btn btn-danger" onclick="callresponse(0);">Reject</a>
+                        <audio class="ringtone" id="ringtone" src="http://sanutanu.com/ringtones/ring-basic.mp3" loop></audio>
+                    </div>
+				</div>
+			</div>
+			
+		</div>
+		
+	</div>
+</div>
+
+<style type="text/css">
+
+#callpopup .modal-dialog {
+    width: 400px;
+    max-height: 100%;
+    padding: 0px ;
+    position: relative;
+}
+/* #callpopup .modal-dialog:before {
+    content: '';
+    height: 0px;
+    width: 0px;
+    border-left: 50px solid #a41be3;
+    border-right: 50px solid transparent;
+    border-bottom: 50px solid transparent;
+    position: absolute;
+    top: 1px;
+    left: -14px;
+    z-index: 99;
+}
+
+.custom-modal-header {
+    text-align: center;
+    color: #a41be3;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-top: 4px solid;
+}
+
+#callpopup .modal-dialog .close {
+    z-index: 99999999;
+    color: white;
+    text-shadow: 0px 0px 0px;
+    font-weight: normal;
+    top: 4px;
+    right: 6px;
+    position: absolute;
+    opacity: 1;
+} */
+
+.custom-modal-header .modal-title {
+    /* font-weight: bold; */
+    font-size: 18px;
+}
+
+.custom-modal-body {
+	/*height: 700px;*/
+}
+
+/* #callpopup .modal-dialog:after {
+    content: '';
+    height: 0px;
+    width: 0px;
+    border-right: 50px solid rgba(255, 0, 0, 0.98);
+    border-right: 50px solid #a41be3;
+    border-bottom: 50px solid transparent;
+    position: absolute;
+    top: 1px;
+    right: -14px;
+    z-index: 999999;
+} */
+
+#callpopup .form-group {
+    margin-bottom: 15px !important;
+}
+
+#callpopup .form-inline .form-control {
+    display: inline-block;
+    width: 100%;
+    vertical-align: middle;
+}
+#callpopup .feed-comments-spot {
+	max-height: 190px;
+	overflow-y: auto;
+}
+</style>
+
+<script type="text/javascript">
+	function call_modal(userid, calltype)
+	{
+        $.ajax({
+            url: 'http://sanutanu.com/chat/chatuser/'+userid,
+            type: 'GET',
+            //dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
+            //data: {param1: 'value1'},
+            success: function(resp){
+                $('.chatcallinfo').html(resp);
+                $('.chatcalltype').text(calltype);
+                var tum =  <?php $this->user->info-rings ?>;
+                alert(tum);
+                $('.ringtone')[0].play();
+                $('body').click();
+            }
+        });
+        
+		$('#callpopup').modal('show');
+	}
+</script>        <div id="profilepicpopup" class="modal fade in" role="dialog">
+    <div class="modal-dialog">
+        
+        <!-- Modal content-->
+        <div class="modal-content row">
+            <div class="custom-modal-header" style="background: #333;">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <!-- <h4 class="modal-title">Enquire Now</h4> -->
+            </div>
+            <div class="modal-body" id="sanutanu_profile_popup" style="padding-top: 0;">
+                <div class="row">
+                    <div class="col-md-12">
+                        
+                        <div class="row demo-wrap upload-demo profile_pic_crop" style="display: none;">
+                            
+                            
+                            <div class="col-md-12" style="padding-bottom: 50px; background: #333;">
+                                <div class="upload-msg">
+                                    Upload a file to start cropping
+                                </div>
+                                <div class="upload-demo-wrap">
+                                    <div id="upload-demo"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12" style="padding: 10px;" align="center">
+                                <div class="actions">
+                                    <div style="display: none;">
+                                        <a class="btn file-btn">
+                                            <strong>Upload: </strong>
+                                            <input type="file" id="profileupload" name="profileupload" value="" accept="image/*" />
+                                        </a>
+                                    </div>
+                                    
+                                    <!-- <br /><br /> -->
+                                    <!-- <div class="myprofilecroped"></div> -->
+                                    <input type="hidden" id="profilecaptured" name="profilecaptured" />
+                                    <input type="hidden" name="fullprofilepic" id="fullprofilepic" />
+                                    <input type="hidden" name="profile_imageid" id="profile_imageid" />
+                                    <button class="btn btn-success upload-result">Save</button>
+                                    <button class="btn btn-danger " data-dismiss="modal">Cancel</button>
+                                    <!-- <img src="" id="myprofilecroped" width="150" height="150"> -->
+                                </div>
+                            </div>
+                            
+
+                        </div>
+                        <div class="profile_oldpics" style="padding: 10px;">
+                            <div class="row">
+                                <div class="col-md-12" style="padding: 10px;" align="center">
+                                    <button type="button" onclick="profilepicupload_click();" class="btn btn-info"><i class="glyphicon glyphicon-plus"></i> Upload Photo</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 profile_oldpicsload" style="max-height: 400px; overflow-y: auto;">
+                                                                        
+                                </div>
+                            </div>
+                              
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+</div>
+
+<style type="text/css">
+#profilepicpopup .modal-dialog {
+    width: 50%;
+    max-height: 100%;
+    padding: 0px ;
+    position: relative;
+}
+#profilepicpopup .modal-dialog:before {
+    content: '';
+    height: 0px;
+    width: 0px;
+    border-left: 50px solid #a41be3;
+    border-right: 50px solid transparent;
+    border-bottom: 50px solid transparent;
+    position: absolute;
+    top: 1px;
+    left: -14px;
+    z-index: 99;
+}
+
+.custom-modal-header {
+    text-align: center;
+    color: #a41be3;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-top: 4px solid;
+}
+
+#profilepicpopup .modal-dialog .close {
+    z-index: 99999999;
+    color: white;
+    text-shadow: 0px 0px 0px;
+    font-weight: normal;
+    top: 4px;
+    right: 6px;
+    position: absolute;
+    opacity: 1;
+}
+
+.custom-modal-header .modal-title {
+    /* font-weight: bold; */
+    font-size: 18px;
+}
+
+.custom-modal-body {
+    padding-bottom: 40px;
+}
+
+#profilepicpopup .modal-dialog:after {
+    content: '';
+    height: 0px;
+    width: 0px;
+    /* border-right: 50px solid rgba(255, 0, 0, 0.98); */
+    border-right: 50px solid #a41be3;
+    border-bottom: 50px solid transparent;
+    position: absolute;
+    top: 1px;
+    right: -14px;
+    z-index: 999999;
+}
+
+#profilepicpopup .form-group {
+    margin-bottom: 15px !important;
+}
+
+#profilepicpopup .form-inline .form-control {
+    display: inline-block;
+    width: 100%;
+    vertical-align: middle;
+}
+#profilepicpopup .feed-comments-spot {
+    max-height: 190px;
+    overflow-y: auto;
+}
+
+.upload-demo .upload-demo-wrap,
+.upload-demo .upload-result,
+.upload-demo.ready .upload-msg {
+    display: none;
+}
+.upload-demo.ready .upload-demo-wrap {
+    display: block;
+}
+.upload-demo.ready .upload-result {
+    display: inline-block;    
+}
+.upload-demo-wrap {
+    width: 100%;
+    height: 400px;
+    margin: 0 auto;
+}
+
+.upload-msg {
+    text-align: center;
+    padding: 50px;
+    font-size: 22px;
+    color: #aaa;
+    width: 260px;
+    margin: 50px auto;
+    border: 1px solid #aaa;
+}
+
+</style>
+<script type="text/javascript">
+    
+
+    var Demo = (function() {
+
+    function output(node) {
+        var existing = $('#result .croppie-result');
+        if (existing.length > 0) {
+            existing[0].parentNode.replaceChild(node, existing[0]);
+        }
+        else {
+            $('#result')[0].appendChild(node);
+        }
+    }
+
+    function popupResult(result) {
+        var html;
+        if (result.html) {
+            html = result.html;
+        }
+        if (result.src) {
+            html = '<img src="' + result.src + '" />';
+        }
+        swal({
+            title: '',
+            html: true,
+            text: html,
+            allowOutsideClick: true
+        });
+        setTimeout(function(){
+            $('.sweet-alert').css('margin', function() {
+                var top = -1 * ($(this).height() / 2),
+                    left = -1 * ($(this).width() / 2);
+
+                return top + 'px 0 0 ' + left + 'px';
+            });
+        }, 1);
+    }
+
+    function demoUpload() {
+        var $uploadCrop;
+
+        function readFile(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                
+                reader.onload = function (e) {
+                    $('.upload-demo').addClass('ready');
+                    $uploadCrop.croppie('bind', {
+                        url: e.target.result
+                    }).then(function(){
+                        console.log('jQuery bind complete');
+                    });
+                    //console.log();
+                    $('#fullprofilepic').val(e.target.result);
+                }
+                
+                reader.readAsDataURL(input.files[0]);
+            }
+            else {
+                alert("Sorry - you're browser doesn't support the FileReader API");
+            }
+        }
+
+        function readFilePost(filepath)
+        {
+            $('.upload-demo').addClass('ready');
+            $uploadCrop.croppie('bind', {
+                url: filepath
+            }).then(function(){
+                console.log('jQuery bind complete');
+            });
+
+            $('.profile_oldpics').hide();
+            $('.profile_pic_crop').show();
+        }
+
+
+        function readFile2(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                //alert('ok');
+                reader.onload = function (e) {
+                    //alert('ok');
+                 var coverphoto = e.target.result
+                    //console.log();
+                    //alert(coverphoto);
+
+                                  var uri = "http://sanutanu.com/user_settings/cover_pic_upload";
+                
+                    $.ajax({
+                        url: uri,
+                        type: "POST",
+                        data: {'csrf_test_name':'da8c9e7b95a9b14bc86954f3f7b3700f','coverphoto': coverphoto},
+                        success: function (response) {
+                            window.location.reload();
+                            //alert(response);
+                        }
+                    });
+
+                }
+                
+                reader.readAsDataURL(input.files[0]);
+            }
+            else {
+                alert("Sorry - you're browser doesn't support the FileReader API");
+            }
+        }
+
+
+        $uploadCrop = $('#upload-demo').croppie({
+            viewport: {
+                width: 300,
+                height: 300,
+                type: 'circle'
+            },
+            enableExif: true
+        });
+
+        $(document).on('click','.profilethumbnail', function(){ readFilePost(this.src); });
+        $('#coverupload').on('change', function () { readFile2(this);  });
+        $('#profileupload').on('change', function () { 
+            $('.profile_oldpics').hide();
+            $('.profile_pic_crop').show();
+            $('#profile_imageid').val("");
+            readFile(this);
+        });
+        $('.upload-result').on('click', function (ev) {
+            $uploadCrop.croppie('result', {
+                type: 'canvas',
+                size: 'viewport'
+            }).then(function (resp) {
+                /*popupResult({
+                    src: resp
+                });*/
+                /*var img = '<img src="' + resp + '" />';
+                $('.myprofilecroped').html(img);*/
+                $('#profilecaptured').val(resp);
+                //alert($('#fullprofilepic').val());
+                //alert($('#profilecaptured').val());
+                var fullpic = $('#fullprofilepic').val();
+                var capturedpic = $('#profilecaptured').val();
+                var profile_imageid = $('#profile_imageid').val();
+                                  var uri = "http://sanutanu.com/user_settings/profile_pic_upload";
+                                
+                //alert(resp);
+                //alert(global_base_url);
+                $.ajax({
+                    url: uri,//global_base_url + 'user_settings/profile_pic_upload',
+                    type: "POST",
+                    data: {'csrf_test_name':'da8c9e7b95a9b14bc86954f3f7b3700f',fullpic: fullpic, capturedpic: capturedpic, profile_imageid: profile_imageid},
+                    success: function (response) {
+                        window.location.reload();// = 'http://sanutanu.com/';
+                        //alert(response);
+                        //$('.subjects_select').html(response);
+                        //$('.subjects_select').multiSelect('refresh');
+                    }
+                });
+
+
+            });
+        });
+    }
+
+    function bindNavigation () {
+        var $body = $('body');
+        $('nav a').on('click', function (ev) {
+            var lnk = $(ev.currentTarget),
+                href = lnk.attr('href'),
+                targetTop = $('a[name=' + href.substring(1) + ']').offset().top;
+
+            $body.animate({ scrollTop: targetTop });
+            ev.preventDefault();
+        });
+    }
+
+
+    function reset_modal_form()
+    {
+        $('#profilepicpopup').on('hide.bs.modal', function () { 
+            $('#profileupload').val('');
+            $('#profile_imageid').val("");
+            $('.profile_pic_crop').hide();
+            $('.profile_oldpics').show();
+        });
+    }
+
+    
+
+    function init() {
+        bindNavigation();
+        demoUpload();
+        reset_modal_form();
+    }
+
+    return {
+        init: init
+    };
+})();
+
+
+// Full version of `log` that:
+//  * Prevents errors on console methods when no console present.
+//  * Exposes a global 'log' function that preserves line numbering and formatting.
+(function () {
+  var method;
+  var noop = function () { };
+  var methods = [
+      'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error',
+      'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log',
+      'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd',
+      'timeStamp', 'trace', 'warn'
+  ];
+  var length = methods.length;
+  var console = (window.console = window.console || {});
+ 
+  while (length--) {
+    method = methods[length];
+ 
+    // Only stub undefined methods.
+    if (!console[method]) {
+        console[method] = noop;
+    }
+  }
+ 
+ 
+  if (Function.prototype.bind) {
+    window.log = Function.prototype.bind.call(console.log, console);
+  }
+  else {
+    window.log = function() { 
+      Function.prototype.apply.call(console.log, console, arguments);
+    };
+  }
+})();
+Demo.init();
+</script>
+<script type="text/javascript">
+function set_imageid(id)
+{
+    $('#profile_imageid').val(id);
+}
+function profilepicpopup_modal()
+{
+    $('#profilepicpopup').modal('show');
+          var uri = "http://sanutanu.com/user_settings/loadpicturesforprofile";
+        $.ajax({
+        url: uri,//global_base_url + 'user_settings/profile_pic_upload',
+        type: "GET",
+        success: function (response) {
+            //window.location.reload();// = 'http://sanutanu.com/';
+            //alert(response);
+            $('.profile_oldpicsload').html(response);
+            //$('.subjects_select').multiSelect('refresh');
+        }
+    });
+}
+
+function profilepicupload_click()
+{
+    $('#profileupload').click();
+}
+
+function change_cover()
+{
+    $('#coverupload').click();
+}
+
+</script>    <div id="report_abuse_popup" class="modal fade in" role="dialog">
+	<div class="modal-dialog">
+		
+		<!-- Modal content-->
+		<div class="modal-content row">
+			<div class="custom-modal-header">
+				<button type="button" class="close" data-dismiss="modal">×</button>
+				<!-- <h4 class="modal-title">Please select a problem to continue</h4> -->
+			</div>
+			<div class="modal-body" id="sanutanu_report_abuse_popup">
+				<div class="row">
+					<div class="col-md-12 sanutanu_report_abuse_form" >
+                                     
+                    </div>
+				</div>
+			</div>
+			
+		</div>
+		
+	</div>
+</div>
+
+<style type="text/css">
+	
+#report_abuse_popup .modal-dialog {
+    width: 400px;
+    max-height: 100%;
+    padding: 0px ;
+    position: relative;
+}
+#report_abuse_popup .modal-dialog:before {
+    content: '';
+    height: 0px;
+    width: 0px;
+    border-left: 50px solid #a41be3;
+    border-right: 50px solid transparent;
+    border-bottom: 50px solid transparent;
+    position: absolute;
+    top: 1px;
+    left: -14px;
+    z-index: 99;
+}
+
+#report_abuse_popup .custom-modal-header {
+    text-align: center;
+    color: #a41be3;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-top: 4px solid;
+}
+
+#report_abuse_popup .modal-dialog .close {
+    z-index: 99999999;
+    color: white;
+    text-shadow: 0px 0px 0px;
+    font-weight: normal;
+    top: 4px;
+    right: 6px;
+    position: absolute;
+    opacity: 1;
+}
+
+#report_abuse_popup .custom-modal-header .modal-title {
+    /* font-weight: bold; */
+    font-size: 18px;
+}
+
+/*#report_abuse_popup .custom-modal-body {
+	height: 700px;
+}*/
+
+#report_abuse_popup .modal-dialog:after {
+    content: '';
+    height: 0px;
+    width: 0px;
+    /* border-right: 50px solid rgba(255, 0, 0, 0.98); */
+    border-right: 50px solid #a41be3;
+    border-bottom: 50px solid transparent;
+    position: absolute;
+    top: 1px;
+    right: -14px;
+    z-index: 999999;
+}
+
+#report_abuse_popup .form-group {
+    margin-bottom: 15px !important;
+}
+
+#report_abuse_popup .form-inline .form-control {
+    display: inline-block;
+    width: 100%;
+    vertical-align: middle;
+}
+#report_abuse_popup .feed-comments-spot {
+	max-height: 190px;
+	overflow-y: auto;
+}
+</style>
+<script type="text/javascript">
+	function report_abuse_modal(postid)
+	{
+		$.ajax({
+		    url: global_base_url + 'user_settings/report_abuse_form/'+postid,
+		    type: 'GET',
+		    data: {
+		    },
+		    success: function(msg) {
+		      $('.sanutanu_report_abuse_form').html(msg);
+		    }
+		  })
+		$('#report_abuse_popup').modal('show');
+	}
+</script>    <div id="chat_bar">
+
+
+<div id="active_chats">
+
+</div>
+
+<audio id="bleep" controls>
+    <source src="http://sanutanu.com/images/audio/beep.mp3" type="audio/mpeg">
+</audio>
+
+</div>
+    <!--<div id="footer" class="clearfix">-->
+    <!--  <span class="pull-left"> <a href=""></a></span>-->
+    <!--</div>-->
+
+    <!-- SCRIPTS -->
+     <script src="http://sanutanu.com/scripts/custom/global.js"></script>
+    <script src="http://sanutanu.com/scripts/libraries/jquery.nicescroll.min.js"></script>
+    <script type="text/javascript">
+      $.widget.bridge('uitooltip', $.ui.tooltip);
+    </script>
+    
+    <script src="http://sanutanu.com/bootstrap/js/bootstrap.min.js"></script>
+
+     <script type="text/javascript">
+            $(document).ready(function() {
+              $('[data-toggle="tooltip"]').tooltip();
+            });
+        </script>
+            <script type="text/javascript">
+     $(document).ready(function() {
+
+        // Get sidebar height
+       resize_layout();
+
+        $('.nav-sidebar li').on('shown.bs.collapse', function () {
+           $(this).find(".glyphicon-menu-right")
+                 .removeClass("glyphicon-menu-right")
+                 .addClass("glyphicon-menu-down");
+            resize_layout();
+        });
+        $('.nav-sidebar li').on('hidden.bs.collapse', function () {
+           $(this).find(".glyphicon-menu-down")
+                 .removeClass("glyphicon-menu-down")
+                 .addClass("glyphicon-menu-right");
+            resize_layout();
+        });
+
+        function resize_layout() 
+        {
+          var sb_h = $('.sidebar').height();
+          var mc_h = $('#main-content').height();
+          var w_h = $(window).height();
+          $('.sidebar').height($(window).height());
+          if(sb_h > mc_h) {
+            $('#main-content').css("min-height", sb_h+50 + "px");
+          }
+          if(w_h > mc_h) {
+            $('#main-content').css("min-height", (w_h-(51+30)) +"px");
+          }
+        }
+     });
+    </script>
+    <script>
+$(function() {
+    
+    $(document).on('keydown.autocomplete', function()
+  {
+    $('.autocomplete').autocomplete({
+      source: function( request, response ) {
+          var uri = this.element.attr('data-uri');
+          //alert(uri);
+          //console.log(request.term);
+        $.ajax({
+            dataType: "json",
+            type : 'POST',
+            url: 'http://sanutanu.com/search/' + uri,
+            data:
+            {
+                query: request.term,
+                'csrf_test_name':'da8c9e7b95a9b14bc86954f3f7b3700f',
+            },
+            success: function(data) { 
+                //console.log(data);
+                response(data);
+            },
+            error: function(data) { 
+            }
+        });
+    },
+    minLength: 1,
+    html: true,
+            select: function (event, ui) {
+              var t = $(this).attr('data-template');
+              //console.log(ui.item);
+              if(t=='city')
+              {
+                $('#city').val(remove_linebreaks(ui.item.label));
+              }
+              if(t=='group')
+              {
+                $('#group').val( remove_linebreaks(ui.item.ID) );
+              }
+              if(t=='school')
+              {
+                $('#edu').val( remove_linebreaks(ui.item.label) );
+              }
+              if(t=='work')
+              {
+                $('#work').val( remove_linebreaks(ui.item.label) );
+              }
+              if(t=='source'){
+                // The property exists
+                //remove_linebreaks(ui.item);
+                console.log(ui.item);
+                $('#from').val(ui.item.ID);
+                $('#fromtype').val(ui.item.type);
+              }
+
+              if ( typeof searchinfo == 'function' ) {
+                searchinfo();
+              }
+            },
+            focus: function (event, ui) {
+            },
+            change: function (event, ui) {
+            },
+            close: function (event, ui) {},
+            search: function (event, ui) {},
+            response: function (event, ui) {},
+            open: function(e,ui) {
+                /*var acData = $(this).data('ui-autocomplete');
+                    acData
+                    .menu
+                    .element
+                    .find('li')
+                    .each(function () {
+                        var me = $(this);
+                        var keywords = acData.term.split(' ').join('|');
+                        me.html(me.text().replace(new RegExp("(" + keywords + ")", "gi"), '<b>$1</b>'));
+                     });*/
+            },
+            create: function () {
+                var t = $(this).attr('data-template');
+                $(this).data('ui-autocomplete')._renderItem = function (ul, item) {
+                    if(t == "school") {
+                        return $(`<li class="ui-menu-item" role="presentation">
+
+                            <a id="ui-id-3" class="ui-corner-all" tabindex="-1">
+                            <div style="display: flex;">
+                            <div style="border:1px solid #CCC; width: 35px; border-radius: 4px; overflow: hidden;">
+                                <img src="http://sanutanu.com/images/school.jpg" width="100%" height="100%" />
+                            </div> 
+                            <div style="padding-left:5px;">`+item.label+`</div>
+                            </div>
+                            </a>
+                            </li>`)
+                            .appendTo(ul);
+                    } else if(t == "work") {
+                        return $(`<li class="ui-menu-item" role="presentation">
+                            <a id="ui-id-3" class="ui-corner-all" tabindex="-1">
+                            <div style="display: flex;">
+                            <div style="border:1px solid #CCC; width: 35px; border-radius: 4px; overflow: hidden;">
+                                <img src="http://sanutanu.com/images/office.jpg" width="100%" height="100%" />
+                            </div>
+                             <div style="padding-left:5px;">`+item.label+`</div>
+                             </div>
+                             </a>
+                             </li>`)
+                            .appendTo(ul);
+                    } else if(t == "city") {
+                        return $(`<li class="ui-menu-item" role="presentation">
+                            <a id="ui-id-3" class="ui-corner-all" tabindex="-1">
+                            <div style="display: flex;">
+                            <div style="border:1px solid #CCC; width: 35px; border-radius: 4px; overflow: hidden;">
+                                <img src="http://sanutanu.com/images/location.png" width="100%" height="100%" />
+                            </div>
+                             <div style="padding-left:5px;">`+item.city+`, `+item.state+`, `+item.country+`</div>
+                             </div>
+                             </a>
+                             </li>`)
+                            .appendTo(ul);
+                    } else if(t == "state") {
+                        return $(`<li class="ui-menu-item" role="presentation">
+                            <a id="ui-id-3" class="ui-corner-all" tabindex="-1">
+                            <div style="display: flex;">
+                            <div style="border:1px solid #CCC; width: 35px; border-radius: 4px; overflow: hidden;">
+                                <img src="http://sanutanu.com/images/location.png" width="100%" height="100%" />
+                            </div>
+                             <div style="padding-left:5px;">`+item.state+`, `+item.country+`</div>
+                             </div>
+                             </a>
+                             </li>`)
+                            .appendTo(ul);
+                    } else if(t == "country") {
+                        return $(`<li class="ui-menu-item" role="presentation">
+                            <a id="ui-id-3" class="ui-corner-all" tabindex="-1">
+                            <div style="display: flex;">
+                            <div style="border:1px solid #CCC; width: 35px; border-radius: 4px; overflow: hidden;">
+                                <img src="http://sanutanu.com/images/location.png" width="100%" height="100%" />
+                            </div>
+                             <div style="padding-left:5px;">`+item.label+`</div>
+                             </div>
+                             </a>
+                             </li>`)
+                            .appendTo(ul);
+                    } else if(t == "source") {
+                        return $(`<li class="ui-menu-item" role="presentation" style="min-width:300px;">
+                            <a id="ui-id-3" class="ui-corner-all" tabindex="-1" style="display:flex; align-items:center; font-family: Arial;">
+                              <div style="margin-right: 15px; width: 40px; height: 40px;">
+                                <img src="http://sanutanu.com//uploads/`+item.avatar+`" style="border-radius: 50%; width: 100%; height: 100%;">
+                              </div>
+                              <div style="font-size:12px;">
+                                <b>`+item.label+`</b>
+                                <div>`+item.detail+`</div>
+                              </div>
+                             </a>
+                             </li>`)
+                            .appendTo(ul);
+                    }
+                    else {
+                        return $(`<li class="ui-menu-item" role="presentation"><a id="ui-id-3" class="ui-corner-all" tabindex="-1">`+item.label+`</a></li>`)
+                            .appendTo(ul);
+                    }
+                };
+            }
+    
+    });
+    
+    
+    });
+    
+});
+
+function remove_linebreaks( message ) {
+      return message.replace( /[\r\n]+/gm, "" );
+  }
+</script>
+    <div id="status-overlay" style="display: none"></div>
+    <input type="hidden" id="calltimer" value="0">
+    <input type="hidden" id="callerid" value="" />
+    <input type="hidden" id="calltype" value="" />
+    </body>
+<script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'}),_trfd.push({'ap':'cpsh'},{'server':'sg2plcpnl0252'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script><script src='https://img1.wsimg.com/tcc/tcc_l.combined.1.0.6.min.js'></script></html>
+<script type="text/javascript">
+ 
+var start_video_call_window = function(userid,chatid)
+{
+  var calltype = 'video';
+  var callerid = userid;
+  var url = 'http://sanutanu.com/chat/call/'+calltype+'/'+callerid+'/1';
+  var child_w = popupWindow(url, 'Call', 500, 400);
+  child_w.onbeforeunload = function(){ 
+    publish('cancel-call', null, userid); 
+  };
+  setTimeout(function(){ 
+    publish('start-call', {type: calltype}, userid); 
+    $('#callerid').val(userid);
+    $('#calltype').val(calltype);
+    send_chat_message(chatid, userid, 'New video call from SanuTanu ');
+  }, 1000);
+
+  setTimeout(function(){
+    if($('#calltimer').val()==0)
+    {
+      publish('cancel-call', null, userid);
+    }
+  }, (1000*30));
+}
+
+var start_audio_call_window = function(userid,chatid)
+{
+  var calltype = 'audio';
+  var callerid = userid;
+  var url = 'http://sanutanu.com/chat/call/'+calltype+'/'+callerid+'/1';
+  var child_w = popupWindow(url, 'Call', 500, 400);
+  child_w.onbeforeunload = function(){ publish('cancel-call', null, userid); };
+  setTimeout(function(){ 
+    publish('start-call', {type: calltype}, userid);
+    $('#callerid').val(userid);
+    $('#calltype').val(calltype);
+    send_chat_message(chatid, userid, 'New Audio call from SanuTanu ');
+  }, 1000);
+
+  setTimeout(function(){
+    publish('cancel-call', null, userid);
+  }, (1000*30));
+}
+
+var ws = new WebSocket('ws://192.168.10.103');
+
+ws.onopen = function() {
+console.info("Connected.");
+//sendMessage('setName', userName);
+};
+
+ws.onmessage = function(e) {
+  var data = JSON.parse(e.data);
+  if(data.event == 'start-call' && data.to == '1')
+  {
+    if($('#calltimer').val()==0)
+    {
+      $('#callerid').val(data.from);
+      $('#calltype').val(data.data.type);
+      call_modal(data.from, data.data.type);
+    }
+    else
+    {
+      publish('busy',null,data.from);
+    }
+    
+  }
+  if(data.event == 'cancel-call' && ((data.to == '1' && data.from == $('#callerid').val()) || (data.from == '1' && data.to == $('#callerid').val()) ) )
+  {
+    $('#callpopup').modal('hide');
+    $('#calltype').val('');
+    $('#callerid').val('');
+    $('.ringtone')[0].pause();
+    $('#calltimer').val(0);
+  }
+  if(data.event=='timer' && ((data.to == '1' && data.from == $('#callerid').val()) || (data.from == '1' && data.to == $('#callerid').val()) ) )
+  {
+    $('#calltimer').val(1);
+  }
+  //onsinglemessage( decodeURIComponent( escape ( e.data ) ) );
+}
+
+ws.onclose = function(event) {
+/*if (event.wasClean) {
+  //console.info('clouse conecting');
+} else {
+  //location = location;
+  //console.warn('server disconected');
+}*/
+//console.info('Code: ' + event.code + ' Msg: ' + event.reason);
+};
+
+callresponse = function(r){
+  if(r==1)
+  {
+    var calltype = $('#calltype').val();
+    var callerid = $('#callerid').val();
+    var url = 'http://sanutanu.com/chat/call/'+calltype+'/'+callerid+'/2';
+    //window.open(url, 'child', '"width=350, height=300"');
+    if(calltype=='audio')
+    {
+      var h = 400;
+    }
+    else
+    {
+      var h = 400;
+    }
+    var child_w = popupWindow(url, 'Call', 500, h);
+    child_w.onbeforeunload = function(){ publish('cancel-call', null, callerid); };
+    //child_w.onunload = function(){ child_w.startcall(); };
+    setTimeout(function(){ child_w.startcall(); }, 3000);
+  }
+  if(r==0)
+  {
+    publish('cancel-call', null, callerid);
+  }
+  $('#callpopup').modal('hide');
+  $('#calltype').val('');
+  $('#callerid').val('');
+  $('.ringtone')[0].pause();
+}
+      
+function publish(event, data, to) {
+        //console.log("sending ws.send: " + event);
+        var senddata = JSON.stringify({
+            event:event,
+            data:data,
+            to: to,
+            from: '1'
+        });
+        var encdata = unescape( encodeURIComponent( senddata ));
+        //console.log(encdata);
+        ws.send( encdata );
+    }
+
+function popupWindow(url, title, w, h) {
+    const y = window.top.outerHeight / 2 + window.top.screenY - ( h / 2);
+    const x = window.top.outerWidth / 2 + window.top.screenX - ( w / 2);
+    return window.open(url, title, `directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no, width=${w}, height=${h}, top=${y}, left=${x}`);
+}
+</script>

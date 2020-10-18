@@ -18,7 +18,7 @@ class Welcome extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
-	 public function __construct() 
+	public function __construct() 
 	{
 		parent::__construct();
 		$this->load->model("login_model");
@@ -27,16 +27,13 @@ class Welcome extends CI_Controller {
 		$this->load->model("register_model");
 	}
 	public function index()
-    {   
-        
-            // print_r($this->user->loggedin);
+    {
+        //print_r($this->user->loggedin);
         if($this->user->loggedin){
-		redirect(base_url('index.php/home/index')); 
+			redirect(base_url('home/index')); 
         }else{
             $this->load->view('index_welcome');
-           
         }
-		
 	}
 }
 

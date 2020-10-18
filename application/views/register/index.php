@@ -1,6 +1,60 @@
+<style>
+	@media (max-width: 414px){
+.mail-place{
+      width: 96% !important;
+      height: 22px !important;
+      padding: 3px 26px !important;
+      font-size: 2vw !important;
+}
+.cisco{
+	width: 40% !important;
+	float: left !important;
+ }
+ .form-control{
+ 	font-size: 2vw !important;
+ 	height: 26px !important;
+ 	padding-right: 5px !important;
+ }
+ .glyphicon{
+ 	font-size: 2vw !important;
+ }
+ .feed{
+ 	margin-left: 47px !important;
+ }
+
+#countries{
+  width: 40% !important;
+  float: left !important;
+}
+#cities{
+  width: 40% !important;
+  float: left !important;
+
+ margin-left: 47px !important;
+}
+.form-control-feedback{
+	line-height: 28px !important;
+}
+.alert {
+font-size: 2vw !important;
+padding: 9px !important;
+width: 96% !important;
+}
+.btn-flat-login{
+	width: 96% !important;
+}
+.last{
+	padding-left: 59px !important;
+}
+
+
+}
+
+</style>
 <div class="container">
-    <div class="row">
-    <div class="col-md-5 center-block-e">
+
+    <div class="row ">
+    <div class="col-md-6 center-block-e">
 
       
 
@@ -16,29 +70,65 @@
     		<?php echo form_open(site_url("register"), array("id" => "register_form")) ?>
     			<input type="hidden" name="code" value="<?php if(isset($code)) echo $code ?>">
 				<div class="form-group login-form-area has-feedback">
-					<input type="text" class="form-control" name="email" placeholder="<?php echo lang("ctn_214") ?>" id="email" value="<?php if(isset($email)) echo $email; ?>">
-		            <i class="glyphicon glyphicon-envelope form-control-feedback login-icon-color" id="login-icon-email"></i>
+					<input type="text" class="form-control mail-place" name="email" placeholder="<?php echo lang("ctn_214") ?>" id="email" value="<?php if(isset($email)) echo $email; ?>">
+		            <i class="glyphicon glyphicon-envelope form-control-feedback login-icon-color icon" id="login-icon-email"></i>
 		        </div>
 		        <div class="form-group login-form-area has-feedback">
-					<input type="text" class="form-control" name="username" id="username" placeholder="<?php echo lang("ctn_215") ?>" value="<?php if(isset($username)) echo $username; ?>">
-		            <i class="glyphicon glyphicon-user form-control-feedback login-icon-color" id="login-icon-username"></i>
+					<input type="text" class="form-control mail-place" name="username" id="username" placeholder="<?php echo lang("ctn_215") ?>" value="<?php if(isset($username)) echo $username; ?>">
+		            <i class="glyphicon glyphicon-user form-control-feedback login-icon-color icon" id="login-icon-username"></i>
 		        </div>
-		        <div class="form-group login-form-area has-feedback">
-					<input type="password" class="form-control" name="password" placeholder="<?php echo lang("ctn_216") ?>">
-		            <i class="glyphicon glyphicon-lock form-control-feedback login-icon-color"></i>
+		        <div class="row">
+		        	<div class="col-sm-6">
+		        		<div class="form-group login-form-area has-feedback cisco ">
+							<input type="password" class="form-control index" name="password" placeholder="<?php echo lang("ctn_216") ?>">
+				            <i class="glyphicon glyphicon-lock form-control-feedback login-icon-color"></i>
+				        </div>
+		        	</div>
+		        	<div class="col-sm-6">
+		        		<div class="form-group login-form-area has-feedback cisco
+		        		feed">
+							<input type="password" class="form-control index" name="password2" placeholder="<?php echo lang("ctn_217") ?>">
+				            <i class="glyphicon glyphicon-lock form-control-feedback login-icon-color"></i>
+				        </div>
+		        	</div>
 		        </div>
-		        <div class="form-group login-form-area has-feedback">
-					<input type="password" class="form-control" name="password2" placeholder="<?php echo lang("ctn_217") ?>">
-		            <i class="glyphicon glyphicon-lock form-control-feedback login-icon-color"></i>
+
+		        
+		        
+		        <div class="row">
+		        	<div class=" col-sm-6">
+		        		<div class="form-group login-form-area has-feedback cisco">
+							<input type="text" class="form-control" name="first_name" placeholder="<?php echo lang("ctn_29") ?>">
+				            <i class="glyphicon glyphicon-user form-control-feedback login-icon-color"></i>
+				        </div>
+		        	</div>
+		        	<div class=" col-sm-6">
+		        		<div class="form-group login-form-area has-feedback cisco">
+							<input type="text" class="form-control feed" name="last_name" placeholder="<?php echo lang("ctn_30") ?>">
+				            <i class="glyphicon glyphicon-user form-control-feedback login-icon-color last"></i>
+				        </div>
+		        	</div>
+			        
 		        </div>
-		        <div class="form-group login-form-area has-feedback">
-					<input type="text" class="form-control" name="first_name" placeholder="<?php echo lang("ctn_29") ?>">
-		            <i class="glyphicon glyphicon-user form-control-feedback login-icon-color"></i>
-		        </div>
-		        <div class="form-group login-form-area has-feedback">
-					<input type="text" class="form-control" name="last_name" placeholder="<?php echo lang("ctn_30") ?>">
-		            <i class="glyphicon glyphicon-user form-control-feedback login-icon-color"></i>
-		        </div>
+
+		        <div class="row">
+              <div class=" col-sm-6">
+                <select style="font-size: 15px;height: 35px;" class="form-control" id="countries" name="countries">
+                            <option value="">Select Country</option>
+                            <?php foreach ($this->db->get('countries')->result() as $c) { ?>
+                                <option value="<?php echo $$c->name ?>"><?php echo $c->name; ?></option>
+                            <?php } ?>
+                        </select>
+              </div>
+              <div class=" col-sm-6">
+                <select style="font-size: 15px; height: 35px;" class="form-control" id="cities" name="cities">
+                            <option value="">Select City</option>
+                           
+                        </select>
+              </div>
+              
+            </div>
+		        
 			  	<?php foreach($fields->result() as $r) : ?>
 			  	<div class="form-group login-form-area clearfix">
 
@@ -89,6 +179,56 @@
 				    <div class="g-recaptcha" data-sitekey="<?php echo $this->settings->info->google_recaptcha_key ?>"></div> 
 		  		</div>
 		  		<?php endif ?>
+
+				<label><?php echo lang("ctn_954") ?></label><!-- Birthday -->
+		  		<div class="form-group login-form-area has-feedback">
+		  			<div class="input-group">
+		  				<select class="form-control" style="width: inherit;" name="dob_day">
+		  					<?php 
+		  					$d=1; 
+		  					for($d=1; $d<=31; $d++): ?>
+		  					<option value="<?php echo $d; ?>" <?php if($d==18){ echo 'selected'; } ?>><?php echo $d; ?></option>
+		  				<?php endfor; ?>
+		  				</select>
+		  				<select class="form-control" style="width: inherit;" name="dob_month">
+		  					<?php 
+		  					$m=1; 
+		  					for($m=1; $m<=12; $m++): ?>
+		  					<option value="<?php echo $m; ?>" <?php if($m==4){ echo 'selected'; } ?>><?php echo date('M', strtotime('2001-'.$m.'-01')); ?></option>
+		  				<?php endfor; ?>
+		  				</select>
+		  				<select class="form-control" style="width: inherit;" name="dob_year">
+		  					<?php 
+		  					$y=date('Y');
+		  					for($y=date('Y'); $y>=1905; $y--): ?>
+		  					<option value="<?php echo $y; ?>" <?php if($y==1995){ echo 'selected'; } ?>><?php echo $y; ?></option>
+		  				<?php endfor; ?>
+		  				</select>
+		  			</div>
+		        </div>
+
+
+		        <label><?php echo lang("ctn_951") ?></label><!-- Gender -->
+		  		<div class="form-group login-form-area has-feedback">
+		  			<input type="radio" name="gender" id="male" value="Male" checked />
+		  			<label for="gender" onclick="$('#male').click();" ><?php echo lang("ctn_952") ?></label>
+		  			&nbsp; &nbsp; &nbsp;
+		  			<input type="radio" name="gender" id="female" value="Female" />
+		  			<label for="gender"  onclick="$('#female').click();" ><?php echo lang("ctn_953") ?></label>
+		        </div>
+
+		  		<div class="form-group login-form-area has-feedback">
+		  			<input type="hidden" name="allow_newsletter" id="allow_newsletter" value="1" />
+					<input type="checkbox" class="" name="getnewsletter" id="getnewsletter" onclick="cheknewsletter();" checked >
+		            <label for="getnewsletter"><?php echo lang("ctn_955"); ?></label>
+		        </div>
+
+
+		        <div class="form-group login-form-area has-feedback">
+		        	<input type="hidden" name="allow_privacypolicy" id="allow_privacypolicy" value="1" />
+					<input type="checkbox" class="" name="acceptprivacypolicy" id="acceptprivacypolicy" onclick="chekprivacypolicy();" checked >
+		            <label for="acceptprivacypolicy"><?php echo lang("ctn_979"); ?></label>
+		        </div>
 
 
 		  		<input type="submit" name="s" class="btn btn-flat-login form-control" value="<?php echo lang("ctn_221") ?>" />
@@ -239,6 +379,7 @@
             var errors = data.fieldErrors;
             for (var property in errors) {
                 if (errors.hasOwnProperty(property)) {
+                	//alert(property);
                     // Find form name
                     var field_name = '#' + form + ' input[name="'+property+'"]';
                     $(field_name).addClass("errorField");
@@ -267,4 +408,45 @@
     $('.form-error-no-margin').remove();
     $('.errorField').removeClass('errorField');
   }
+  function cheknewsletter()
+  {
+  	var chk = document.getElementById('getnewsletter').checked;
+  	if(chk==true)
+  	{
+  		$('#allow_newsletter').val(1);
+  	}
+  	else
+  	{
+  		$('#allow_newsletter').val(0);
+  	}
+  }
+
+  function chekprivacypolicy()
+  {
+  	var chk = document.getElementById('acceptprivacypolicy').checked;
+  	if(chk==true)
+  	{
+  		$('#allow_privacypolicy').val(1);
+  	}
+  	else
+  	{
+  		$('#allow_privacypolicy').val(0);
+  	}
+  }
+
+  $('#countries').on('change',function(){
+    $id = $('#countries').val();
+    $.ajax({
+      url: global_base_url + 'Login/get_city_id',
+      data: {id: $id},
+    })
+    .done(function(res) {
+      // console.log(res);
+      $('#cities').html(res);
+
+    })
+   
+    
+  });
+
 </script>

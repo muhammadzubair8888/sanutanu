@@ -11,7 +11,7 @@ class Settings
 	public function __construct() 
 	{
 		$CI =& get_instance();
-		$site = $CI->db->select("site_name,site_desc,site_email,
+		$site = $CI->db->select("site_name,site_desc,site_email,story_time,
 			upload_path_relative, upload_path, site_logo, register,
 			 disable_captcha, date_format, avatar_upload, file_types,
 			 twitter_consumer_key, twitter_consumer_secret, disable_social_login
@@ -30,7 +30,7 @@ class Settings
 			 rotation_ad_alert_user, enable_promote_post, resize_avatar,
 			 verified_cost, enable_verified_buy, enable_verified_requests,
 			 public_profiles, public_pages, public_blogs, enable_blogs,
-			 limit_max_photos, limit_max_photos_post, enable_dislikes")
+			 limit_max_photos, limit_max_photos_post,promoted_one_week ,promoted_two_week ,promoted_three_week,promoted_four_week,  enable_dislikes,color")
 		->where("ID", 1)
 		->get("site_settings");
 		

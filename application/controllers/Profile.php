@@ -70,13 +70,6 @@ class Profile extends CI_Controller
 			$user_data = $user_data->row();
 		}
 
-		if($this->user->loggedin) {
-			// check user is friend
-			$flags = $this->check_friend($this->user->info->ID, $user->ID);
-		} else {
-			$flags = array("friend_flag" => false, "request_flag" => false);
-		}
-
 		// If user is not logged in and friend only profile, no dice.
 		if($user->profile_view == 1 && !$this->user->loggedin) {
 			$user->profile_header = "empty.png";
@@ -93,18 +86,18 @@ class Profile extends CI_Controller
 		if($this->user->loggedin) {
 			if($user->profile_view == 1 && $user->ID != $this->user->info->ID) {
 				// Only let's friends view profile.
-				if(!$flags['friend_flag']) {
+				// if(!$flags['friend_flag']) {
 
-					$user->profile_header = "empty.png";
-					$user->avatar = "default.png";
+				// 	$user->profile_header = "empty.png";
+				// 	$user->avatar = "default.png";
 
-					$this->template->loadContent("profile/empty.php", array(
-						"user" => $user,
-						"friend_flag" => $flags['friend_flag'],
-						"request_flag" => $flags['request_flag'],
-						), 1
-					);
-				}
+				// 	$this->template->loadContent("profile/empty.php", array(
+				// 		"user" => $user,
+				// 		"friend_flag" => $flags['friend_flag'],
+				// 		"request_flag" => $flags['request_flag'],
+				// 		), 1
+				// 	);
+				// }
 			}
 		}
 
@@ -120,6 +113,13 @@ class Profile extends CI_Controller
 
 		$friends = $this->user_model->get_user_friends_sample($user->ID);
 		$albums = $this->image_model->get_user_albums_sample($user->ID);
+		if($user->ID == $this->user->info->ID):
+			$mutule_friends = false;
+		else:
+		$mutule_friends = $this->user_model->mutual_frields_profile($user->ID);
+	endif;
+		// print_r($mutule_friends->result());
+		// exit;
 
 		$this->template->loadContent("profile/index.php", array(
 			"user" => $user,
@@ -127,12 +127,11 @@ class Profile extends CI_Controller
 			"role" => $rolename,
 			"fields" => $fields,
 			"user_data" => $user_data,
-			"friend_flag" => $flags['friend_flag'],
-			"request_flag" => $flags['request_flag'],
 			"friends" => $friends,
 			"albums" => $albums,
 			"post_count" => 0,
-			"relationship_user" => $relationship_user
+			"relationship_user" => $relationship_user,
+			"m_friends" => $mutule_friends
 			)
 		);
 	}
@@ -227,6 +226,7 @@ class Profile extends CI_Controller
 		$type = intval($type);
 		$name = $this->common->nohtml($this->input->post("name"));
 		$desc = $this->common->nohtml($this->input->post("description"));
+		$privacy = $this->common->nohtml($this->input->post('privacy'));
 
 		if(empty($name)) {
 			$this->template->error(lang("error_126"));
@@ -236,6 +236,7 @@ class Profile extends CI_Controller
 			"userid" => $this->user->info->ID,
 			"name" => $name,
 			"description" => $desc,
+			"privacy" => $privacy,
 			"timestamp" => time()
 			)
 		);
@@ -555,6 +556,7 @@ class Profile extends CI_Controller
 		$name = $this->common->nohtml($this->input->post("name"));
 		$description = $this->common->nohtml($this->input->post("description"));
 		$feed_post = intval($this->input->post("feed_post"));
+		$privacy = intval($this->input->post('privacy'));
 
 		// Check photo limit
 		if($this->settings->info->limit_max_photos > 0) {
@@ -570,7 +572,8 @@ class Profile extends CI_Controller
             	"file_url" => $image_url,
             	"userid" => $this->user->info->ID,
             	"timestamp" => time(),
-            	"albumid" => $album->ID,
+				"albumid" => $album->ID,
+				"privacy"=> $privacy,
             	"name" => $name,
             	"description" => $description
             	)
@@ -609,7 +612,8 @@ class Profile extends CI_Controller
             	"file_size" => $data['file_size'],
             	"userid" => $this->user->info->ID,
             	"timestamp" => time(),
-            	"albumid" => $album->ID,
+				"albumid" => $album->ID,
+				"privacy" => $privacy,
             	"name" => $name,
             	"description" => $description
             	)
@@ -627,6 +631,7 @@ class Profile extends CI_Controller
 				"content" => $description,
 				"timestamp" => time(),
 				"imageid" => $fileid,
+				"postfor" => $privacy,
 				)
 			);
 			$this->user_model->increase_posts($this->user->info->ID);
@@ -642,6 +647,7 @@ class Profile extends CI_Controller
 			redirect(site_url("login"));
 		}
 		$id = intval($id);
+		$privacy = intval($this->input->post('privacy'));
 		$album = $this->image_model->get_user_album($id);
 		if($album->num_rows() == 0) {
 			$this->template->error(lang("error_127"));
@@ -688,9 +694,10 @@ class Profile extends CI_Controller
 	            	"file_url" => $image_url,
 	            	"userid" => $this->user->info->ID,
 	            	"timestamp" => time(),
-	            	"albumid" => $album->ID,
-	            	"name" => $name,
-	            	"description" => $description
+					"albumid" => $album->ID,
+					"privacy" => $privacy,
+	            	"name" => '',
+	            	"description" => ''
 	            	)
 	            );
 	            // Update album count
@@ -725,7 +732,8 @@ class Profile extends CI_Controller
 	            	"file_type" => $data['file_type'],
 	            	"extension" => $data['file_ext'],
 	            	"file_size" => $data['file_size'],
-	            	"userid" => $this->user->info->ID,
+					"userid" => $this->user->info->ID,
+					"privacy" => $privacy,
 	            	"timestamp" => time(),
 	            	"albumid" => $album->ID,
 	            	)
@@ -744,7 +752,8 @@ class Profile extends CI_Controller
 				"userid" => $this->user->info->ID,
 				"content" => "",
 				"timestamp" => time(),
-				"template" => "album"
+				"template" => "album",
+				"postfor" => $privacy
 				)
 			);
 			$this->user_model->increase_posts($this->user->info->ID);
@@ -813,6 +822,7 @@ class Profile extends CI_Controller
 		$name = $this->common->nohtml($this->input->post("name"));
 		$description = $this->common->nohtml($this->input->post("description"));
 		$albumid = intval($this->input->post("albumid"));
+		$privacy = intval($this->input->post('privacy'));
 
 		// Check for valid album
 		$album = $this->image_model->get_user_album($albumid);
@@ -838,7 +848,8 @@ class Profile extends CI_Controller
             	"file_url" => $image_url,
             	"albumid" => $album->ID,
             	"name" => $name,
-            	"description" => $description
+            	"description" => $description,
+            	"privacy" => $privacy
             	)
             );
 
@@ -875,7 +886,8 @@ class Profile extends CI_Controller
             	"albumid" => $album->ID,
             	"name" => $name,
             	"description" => $description,
-            	"file_url" => ""
+            	"file_url" => "",
+            	"privacy" => $privacy
             	)
             );
 		} else {
@@ -883,6 +895,7 @@ class Profile extends CI_Controller
 				"name" => $name,
             	"description" => $description,
             	"albumid" => $album->ID,
+            	"privacy" => $privacy
 				)
 			);
 		}
@@ -954,9 +967,11 @@ class Profile extends CI_Controller
 		}
 		$user = $user->row();
 
-		//echo 123;
-		//exit;
-
+		
+		// $user_city = $this->home_model->get_city($user->city)->result();
+		// // print_r($user_city[0]->name);
+		// // exit;
+		// $city_name = $user_city[0]->name;
 		$userdata = $this->user_model->get_user_data($userid);
 		$userdata = $userdata->row_array();
 
@@ -987,6 +1002,7 @@ class Profile extends CI_Controller
 			"userdata" => $userdata,
 			"friend_flag" => $flags['friend_flag'],
 			"request_flag" => $flags['request_flag'],
+	
 			)
 		);
 	}

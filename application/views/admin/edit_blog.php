@@ -36,6 +36,28 @@
                         </select>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label"><?php echo lang("ctn_1072") ?></label>
+                    <div class="col-sm-10">
+                        <select name="block_blog" class="form-control">
+                          <option value="0"><?php echo lang("ctn_539") ?></option>
+                          <option value="1" <?php if($blog->blog_status == 1) echo "selected" ?>><?php echo lang("ctn_1068") ?></option>
+                          <option value="2" <?php if($blog->blog_status == 2) echo "selected" ?>><?php echo lang("ctn_1069") ?></option>
+                          <option value="3" <?php if($blog->blog_status == 3) echo "selected" ?>><?php echo lang("ctn_1070") ?></option>
+                          <option value="4" <?php if($blog->blog_status == 4) echo "selected" ?>><?php echo lang("ctn_1071") ?></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label"><?php echo lang("ctn_1076") ?></label>
+                    <div class="col-sm-10">
+                        <select name="approve_blog" class="form-control">
+                          <option value="0"><?php echo lang("ctn_1073") ?></option>
+                          <option value="1" <?php if($blog->blog_approved == 1) echo "selected" ?>><?php echo lang("ctn_1075") ?></option>
+                          
+                        </select>
+                    </div>
+                </div>
 
                 <input style="color:#FFF; background:#a41be3;" type="submit" class="btn form-control" value="<?php echo lang("ctn_13") ?>">
 

@@ -66,7 +66,8 @@ class Register extends CI_Controller
 		$first_name = "";
 		$last_name = "";
 
-		if (isset($_POST['username'])) {
+		if (isset($_POST['username'])) 
+		{
 			$email = $this->input->post("email", true);
 			$first_name = $this->common->nohtml(
 				$this->input->post("first_name", true));
@@ -79,6 +80,19 @@ class Register extends CI_Controller
 			$captcha = $this->input->post("captcha", true);
 			$username = $this->common->nohtml(
 				$this->input->post("username", true));
+
+			$gender = $this->common->nohtml( $this->input->post('gender') );
+
+			$dob_day = $this->input->post('dob_day');
+			$dob_month = $this->input->post('dob_month');
+			$dob_year = $this->input->post('dob_year');
+			$country_id  = $this->input->post('countries');
+			$country = $this->db->get_where('countries',array('id'=>$country_id))->row()->name;
+			$city_id     = $this->input->post('cities');
+
+			$birthday = date('Y-m-d',strtotime($dob_year.'-'.$dob_month.'-'.$dob_day));
+
+			$allow_newsletter = intval($this->input->post('allow_newsletter'));
 
 
 
@@ -140,6 +154,8 @@ class Register extends CI_Controller
 					$field_errors['email'] = lang("error_193");
 				}
 			}
+
+			
 
 			if (!$this->register_model->checkEmailIsFree($email)) {
 				$fail = lang("error_20");
@@ -287,11 +303,17 @@ class Register extends CI_Controller
 							),
 						$email_template->message);
 
-						$this->common->send_email($email_template->title,
+						$this->common->send_email($email_template->title, 
 							$email_template->message, $email);
 					}
 					
 				}
+
+    			$new_arr[]= unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$_SERVER['REMOTE_ADDR']));
+	 			$ipcity = $new_arr[0]['geoplugin_city'];
+	 			$ipstate = $new_arr[0]['geoplugin_region'];
+				$ipcountry = $new_arr[0]['geoplugin_countryName'];
+
 
 				$userid = $this->register_model->add_user(array(
 					"username" => $username,
@@ -305,6 +327,22 @@ class Register extends CI_Controller
 					"joined_date" => date("n-Y"),
 					"active" => $active,
 					"activate_code" => $activate_code,
+					"gender" => $gender,
+					"ipcity" => $ipcity,
+					"ipstate" => $ipstate,
+					"ipcountry" => $ipcountry,
+					"birthday" => $birthday,
+					"allow_newsletter" => $allow_newsletter,
+					"city"       => $city_id,
+					"country"    => $country,
+					"country_id" => $country_id
+					)
+				);
+
+				$this->user_model->add_user_data(array(
+					'userid' => $userid,
+					'gender' => $gender,
+					'birthday' => $birthday
 					)
 				);
 
@@ -374,7 +412,7 @@ class Register extends CI_Controller
 		    )
 		);
 	}
-
+ 
 	public function ajax_check_register() 
 	{
 		$formData = $this->input->post("formData");
@@ -424,7 +462,10 @@ class Register extends CI_Controller
 		$username = $this->common->nohtml($data['username']);
 		$first_name = $this->common->nohtml($data['first_name']);
 		$last_name = $this->common->nohtml($data['last_name']);
+		$countries = $this->common->nohtml($data['countries']);
+		$cities = $this->common->nohtml($data['cities']);
 
+		
 		if (strlen($username) < 3) {
 			$field_errors['username'] = lang("error_31");
 		}
@@ -477,6 +518,11 @@ class Register extends CI_Controller
 			$field_errors['email'] = lang("error_20");
 		}
 
+		if($data['allow_privacypolicy']==0)
+		{
+			$field_errors['acceptprivacypolicy'] = $data['allow_privacypolicy'].' - '.lang("ctn_980");
+		}
+
 		// Custom Fields
 		// Process fields
 		$answers = array();
@@ -495,7 +541,7 @@ class Register extends CI_Controller
 				// Add
 				$answers[] = array(
 					"fieldid" => $r->ID,
-					"answer" => $answer
+					" " => $answer
 				);
 			} elseif($r->type == 1) {
 				// HTML
@@ -725,7 +771,6 @@ class Register extends CI_Controller
 	{
 		$code = $this->common->nohtml($code);
 		$username = $this->common->nohtml($username);
-
 		$code = $this->user_model->get_verify_user($code, $username);
 		if($code->num_rows() == 0) {
 			$this->template->error(lang("error_69"));
@@ -737,7 +782,8 @@ class Register extends CI_Controller
 
 		$this->user_model->update_user($code->ID, array(
 			"active" => 1, 
-			"activate_code" => ""
+			"activate_code" => "", 
+			"redirect" => 1 
 			)
 		);
 

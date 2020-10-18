@@ -1,17 +1,17 @@
 <div id="profilepicpopup" class="modal fade in" role="dialog">
-	<div class="modal-dialog">
-		
-		<!-- Modal content-->
-		<div class="modal-content row">
-			<div class="custom-modal-header" style="background: #333;">
-				<button type="button" class="close" data-dismiss="modal">×</button>
-				<!-- <h4 class="modal-title">Enquire Now</h4> -->
-			</div>
-			<div class="modal-body" id="sanutanu_profile_popup" style="padding-top: 0;">
-				<div class="row">
-					<div class="col-md-12">
+    <div class="modal-dialog">
+        
+        <!-- Modal content-->
+        <div class="modal-content row">
+            <div class="custom-modal-header" style="background: #333;">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <!-- <h4 class="modal-title">Enquire Now</h4> -->
+            </div>
+            <div class="modal-body" id="sanutanu_profile_popup" style="padding-top: 0;">
+                <div class="row">
+                    <div class="col-md-12">
                         
-                        <div class="row demo-wrap upload-demo">
+                        <div class="row demo-wrap upload-demo profile_pic_crop" style="display: none;">
                             
                             
                             <div class="col-md-12" style="padding-bottom: 50px; background: #333;">
@@ -36,6 +36,7 @@
                                     <!-- <div class="myprofilecroped"></div> -->
                                     <input type="hidden" id="profilecaptured" name="profilecaptured" />
                                     <input type="hidden" name="fullprofilepic" id="fullprofilepic" />
+                                    <input type="hidden" name="profile_imageid" id="profile_imageid" />
                                     <button class="btn btn-success upload-result">Save</button>
                                     <button class="btn btn-danger " data-dismiss="modal">Cancel</button>
                                     <!-- <img src="" id="myprofilecroped" width="150" height="150"> -->
@@ -44,14 +45,36 @@
                             
 
                         </div>
+                        <div class="profile_oldpics" style="padding: 10px;">
+                            <div class="row">
+                                <div class="col-md-12" style="padding: 10px;" align="center">
+                                    <button type="button" onclick="profilepicupload_click();" class="btn btn-info"><i class="glyphicon glyphicon-plus"></i> Upload Photo</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 profile_oldpicsload" style="max-height: 400px; overflow-y: auto;">
+                                    <?php
+                                    /*$userid = $this->user->info->ID;
+$pics = $this->db->order_by("ID", "desc")->get_where('user_images',array('userid'=>$userid))->result_array();
+foreach ($pics as $pic) {
+    ?>
+<div class="col-lg-3 col-sm-4 col-xs-6" style="height: 100px;  overflow: hidden; margin-bottom: 6px;"><img class="thumbnail img-responsive profilethumbnail" onclick="set_imageid(<?php echo $pic['ID']; ?>);" src="<?php echo base_url() ?>/<?php echo $this->settings->info->upload_path_relative ?>/<?php echo $pic['file_name']; ?>" style="width: 100%; height: 100px; object-fit: cover; cursor: pointer;" ></div>
+    <?php
+}*/
+                                    ?>
+                                    
+                                </div>
+                            </div>
+                              
+                        </div>
 
                     </div>
-				</div>
-			</div>
-			
-		</div>
-		
-	</div>
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
 </div>
 
 <style type="text/css">
@@ -125,8 +148,8 @@
     vertical-align: middle;
 }
 #profilepicpopup .feed-comments-spot {
-	max-height: 190px;
-	overflow-y: auto;
+    max-height: 190px;
+    overflow-y: auto;
 }
 
 .upload-demo .upload-demo-wrap,
@@ -158,7 +181,7 @@
 
 </style>
 <script type="text/javascript">
-	
+    
 
     var Demo = (function() {
 
@@ -221,35 +244,69 @@
             }
         }
 
+        function readFilePost(filepath)
+        {
+            $('.upload-demo').addClass('ready');
+            $uploadCrop.croppie('bind', {
+                url: filepath
+            }).then(function(){
+                console.log('jQuery bind complete');
+            });
+
+            $('.profile_oldpics').hide();
+            $('.profile_pic_crop').show();
+        }
+
 
         function readFile2(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            //alert('ok');
-            reader.onload = function (e) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
                 //alert('ok');
-             var coverphoto = e.target.result
-                //console.log();
-                //alert(coverphoto);
+                reader.onload = function (e) {
+                    //alert('ok');
+                 var coverphoto = e.target.result
+                    //console.log();
+                    //alert(coverphoto);
 
-                $.ajax({
-                    url: "<?php echo base_url('index.php/user_settings/cover_pic_upload'); ?>",
-                    type: "POST",
-                    data: {'<?php echo $this->security->get_csrf_token_name(); ?>':'<?php echo $this->security->get_csrf_hash(); ?>','coverphoto': coverphoto},
-                    success: function (response) {
-                        window.location.reload();
-                        //alert(response);
-                    }
-                });
+                <?php
+                if($this->uri->rsegment(1)=='pages')
+                {
+                ?>
+                  var uri = "<?php echo base_url('pages/cover_pic_upload/'.$page->ID); ?>";
+                <?php
+                }
+                else if($this->uri->rsegment(1)=='groups')
+                {
+                ?>
+                  var uri = "<?php echo base_url('groups/cover_pic_upload/'.$group->ID); ?>";
+                <?php
+                }
+                else
+                {
+                ?>
+                  var uri = "<?php echo base_url('user_settings/cover_pic_upload'); ?>";
+                <?php
+                }
+                ?>
 
+                    $.ajax({
+                        url: uri,
+                        type: "POST",
+                        data: {'<?php echo $this->security->get_csrf_token_name(); ?>':'<?php echo $this->security->get_csrf_hash(); ?>','coverphoto': coverphoto},
+                        success: function (response) {
+                            window.location.reload();
+                            //alert(response);
+                        }
+                    });
+
+                }
+                
+                reader.readAsDataURL(input.files[0]);
             }
-            
-            reader.readAsDataURL(input.files[0]);
+            else {
+                alert("Sorry - you're browser doesn't support the FileReader API");
+            }
         }
-        else {
-            alert("Sorry - you're browser doesn't support the FileReader API");
-        }
-    }
 
 
         $uploadCrop = $('#upload-demo').croppie({
@@ -261,8 +318,14 @@
             enableExif: true
         });
 
+        $(document).on('click','.profilethumbnail', function(){ readFilePost(this.src); });
         $('#coverupload').on('change', function () { readFile2(this);  });
-        $('#profileupload').on('change', function () { readFile(this);  });
+        $('#profileupload').on('change', function () { 
+            $('.profile_oldpics').hide();
+            $('.profile_pic_crop').show();
+            $('#profile_imageid').val("");
+            readFile(this);
+        });
         $('.upload-result').on('click', function (ev) {
             $uploadCrop.croppie('result', {
                 type: 'canvas',
@@ -278,12 +341,28 @@
                 //alert($('#profilecaptured').val());
                 var fullpic = $('#fullprofilepic').val();
                 var capturedpic = $('#profilecaptured').val();
+                var profile_imageid = $('#profile_imageid').val();
+                <?php
+                if($this->uri->rsegment(1)=='pages')
+                {
+                ?>
+                  var uri = "<?php echo base_url('pages/profile_pic_upload/'.$page->ID); ?>";
+                <?php
+                }
+                else
+                {
+                ?>
+                  var uri = "<?php echo base_url('user_settings/profile_pic_upload'); ?>";
+                <?php
+                }
+                ?>
+                
                 //alert(resp);
                 //alert(global_base_url);
                 $.ajax({
-                    url: "<?php echo base_url('index.php/user_settings/profile_pic_upload'); ?>",//global_base_url + 'user_settings/profile_pic_upload',
+                    url: uri,//global_base_url + 'user_settings/profile_pic_upload',
                     type: "POST",
-                    data: {'<?php echo $this->security->get_csrf_token_name(); ?>':'<?php echo $this->security->get_csrf_hash(); ?>',fullpic: fullpic, capturedpic: capturedpic},
+                    data: {'<?php echo $this->security->get_csrf_token_name(); ?>':'<?php echo $this->security->get_csrf_hash(); ?>',fullpic: fullpic, capturedpic: capturedpic, profile_imageid: profile_imageid},
                     success: function (response) {
                         window.location.reload();// = '<?php echo current_url()?>';
                         //alert(response);
@@ -310,13 +389,22 @@
     }
 
 
-
+    function reset_modal_form()
+    {
+        $('#profilepicpopup').on('hide.bs.modal', function () { 
+            $('#profileupload').val('');
+            $('#profile_imageid').val("");
+            $('.profile_pic_crop').hide();
+            $('.profile_oldpics').show();
+        });
+    }
 
     
 
     function init() {
         bindNavigation();
         demoUpload();
+        reset_modal_form();
     }
 
     return {
@@ -362,10 +450,42 @@
 Demo.init();
 </script>
 <script type="text/javascript">
+function set_imageid(id)
+{
+    $('#profile_imageid').val(id);
+}
 function profilepicpopup_modal()
 {
-    $('#profileupload').click();
     $('#profilepicpopup').modal('show');
+    <?php
+    if($this->uri->rsegment(1)=='pages')
+    {
+    ?>
+      var uri = "<?php echo base_url('pages/loadpicturesforprofile/'.$page->ID); ?>";
+    <?php
+    }
+    else
+    {
+    ?>
+      var uri = "<?php echo base_url('user_settings/loadpicturesforprofile'); ?>";
+    <?php
+    }
+    ?>
+    $.ajax({
+        url: uri,//global_base_url + 'user_settings/profile_pic_upload',
+        type: "GET",
+        success: function (response) {
+            //window.location.reload();// = '<?php echo current_url()?>';
+            //alert(response);
+            $('.profile_oldpicsload').html(response);
+            //$('.subjects_select').multiSelect('refresh');
+        }
+    });
+}
+
+function profilepicupload_click()
+{
+    $('#profileupload').click();
 }
 
 function change_cover()

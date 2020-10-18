@@ -1,43 +1,56 @@
     <div class="row">
-        <div class="col-md-2 sidebar-block" id="homepage-links">
+        <div class="col-md-2 sidebar-block custom-scrollbar-css" id="homepage-links">
           
         <ul>
-        <li <?php if($type == 0) : ?>class="active"<?php endif; ?>><a href="<?php echo site_url("home") ?>"><span class="glyphicon glyphicon-home" style="color: #a41be3"></span> <?php echo lang("ctn_481") ?></a></li>
-        <li><a href="<?php echo site_url("profile/" . $this->user->info->username) ?>"><span class="glyphicon glyphicon-user sidebaricon" style="color: #a41be3"></span> <?php echo lang("ctn_200") ?></a></li>
-        <li><a href="<?php echo site_url("chat") ?>"><span class="glyphicon glyphicon-envelope sidebaricon" style="color: #a41be3"></span> <?php echo lang("ctn_482") ?></a></li>
+        <li <?php if($type == 0) : ?>class="active"<?php endif; ?>><a href="<?php echo site_url("home") ?>"><span class="fa fa-house-user sidebaricon"></span> <?php echo lang("ctn_481") ?></a></li>
+        <li><a href="<?php echo site_url("profile/" . $this->user->info->username) ?>"><span class="fa fa-user-tie sidebaricon"></span> <?php echo lang("ctn_200") ?></a></li>
+        <li><a href="<?php echo site_url("marriage/profile/" . $this->user->info->username) ?>"><span class="fa fa-heart sidebaricon"></span> <?php echo lang("ctn_1040") ?></a></li>
+        <li><a href="<?php echo site_url("chat") ?>"><span class="far fa-envelope sidebaricon"></span> <?php echo lang("ctn_482") ?></a></li>
 
-        <li><a href="<?php echo site_url("home/notifications") ?>"><span class="glyphicon glyphicon-bell sidebaricon" style="color: #a41be3"></span><?php if($this->user->info->noti_count > 0) : ?><span class="badge notification-badge notification-badge2 small-text"><?php echo $this->user->info->noti_count ?></span><?php endif; ?> <?php echo lang("ctn_412") ?></a></li>
+        <li><a href="<?php echo site_url("home/notifications") ?>"><span class="far fa-bell sidebaricon"></span><?php if($this->user->info->noti_count > 0) : ?><span class="badge notification-badge notification-badge2 small-text"><?php echo $this->user->info->noti_count ?></span><?php endif; ?> <?php echo lang("ctn_412") ?></a></li>
+
+        <li <?php if($type == 0) : ?><?php endif; ?>><a style="color: red !important;" href="<?php echo site_url("marriage/findpartner") ?>"><span style="color: red !important;" class="fa fa-heart sidebaricon"></span> <?php echo lang("ctn_1039") ?></a></li>
 
         <?php if($this->settings->info->enable_blogs) : ?>
-          <li><a href="<?php echo site_url("blog/your") ?>"><span class="glyphicon glyphicon-pencil sidebaricon" style="color: #a41be3"></span> <?php echo lang("ctn_780") ?></a></li>
+          <li><a href="<?php echo site_url("blog/your") ?>"><span class="fa fa-blog sidebaricon"></span> <?php echo lang("ctn_780") ?></a></li>
         <?php endif; ?>
-        <li><a href="<?php echo site_url("user_settings") ?>"><span class="glyphicon glyphicon-cog sidebaricon" style="color: #a41be3"></span> <?php echo lang("ctn_156") ?></a></li>
+
+
+
+
+        <li><a href="<?php echo site_url("user_settings") ?>"><span class="fa fa-user-cog sidebaricon"></span> <?php echo lang("ctn_156") ?></a></li>
+
+        <?php if($this->user->loggedin) : ?>
+        <li><a href="<?php echo site_url("login/logout/" . $this->security->get_csrf_hash()) ?>"><span class="fa fa-sign-out-alt sidebaricon"></span> <?php echo lang("ctn_149") ?></a></li>
+        <?php endif; ?>
         </ul>
 
         <p class="sidebar-title"><?php echo lang("ctn_525") ?></p>
         <ul>
-        <li><a href="<?php echo site_url("profile/albums/" . $this->user->info->ID) ?>"><span class="glyphicon glyphicon-picture sidebaricon" style="color: #a41be3"></span> <?php echo lang("ctn_483") ?></a></li>
-        <li><a href="<?php echo site_url("pages/your") ?>"><span class="glyphicon glyphicon-duplicate sidebaricon" style="color: #a41be3"></span> <?php echo lang("ctn_484") ?></a></li>
+        <li><a href="<?php echo site_url("profile/albums/" . $this->user->info->ID) ?>"><span class="fa fa-images sidebaricon"></span> <?php echo lang("ctn_483") ?></a></li>
+        <li><a href="<?php echo site_url("pages/your") ?>"><span class="fa fa-copy sidebaricon"></span> <?php echo lang("ctn_484") ?></a></li>
+        <li><a href="<?php echo site_url("groups/index") ?>"><span class="fa fa-users sidebaricon"></span><?php echo lang("ctn_1021") ?></a></li>
+   
         <?php if($this->settings->info->enable_blogs) : ?>
-          <li><a href="<?php echo site_url("blog/new_posts") ?>"><span class="glyphicon glyphicon-pencil sidebaricon" style="color: #a41be3"></span> <?php echo lang("ctn_772") ?></a></li>
+          <li><a href="<?php echo site_url("blog/new_posts") ?>"><span class="fa fa-blog sidebaricon"></span> <?php echo lang("ctn_772") ?></a></li>
         <?php endif; ?>
-        <li <?php if($type == 2) : ?>class="active"<?php endif; ?>><a href="<?php echo site_url("home/index/2") ?>"><span class="glyphicon glyphicon-list-alt sidebaricon" style="color: #a41be3"></span> <?php echo lang("ctn_485") ?></a></li>
-        <?php if($this->settings->info->payment_enabled) : ?>
-        <li><a href="<?php echo site_url("funds") ?>"><span class="glyphicon glyphicon-piggy-bank sidebaricon" style="color: #a41be3"></span> <?php echo lang("ctn_250") ?></a></li>
-        <?php endif; ?>
+        <li <?php if($type == 2) : ?>class="active"<?php endif; ?>><a href="<?php echo site_url("home/index/2") ?>"><span class="far fa-list-alt sidebaricon" style="color: #a41be3"></span> <?php echo lang("ctn_485") ?></a></li>
+        <?php /* if($this->settings->info->payment_enabled) : ?>
+        <li><a href="<?php echo site_url("funds") ?>"><span class="fa fa-money-bill sidebaricon"></span> <?php echo lang("ctn_250") ?></a></li>
+        <?php endif; */ ?>
         </ul>
         <?php if($this->common->has_permissions(array("admin", "admin_members", "admin_payment", "admin_settings", "post_admin", "page_admin"), $this->user)) : ?>
           <p class="sidebar-title"><?php echo lang("ctn_35") ?></p>
           <ul>
         <?php endif; ?>
         <?php if($this->common->has_permissions(array("admin", "admin_members", "admin_payment", "admin_settings"), $this->user)) : ?>
-        <li><a href="<?php echo site_url("admin") ?>"><span class="glyphicon glyphicon-tower sidebaricon" style="color: #a41be3"></span> <?php echo lang("ctn_35") ?></a></li>
+        <li><a href="<?php echo site_url("admin") ?>"><span class="fa fa-tools sidebaricon"></span> <?php echo lang("ctn_157") ?></a></li>
         <?php endif; ?>
         <?php if($this->common->has_permissions(array("admin", "post_admin"), $this->user)) : ?>
-          <li <?php if($type == 4) : ?>class="active"<?php endif; ?>><a href="<?php echo site_url("home/index/4") ?>"><span class="glyphicon glyphicon-tower sidebaricon" style="color: #a41be3"></span> <?php echo lang("ctn_486") ?></a></li>
+          <li <?php if($type == 4) : ?>class="active"<?php endif; ?>><a href="<?php echo site_url("home/index/4") ?>"><span class="far fa-list-alt sidebaricon" style="color: #a41be3"></span> <?php echo lang("ctn_486") ?></a></li>
         <?php endif; ?>
         <?php if($this->common->has_permissions(array("admin", "page_admin"), $this->user)) : ?>
-          <li><a href="<?php echo site_url("pages/all") ?>"><span class="glyphicon glyphicon-tower sidebaricon" style="color: #a41be3"></span> <?php echo lang("ctn_487") ?></a></li>
+          <li><a href="<?php echo site_url("pages/all") ?>"><span class="fa fa-list-alt sidebaricon"></span> <?php echo lang("ctn_487") ?></a></li>
         <?php endif; ?>
         <?php if($this->common->has_permissions(array("admin", "admin_members", "admin_payment", "admin_settings", "post_admin", "page_admin"), $this->user)) : ?>
         </ul>
@@ -45,26 +58,29 @@
 
         <hr>
 
-        <p class="sidebar-title">
+<!--         <p class="sidebar-title">
         <?php echo lang("ctn_526") ?></p>
         <ul>
           <?php foreach($hashtags->result() as $r) : ?>
             <li><a href="<?php echo site_url("home/index/1/" . $r->hashtag) ?>">#<?php echo $r->hashtag ?></a></li>
           <?php endforeach; ?>
-        </ul>
+        </ul> -->
         </div>
         <div class="col-md-6">
  
  <?php include(APPPATH . "views/feed/editor.php"); ?>
+ <?php include(APPPATH . "views/feed/story.php"); ?>
+
 
 <div id="home_posts">
 
 </div>
 
 
+
   </div>
 
-        <div class="col-md-4" id="homepage-stuff">
+        <div class="col-md-4 homepage-stuff" id="homepage-stuff">
         
         <!-- <div class="page-block">
           <div class="page-block-inner" style="background: url(<?php echo base_url() ?><?php echo $this->settings->info->upload_path_relative . "/" . $this->user->info->profile_header ?>) center center; background-size: cover;">
@@ -89,7 +105,7 @@
           <?php include(APPPATH . "/views/home/rotation_ads.php"); ?>
         <?php endif; ?>
 
-        <div class="page-block half-separator">
+        <div id="hidewhenaddshow" class="page-block half-separator">
          <div class="page-block-title"><?php echo lang("ctn_527") ?></div>
          <?php foreach($users->result() as $r) : ?>
           <div class="page-block-page clearfix">
@@ -135,7 +151,6 @@
                 <?php endif; ?>
                 <?php
               } ?>
-
             </div>
 
           </div>
@@ -154,7 +169,7 @@
           } ?>
          	<div class="page-block-page clearfix">
          		<div class="pull-left" style="margin-right: 5px;">
-         			<img src="<?php echo base_url() ?><?php echo $this->settings->info->upload_path_relative ?>/<?php echo $r->profile_avatar ?>" width="40">
+         			<img style="border-radius: 50%;" src="<?php echo base_url() ?><?php echo $this->settings->info->upload_path_relative ?>/<?php echo $r->profile_avatar ?>" width="40">
          		</div>
          		<div class="pull-left">
          			<a href="<?php echo site_url("pages/view/" . $slug) ?>"><?php echo $r->name ?></a>
@@ -165,6 +180,7 @@
         </div>
 
         </div>
+      
       </div>
 
 <script type="text/javascript">

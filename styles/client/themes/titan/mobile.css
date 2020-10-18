@@ -1,0 +1,1208 @@
+#responsive-menu-links { display: none; }
+
+@media (max-width: 400px) {
+	#responsive-menu-links { display: block; }
+	.dashboard-window { margin-bottom:10px; }
+	#main-content { margin-top: 50px !important; }
+}
+@media (max-width: 991px) {
+ { margin-top: 50px !important; }
+	/*.sidebar { padding-top: 150px !important; }*/
+	.sidebar{
+		display: inline-block;
+	}
+} 
+@media (max-width: 768px) {
+	#timer-scroll { background: #FFF; }
+	#notifications-scroll { background: #FFF; }
+	#projects-scroll { background: #FFF; }
+	#chat-scroll { background: #FFF; }
+	.notification-box-title { background: #FFF; }
+	#responsive-menu-links { display: block; }
+	.dashboard-window { margin-bottom: 10px; }
+	#main-content { margin-top: 50px !important; }
+}
+@media (max-width: 1024px){
+   
+
+	.mainbar{
+        width: 100vw;  
+	 }
+	.rightbar{
+		display: none;
+	 }
+	.col-md-2{
+		width: 16.66666667vw;
+		float: left;
+		font-size: 2vw !important;
+	 }
+	.col-md-6 {
+       width: 50vw;
+       float: left;
+       font-size: 2vw !important;
+     }
+     .col-md-4 {
+       width: 33.33333333%;
+       float: left;
+       font-size: 2vw !important;
+     }
+    #navbar{
+       display: block !important;
+       font-size: 2vw !important;
+       border-radius: 0px !important;
+     }
+    .navbar-brand{
+       font-size: 2vw !important;
+     }
+    .navbar-for{
+    	font-size: 2vw !important;
+     }
+    .sidebar-block{
+    	font-size: 2vw !important;
+     }
+    #homepage-links{
+    	font-size: 2vw !important;
+     }
+    #homepage-stuff{
+    	font-size: 2vw !important;
+
+     }
+    .sidebar-block{
+    	font-size: 2vw !important;
+     }
+    .sidebar-block ul{
+    	font-size: 2vw !important;
+     }
+    .sidebar-block  ul li a{
+    	font-size: 1.46vw !important;
+     }
+    .sidebar-block p{
+    	font-size: 2vw !important;
+     }
+    .page-block{
+    	font-size: 2vw !important;
+     }
+    .page-block-title{
+    	font-size: 2vw !important;
+     }
+    .page-block-page{
+    	font-size: 2vw !important;
+     }
+    .pull-left{
+    	font-size: 2vw !important;
+    	margin-right: 0.5vw !important;
+     }
+    .pull-left p{
+    	font-size: 1vw !important;
+     }
+    .pull-left a{
+    	font-size: 1vw !important;	
+     }
+    .pull-left a img{
+    	font-size: 1vw !important;
+    	width: 4vw !important;
+     }
+    .pull-left img{
+    	font-size: 1vw !important;
+    	width: 5vw !important;
+      border-radius: 50% !important;
+     }
+    .pull-right{
+    	font-size: 2vw !important;
+     }
+    .pull-right button{
+    	font-size: 1vw !important;
+     }
+    .feed-footer{
+    	font-size:2vw !important;
+     }
+    .feed-header-user{
+    	font-size:2vw !important;
+     }
+    .feed-header-user img{
+    	font-size:2vw !important;
+    	width: 5vw !important;
+    	height: 5vw !important;
+     }
+    .feed-header-info{
+    	font-size:2vw !important;
+     }
+    .feed-header-info a{
+    	font-size:2vw !important;
+      padding-right: 2vw !important;
+     }
+    .feed-timestamp{
+    	font-size:2vw !important;
+     }
+    .feed-header-dropdown{
+    	font-size: 2vw !important;
+     }
+    .dropdown a{
+       font-style:1vw !important;
+     }
+    .dropdown a{
+    	font-style:2vw !important;
+     }
+    .btn-group{
+       font-style:2vw !important;
+     }
+    .btn-group a{
+    	font-style:2vw !important;
+     }
+    .btn-group ul li a{
+        font-style:2vw !important;
+     }
+    .feed-content{
+        font-style:2vw !important;
+     }
+    .feed-content a{
+    	font-style:2vw !important;
+     }
+    .feed-content-stats{
+    	font-style:2vw !important;
+     }
+     .feed-content-stats a{
+    	font-style:2vw !important;
+     }
+    .feed-footer{
+    	font-size: 2vw !important;
+     }
+    .feed-footer a{
+    	font-size:2vw !important;
+     }
+    .feed-footer ul li{
+    	font-size:2vw !important;
+     }
+    #like-button-267{
+        font-size:2vw !important;
+     }
+    #dislike-button-267{
+       font-size:2vw !important;
+     }
+    .editor-button{
+       font-size:2vw !important;
+     }
+    .editor-button {
+       font-size:2vw !important;
+     }
+    .editor-button  ul li a{
+     	font-size: 2vw !important;
+     }
+    .user_bi a img{
+        font-size: 1vw !important;   
+     }
+    .topbar-right a{
+     	font-size: 1vw !important;
+     }
+    .toplinkbtn img{
+     	font-size: 1vw !important;
+     	width: 2vw !important;
+     	height: 2vw !important;
+     }
+    .toplinkbtn{
+     	font-size: 1vw !important;
+     }
+    #noti-menu-drop{
+     	font-size: 1vw !important;
+     }
+
+    .topbar-right{
+     	font-size: 1vw !important;
+     }
+    .searchButton{
+     	font-size: 2vw !important;
+     }
+    .search{
+     	font-size: 2vw !important;
+     }
+    .nav ul li a{
+     	font-size: 1vw !important;
+     }
+    .editor-user-icon img{
+     	width: 5vw !important;
+     	height: 5vw !important;
+       }
+    .editor-header{
+     	font-size: 2vw !important;
+     }
+    .user-icon-big {
+       width: 4vw !important;
+       height: 4vw !important;
+      }
+    .editor-textarea {
+      	font-size: 2vw !important;
+      }
+    .editor-textarea-part {
+        width: calc(100% - 0px) !important;
+        float: left !important;
+      }
+    .btn-post{
+      	
+      	font-size: 2vw !important;
+      }
+    .dropdown-menu{
+      	font-size: 2vw !important;
+      }
+    .notify-arrow{
+      	font-size: 2vw !important;
+      }
+    .notifications-scroll{
+      	font-size: 2vw !important;
+      }
+    .notification-box-bit {
+      	font-size: 2vw !important;
+      }
+     .notification-icon-bit {
+      }
+      .notification-icon-bit img{
+        width: 3vw !important;
+        height: 3vw !important;
+      }
+     .notification-box-bit {
+        padding: 0px !important;   	
+      }
+    .projects-text-bit{
+      		font-size: 1vw !important;
+      }
+    .projects-text-bit a{
+      		font-size: 1vw !important;
+      }
+    .projects-text-bit p{
+      		font-size: 1vw !important;
+      }
+    .notification-box-footer{
+      	font-size:1vw !important;
+
+      }
+    .notification-box-footer a{
+      	font-size: 1vw !important;
+      }
+    .notification-icon{
+      	font-size: 2vw !important;
+      }
+    .badge{
+      	font-size: 2vw !important;
+      }
+    .notification-box-title{
+      	font-size: 1vw !important;
+              }
+    .notification-box-title a{
+     	font-size: 1vw !important;
+      }
+    #chat-scroll{
+      	font-size: 2vw !important;
+        
+      }
+    #loading_spinner_email{
+      	font-size: 2vw !important;
+      }
+    .glyphicon {
+     	font-size: 2vw !important;
+      }
+    .notification-box-footer{
+      	font-size: 2vw !important;
+      }
+    .notification-box-footer a{
+      	font-size: 2vw !important;
+      }
+    .notification-badge {
+      	font-size: 2vw !important;
+        top: 
+      }
+    .fa-w-16{
+      	font-size: 2vw !important;
+      }
+    .online-dot-user{
+       font-size: 1vw !important;
+       width: 5px !important;
+       height: 5px !important;
+      }
+    .online-dot-user a{
+      	font-size: 1vw !important;
+      }
+      .online-dot-user a img{
+      	font-size: 2vw !important;
+      	width: 2vw !important;
+      	height: 2vw !important;
+      }
+     .user-box-avatar img {
+       width: 3vw !important;
+       height: 3vw !important;
+      }
+      .notification-icon-bit {
+       }
+    .projects-text-bit{
+      font-size: 1vw !important;
+
+      }
+    .projects-text-bit a{
+      font-size: 1vw !important;
+      }
+    .notification-datestamp{
+      font-size: 1vw !important;
+      }
+    .offline-dot-user{
+       font-size: 1vw !important;
+       height: 5px !important;
+       width: 5px !important;
+      }
+    .offline-dot-user a{
+       font-size: 1vw !important;
+      } 
+    .offline-dot-user a img{
+       font-size: 1vw !important;
+      } 
+    .dropdown-menu{
+      	font-size: 2vw !important;
+      }
+    .dropdown-menu li{
+      	font-size: 2vw !important;
+      }
+    .dropdown-menu li a{
+      	font-size: 2vw !important;
+      }
+    .dropdown{
+        font-size: 2vw !important;
+      }
+    .faded-icon{
+        font-size: 2vw !important;
+      }
+    .editor-feedcol{
+      	font-size: 2vw !important;
+        padding:0px 1vw !important;  
+      }
+    table{
+      	font-size: 1vw !important;
+      }
+    .editor-feedrow{
+      	font-size: 1vw !important;
+      }
+    table{
+      	font-size: 1vw !important;
+      }
+    tbody{
+      	font-size: 1vw !important;
+      }
+    .editor-feedrow{
+         font-size: 1vw !important;
+         padding-right: 0px !important;
+      }
+    .editor-feedrow div{
+         font-size: 1vw !important;
+      }
+    .editor-feedrow img{
+      	font-size: 1vw !important;
+      	width: 4vw !important;
+      	height: 4vw !important; 
+      }
+    .dropdown{
+      	font-size: 1vw !important;
+      }
+    .dropdown-toggle{
+      	font-size: 1vw !important;
+      }
+    .fa-w-20{
+      	font-size: 1vw !important;
+      }
+    .caret{
+      	font-size: 1vw !important;
+      }
+    .dropdown-menu{
+      	font-size: 1vw !important;
+      }
+    .dropdown-header{
+      	font-size: 1vw !important;
+      }
+    .active{
+      	font-size: 2vw !important;
+      }
+       .active a{
+       	font-size: 2vw !important;	
+      }
+      .dropdown-menu li a{
+        font-size: 2vw !important;
+      }
+      .fa-lock{
+        font-size: 1vw !important;
+      }
+    .btn-sm {
+        padding: 1px 0px;
+        line-height: 1.5; 
+     }
+       .navbar-nav a {
+        padding-top:2vw !important;
+padding-right:1vw !important;
+padding-left:1vw !important;
+padding-bottom:3vw !important; 
+    }
+     #noti-menu-drop{  
+     width: 4.8vw !important;     
+     }
+     #email-menu-drop{
+      width: 4.8vw !important;
+     }
+    .navbar-nav {
+       margin: 1vw -0vw !important;
+      }
+      .searchform{
+      	margin-left: 4vw !important;
+      	margin-right: -2vw !important;
+      }
+      .olx{
+        width:90% !important;
+        font-size: 1.5vw !important;
+        margin-left: 1vw !important;
+      }
+     .editor-feedrow{
+      width: 50% !important;
+     }
+     .notification-box-footer{
+     }
+     #responsive-menu-links{
+      display: none !important;
+     }
+     .notification-box-title{
+      margin-bottom: 0px !important;
+     }
+     .notification-box-footer{
+      padding: 0px !important;
+     }
+     .btn-xs{
+      padding: 1px 3px !important;
+      margin-right: 7vw !important;
+     }
+     /* .fa-circle{
+      margin-left: -2vw !important;
+     } */
+     .post-promoted{
+      font-size: 1vw !important;
+     }
+     .glyphicon-bullhorn{
+      font-size: 1vw !important;
+      width: 2vw !important;
+     }
+     .editor-button{
+      margin-right: 0px !important;
+     }
+     .btn-primary{
+      font-size: 1vw !important;
+      width: 8vw !important;
+     }
+     .storybox-title{
+      font-size: 1vw !important;
+     }
+     .storybox-title a{
+      font-size:2vw !important;
+     }
+     .story-seeall{
+      font-size: 3vw !important;
+     }
+     .storyprofilepicbox img{
+      width: 5vw !important;
+     }
+     .storyusername{
+      font-size: 2vw !important;
+     }
+     .storyprofilepicbox{
+      font-size: 2vw !important;
+     }
+     .storyprofilepicbox img{
+      font-size: 2vw !important;
+      width: 5vw !important;
+      height: 5vw !important;
+     }
+     .feed-content-stats{
+      font-size: 2vw !important;
+     }
+     .storyImageContainer{
+      width: 15vw !important;
+      height: 35vw !important;
+     }
+     .storybox{
+     }
+     .feed-content-stats{
+      font-size: 2vw !important;
+     }
+     .feed-content-stats a{
+      font-size: 2vw !important;
+     }
+     .fa-thumbs-up{
+      font-size: 2vw !important;
+     }
+     .feed-likes-350{
+      font-size: 2vw !important;
+     }
+     .fa-comment-alt{
+      font-size: 2vw !important;
+     }
+     .feed-comments-350{
+      font-size: 2vw !important;
+     }
+     .feed-comment-area{
+      font-size: 2vw !important;
+     }
+     .feed-comment-wrapper{
+      font-size: 2vw !important;
+     }
+     .feed-comments-spot{
+      font-size: 2vw !important;
+     }
+     .feed-comment-m {
+      font-size: 2vw !important;
+     }
+     .feed-comment-m-part1{
+      font-size: 2vw !important;
+     }
+     .feed-comment-m-part1 a{
+      font-size: 2vw !important;
+     }
+     .feed-comment-m-part1 a img{
+      font-size: 2vw !important;
+      }
+     .feed-comment-m-part2{
+      font-size: 2vw !important;
+     }
+     .feed-comment-m-part2 a{
+      font-size: 2vw !important;
+     }
+     .small-text{
+      font-size: 1vw !important;
+     }
+     .small-text a{
+     font-size: 1vw !important;
+     }
+     #comment-like-link-41{
+      font-size: 2vw !important;
+     }
+     .feed-reply-comments-41{
+      font-size: 2vw !important;
+     }
+     #comment-like-41{
+      font-size: 2vw !important;
+     }
+     .fa-trash-alt{
+      font-size: 2vw !important;
+     }
+     .feed-comment-m{
+      font-size: 2vw !important;
+     }
+     .feed-comment-m-part1{
+      font-size: 2vw !important;
+     }
+      .feed-comment-m-part1 a {
+      font-size: 2vw !important;
+     }
+     .feed-comment-m-part1 a img{
+      font-size: 2vw !important;
+     }
+     .feed-comment-m-part2{
+      font-size: 2vw !important;
+     }
+     .mentions-input{
+      font-size: 2vw !important;
+     }
+     .highlighter{
+      font-size: 2vw !important;
+     }
+     .highlighter-content{
+      font-size: 2vw !important;
+     }
+     .form-control{
+      font-size: 2vw !important;
+      height: 17px !important;
+     }
+     .ui-autocomplete{
+      font-size: 2vw !important;
+     }
+     .feed-comment-m-part1{
+      width: 23px !important;
+     }
+     .media-left a img{
+      font-size: 2vw !important;
+      width: 4vw !important;
+      height: 4vw !important;
+     }
+     .form-control{
+      font-size: 2vw !important;
+     }
+     .ui-autocomplete{
+      font-size: 2vw !important;
+     }
+     .form-control{
+      padding: 0px 4px !important;
+     }
+     .ui-helper-hidden-accessible{
+      font-size: 2vw !important;
+     }
+     .mentions-input{
+      font-size: 2vw !important;
+     }
+     .highlighter{
+      font-size: 2vw !important;
+     }
+     .highlighter-content{
+      font-size: 2vw !important;
+     }
+     .mentions-input{
+      font-size: 2vw !important;
+     }
+     .feed-comment-m-part2 {
+      width: calc(100% - 23px) !important;
+    }
+    .btn-success{
+      font-size: 1vw !important;
+    }
+    .badge{
+      font-size: 1.5vw !important;
+    
+    }
+    .userstorybox{
+      width: 100px !important;
+    height: 130px !important;
+    }
+    .userstorybox{
+      width: 100px !important;
+    height: 130px !important;
+    }
+    .btn {
+      border: 1px solid transparent !important;
+    }
+    .col-md-12{
+      padding-right: 0px !important;
+      padding-left: 0px !important;
+    }
+    .editor-feedrow .row{
+      margin: 0px !important;
+    }
+    .fa-plus-circle{
+      bottom: -1px !important;
+      right: 3px !important;
+    }
+    .dropdown-menu{
+      min-width: 27vw !important;
+    }
+    .postboxbutton{
+      width: 5vw !important;
+    }
+    .editor-textarea-part textarea {
+      margin: -1.5rem 0  -0.5rem 2.5rem !important;
+      padding: 0.5rem  0   0 0.25rem !important;
+     }
+
+     .responsiveimage{
+      height: 100px !important;
+     }
+
+     .editor-textarea-wrapper{
+      margin-bottom: 0px !important;
+     }
+     .navbar-brand-two img{
+      font-size: 2vw !important;
+     }
+     .navbar-nav li a {
+      height: 15px !important;
+     }
+     .navbar-brand-two{
+      margin-left: -12px !important;
+      padding: 11px 0px 11px 23px !important;
+      height: 45px !important;
+     }
+     .user-box-avatar{
+      list-style: 23px !important;
+     }
+     #navbar{
+     line-height: 8px !important;
+     }
+     #main-content{
+      border-right: 0px !important;
+     }
+
+#responsive-menu-links {
+	   display: none !important;
+    }
+.editor-button{
+	padding: 0px !important;
+}
+
+@media (max-width: 770px){
+	
+      .navbar-nav>li {
+     float: left;
+     }
+     .navbar-nav>li{
+     	float: left;
+     }
+     .navbar-nav>li {
+       float: left;
+     }
+
+  }
+*{
+	padding: 0px;
+	margin: 0px;
+}
+.editor-feedrow
+{
+  width: 50%;
+}
+@media (max-width: 414px){
+  .navbar-nav a {
+padding-top:2vw !important;
+padding-right:1vw !important;
+padding-left:1vw !important;
+padding-bottom:3vw !important; 
+}
+.notification-icon-bit{
+ padding-left:1vw !important; 
+
+}
+.notification-box-bit {
+  line-height:6px !important;
+  width: auto !important;
+  padding: 1px 0px !important;
+}
+.projects-text-bit{
+  line-height: 7px !important;
+  width:60px !important;
+  margin-left:-3vw !important;
+}
+#notifications-scroll {
+  height: 140px !important;
+}
+.navbar-nav>li>a{
+  line-height: 5px !important;
+}
+.badge{
+  padding: 1px 3px !important;
+}
+     .navbar-nav .open .dropdown-menu {
+    position:  absolute !important; 
+    width: 24.5vw !important;
+    padding-left: 11px !important;
+    }
+    .dropdown-menu{ 
+      right: 0px !important;
+      left: unset;
+     }
+     .notify-arrow{
+      border-width: 0 5px 5px !important;
+      right: 4px !important;
+      top: -12px !important;
+     }
+          #navbar{
+     line-height: 8px !important;
+     }
+     #chat-scroll p{
+      padding:0px !important;
+     }
+     .notification-icon-bit{
+      margin-right: 1px !important;
+     }
+     .dropdown-menu li {
+      background-color: white;
+      border: 1px solid #C1C1C1;
+     } 
+
+
+     .notification-datestamp {
+      width: auto;
+     }
+     .postboxbutton{
+      height: 12px !important;
+     }
+     .searchTerm 
+     {
+      height: 23px !important;
+     }
+     .searchButton{
+      height: 23px !important;
+     }
+     .topbar-right::before{
+      height: 10px !important;
+      top: 5px !important;
+     }
+     .navbar-collapse{
+      height: 24.5px !important
+     }
+     .notification-badge{
+      top: 1px !important;
+     }
+     .notification-icon{
+      top: -2px !important;
+     }
+     .feed-comment-m{
+
+     }
+     .feed-comment-m-part1 a{
+      height: 4vw !important;
+      width: 4vw !important;
+     }
+     .feed-comment-m-part1 a img{
+      height: 4vw !important;
+      width: 4vw !important;
+     }
+     .editor-content{
+      height: 15vw !important;
+     }
+     .post-promoted{
+      margin-right: .7px !important; 
+     }
+     .half-separator{
+      margin-right: 2.3vw !important;
+
+     }
+     .profile-header{
+      width: 92% !important;
+      height: 200px !important;
+     }
+      .profile-header-avatar{
+        width: 85px !important;
+        height: 85px !important;
+        left: 10px !important;
+        bottom: -28px !important;
+        }
+        .profile-header-bar{
+          width: 92% !important;
+        }
+        .profile-header-bar ul{
+          margin-left: 110px !important;
+        }
+        .profile-header-bar ul li{
+          padding-right:5px !important; 
+          padding-left:5px !important;
+          padding-top:5px !important;
+          padding-bottom:5px !important;
+          font-size: 2.5vw !important;
+        }
+        .copyright-area {
+       padding: 5px 0px!important;
+        }
+        .copyright-text p{
+          font-size: 5px !important;
+          margin-top: 11px !important;
+        }
+        .footer-menu li a{
+          font-size: 5px !important;
+        }
+        .copyright-area{
+
+          }
+        .footer-menu li{
+     margin-left:4px !important; 
+           }
+           .container{
+           width: 120% !important;
+           }
+           .footer-menu ul{
+           padding-left: 77px !important;
+           }
+           .page-header-title{
+            font-size: 10px !important;
+           }
+           .input-group-addon, .input-group-btn{
+            width: 37% !important;
+           }
+           .form-control{
+            width: 36% !important;
+            height: 19px !important;
+            padding:3px 4px !important;
+            font-size: 2vw !important;
+           }
+           .input-sm{
+            width: 100% !important;
+           }
+           .btn-info{
+            padding: 4.5px 3.4px !important;
+           }
+           .glyphicon-trash{
+            font-size: 1.5vw !important;
+           }
+           .glyphicon-cog{
+            font-size: 1.5vw !important;
+           }
+           .btn-warning{
+            padding: 0px 2.5px !important;
+            float: left !important;
+           }
+           .btn-danger{
+            padding: 0px 2.5px !important;
+            float: left !important;
+
+           }
+           .blog-table_info{
+            font-size: 2vw !important;
+                      }
+           .dataTables_info{
+            font-size: 2vw !important;
+           }
+           #blog-table_first a{
+           font-size: 1.5vw !important;
+           }
+           #blog-table_previous a{
+           font-size: 1.5vw !important;
+           }
+           #blog-table_next a{
+            font-size: 1.5vw !important;
+           }
+           #blog-table_last{
+            font-size: 1.5vw !important;
+           }
+           #blog-table_paginate{
+            
+           }
+           .dataTables_info{
+            float: left !important;
+           }
+           .pagination{
+            padding-left: 50px !important;
+                     }
+           .pagination>li>a{
+            padding: 6px 5px !important;
+            font-size: 1vw !important;
+           }
+           .table-responsive{
+            border: 0px !important;
+           }
+           .profile-header-name{
+            bottom: 12px !important;
+    left: 101px !important;
+    font-size: 12px !important;
+           }
+           .col-md-4{
+            width: 33.333% !important;
+            float: left !important;
+           }
+           .col-md-8{
+            width: 66.666667% !important;
+            float: left !important;
+           }
+           .page-block-intro p{
+            font-size: 1.5vw !important;
+           }
+           .page-block-tidbit{
+            font-size: 1vw !important;
+           }
+           .profile-friend-area{
+            width: 8vw !important;
+            height: 13vw !important;
+           }
+           .profile-album-area img{
+            width: 8vw !important;
+            height: 12vw !important;
+            object-fit: cover !important;
+           }
+           .profile-album-area{
+            width: 23px !important;
+            margin: 7px !important;
+           }
+           .btn-default{
+            font-size: 2vw !important;
+           }
+           .btn-xs{
+           }
+           .table>tbody>tr>td{
+             padding: 3px !important;
+           }
+           .form-inline .form-group{
+            display: inline-block !important;
+           }
+           #mn1{
+            right: unset !important;
+           }
+           .col-xs-4{
+            width: 33.3333% !important;
+           }
+           .btn{
+            font-size: 7px !important;
+           }
+           .glyphicon-plus{
+            font-size: 1.5vw !important;
+           }
+          .col-md-3 img {
+           display: none;
+          }
+          #loadmorebutton{
+            width: unset !important;
+          }
+          .btn-success{
+            margin-top: 2px !important;
+          }
+          #country{
+            width: 70% !important;
+          }
+          #searchbyid{
+            width: 70% !important;
+          }
+          .open>.dropdown-menu{
+            height: 190px !important;
+          }
+          .modal-content{
+            width: 250px !important;
+            margin: 30px !important;
+            margin-left: 70px !important;
+          }
+           h4 {
+            font-size: 11px !important;
+           } 
+           .label-heading{
+            font-size: 5px !important;
+           }  
+           .col-md-8 .form-control{
+            width: 85% !important;
+            height: 22px !important;
+           }
+           .modal-footer .btn{
+            padding:3px 10px !important;
+           } 
+           #poll_question{
+            margin-left:px !important;
+           }
+           .mail-box-avatar{
+            width: 22px !important;
+           }
+           .mail-box-username a{
+            font-size: 2vw !important;
+           }
+           .mail-box-title{
+           font-size: 1.5vw !important;
+           }
+           .mail-box-message{
+            font-size: 1.5vw !important;
+           }
+           .mail-box-timestamp{
+            font-size: 1.5vw !important;
+           }
+           .mail-box-snippet .btn{
+            padding:3px 3px !important;
+           }
+          .input-group .form-control{
+            width: 80% !important;
+          }
+          .input-group-btn .btn {
+            padding: 3px 5px !important;
+            margin-left:-20px !important; 
+          }
+          .col-md-5 {
+            width: 41.666667% !important;
+            float: left !important;
+          }
+          .mail-header-timestamp .btn-warning{
+            padding:4px 4px !important;
+            margin-right: 2px !important;
+          }
+          .mail-header-timestamp .btn-danger{
+            padding: 4px 4px !important;
+            margin-right: 2px !important;
+          }
+          .mail-pagination  .pagination li a{
+            padding: 8.5px 8px !important;
+          }
+          .mail-reply-avatar{
+            width: 22px !important;
+          }
+          .mail-reply-user a{
+            font-size: 2vw !important;
+          }
+          .mail-reply-message{
+            font-size: 1.8vw !important;
+          }
+          .mail-reply-timestamp{
+            font-size: 1.5vw !important;
+          }
+        .col-md-7{
+          width: 58.33333% !important;
+          float: left !important;
+          }       
+        .mail-reply-button .btn{
+          width: 100% !important;
+        }
+        .mail-reply-timestamp a{
+          margin-left: -10px !important;
+        }
+        ul.settings-sidebar li a {
+        font-size: 1.5vw !important;
+        }
+        .col-sm-2{
+         width: 16.6667% !important;
+         float: left;
+        }
+        .col-sm-10{
+          width: 83.333333% !important;
+          float: left;
+          font-size: 2vw !important;
+        }
+        .col-md-9{
+          width: 75% !important;
+          float: left !important;
+         }
+        .col-md-3{
+          width: 25% !important;
+          float:  left !important;
+        }
+        .control-label{
+         font-size: 1.5vw !important;
+        }
+        .col-sm-10 img{
+          width: 115px !important;
+          height: 115px !important;
+        }
+        .col-md-10 .form-control{
+          width: 100% !important;
+        }
+        .col-md-10 textarea {
+          height: 50px !important;
+        }
+        .avatar{
+          width: 40px!important;
+          height: 40px !important;
+        } 
+        .user-details h3 a{
+          font-size: 3vw !important;
+        }
+        .user-details p{
+          font-size: 2vw !important;
+        }
+        .detail strong{
+          font-size: 2vw !important;
+        }
+        .detail{
+          font-size: 1.5vw !important;
+        }
+        .breadcrumb li {
+          font-size: 2vw !important;
+        }
+        .active{
+          font-size: 2vw !important;
+        }
+        .settings-sidebar li{
+          padding: 4px !important;
+          margin: 1px !important;
+          font-size: 5px !important;
+        }
+        #albums a{
+          width: 80px !important;
+        }
+        #albums img{
+          width: 100% !important;
+          height: 100px !important;
+        }
+        #albums h5{
+          font-size: 2vw !important;
+        }
+        .profile-friend-box .btn{
+          padding: 3px 3px !important;
+        }
+        .album-tools .btn{
+          padding: 3px 3px !important;
+        }
+    
+
+      
+        
+}
+@media (min-width:768px){
+.editor-textarea-part textarea {
+    margin: -3.5rem 0 -0.5rem 6.5rem !important;
+    padding: 0.5rem 0 0 0.25rem !important;
+}
+}

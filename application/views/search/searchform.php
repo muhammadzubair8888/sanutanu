@@ -1,10 +1,9 @@
-<?php echo form_open(site_url(), array("class"=>"navbar-for")) ?>
+<?php echo form_open(site_url('search/index'), array("class"=>"navbar-for searchform","method"=>"get")) ?>
 	<div class="search">
-		<button disabled="true" type="button" class="searchButton">
-	        <i class="glyphicon glyphicon-search"></i>
-	     </button>
-	      <input type="text" class="searchTerm" placeholder="<?php echo lang("ctn_76") ?> ..." id="search-complete" >
-	      
+	      <input type="text" name="q" class="searchTerm autocomplete" placeholder="<?php echo lang("ctn_76") ?> ..." data-uri="search_suggession" data-template="search" value="<?php if(isset($get['q'])){ echo $get['q']; } else if(isset($_GET['q'])){ echo $_GET['q']; } ?>" autocomplete="off" >
+        <button disabled="true" type="button" class="searchButton">
+          <i class="glyphicon glyphicon-search"></i>
+       </button>
    </div>
               <!-- <div class="has-search" style="padding-bottom: 5px; position: relative !important;">
                 <span class="glyphicon glyphicon-search form-control-feedback"></span>
@@ -21,27 +20,25 @@
 .searchTerm {
   width: 100%;
   border: 1px solid #CCC;
-  border-left: none;
+  /*border-right: none;*/
   padding: 5px;
   height: 36px;
-  border-radius: 0 5px 5px 0;
+   border-radius: 3px 0 0 3px; 
   outline: none;
   color: #9DBFAF;
 }
 
-.searchTerm:focus{
-  color: #a41be3;
-}
+
 
 .searchButton {
   width: 40px;
   height: 36px;
   border: 1px solid #CCC;
-  border-right: none;
+  border-left: none;
   background: #FFF;
   text-align: center;
   color: #AAA;
-  border-radius: 5px 0 0 5px;
+  border-radius: 0 3px 3px 0;
   cursor: pointer;
   font-size: 20px;
 }

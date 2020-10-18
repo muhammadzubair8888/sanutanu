@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+ 
 class Admin extends CI_Controller 
 {
 
@@ -8,7 +8,9 @@ class Admin extends CI_Controller
 		parent::__construct();
 		$this->load->model("admin_model");
 		$this->load->model("user_model");
-
+		$this->load->model("home_model");
+		$this->load->model("marriage_model");
+		
 		if (!$this->user->loggedin) $this->template->error(lang("error_1"));
 		if(!$this->common->has_permissions(array("admin", "admin_settings",
 			"admin_members", "admin_payment"), $this->user)) {
@@ -19,12 +21,8 @@ class Admin extends CI_Controller
 
 	public function index() 
 	{	
-		$this->template->loadData("activeLink", 
-			array("admin" => array("general" => 1)));
-		$this->template->loadContent("admin/index.php", array(
-			)
-		);
-
+		$this->template->loadData("activeLink", array("admin" => array("general" => 1)));
+		$this->template->loadContent("admin/index.php", array() );
 	}
 
 	public function invites() 
@@ -37,15 +35,12 @@ class Admin extends CI_Controller
 		$this->template->loadContent("admin/invites.php", array(
 			)
 		);
-
 	}
 
 	public function invite_page() 
 	{
 		$this->load->library("datatables");
-
 		$this->datatables->set_default_order("invites.ID", "desc");
-
 		// Set page ordering options that can be used
 		$this->datatables->ordering(
 			array(
@@ -326,8 +321,9 @@ class Admin extends CI_Controller
 
 		$title = $this->common->nohtml($this->input->post("title"));
 		$description = $this->common->nohtml($this->input->post("description"));
-
+		$blocking = $this->common->nohtml($this->input->post('block_blog'));
 		$private = intval($this->input->post("private"));
+		$approve_blog = intval($this->input->post("approve_blog"));
 
 		if(empty($title)) {
 			$this->template->error(lang("error_172"));
@@ -338,7 +334,9 @@ class Admin extends CI_Controller
 			"title" => $title,
 			"description" => $description,
 			"private" => $private,
-			"timestamp" => time()
+			"timestamp" => time(),
+			"blog_status" => $blocking,
+			"blog_approved" => $approve_blog
 			)
 		);
 
@@ -434,6 +432,48 @@ class Admin extends CI_Controller
 				$this->common->get_user_display(array("username" => $r->username, "avatar" => $r->avatar, "online_timestamp" => $r->online_timestamp, "first_name" => $r->first_name, "last_name" => $r->last_name)),
 				'<a href="' . site_url("admin/edit_blog_post/" . $r->ID) .'" class="btn btn-warning btn-xs" title="'. lang("ctn_55").'"><span class="glyphicon glyphicon-cog"></span></a>  <a href="' . site_url("admin/delete_blog_post/" . $r->ID . "/" . $this->security->get_csrf_hash()) .'" onclick="return confirm(\'' . lang("ctn_86") . '\')" class="btn btn-danger btn-xs" title="'. lang("ctn_57") .'"><span class="glyphicon glyphicon-trash"></span></a>'
 			);
+		}
+		echo json_encode($this->datatables->process());
+	}
+    //contact us info
+	public function contact_us_info()
+	{
+		if(!$this->user->info->admin && !$this->user->info->admin_settings) {
+			$this->template->error(lang("error_2"));
+		}
+		//$activeLink['admin']['contact_us_info']
+		$this->template->loadData("activeLink", 
+			array("admin" => array("contact_us_info" => 1)));
+		$this->template->loadContent("admin/contact_us_info.php", array(
+			)
+		);
+	}
+	public function contact_us_page()
+	{
+		$this->load->library("datatables");
+		$this->datatables->length = 50000;
+		$this->datatables->set_default_order("contact_us.ID", "desc");
+		// Set page ordering options that can be used
+		$this->datatables->ordering(
+			array(
+				 0 => array(
+				 	"contact_us.title" => 0,
+				 	"contact_us.description" =>0
+				 ))
+		);
+
+		$this->datatables->set_total_rows($this->admin_model->get_contact_us());
+
+		$reports = $this->admin_model->get_contact_us_report($this->datatables);
+		foreach($reports->result() as $r) {
+//$this->common->get_user_display(array("username" => $r->username, "avatar" => $r->avatar, "online_timestamp" => $r->online_timestamp, "first_name" => $r->first_name, "last_name" => $r->last_name))
+			$this->datatables->data[] = array(
+				$r->title,
+				$r->description ,
+ 				$this->common->get_user_display(array("username" => $r->username, "avatar" => $r->avatar, "online_timestamp" => $r->online_timestamp, "first_name" => $r->first_name, "last_name" => $r->last_name))
+			);
+				
+			
 		}
 		echo json_encode($this->datatables->process());
 	}
@@ -895,7 +935,260 @@ class Admin extends CI_Controller
 		$this->session->set_flashdata("globalmsg", lang("success_92"));
 		redirect(site_url("admin/promoted_posts"));
 	}
+	public function plan_ads() 
+	{
+		if(!$this->user->info->admin && !$this->user->info->admin_settings) {
+			$this->template->error(lang("error_2"));
+		}
+		$this->template->loadData("activeLink", 
+			array("admin" => array("plan_ads" => 1)));
+		$page_data['all_countries'] = $this->home_model->get_country_for_admin_insert_adds();
+		$this->template->loadContent("admin/ads_plan.php" ,$page_data);
+	}
 
+	public function editaddsplan($id = "")
+	{
+		if(!$this->user->info->admin && !$this->user->info->admin_settings) {
+			$this->template->error(lang("error_2"));
+		}
+
+		$this->template->loadData("activeLink", 
+			array("admin" => array("plan_ads" => 1)));
+		$page_data['all_countries'] = $this->home_model->get_country_for_admin_insert_adds();
+		$page_data['editplan'] = $this->admin_model->get_ads_plan($id)->result();
+
+		$this->template->loadContent("admin/editaddsplan.php" ,$page_data);
+	}
+
+	public function globe()
+	{
+		if(!$this->user->info->admin && !$this->user->info->admin_settings) {
+			$this->template->error(lang("error_2"));
+		}
+
+		$page_data['globe'] = $this->home_model->get_globe();
+		// $page_data['editplan'] = $this->admin_model->get_ads_plan($id)->result();
+		$this->template->loadContent("admin/globe.php" ,$page_data);
+	}
+
+	public function add_country_papulation()
+	{
+		$country_id   = $this->input->post('country_id');
+		$papulation   = $this->input->post('country_papulation');
+		$this->admin_model->update_papulation($country_id,array(
+			'papulation'=>$papulation
+		));
+		$this->session->set_flashdata("globalmsg", 'Papulation added');
+		redirect(site_url("admin/globe"));
+	}
+
+	public function cities()
+	{
+		if(!$this->user->info->admin && !$this->user->info->admin_settings) {
+			$this->template->error(lang("error_2"));
+		}
+
+		$page_data['cities'] = $this->home_model->get_cities();
+		// $page_data['editplan'] = $this->admin_model->get_ads_plan($id)->result();
+		$this->template->loadContent("admin/cities.php" ,$page_data);
+	}
+
+	public function add_city_papulation()
+	{
+		$country_id   = $this->input->post('city_id');
+		$papulation   = $this->input->post('city_papulation');
+		$this->admin_model->update_city_papulation($country_id,array(
+			'papulation'=>$papulation
+		));
+		$this->session->set_flashdata("globalmsg", 'Papulation added');
+		redirect(site_url("admin/cities"));
+	}
+
+	public function add_country_rate()
+	{
+		$country_id   = $this->input->post('cntry_id');
+		$papulation   = $this->input->post('country_rate');
+	
+		$this->admin_model->update_papulation($country_id,array(
+			'rate_per'=>$papulation
+		));
+		$this->session->set_flashdata("globalmsg", 'Papulation added');
+		redirect(site_url("admin/globe"));
+	}
+
+	public function insert_ads_plan() 
+	{
+		if(!$this->user->info->admin && !$this->user->info->admin_settings) {
+			$this->template->error(lang("error_2"));
+		}
+		$status = intval($this->input->post("status"));
+		$country_id = ($this->input->post("country_id"));
+		$type = 1;
+		if (empty($country_id)) {
+			$country_id = 0000000;
+			$type = 0;
+		}
+		$state_id = ($this->input->post("state_id"));
+		if (empty($state_id)) {
+			$state_id = 0000000;
+		}
+		$city_id = ($this->input->post("city_id"));
+		if (empty($city_id)) {
+			$city_id = 0000000;
+		}		
+		$plan_tittle = ($this->input->post("plan_tittle"));
+		$no_of_ads = 	($this->input->post("no_of_ads"));
+		$credit_cost = 	($this->input->post("credit_cost"));
+
+		$this->admin_model->add_rotation_plan(array(
+			"status" => $status,
+			"no_of_credits" => $credit_cost,
+			"plan_name"    => $plan_tittle,
+			"no_of_ads" => $no_of_ads,
+			"city_id" => $city_id,
+			"country_id" => $country_id,
+			"state_id" => $state_id,
+			"no_of_ads" => $no_of_ads,
+			"type" => $type,
+			)
+		);
+		$this->session->set_flashdata("globalmsg", lang("success_120"));
+		redirect(site_url("admin/plan_ads"));
+	}
+	public function update_ads_plan()
+	{
+		$planid = ($this->input->post("planid"));
+		$status = intval($this->input->post("status"));
+		$plan_tittle = ($this->input->post("plan_tittle"));
+		$no_of_ads = 	($this->input->post("no_of_ads"));
+		$credit_cost = 	($this->input->post("credit_cost"));
+
+		if (!empty($this->input->post("country_id"))) {
+		$country_id = ($this->input->post("country_id"));
+		$state_id = ($this->input->post("state_id"));
+		$city_id = ($this->input->post("city_id"));
+		$this->admin_model->update_rotation_plan($planid ,  array(
+			"status" => $status,
+			"no_of_credits" => $credit_cost,
+			"plan_name"    => $plan_tittle,
+			"no_of_ads" => $no_of_ads,
+			"no_of_ads" => $no_of_ads,
+			"city_id" => $city_id,
+			"country_id" => $country_id,
+			"state_id" => $state_id,			
+			)
+		);	
+		}else{
+		$this->admin_model->update_rotation_plan($planid ,  array(
+			"status" => $status,
+			"no_of_credits" => $credit_cost,
+			"plan_name"    => $plan_tittle,
+			"no_of_ads" => $no_of_ads,
+			"no_of_ads" => $no_of_ads,			
+			)
+		);
+
+	}
+		$this->session->set_flashdata("globalmsg", lang("success_120"));
+		redirect(site_url("admin/editaddsplan/".$planid));
+	}
+	public function ads_plan_page() 
+	{
+		$this->load->library("datatables");
+
+		$this->datatables->set_default_order("ads_plans.id", "desc");
+
+		// Set page ordering options that can be used
+		$this->datatables->ordering(
+			array(
+				 0 => array(
+				 	"ads_plans.plan_name" => 0
+				 ),
+				 1 => array(
+				 	"ads_plans.status" => 0
+				 ),
+				 2 => array(
+				 	"ads_plans.no_of_ads" => 0
+				 ),
+				 3 => array(
+				 	"ads_plans.city_id" => 0
+				 ),
+				 4 => array(
+				 	"ads_plans.state_id" => 0
+				 ),
+				 
+				  5 => array(
+				 	"ads_plans.country_id" => 0
+				 ),
+				6 => array(
+				 	"ads_plans.no_of_credits" => 0
+				 ),  
+			)
+		);
+
+		$this->datatables->set_total_rows(
+			$this->admin_model
+				->get_total_ads_plans()
+		);
+		$plans = $this->admin_model->get_adds_plans($this->datatables);
+
+		foreach($plans->result() as $r) {
+
+			$options = "";
+
+			if($r->status == 0) {
+				$status = lang("ctn_702");
+			} elseif($r->status == 1) {
+				$status = lang("ctn_703");
+			}
+
+			if ($r->city_id) {
+				# code...
+			}
+
+			if ($r->type == 1) {
+				$type = "Specific";
+			}else{
+				$type = "Random";
+			}
+
+			$cityname = @$this->home_model->get_city($r->city_id)->row()->name;
+			$statename = @$this->home_model->get_state($r->state_id)->row()->name;
+			$countryname = @$this->home_model->get_country($r->country_id)->row()->name;
+
+
+			$this->datatables->data[] = array(
+				$r->plan_name,
+				$status,
+				$r->no_of_ads." Ads",
+				$cityname,
+				$statename,
+				$countryname,
+				$r->no_of_credits." Credits",
+				$type,
+				$options . '<a href="' . site_url("admin/delete_addsplan/" . $r->id . "/" . $this->security->get_csrf_hash()) .'" onclick="return confirm(\'' . lang("ctn_86") . '\')" class="btn btn-danger btn-xs" title="'. lang("ctn_57") .'"><span class="glyphicon glyphicon-trash"></span></a>
+					<a class="btn btn-primary btn-xs" href="'.site_url('admin/editaddsplan/').$r->id.'")><span class="glyphicon glyphicon-edit"></span></a>'
+
+			);
+		}
+		echo json_encode($this->datatables->process());
+	}
+
+	public function delete_addsplan($id) 
+	{
+		if(!$this->user->info->admin && !$this->user->info->admin_settings) {
+			$this->template->error(lang("error_2"));
+		}
+		$id = intval($id);
+		$ad = $this->admin_model->get_ads_plan($id);
+		if($ad->num_rows() == 0) {
+			$this->template->error(lang("error_158"));
+		}
+
+		$this->admin_model->delete_ads_plan($id);
+		$this->session->set_flashdata("globalmsg", lang("success_121"));
+		redirect(site_url("admin/plan_ads"));
+	}		
 	public function rotation_ads() 
 	{
 		if(!$this->user->info->admin && !$this->user->info->admin_settings) {
@@ -903,11 +1196,38 @@ class Admin extends CI_Controller
 		}
 		$this->template->loadData("activeLink", 
 			array("admin" => array("rotation_ads" => 1)));
-		$this->template->loadContent("admin/rotation_ads.php", array(
-			)
-		);
+		$page_data['all_countries'] = $this->home_model->get_country_for_admin_insert_adds();
+		$this->template->loadContent("admin/rotation_ads.php" ,$page_data);
 	}
 
+	public function get_states_against_country_for_add_rotation($country_id = "")
+	{
+		$get_states = $this->home_model->get_states_for_admin_insert_adds($country_id);
+		foreach($get_states as $state)
+
+		{
+			echo '<option value="'.$state->id.'">'.$state->name.'</option>';
+		}
+
+	}
+
+	public function get_city_against_country_for_add_rotation($state_id = "")
+	{
+		$get_cities = $this->home_model->get_city_for_admin_insert_adds($state_id);
+		foreach($get_cities as $city)
+
+		{
+			echo '<option value="'.$city->id.'">'.$city->name.'</option>';
+		}
+
+	}
+	public function get_peoples_against_city($city = "")
+	{
+		$cityname = @$this->home_model->get_city($city)->row()->name;
+		$get_peoples = $this->home_model->get_peoples_for_userside_insert_adds($cityname)->row()->totalpeoples;		
+		
+		echo "There are <b>".$get_peoples." </b>Peoples In this City to See Your Ads <br><br> <div onclick='showplans(".$city.");' class='btn btn-primary'>Show Plans</div>";
+	}
 	public function rotation_ad_page() 
 	{
 		$this->load->library("datatables");
@@ -918,20 +1238,33 @@ class Admin extends CI_Controller
 		$this->datatables->ordering(
 			array(
 				 0 => array(
-				 	"rotation_ads.name" => 0
+				 	"rotation_ads.image" => 0
 				 ),
 				 1 => array(
 				 	"rotation_ads.status" => 0
 				 ),
 				 2 => array(
-				 	"rotation_ads.pageviews" => 0
+				 	"rotation_ads.add_duration" => 0
 				 ),
 				 3 => array(
-				 	"users.username" => 0
+				 	"rotation_ads.city_id" => 0
 				 ),
 				 4 => array(
+				 	"rotation_ads.state_id" => 0
+				 ),
+				 
+				 5 => array(
+				 	"rotation_ads.country_id" => 0
+				 ),
+				 6 => array(
 				 	"rotation_ads.timestamp" => 0
-				 )
+				 ),
+				 7 => array(
+				 	"rotation_ads.page" => 0
+				 ),				  
+				 8 => array(
+				 	"users.username" => 0
+				 ),  
 			)
 		);
 
@@ -945,23 +1278,66 @@ class Admin extends CI_Controller
 
 			$options = "";
 
+			$page = "";
+
+			$status = "";
+
+			$addid = $r->ID;
+
 			if($r->status == 0) {
-				$status = lang("ctn_701");
-				$options .= '<a href="'.site_url("admin/accept_ad/" . $r->ID . "/" . $this->security->get_csrf_hash()).'" class="btn btn-success btn-xs">'.lang("ctn_623").'</a> <a href="'.site_url("admin/reject_ad/" . $r->ID . "/" . $this->security->get_csrf_hash()).'" class="btn btn-danger btn-xs">'.lang("ctn_624").'</a> ';
+				$status = "<select data-id='$addid' onchange='changestatus(this)' class='form-control'><option value='0'>".lang('ctn_701')."</option><option value='2'>".lang('ctn_703')."</option><option value='1'>".lang('ctn_702')."</option></select>";
 			} elseif($r->status == 1) {
-				$status = lang("ctn_702");
+				$status = "<select data-id='$addid' onchange='changestatus(this)' class='form-control'><option value='1'>".lang('ctn_702')."</option><option value='2'>".lang('ctn_703')."</option><option value='0'>".lang('ctn_701')."</option></select>";
 			} elseif($r->status == 2) {
-				$status = lang("ctn_703");
+				$status = "<select data-id='$addid' onchange='changestatus(this)' class='form-control'><option value='2'>".lang('ctn_703')."</option><option value='1'>".lang('ctn_702')."</option><option value='0'>".lang('ctn_701')."</option></select>";
 			}
 
-			 
+			if(!empty($r->image)) {
+				$image = '<div style="width:100px;height:100px;"><img style="width:100px; height:100px;" src="'.base_url() . $this->settings->info->upload_path_relative.'/' . $r->image.'"></div>';
+			} else {
+				$image = "";
+			}
+			if ($r->add_duration == 1) {
+				$addduration = "One Weak";
+			}elseif ($r->add_duration == 2) {
+				$addduration = "Two Weak";
+			}elseif ($r->add_duration == 3) {
+				$addduration = "Three Weak";
+			}elseif ($r->add_duration == 4) {
+				$addduration =  "One Month";
+			}elseif ($r->add_duration == 0) {
+				$addduration =  "Not Selected";
+			}
+
+			$id = $r->ID;
+
+			if ($r->page == 'home') {
+				$page = $page."<select id='changepage' data-id='$id' onchange='changepage(this)' class='form-control'><option value='home'>Home</option><option value='profile'>Profile</option><option value='pages'>Pages</option></select>";
+			}else if ($r->page == 'profile') {
+				$page = $page."<select id='changepage' data-id='$id' onchange='changepage(this)' class='form-control'><option value='profile'>Profile</option><option value='home'>Home</option><option value='pages'>Pages</option></select>";
+			}else if ($r->page == 'pages'){
+				$page = $page."<select id='changepage' data-id='$id' onchange='changepage(this)' class='form-control'><option value='pages'>Pages</option><option value='home'>Home</option><option value='profile'>Profile</option></select>";
+			}
+	
+
+
+			$cityname = @$this->home_model->get_city($r->city_id)->row()->name;
+			$statename = @$this->home_model->get_state($r->state_id)->row()->name;
+			$countryname = @$this->home_model->get_country($r->country_id)->row()->name;
+
 			$this->datatables->data[] = array(
-				$r->name,
+				$image,
 				$status,
-				$r->pageviews,
-				$this->common->get_user_display(array("username" => $r->username, "avatar" => $r->avatar, "online_timestamp" => $r->online_timestamp, "first_name" => $r->first_name, "last_name" => $r->last_name)),
+				$addduration,
+				$cityname,
+				$statename,
+				$countryname,
+				
 				date($this->settings->info->date_format, $r->timestamp),
-				$options . '<a href="' . site_url("admin/edit_rotation_ad/" . $r->ID) .'" class="btn btn-warning btn-xs" title="'. lang("ctn_55").'"><span class="glyphicon glyphicon-cog"></span></a>  <a href="' . site_url("admin/delete_rotation_ad/" . $r->ID . "/" . $this->security->get_csrf_hash()) .'" onclick="return confirm(\'' . lang("ctn_86") . '\')" class="btn btn-danger btn-xs" title="'. lang("ctn_57") .'"><span class="glyphicon glyphicon-trash"></span></a>'
+				$page,
+				$this->common->get_user_display(array("username" => $r->username, "avatar" => $r->avatar, "online_timestamp" => $r->online_timestamp, "first_name" => $r->first_name, "last_name" => $r->last_name)),
+				$options . ' <a href="' . site_url("admin/delete_rotation_ad/" . $r->ID . "/" . $this->security->get_csrf_hash()) .'" onclick="return confirm(\'' . lang("ctn_86") . '\')" class="btn btn-danger btn-xs" title="'. lang("ctn_57") .'"><span class="glyphicon glyphicon-trash"></span></a>'
+
 			);
 		}
 		echo json_encode($this->datatables->process());
@@ -972,27 +1348,93 @@ class Admin extends CI_Controller
 		if(!$this->user->info->admin && !$this->user->info->admin_settings) {
 			$this->template->error(lang("error_2"));
 		}
-		$name = $this->common->nohtml($this->input->post("name"));
-		$advert = $this->lib_filter->go($this->input->post("advert"));
-		$status = intval($this->input->post("status"));
-		$pageviews = intval($this->input->post("pageviews"));
 
-		if(empty($name)) {
-			$this->template->error(lang("error_157"));
+		if (!empty($this->input->post("planidforadduser"))) {
+			$planid = $this->input->post("planidforadduser");
+			$remaining_adds = $this->admin_model->get_buy_adds_plan($planid)->row()->remaining_adds;
+
+			$minusadds= $remaining_adds-1;
+
+			$userid = $this->user->info->ID;
+			$this->db->where('users_id',$userid);
+			$this->db->where('ads_plans_id',$planid);
+			$this->db->update('buy_ads_plan', array('remaining_adds'=>$minusadds));
+
 		}
 
+		$status = intval($this->input->post("status"));
+		if (empty($status)) {
+			$status = 2;
+		}
+		$pageviews = intval($this->input->post("pageviews"));
+		if (empty($pageviews)) {
+			$pageviews = 1;
+		}		
+		$country_id = ($this->input->post("country_id"));
+		if (empty($country_id)) {
+			$country_id = 0;
+		}
+		$state_id = ($this->input->post("state_id"));
+		if (empty($state_id)) {
+			$state_id = 0;
+		}
+		$city_id = ($this->input->post("city_id"));
+		if (empty($city_id)) {
+			$city_id = 0;
+		}
+		$link = ($this->input->post("link"));
+		$addduration = 	($this->input->post("addduration"));
+		if (empty($addduration)) {
+			$addduration = 0;
+		}
+		$pagetoshow = 	($this->input->post("pagetoshow"));
+		if (empty($pagetoshow)) {
+			$pagetoshow = 'home';
+		}
+
+		$this->load->library("upload");
+		if (isset($_FILES['image']) && $_FILES['image']['size'] > 0) {
+			$this->upload->initialize(array( 
+		       "upload_path" => $this->settings->info->upload_path,
+		       "overwrite" => FALSE,
+		       "max_filename" => 300,
+		       "encrypt_name" => TRUE,
+		       "remove_spaces" => TRUE,
+		       "allowed_types" => "gif|png|jpg|jpeg",
+		       "max_size" => $this->settings->info->file_size,
+		    ));
+
+		    if (!$this->upload->do_upload("image")) {
+		    	$this->template->error(lang("error_21")
+		    	.$this->upload->display_errors());
+		    }
+
+		    $data = $this->upload->data();
+			    $image = $data['file_name'];
+			} else {
+				$image= 'ad.jpg';
+			}
 		$this->admin_model->add_rotation_ad(array(
-			"name" => $name,
-			"advert" => $advert,
 			"status" => $status,
 			"pageviews" => $pageviews,
+			"image" => $image,
+			"link"       => $link,
 			"userid" => $this->user->info->ID,
+			"city_id" => $city_id,
+			"country_id" => $country_id,
+			"state_id" => $state_id,
+			"add_duration" => $addduration,
+			"page"=>$pagetoshow,
 			"timestamp" => time()
 			)
 		);
-
+		if ($this->input->post("redirect") == 1) {
+			$this->session->set_flashdata("globalmsg", lang("success_93"));
+			redirect(site_url("user_settings/addadvert"));
+		}else{
 		$this->session->set_flashdata("globalmsg", lang("success_93"));
 		redirect(site_url("admin/rotation_ads"));
+	}
 	}
 
 	public function edit_rotation_ad($id) 
@@ -1031,6 +1473,8 @@ class Admin extends CI_Controller
 		$advert = $this->lib_filter->go($this->input->post("advert"));
 		$status = intval($this->input->post("status"));
 		$pageviews = intval($this->input->post("pageviews"));
+		$image = ($this->input->post("image"));
+		$link = ($this->input->post("link"));
 
 		if(empty($name)) {
 			$this->template->error(lang("error_157"));
@@ -1040,7 +1484,9 @@ class Admin extends CI_Controller
 			"name" => $name,
 			"advert" => $advert,
 			"status" => $status,
-			"pageviews" => $pageviews
+			"pageviews" => $pageviews,
+			"image" => $image,
+			"link" =>$link
 			)
 		);
 
@@ -1200,6 +1646,13 @@ class Admin extends CI_Controller
 		$verified_cost = floatval($this->input->post("verified_cost"));
 		$enable_verified_requests = intval($this->input->post("enable_verified_requests"));
 
+
+
+		$promoted_one_week = intval($this->input->post("oneweak"));
+		$promoted_two_week = intval($this->input->post("twoweak"));
+		$promoted_three_week = intval($this->input->post("threeweek"));
+		$promoted_four_week = intval($this->input->post("onemonth"));
+
 		$userid = 0;
 		if(!empty($rotation_ad_alert_user)) {
 			$user = $this->user_model->get_user_by_username($rotation_ad_alert_user);
@@ -1222,7 +1675,13 @@ class Admin extends CI_Controller
 				"enable_promote_post" => $enable_promote_post,
 				"enable_verified_buy" => $enable_verified_buy,
 				"verified_cost" => $verified_cost,
-				"enable_verified_requests" => $enable_verified_requests
+				"enable_verified_requests" => $enable_verified_requests,
+				"promoted_one_week" => $promoted_one_week,
+				"promoted_two_week" => $promoted_two_week,
+				"promoted_three_week" => $promoted_three_week,
+				"promoted_four_week" => $promoted_four_week,
+
+
 			)
 		);
 		$this->session->set_flashdata("globalmsg", lang("success_13"));
@@ -1298,6 +1757,57 @@ class Admin extends CI_Controller
 		redirect(site_url("admin/reports"));
 	}
 
+	public function group_categories() 
+	{
+		if(!$this->common->has_permissions(array("admin",
+			"admin_settings"), $this->user)) {
+			$this->template->error(lang("error_2"));
+		}
+		$this->template->loadData("activeLink", 
+			array("admin" => array("group_categories" => 1)));
+
+		$this->template->loadContent("admin/group_categories.php", array(
+			)
+		);
+	}
+
+	public function group_categories_page() 
+	{
+		$this->load->library("datatables");
+
+		$this->datatables->set_default_order("group_categories.id", "desc");
+
+		// Set page ordering options that can be used
+		$this->datatables->ordering(
+			array(
+				 0 => array(
+				 	"group_categories.name" => 0
+				 )
+			)
+		);
+
+		$this->datatables->set_total_rows(
+			$this->admin_model
+				->get_total_page_categories()
+		);
+		$categories = $this->admin_model->get_group_categories($this->datatables);
+		foreach($categories->result() as $r) {
+
+
+			if(!empty($r->image)) {
+				$image = '<div style="width:100px;height:100px;"><img style="width:100px; height:100px;" src="'.base_url() . $this->settings->info->upload_path_relative.'/' . $r->image.'"></div>';
+			} else {
+				$image = "";
+			}
+			$this->datatables->data[] = array(
+				$image,
+				$r->name,
+				'<a href="' . site_url("admin/delete_group_cat/" . $r->id . "/" . $this->security->get_csrf_hash()) .'" onclick="return confirm(\'' . lang("ctn_86") . '\')" class="btn btn-danger btn-xs" title="'. lang("ctn_57") .'"><span class="glyphicon glyphicon-trash"></span></a>'
+			);
+		}
+		echo json_encode($this->datatables->process());
+	}
+
 	public function page_categories() 
 	{
 		if(!$this->common->has_permissions(array("admin",
@@ -1361,6 +1871,72 @@ class Admin extends CI_Controller
 
 		$this->session->set_flashdata("globalmsg", lang("success_49"));
 		redirect(site_url("admin/page_categories"));
+	}
+
+
+	public function delete_group_cat($id, $hash) 
+	{
+		if(!$this->common->has_permissions(array("admin",
+			"admin_settings"), $this->user)) {
+			$this->template->error(lang("error_2"));
+		}
+		$this->template->loadData("activeLink", 
+			array("admin" => array("page_categories" => 1)));
+		if($hash != $this->security->get_csrf_hash()) {
+			$this->template->error(lang("error_6"));
+		}
+		$id = intval($id);
+		$category = $this->admin_model->get_group_category($id);
+		if($category->num_rows() == 0) {
+			$this->template->error(lang("error_83"));
+		}
+
+		$this->admin_model->delete_group_category($id);
+		$this->session->set_flashdata("globalmsg", lang("success_128"));
+		redirect(site_url("admin/group_categories"));
+	}
+
+
+
+	public function add_group_category() 
+	{
+		if(!$this->user->info->admin && !$this->user->info->admin_settings) {
+			$this->template->error(lang("error_2"));
+		}
+
+		$name = $this->common->nohtml($this->input->post("name"));
+
+		$this->load->library("upload");
+		if (isset($_FILES['image']) && $_FILES['image']['size'] > 0) {
+			$this->upload->initialize(array( 
+		       "upload_path" => $this->settings->info->upload_path,
+		       "overwrite" => FALSE,
+		       "max_filename" => 300,
+		       "encrypt_name" => TRUE,
+		       "remove_spaces" => TRUE,
+		       "allowed_types" => "gif|png|jpg|jpeg",
+		       "max_size" => $this->settings->info->file_size,
+		       "max_width" => 800,
+		       "max_height" => 800
+		    ));
+
+		    if (!$this->upload->do_upload("image")) {
+		    	$this->template->error(lang("error_21")
+		    	.$this->upload->display_errors());
+		    }
+
+		    $data = $this->upload->data();
+			    $image = $data['file_name'];
+			} else {
+				$image= 'ad.jpg';
+			}
+		$this->admin_model->add_group_category(array(
+			"name" => $name,
+			"image" => $image
+			)
+		);
+		$this->session->set_flashdata("globalmsg", lang("success_129"));
+		redirect(site_url("admin/group_categories"));
 	}
 
 	public function edit_page_cat($id) {
@@ -3150,6 +3726,7 @@ class Admin extends CI_Controller
 		$secure_login = intval($this->input->post("secure_login"));
 		$page_slugs = intval($this->input->post("page_slugs"));
 		$disable_chat = intval($this->input->post("disable_chat"));
+		$story_time = intval($this->input->post('story_time'));
 
 		$google_recaptcha = intval($this->input->post("google_recaptcha"));
 		$google_recaptcha_secret = $this->common->nohtml($this->input->post("google_recaptcha_secret"));
@@ -3170,10 +3747,11 @@ class Admin extends CI_Controller
 		$public_blogs = intval($this->input->post("public_blogs"));
 		$enable_blogs = intval($this->input->post("enable_blogs"));
 		$enable_dislikes = intval($this->input->post("enable_dislikes"));
+        $color        = $this->common->nohtml($this->input->post("color"));
+		//echo $color;
+		//exit;
 
-		
-
-		// Validate
+		// Validate 
 		if (empty($site_name) || empty($site_email)) {
 			$this->template->error(lang("error_23"));
 		}
@@ -3237,13 +3815,503 @@ class Admin extends CI_Controller
 				"public_pages" => $public_pages,
 				"public_blogs" => $public_blogs,
 				"enable_blogs" => $enable_blogs,
-				"enable_dislikes" => $enable_dislikes
+				"enable_dislikes" => $enable_dislikes,
+				"story_time"  => $story_time,
+				"color" => $color
 			)
 		);
+
+
+
 		$this->session->set_flashdata("globalmsg", lang("success_13"));
-		redirect(site_url("admin/settings"));
+		 redirect(site_url("admin/settings"));
 	}
 
+	public function report_abuse_reasons()
+	{
+		if(!$this->user->info->admin && !$this->user->info->admin_settings) {
+			$this->template->error(lang("error_2"));
+		}
+
+		$this->template->loadData("activeLink", 
+			array("admin" => array("report_abuse_reasons" => 1)));
+		$this->template->loadContent("admin/report_abuse_reasons.php", array(
+			)
+		);
+	}
+
+	public function report_abuse_reason_add()
+	{
+		if(!$this->user->info->admin && !$this->user->info->admin_settings) {
+			$this->template->error(lang("error_2"));
+		}
+		$reason = $this->common->nohtml($this->input->post('reason'));
+		$this->db->insert('report_abuse_reasons', array('reason'=>$reason));
+		echo 1;
+		exit;
+	}
+
+	public function report_abuse_reason_update()
+	{
+		if(!$this->user->info->admin && !$this->user->info->admin_settings) {
+			$this->template->error(lang("error_2"));
+		}
+		$id = intval( $this->input->post('id') );
+		$reason = $this->common->nohtml($this->input->post('reason'));
+		$this->db->where('ID',$id);
+		$this->db->update('report_abuse_reasons', array('reason'=>$reason));
+		echo 1;
+		exit;
+	}
+
+	public function report_abuse_reason_delete()
+	{
+		if(!$this->user->info->admin && !$this->user->info->admin_settings) {
+			$this->template->error(lang("error_2"));
+		}
+		$id = intval( $this->input->post('id') );
+
+		$this->db->where('ID',$id);
+		$this->db->delete('report_abuse_reasons');
+		echo 1;
+		exit;
+	}
+
+	public function report_abuse_reason_load()
+	{
+		if(!$this->user->info->admin && !$this->user->info->admin_settings) {
+			$this->template->error(lang("error_2"));
+		}
+		$i=0;
+		foreach($this->db->get('report_abuse_reasons')->result() as $r)
+		{
+			echo '<tr>
+					<td>'.++$i.'</td>
+					<td><span class="reason-text-'.$r->ID.'">'.$r->reason.'</span>
+						<span class="reason_validation_title'.$r->ID.'" style="color: red;"></span>
+						<input type="text" class="form-control" name="reason'.$r->ID.'" id="reason'.$r->ID.'" value="'.$r->reason.'" style="display:none;" />
+					</td>
+					<td>
+						<div style="min-width: 120px; text-align: center;">
+							<a onclick="edit_report_abuse_reason('.$r->ID.');" class="btn btn-xs btn-info btn-edit-'.$r->ID.'">'.lang("ctn_964") .'</a> 
+							<a onclick="save_edit_report_abuse_reason('.$r->ID.');" class="btn btn-xs btn-success btn-save-'.$r->ID.'" style="display: none;">'.lang("ctn_967") .'</a> 
+							<a onclick="delete_report_abuse_reason('.$r->ID.');" class="btn btn-xs btn-danger">'.lang("ctn_966") .'</a>
+						</div>
+					</td>
+				  </tr>';
+		}
+		exit;
+	}
+
+	public function report_abuse_posts()
+	{
+		if(!$this->user->info->admin && !$this->user->info->admin_settings) {
+			$this->template->error(lang("error_2"));
+		}
+
+		$this->template->loadData("activeLink", 
+			array("admin" => array("report_abuse_posts" => 1)));
+		$this->template->loadContent("admin/report_abuse_posts.php", array(
+			)
+		);
+	}
+
+
+	public function report_abuse_posts_page() 
+	{
+		$this->load->library("datatables");
+
+		$this->datatables->set_default_order("report_abuse_posts.ID", "desc");
+
+		// Set page ordering options that can be used
+		$this->datatables->ordering(
+			array(
+				 0 => array(
+				 	"page_categories.name" => 0
+				 )
+			)
+		);
+
+		$this->datatables->set_total_rows(
+			$this->admin_model
+				->get_total_reports()
+		);
+		$reports = $this->admin_model->get_report_abuse_posts($this->datatables);
+		$sr=1;
+		foreach($reports->result() as $r) {
+
+			if(isset($r->reported_username)) {
+				$report = $this->common->get_user_display(array("username" => $r->username, "avatar" => $r->avatar, "online_timestamp" => $r->online_timestamp, "first_name" => $r->first_name, "last_name" => $r->last_name));
+				$type = lang("ctn_339");
+			} else {
+				$report = "" . $r->postid . "";
+				$type = lang("ctn_552");
+			}
+			 
+			$this->datatables->data[] = array(
+				$sr,
+				$report,
+				//$type,
+				$r->reason,
+				$this->common->get_user_display(array("username" => $r->username, "avatar" => $r->avatar, "online_timestamp" => $r->online_timestamp, "first_name" => $r->first_name, "last_name" => $r->last_name)),
+				date($this->settings->info->date_format, $r->timestamp),
+				'<a href="' . site_url("admin/delete_report_abuse/" . $r->ID . "/" . $this->security->get_csrf_hash()) .'" onclick="return confirm(\'' . lang("ctn_86") . '\')" class="btn btn-danger btn-xs" title="'. lang("ctn_57") .'"><span class="glyphicon glyphicon-trash"></span></a>'
+			);
+
+			$sr++;
+		}
+		echo json_encode($this->datatables->process());
+	}
+
+	public function delete_report_abuse($id, $hash) 
+	{
+		if($hash != $this->security->get_csrf_hash()) {
+			$this->template->error(lang("error_6"));
+		}
+		$id = intval($id);
+		$this->admin_model->delete_report_abuse($id);
+		$this->session->set_flashdata("globalmsg", lang("success_48"));
+		redirect(site_url("admin/report_abuse_posts"));
+	}
+
+
+	public function bugs_report()
+	{
+		if(!$this->user->info->admin && !$this->user->info->admin_settings) {
+			$this->template->error(lang("error_2"));
+		}
+
+		$this->template->loadData("activeLink", 
+			array("admin" => array("bugs_report" => 1)));
+		$this->template->loadContent("admin/bugs_report.php", array(
+			)
+		);
+	}
+
+
+	public function bugs_report_page()
+	{
+		$this->load->library("datatables");
+		$this->datatables->length = 50000;
+		$this->datatables->set_default_order("bug_report.ID", "desc");
+		// Set page ordering options that can be used
+		$this->datatables->ordering(
+			array(
+				 0 => array(
+				 	"bug_report.subject" => 0
+				 )
+			)
+		);
+
+		$this->datatables->set_total_rows(
+			$this->admin_model
+				->get_total_bug_reports()
+		);
+		$reports = $this->admin_model->get_bug_report($this->datatables);
+		foreach($reports->result() as $r) {
+
+			$this->datatables->data[] = array(
+				$r->subject,
+				$r->screenshort,
+				$r->description,
+				$r->os,
+				$this->common->get_user_display(array("username" => $r->username, "avatar" => $r->avatar, "online_timestamp" => $r->online_timestamp, "first_name" => $r->first_name, "last_name" => $r->last_name)),
+				date($this->settings->info->date_format, $r->timestamp),
+				'<a href="' . site_url("admin/delete_bugs_report/" . $r->ID . "/" . $this->security->get_csrf_hash()) .'" onclick="return confirm(\'' . lang("ctn_86") . '\')" class="btn btn-danger btn-xs" title="'. lang("ctn_57") .'"><span class="glyphicon glyphicon-trash"></span></a>'
+			);
+		}
+		echo json_encode($this->datatables->process());
+	}
+
+
+	public function delete_bugs_report($id, $hash) 
+	{
+		if($hash != $this->security->get_csrf_hash()) {
+			$this->template->error(lang("error_6"));
+		}
+		$id = intval($id);
+		$this->db->where('ID',$id);
+		$this->db->delete('bug_report');
+		$this->session->set_flashdata("globalmsg", lang("success_48"));
+		redirect(site_url("admin/report_abuse_posts"));
+	}
+
+	public function privacy($param1 = '') 
+	{
+		if($param1=='save')
+		{
+			$data['description'] = $this->lib_filter->go($this->input->post("description"));
+			$this->db->where('ID',1)->update('privacy', $data);
+			$this->session->set_flashdata("globalmsg", lang("success_119"));
+			redirect(site_url("admin/privacy"));
+		}
+		$page_data['description'] = $this->db->get_where('privacy', array('ID'=>1))->row()->description;
+		$this->template->loadContent("admin/privacy_policy.php", array(
+			"page_data" => $page_data
+			)
+		);
+	}
+
+	public function changepageofrotationadds($one = "" , $two = "")
+	{
+		$data['page'] = $two;
+		$this->db->where('ID', $one);
+	 	$this->db->update('rotation_ads',$data);
+	}
+
+	public function changestatusofrotationadds($one = "" , $two = "")
+	{
+		$data['status'] = $two;
+		$this->db->where('ID', $one);
+	 	$this->db->update('rotation_ads',$data);
+	}
+	
+    public function religions(){
+
+		if(!$this->user->info->admin && !$this->user->info->admin_settings) {
+			$this->template->error(lang("error_2"));
+		}
+		$this->template->loadData("activeLink", 
+			array("admin" => array("religions" => 1)));
+		$page_data['all_countries'] = $this->home_model->get_country_for_admin_insert_adds();
+		$this->template->loadContent("admin/religions.php" ,$page_data);
+	
+   }
+   public function add_religion_pro() 
+	{
+		$this->load->model("home_model");
+		$name = $this->common->nohtml($this->input->post("name"));
+		
+	    $this->admin_model->add_religion(array(
+			"name" => $name,
+			
+			
+			)
+		);
+
+		
+
+		$this->session->set_flashdata("globalmsg", lang("success_113"));
+		redirect(site_url("admin/religions"));
+	}
+	 public function add_religion_category() 
+	{
+		
+		$name = $this->common->nohtml($this->input->post("name"));
+
+		if(empty($name)) {
+			$this->template->error(lang("error_195"));
+		}
+
+		$this->admin_model->add_religion(array(
+			
+			"name" => $name
+			)
+		);
+
+		$this->session->set_flashdata("globalmsg", lang("success_122"));
+		redirect(site_url("admin/religions"));
+	}
+
+
+	public function edit_religion($id) 
+	{
+		$id = intval($id);
+		$invite = $this->admin_model->get_religion($id);
+		if($invite->num_rows() == 0) {
+			$this->template->error("Invalid Invite!");
+		}
+		$invite = $invite->row();
+
+		$this->template->loadData("activeLink", 
+			array("admin" => array("invites" => 1)));
+		$this->template->loadContent("admin/edit_religion.php", array(
+			"invite" => $invite
+			)
+		);
+	}
+
+	public function edit_religion_pro($id) 
+	{
+		$id = intval($id);
+		$invite = $this->admin_model->get_religion($id);
+		if($invite->num_rows() == 0) {
+			$this->template->error(lang("error_187"));
+		}
+		$invite = $invite->row();
+
+		$this->template->loadData("activeLink", 
+			array("admin" => array("invites" => 1)));
+
+		$this->load->model("home_model");
+		$name = $this->common->nohtml($this->input->post("name"));
+		
+
+
+		$this->admin_model->update_religion($id, array(
+			"name" => $name
+			
+			
+			)
+		);
+
+		$this->session->set_flashdata("globalmsg", lang("success_114"));
+		redirect(site_url("admin/religions"));
+	}
+
+	public function delete_religion($ID) 
+	{
+		// if($hash != $this->security->get_csrf_hash()) {
+		// 	$this->template->error("Invalid Hash!");
+		// }
+		$ID = intval($ID);
+		$invite = $this->admin_model->get_religion($ID);
+		if($invite->num_rows() == 0) {
+			$this->template->error("Invalid Invite!");
+		}
+
+		$this->admin_model->delete_religion($ID);
+		$this->session->set_flashdata("globalmsg", lang("success_130"));
+		redirect(site_url("admin/religions"));
+	}
+     public function religion_ad_page() 
+	{
+		$this->load->library("datatables");
+        $this->datatables->set_default_order("religions.ID", "desc");
+		$this->datatables->ordering(
+			array(
+				 0 => array(
+				 	" religions.name" => 0
+				 ),
+				));
+        $this->datatables->set_total_rows(
+			$this->admin_model->get_total_religion_ads()
+		);
+		$ads = $this->admin_model->get_religions_ads($this->datatables);
+        foreach($ads->result() as $r) {
+            $options = "";
+         	$addid = $r->ID;
+            $ID = $r->ID;
+            $name = $r->name;
+            $this->datatables->data[] = array(
+				$name,
+				//date($this->settings->info->date_format, $r->timestamp),
+				//$this->common->get_user_display(array("username" => $r->username, "avatar" => $r->avatar, "online_timestamp" => $r->online_timestamp, "first_name" => $r->first_name, "last_name" => $r->last_name)),
+				//$name,
+
+
+				 $options . '<a href="' . site_url("admin/delete_religion/" . $r->ID . "/" . $this->security->get_csrf_hash()) .'" onclick="return confirm(\'' . lang("ctn_86") . '\')" class="btn btn-danger btn-xs" title="'. lang("ctn_57") .'"><span class="glyphicon glyphicon-trash"></span></a>'
+
+
+			);
+		}
+		//print_r($name);
+		echo json_encode($this->datatables->process());
+	}
+  
+     public function communities(){
+
+		if(!$this->user->info->admin && !$this->user->info->admin_settings) {
+			$this->template->error(lang("error_2"));
+		}
+		$this->template->loadData("activeLink", 
+			array("admin" => array("communities" => 1)));
+		$page_data['allcomunities'] = $this->admin_model->get_community()->result();
+		$page_data['religions'] = $this->marriage_model->get_all_religions()->result();
+		$this->template->loadContent("admin/communities.php" ,$page_data);
+	
+   }
+   public function add_communities_pro() 
+	{
+		$this->load->model("home_model");
+		$name = $this->common->nohtml($this->input->post("name"));
+		
+	    $this->admin_model->add_communities(array(
+			"name" => $name
+			)
+		);
+
+		
+
+		$this->session->set_flashdata("globalmsg", lang("success_113"));
+		redirect(site_url("admin/communities"));
+	}
+    public function add_community_category() 
+	{
+		$religion_id = $this->common->nohtml($this->input->post("religion_id"));
+		$name = $this->common->nohtml($this->input->post("name"));
+
+		if(empty($religion_id)) {
+			$this->template->error(lang("error_195"));
+		}
+
+		$this->admin_model->add_communities(array(
+			"religion_id" => $religion_id,
+			"name" => $name
+			)
+		);
+
+		$this->session->set_flashdata("globalmsg", lang("success_123"));
+		redirect(site_url("admin/communities"));
+	}
+
+	public function edit_communities($id) 
+	{
+		$id = intval($id);
+		$invite = $this->admin_model->get_communities($id);
+		if($invite->num_rows() == 0) {
+			$this->template->error("Invalid Invite!");
+		}
+		$invite = $invite->row();
+       $this->template->loadData("activeLink", 
+			array("admin" => array("invites" => 1)));
+		$this->template->loadContent("admin/edit_communities.php", array(
+			"invite" => $invite
+			)
+		);
+	}
+
+	public function edit_communities_pro($id) 
+	{
+		$id = intval($id);
+		$invite = $this->admin_model->get_communities($id);
+		if($invite->num_rows() == 0) {
+			$this->template->error(lang("error_187"));
+		}
+		$invite = $invite->row();
+
+		$this->template->loadData("activeLink", 
+			array("admin" => array("invites" => 1)));
+
+		$this->load->model("home_model");
+		$name = $this->common->nohtml($this->input->post("name"));
+		
+
+
+		$this->admin_model->update_communities($id, array(
+			"name" => $name,
+			)
+		);
+
+		$this->session->set_flashdata("globalmsg", lang("success_114"));
+		redirect(site_url("admin/communities"));
+	}
+
+	public function delete_communities($id) 
+	{
+		// if($hash != $this->security->get_csrf_hash()) {
+		// 	$this->template->error("Invalid Hash!");
+		// }
+		$id = intval($id);
+		$invite = $this->admin_model->get_communities($id);
+		if($invite->num_rows() == 0) {
+			$this->template->error("Invalid Invite!");
+		}
+
+		$this->admin_model->delete_communites($id);
+		$this->session->set_flashdata("globalmsg", lang("success_131"));
+		redirect(site_url("admin/communities"));
+	}
 }
 
 ?>

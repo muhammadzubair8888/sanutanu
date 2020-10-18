@@ -23,7 +23,23 @@
 
              <p><?php echo lang("ctn_789") ?> <a href="<?php echo site_url("blog/view_blog/" . $blog->ID) ?>"><?php echo $blog->title ?></a>
 
+              
 
         	</div>
         </div>
     </div>
+<script>
+    function report_post($id)
+    {
+        $.ajax({
+            url: "<?php echo site_url("blog/report_post") ?>",
+            type: 'post',
+            data: {id: $id},
+        })
+        .done(function() {
+            alert('Post has been repoted');
+        })
+        
+        
+    }
+</script>

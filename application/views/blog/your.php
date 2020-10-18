@@ -13,17 +13,19 @@
                                 <input type="hidden" id="search_type" value="0">
                                     <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                            
                                     <ul class="dropdown-menu small-text" style="min-width: 90px !important; left: -90px;">
                                       <li><a href="#" onclick="change_search(0)"><span class="glyphicon glyphicon-ok" id="search-like"></span> <?php echo lang("ctn_337") ?></a></li>
                                       <li><a href="#" onclick="change_search(1)"><span class="glyphicon glyphicon-ok nodisplay" id="search-exact"></span> <?php echo lang("ctn_338") ?></a></li>
                                       <li><a href="#" onclick="change_search(2)"><span class="glyphicon glyphicon-ok nodisplay" id="name-exact"></span> <?php echo lang("ctn_81") ?></a></li>
                                     </ul>
+                                  
                                   </div><!-- /btn-group -->
                             </div>
                             </div>
-
+                            <?php if($block): ?>
                             <a href="<?php echo site_url("blog/add_post") ?>" class="btn btn-post btn-sm"><?php echo lang("ctn_781") ?></a> <a href="<?php echo site_url("blog/edit_blog/" . $blog->ID) ?>" class="btn btn-warning btn-sm"><?php echo lang("ctn_782") ?></a> <a href="<?php echo site_url("blog/delete_blog/" . $blog->ID . "/" . $this->security->get_csrf_hash()) ?>" class="btn btn-danger btn-sm"><?php echo lang("ctn_783") ?></a>
-                            
+                            <?php endif; ?>
 				</div>
 				</div>
 

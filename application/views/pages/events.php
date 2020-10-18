@@ -106,7 +106,7 @@
             <div class="form-group">
                     <label for="p-in" class="col-md-4 label-heading"><?php echo lang("ctn_574") ?></label>
                     <div class="col-md-8">
-                        <input type="checkbox" class="form-control" name="feed_post" value="1" checked>
+                        <input type="checkbox"  name="feed_post" value="1" checked>
                     </div>
             </div>
       </div>

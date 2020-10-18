@@ -95,7 +95,35 @@
       <span class="help-block"><?php echo lang("ctn_693") ?> <a href="<?php echo site_url("user_settings") ?>"><?php echo lang("ctn_156") ?></a> <?php echo lang("ctn_275") ?>.</span>
     </div>
 </div>
+<hr>
+<h3><?php echo lang("ctn_1026") ?></h3>
 
+<div class="form-group">
+    <label for="name-in" class="col-sm-2 control-label"><?php echo lang("ctn_990") ?></label>
+    <div class="col-sm-10">
+      <input type="text" value="<?php echo $this->settings->info->promoted_one_week ?>" class="form-control"  name="oneweak"  >
+    </div>
+</div>
+<div class="form-group">
+    <label for="name-in" class="col-sm-2 control-label"><?php echo lang("ctn_991") ?></label>
+    <div class="col-sm-10">
+      <input type="text" value="<?php echo $this->settings->info->promoted_two_week ?>" class="form-control"  name="twoweak"  >
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="name-in" class="col-sm-2 control-label"><?php echo lang("ctn_992") ?></label>
+    <div class="col-sm-10">
+      <input type="text" value="<?php echo $this->settings->info->promoted_three_week ?>" class="form-control"  name="threeweek"  >
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="name-in" class="col-sm-2 control-label"><?php echo lang("ctn_993") ?></label>
+    <div class="col-sm-10">
+      <input type="text" value="<?php echo $this->settings->info->promoted_four_week ?>" class="form-control"  name="onemonth"  >
+    </div>
+</div>
 
 <input type="submit" class="btn btn-post form-control" value="<?php echo lang("ctn_13") ?>" />
 <?php echo form_close() ?>

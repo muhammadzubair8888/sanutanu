@@ -125,7 +125,6 @@ $(document).ready(function() {
 
 	// Get active chats once page has loaded
 	get_active_chats();
-
 	setInterval(function() { get_all_chat_messages(); }, time_to_update);
 
 	// ping chat messages of active chats every 5 seconds
@@ -209,14 +208,13 @@ function load_active_chat(id)
 
 // Builds a chat window from a bubble
 function build_chat_area(data) 
-{
+{	
 	$('#active_chat_bubble_' + data.chatid).attr('onclick',null); 
 	$('#active_chat_bubble_' + data.chatid).addClass("active_chat_window");
 	$('#active_chat_bubble_' + data.chatid).html("");
-	$('#active_chat_bubble_' + data.chatid).append('<div class="chat-top-bar">'+data.title+' <div class="pull-right"> <span class="glyphicon glyphicon-minus click chat-icon" onclick="close_active_chat_window('+data.chatid+')"></span> <span class="glyphicon glyphicon-remove click chat-icon" onclick="hide_chat_window('+data.chatid+')"></span></div></div>');
+	$('#active_chat_bubble_' + data.chatid).append('<div class="chat-top-bar">'+data.title+' <div class="pull-right"><span class="fa fa-video click chat-icon" onclick="start_video_call_window('+data.userid+','+data.chatid+')"></span> <span class="fa fa-phone-alt click chat-icon" onclick="start_audio_call_window('+data.userid+','+data.chatid+')"></span> <span class="glyphicon glyphicon-minus click chat-icon" onclick="close_active_chat_window('+data.chatid+')"></span> <span class="glyphicon glyphicon-remove click chat-icon" onclick="hide_chat_window('+data.chatid+')"></span></div></div>');
 	$('#active_chat_bubble_' + data.chatid).append('<div class="chat-chat-body" id="active_chat_window_'+data.chatid+'"></div>');
 	$('#active_chat_bubble_' + data.chatid).append('<div class="chat-main-reply"><input type="text" name="reply" class="form-control" id="chat_input_message_'+data.chatid+'" placeholder="'+lang[0]+'" onkeypress="return wait_for_enter(event, '+data.chatid+');"></div>');
-
 	get_chat_messages(data.chatid, 0);
 }
 
@@ -409,7 +407,7 @@ function wait_for_enter(event, chatid)
 			success: function(msg) {
 				if(msg.error) {
 					handle_error("#active_chat_window_" + chatid, msg.error_msg);
-					return false;;
+					return false;; 
 				} else {
 					if(chatid == 0) {
 						close_empty_chat();
@@ -432,6 +430,44 @@ function wait_for_enter(event, chatid)
         return false;
     }
     return true;
+}
+
+
+function send_chat_message(chatid, userid, message) 
+{
+        $.ajax({
+			url: global_base_url + "chat/send_chat_message/" + chatid,
+			type: "get",
+			data : {
+				hash : global_hash,
+				message : message,
+				userid : userid
+			},
+			dataType : 'json',
+			success: function(msg) {
+				if(msg.error) {
+					handle_error("#active_chat_window_" + chatid, msg.error_msg);
+					return false;
+				} else {
+					if(chatid == 0) {
+						close_empty_chat();
+						get_all_chat_messages(1, function() {
+							$('#chat_close_button').click();
+							load_active_chat(msg.chatid);
+
+						});
+						return false;
+					} else {
+						// Success
+						$('#chat_input_message_' + chatid).val("");
+						// Load new chat messages
+						get_all_chat_messages(true);
+						return false;
+					}
+				}
+			}
+		});
+        return false;
 }
 
 // Function used to open chat chat when bubble doesn't exist

@@ -122,7 +122,7 @@ $(document).ready(function() {
 
 	$('#search-complete').autocomplete({
 	  	delay : 300,
-	  	minLength: 2,
+	  	minLength: 0,
 	  	source: function (request, response) {
 	         $.ajax({
 	             type: "GET",
@@ -143,13 +143,19 @@ $(document).ready(function() {
 		    create: function () {
 	            $(this).data('ui-autocomplete')._renderItem = function (ul, item) {
 	            	if(item.type == "user") {
-		                return $('<li class="clearfix search-option-user">')
-		                    .append('<div class="search-user-avatar"><img src="'+item.avatar+'"></div><div class="search-user-info"><a href="'+item.url+'">' + item.label + '</a></div>')
-		                    .appendTo(ul);
+		                return $(`<li class="ui-menu-item" role="presentation">
+		                	<a href="`+item.url+`">
+		                		<!--div class="search-user-avatar"><img src="`+item.avatar+`"></div-->
+		                		<div>` + item.label + `</div>
+		                	</a>
+		                	</li>`).appendTo(ul);
 	                } else if(item.type == "page") {
-	                	return $('<li class="clearfix search-option-page">')
-		                    .append('<div class="search-user-avatar"><img src="'+item.avatar+'"></div><div class="search-user-info"><a href="'+item.url+'">' + item.label + '</a></div>')
-		                    .appendTo(ul);
+	                	return $(`<li class="ui-menu-item" role="presentation">
+	                		<a href="`+item.url+`">
+	                			<!--div class="search-user-avatar"><img src="`+item.avatar+`"></div-->
+	                			<div>` + item.label + `</div>
+	                		</a>
+	                		</li>`).appendTo(ul);
 	                }
 	            };
 	        }
@@ -157,7 +163,7 @@ $(document).ready(function() {
 
 
 	$('#with_users').select2({
-		placeholder: "Select users",
+		placeholder: "Who are you with?",
   		allowClear: true,
   		ajax: {
 		    url: global_base_url + "home/get_user_friends_v2",
@@ -170,7 +176,8 @@ $(document).ready(function() {
 		    }
 		},
 		minimumInputLength: 1
-	});
+	}).click(function () { $(this).select2('close'); });
+	//$('.select2').select2({}).focus(function () { $(this).select2('open'); });
  
     $('#social-form').submit(function() { 
         
@@ -337,8 +344,17 @@ function addPost(msg)
 	}
 	$('#social-form').clearForm();
 	$('#editor-textarea').mentionsInput("clear");
+    $('.editorpopup').hide();
+	$("#status-overlay").hide();
+  	$('.postbtnrow').hide();
+  	$(".editor-wrapper").css('z-index','1');
+  	$(".editor-wrapper").css('position', '');
+  	$('.editor-post-container').html('');
 	// reload feed
-	load_posts_wrapper();
+	if (typeof load_posts_wrapper == 'function') 
+	{
+		load_posts_wrapper();
+	}
 }
 
 var global_page = 0;
@@ -464,6 +480,46 @@ function delete_comment(id)
 	})
 }
 
+function join_page(id)
+{
+	$.ajax({
+		url: global_base_url + 'pages/join_page/' + id + '/' + global_hash + '/1',
+		type: 'GET',
+		data: {},
+		dataType: 'json',
+		success: function(msg) {
+			if(msg.error) {
+				alert(msg.error_msg);
+				return;
+			}
+			if(msg.success) {
+				$('.join-page-'+id).hide();
+				$('.page-member-'+id).show();
+			}
+		}
+	})
+}
+
+function leave_page(id)
+{
+	$.ajax({
+		url: global_base_url + 'pages/leave_page/' + id + '/' + global_hash + '/1',
+		type: 'GET',
+		data: {},
+		dataType: 'json',
+		success: function(msg) {
+			if(msg.error) {
+				alert(msg.error_msg);
+				return;
+			}
+			if(msg.success) {
+				$('.page-member-'+id).hide();
+				$('.join-page-'+id).show();
+			}
+		}
+	})
+}
+
 function delete_comment_reply(id) 
 {
 	$.ajax({
@@ -521,20 +577,24 @@ function like_feed_post(id, type)
 			}
 			
 				if(msg.like_status) {
-					$('.likes-click-' + id).fadeIn(10);
+					//$('.likes-click-' + id).fadeIn(10);
+					$('.likes-click-' + id).removeClass("nodisplay");
 					$('.like-button-' +id).addClass("active-like");
 				} else {
 					$('.like-button-' +id).removeClass("active-like");
+					$('.likes-click-' + id).addClass("nodisplay");
 				}
 				
 				$('.feed-likes-' +id).html(msg.likes);
 				
 		
 				if(msg.dislike_status) {
-					$('.dislikes-click-' + id).fadeIn(10);
+					//$('.dislikes-click-' + id).fadeIn(10);
+					$('.dislikes-click-' + id).removeClass("nodisplay");
 					$('.dislike-button-' +id).addClass("active-like");
 				} else {
 					$('.dislike-button-' +id).removeClass("active-like");
+					$('.dislike-click-' + id).addClass("nodisplay");
 				}
 				$('.feed-dislikes-' +id).html(msg.dislikes);
 
@@ -706,10 +766,80 @@ function delete_post(id)
 	})
 }
 
-function share_post(id) 
+
+function report_abuse_post(id) 
+{
+	var report_abuse_reason = $('input[name="report_abuse_reason"]:checked').val();
+	$.ajax({
+		url: global_base_url + 'feed/report_abuse_post/' + global_hash,
+		type: 'POST',
+		data: {
+			id: id,
+			report_abuse_reason: report_abuse_reason,
+			csrf_test_name : global_hash
+		},
+		dataType: 'JSON',
+		success: function(msg) {
+			//alert(msg.success);
+			if(msg.error) {
+				alert(msg.error_msg);
+				return;
+			}
+			if(msg.success) {
+				$('#feed-post-' + id).fadeOut(500);
+				$('#report_abuse_popup').modal('hide');
+				$('#postpopup').modal('hide');
+			}
+		}
+	})
+}
+
+function change_privacy(privacy, id)
 {
 	$.ajax({
-		url: global_base_url + 'feed/share_post/' + id + '/' + global_hash,
+		url: global_base_url + 'feed/change_privacy/' + global_hash,
+		type: 'POST',
+		data: {
+			id: id,
+			privacy: privacy,
+			csrf_test_name : global_hash
+		},
+		dataType: 'JSON',
+		success: function(msg) {
+			//alert(msg.success);
+			if(msg.error) {
+				alert(msg.error_msg);
+				return;
+			}
+			if(msg.success) {
+				//alert('ok');
+				var html = '';
+				if(Number(privacy)==1)
+				{
+					html = '<span class="fa fa-globe-asia" style="font-size: 13px;"></span>';
+				}
+				else if(Number(privacy)==2)
+				{
+					html = '<span class="fa fa-user-friends" style="font-size: 13px;"></span>';
+				}
+				else if(Number(privacy)==3)
+				{
+					html = '<span class="fa fa-lock" style="font-size: 13px;"></span>';
+				}
+				$('.privacybtn' + id).html(html);
+				$('li[data-privacy'+id+'="1"]').removeClass('active');
+				$('li[data-privacy'+id+'="2"]').removeClass('active');
+				$('li[data-privacy'+id+'="3"]').removeClass('active');
+				$('li[data-privacy'+id+'="'+privacy+'"]').addClass('active');
+			}
+		}
+	})
+}
+
+function share_post(id, postfor) 
+{
+	$.ajax({
+		url: global_base_url + 'feed/share_post/' + id + '/' + postfor + '/' + global_hash,
 		type: 'GET',
 		data: {
 		},
@@ -786,11 +916,13 @@ function set_post_as(id, img)
 }
 
 function add_smile($text) {
-	$('#editor-textarea').val($('#editor-textarea').val() + " " +$text);
-	$('input[name="content"]').val($('input[name="content"]').val() + " " +$text);
+	$('#editor-textarea').val($('#editor-textarea').val() + "" +$text);
+	$('input[name="content"]').val($('input[name="content"]').val() + "" +$text);
 }
 
 function edit_smile($text) {
-	$('.edit-editor-textarea').val($('.edit-editor-textarea').val() + " " +$text);
+	$('.edit-editor-textarea').val($('.edit-editor-textarea').val() + "" +$text);
 	$('.edit-editor-textarea').trigger('change');
 }
+
+

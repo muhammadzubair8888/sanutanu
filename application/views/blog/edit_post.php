@@ -8,7 +8,7 @@
 
                          <div class="form-group has-feedback no-margin">
                             <div class="input-group">
-                            <input type="text" class="form-control input-sm" placeholder="<?php echo lang("ctn_336") ?>" id="form-search-input" />
+                            <input type="text" class="form-control input-sm search-for" placeholder="<?php echo lang("ctn_336") ?>" id="form-search-input" />
                             <div class="input-group-btn">
                                 <input type="hidden" id="search_type" value="0">
                                     <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -22,7 +22,7 @@
                             </div>
                             </div>
 
-                            <a href="<?php echo site_url("blog/add_post") ?>" class="btn btn-post btn-sm"><?php echo lang("ctn_781") ?></a> <a href="<?php echo site_url("blog/edit_blog/" . $blog->ID) ?>" class="btn btn-warning btn-sm"><?php echo lang("ctn_782") ?></a> <a href="<?php echo site_url("blog/delete_blog/" . $blog->ID . "/" . $this->security->get_csrf_hash()) ?>" class="btn btn-danger btn-sm"><?php echo lang("ctn_783") ?></a>
+                            <a href="<?php echo site_url("blog/add_post") ?>" class="btn btn-post btn-sm"><?php echo lang("ctn_781") ?></a> <a href="<?php echo site_url("blog/edit_blog/" . $blog->ID) ?>" class="btn btn-warning btn-sm"><?php echo lang("ctn_782") ?></a> <a href="<?php echo site_url("blog/delete_blog/" . $blog->ID . "/" . $this->security->get_csrf_hash()) ?>"  class="btn btn-danger btn-sm btn-dell"><?php echo lang("ctn_783") ?></a>
                             
 				</div>
 				</div>
